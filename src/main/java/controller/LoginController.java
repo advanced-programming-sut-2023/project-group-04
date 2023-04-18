@@ -214,7 +214,7 @@ public class LoginController {
     }
 
 
-    public SignUpMessages signIn(String username, String password, String status) {
+    public SignUpMessages signIn(String username, String password, String status) throws Exception {
         if (Player.getPlayerByUsername(username) == null)
             return USER_DOES_NOT_EXIST;
         if (!Player.getPlayerByUsername(username).isPasswordCorrect(password)) {
@@ -224,8 +224,11 @@ public class LoginController {
             return INCORRECT_PASSWORD;
         }
         //Stay logged in not handled!!
-        Player.getPlayerByUsername(username).setNumberOfAttemptsToZero();
-        return LOGIN_SUCCESSFUL;
+        if (generateCaptcha().equals(CAPTCHA_CORRECT)) {
+            Player.getPlayerByUsername(username).setNumberOfAttemptsToZero();
+        }
+            return LOGIN_SUCCESSFUL;
+
     }
 
     public SignUpMenu getSignUpMenu() {

@@ -57,7 +57,7 @@ public class LoginMenu {
         return null;
     }
 
-    private String loginUser(Matcher matcher)  {
+    private String loginUser(Matcher matcher) throws Exception {
         String username = matcher.group("username");
         String password = matcher.group("password");
         String status = matcher.group("status");

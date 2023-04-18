@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class ASCIIArtGenerator {
 
-    public static final int ART_SIZE_SMALL = 12;
+    public static final int ART_SIZE_SMALL = 15;
     public static final int ART_SIZE_MEDIUM = 18;
     public static final int ART_SIZE_LARGE = 24;
     public static final int ART_SIZE_HUGE = 32;
