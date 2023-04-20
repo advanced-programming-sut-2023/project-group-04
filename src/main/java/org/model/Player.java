@@ -1,4 +1,4 @@
-package model;
+package org.model;
 
 import java.util.ArrayList;
 
@@ -28,7 +28,7 @@ public class Player {
     private String securityQuestion;
     private String securityAnswer;
     private int numberOfAttempts;
-    private Player loggedInPlayer;
+    private static Player loggedInPlayer;
 
     public String getUsername() {
         return username;
@@ -104,11 +104,15 @@ public class Player {
         this.numberOfAttempts += 1;
     }
 
-    public void setLoggedInPlayer(Player player) {
-        this.loggedInPlayer = player;
+    public static void setLoggedInPlayer(Player player) {
+        loggedInPlayer = player;
     }
 
     public int getNumberOfAttempts() {
         return numberOfAttempts;
+    }
+
+    public static Player getLoggedInPlayer() {
+        return loggedInPlayer;
     }
 }

@@ -1,16 +1,13 @@
-package model;
+package org.model;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class ASCIIArtGenerator {
 
-    public static final int ART_SIZE_SMALL = 15;
-    public static final int ART_SIZE_MEDIUM = 18;
-    public static final int ART_SIZE_LARGE = 24;
-    public static final int ART_SIZE_HUGE = 32;
+    public static final int ART_SIZE = 15;
 
-    private static final String DEFAULT_ART_SYMBOL = "*";
+    private static final String DEFAULT_ART_SYMBOL = "|";
 
     public ASCIIArtGenerator() {
 
