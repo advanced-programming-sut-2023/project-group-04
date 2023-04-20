@@ -1,7 +1,7 @@
 package org.model.person;
 
-import model.Empire;
-import model.buildings.Building;
+import org.model.Empire;
+import org.model.buildings.Building;
 
 public class Worker extends Person {
     private Building venue;

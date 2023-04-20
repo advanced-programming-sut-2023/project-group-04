@@ -1,6 +1,6 @@
 package org.model.buildings;
 
-import model.buildings.BuildingType;
+import org.model.buildings.BuildingType;
 
 import java.util.HashMap;
 

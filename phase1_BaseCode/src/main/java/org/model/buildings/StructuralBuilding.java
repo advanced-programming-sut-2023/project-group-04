@@ -1,7 +1,7 @@
 package org.model.buildings;
 
-import model.Empire;
-import model.MapCell;
+import org.model.Empire;
+import org.model.MapCell;
 
 import java.util.ArrayList;
 

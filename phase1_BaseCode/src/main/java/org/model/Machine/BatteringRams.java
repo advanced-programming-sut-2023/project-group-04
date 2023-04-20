@@ -1,8 +1,8 @@
 package org.model.Machine;
 
-import model.Empire;
-import model.MapCell;
-import model.buildings.Building;
+import org.model.Empire;
+import org.model.MapCell;
+import org.model.buildings.Building;
 
 import java.util.ArrayList;
 

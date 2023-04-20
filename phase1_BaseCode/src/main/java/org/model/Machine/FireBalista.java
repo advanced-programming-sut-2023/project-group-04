@@ -1,6 +1,6 @@
 package org.model.Machine;
 
-import model.buildings.Building;
+import org.model.buildings.Building;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package org.model.person;
 
-import model.Empire;
+import org.model.Empire;
 
 
 public class Assassins extends Soldier{

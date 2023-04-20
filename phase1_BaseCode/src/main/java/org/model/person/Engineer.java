@@ -1,8 +1,8 @@
 package org.model.person;
 
-import model.Empire;
-import model.Machine.Machine;
-import model.buildings.Building;
+import org.model.Empire;
+import org.model.Machine.Machine;
+import org.model.buildings.Building;
 
 public class Engineer extends Person{
 

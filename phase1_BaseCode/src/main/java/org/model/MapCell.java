@@ -1,22 +1,23 @@
 package org.model;
 
-import model.Machine.Machine;
-import model.buildings.Building;
-import model.person.Person;
-import model.person.Soldier;
+import org.model.Machine.Machine;
+import org.model.buildings.Building;
+import org.model.person.Person;
+import org.model.person.Soldier;
+import org.model.buildings.Building;
 
 import java.util.ArrayList;
 
 public class MapCell {
     private final int xAxis;
     private final int yAxis;
-    private final String groundTexture;
+    private final GroundTextures groundTexture;
     private Building building;
     private ArrayList<Person> people;
     private Machine machine;
     private boolean tunnel;
 
-    public MapCell(int x, int y, String groundTexture) {
+    public MapCell(int x, int y, GroundTextures groundTexture) {
         this.xAxis = x;
         this.yAxis = y;
         this.groundTexture = groundTexture;
@@ -32,7 +33,7 @@ public class MapCell {
         return yAxis;
     }
 
-    public String getGroundTexture() {
+    public GroundTextures getGroundTexture() {
         return groundTexture;
     }
 
@@ -50,10 +51,6 @@ public class MapCell {
 
     public Machine getMachine() {
         return machine;
-    }
-
-    public boolean isTunnel() {
-        return tunnel;
     }
 
     public void setBuilding(Building building) {

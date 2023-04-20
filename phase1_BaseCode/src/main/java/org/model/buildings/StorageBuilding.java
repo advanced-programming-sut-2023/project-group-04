@@ -1,6 +1,6 @@
 package org.model.buildings;
 
-import model.Empire;
+import org.model.Empire;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,6 +1,6 @@
 package org.model.buildings;
 
-import model.buildings.BuildingsDictionary;
+import org.model.buildings.BuildingsDictionary;
 
 public enum ProductiveBuildingsDictionary {
     MILL(BuildingsDictionary.MILL,0,"","",""),

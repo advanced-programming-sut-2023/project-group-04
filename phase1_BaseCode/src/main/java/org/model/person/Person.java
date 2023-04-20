@@ -1,7 +1,7 @@
 package org.model.person;
 
-import model.Empire;
-import model.Player;
+import org.model.Empire;
+import org.model.Player;
 
 public class Person {
 

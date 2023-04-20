@@ -1,7 +1,7 @@
 package org.model.buildings;
 
-import model.buildings.BuildingsDictionary;
-import model.Empire;
+import org.model.buildings.BuildingsDictionary;
+import org.model.Empire;
 
 public class ProductiveBuilding extends Building {
     private final ProductiveBuildingsDictionary productiveBuildingsDictionary;
