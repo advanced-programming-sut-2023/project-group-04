@@ -11,13 +11,13 @@ import java.util.ArrayList;
 public class MapCell {
     private final int xAxis;
     private final int yAxis;
-    private final GroundTextures groundTexture;
+    private final String groundTexture;
     private Building building;
     private ArrayList<Person> people;
     private Machine machine;
     private boolean tunnel;
 
-    public MapCell(int x, int y, GroundTextures groundTexture) {
+    public MapCell(int x, int y, String groundTexture) {
         this.xAxis = x;
         this.yAxis = y;
         this.groundTexture = groundTexture;
@@ -33,7 +33,7 @@ public class MapCell {
         return yAxis;
     }
 
-    public GroundTextures getGroundTexture() {
+    public String getGroundTexture() {
         return groundTexture;
     }
 

@@ -34,12 +34,10 @@ public class EnvironmentMenu {
             if (matcher != null) {
                 System.out.println(Menu.getEnvironmentController().createMap(matcher).getMessage());
                 return true;
-            }
-            else if ((matcher = MapMenuCommands.getMatcher(command, MapMenuCommands.CUSTOM_EXITING_MAP)) != null) {
+            } else if ((matcher = MapMenuCommands.getMatcher(command, MapMenuCommands.CUSTOM_EXITING_MAP)) != null) {
                 System.out.println(Menu.getEnvironmentController().chooseExistingMap(matcher).getMessage());
                 return true;
-            }
-            else if (MapMenuCommands.getMatcher(command, MapMenuCommands.BACK) != null) return false;
+            } else if (MapMenuCommands.getMatcher(command, MapMenuCommands.BACK) != null) return false;
             else System.out.println("Invalid command");
         }
     }

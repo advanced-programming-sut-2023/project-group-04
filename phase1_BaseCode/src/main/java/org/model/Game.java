@@ -12,7 +12,7 @@ public class Game {
     }
 
     public void initializeMap() {
-        GroundTextures[][] mapTemplate = Map.getCurrentMap().getMap();
+        String[][] mapTemplate = Map.getCurrentMap().getMap();
         int mapSize = mapTemplate.length;
         this.map = new MapCell[mapSize][mapSize];
         for (int i = 0; i < mapSize; i++) {
