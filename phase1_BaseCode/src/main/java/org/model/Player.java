@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Player {
 
-    private static Player LoggedInPlayer;
+    private static Player loggedInPlayer;
     private static ArrayList<Player> allPlayers;
     private String username;
     private String password;
@@ -32,6 +32,10 @@ public class Player {
 
     public String getUsername() {
         return username;
+    }
+
+    public static Player getLoggedInPlayer() {
+        return loggedInPlayer;
     }
 
     public boolean isPasswordCorrect(String password) {

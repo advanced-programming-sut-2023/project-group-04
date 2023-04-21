@@ -1,10 +1,14 @@
 package org.controller;
 
+
+import org.model.Player;
+
 import java.util.regex.Matcher;
 
 public class ProfileController {
 
     public String changeUsername(Matcher matcher) {
+        Player.getLoggedInPlayer().setUsername(matcher.group("username"));
         return null;
     }
 
