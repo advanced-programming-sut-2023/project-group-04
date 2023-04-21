@@ -18,9 +18,6 @@ public enum ProfileCommands {
     BACK("^\\s*back\\s*$");
 
 
-
-
-
     private final String regex;
 
     private ProfileCommands(String regex) {

@@ -2,50 +2,71 @@ package org.controller;
 
 
 import org.model.Player;
+import org.view.ProfileMessages;
 
+import java.awt.*;
+import java.util.SimpleTimeZone;
 import java.util.regex.Matcher;
 
 public class ProfileController {
 
-    public String changeUsername(Matcher matcher) {
-        Player.getLoggedInPlayer().setUsername(matcher.group("username"));
+    public ProfileMessages changeUsername(Matcher matcher) {
         return null;
     }
 
-    public String changeNickname(Matcher matcher) {
+    public ProfileMessages changeNickname(Matcher matcher) {
         return null;
     }
 
-    public String changePassword(Matcher matcher) {
+    public ProfileMessages changePassword(Matcher matcher) {
         return null;
     }
 
-    public String changeEmail(Matcher matcher) {
+    public ProfileMessages changeEmail(Matcher matcher) {
         return null;
     }
 
-    public String changeSlogan(Matcher matcher) {
+    public ProfileMessages changeSlogan(Matcher matcher) {
         return null;
     }
 
-    public String removeSlogan() {
+    public ProfileMessages removeSlogan() {
         return null;
     }
 
-    public String highScore() {
+    public ProfileMessages highScore() {
         return null;
     }
 
-    public String showRank() {
+    public ProfileMessages showRank() {
         return null;
     }
 
-    public String showSlogan() {
+    public ProfileMessages showSlogan() {
         return null;
     }
 
-    public String displayProfile() {
+    public ProfileMessages displayProfile() {
         return null;
     }
 
+
+    private ProfileMessages checkUsername(String username) {
+        return null;
+    }
+
+    private ProfileMessages checkPassword(String username) {
+        return null;
+    }
+
+    private ProfileMessages checkEmail(String username) {
+        return null;
+    }
+
+    private ProfileMessages checkNickname(String username) {
+        return null;
+    }
+    private ProfileMessages checkSlogan(String username) {
+        return null;
+    }
 }
