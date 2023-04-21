@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Player {
 
-    private static Player LoggedInPlayer;
+    private static Player loggedInPlayer;
     private static ArrayList<Player> allPlayers;
     private String username;
     private String password;
@@ -14,16 +14,16 @@ public class Player {
     private String securityAnswer;
     private String slogan;
     private String score;
+    private ArrayList<Map> maps;
 
     public Player(String username, String password, String nickname, String email, String slogan, String score) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
         Email = email;
-        this.securityQuestion = securityQuestion;
-        this.securityAnswer = securityAnswer;
         this.slogan = slogan;
         this.score = score;
+        this.maps = new ArrayList<>();
     }
 
     public static ArrayList<Player> getAllPlayers() {
@@ -111,5 +111,23 @@ public class Player {
             if (player.username.equals(username))
                 return player;
         return null;
+    }
+
+    public static Player getLoggedInPlayer() {
+        return loggedInPlayer;
+    }
+
+    public Map getMapById(int id) {
+        for (Map map1 : maps)
+            if (map1.getId() == id)
+                return map1;
+        return null;
+    }
+    public ArrayList<Map> getAllMaps() {
+        return this.maps;
+    }
+
+    public void addMap(Map map) {
+        this.maps.add(map);
     }
 }

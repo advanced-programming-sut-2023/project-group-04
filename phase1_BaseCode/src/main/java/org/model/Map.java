@@ -4,19 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Map {
-    private static String[] allGroundTextures = {"GROUND", "SANDY_GROUND", "STONE_GROUND", "IRON_GROUND", "GRASSLAND",
-            "LOW_MEADOW", "HIGH_MEADOW", "OIL", "PLAIN", "LOW_WATER", "RIVER", "SMALL_POND", "LARGE_POND", "BEACH",
-            "SEA"};
-    private static String[] allTrees = {"LITTLE_CHERRY", "LARGE_CHERRY", "OLIVE", "COCONUT", "DATE"};
-    private static ArrayList<Map> allMaps;
+    private static final String[] allGroundTextures = {"GROUND", "SANDY_GROUND", "STONE_GROUND", "IRON_GROUND", "GRASSLAND",
+            "LOW_MEADOW", "HIGH_MEADOW", "OIL", "PLAIN", "LOW_WATER", "RIVER", "SMALL_POND", "LARGE_POND", "BEACH", "SEA"};
+    private static final String[] allTrees = {"LITTLE_CHERRY", "LARGE_CHERRY", "OLIVE", "COCONUT", "DATE"};
     private static Map currentMap;
     private int id;
-    private String[][] mapTexture;
-    private String[][] mapTrees;
+    private final String[][] mapTexture;
+    private final String[][] mapTrees;
 
     public Map(int id, int mapSize) {
         currentMap = this;
-        allMaps.add(this);
         this.mapTexture = new String[mapSize][mapSize];
         for (int i = 0; i < mapSize; i++)
             for (int j = 0; j < mapSize; j++)
@@ -25,13 +22,6 @@ public class Map {
         for (int i = 0; i < mapSize; i++)
             for (int j = 0; j < mapSize; j++)
                 mapTrees[i][j] = null;
-    }
-
-    public static Map getMapById(int id) {
-        for (Map map1 : allMaps)
-            if (map1.id == id)
-                return map1;
-        return null;
     }
 
     public static Map getCurrentMap() {
@@ -48,6 +38,10 @@ public class Map {
 
     public int getMapSize() {
         return this.mapTexture.length;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setBlockTexture(int x, int y, String groundTexture) {

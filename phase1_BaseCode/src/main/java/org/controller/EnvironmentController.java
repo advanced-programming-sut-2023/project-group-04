@@ -1,23 +1,29 @@
 package org.controller;
 
+import com.google.gson.Gson;
 import org.model.Map;
+import org.model.Player;
 import org.view.CommandsEnum.MapMenuMessages;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 import java.util.regex.Matcher;
 
 public class EnvironmentController {
     public MapMenuMessages createMap(Matcher matcher) {
-        int id = Integer.parseInt(matcher.group("id"));
+        int id = Integer.parseInt(matcher.group("mapId"));
         int size = Integer.parseInt(matcher.group("size"));
         if (size != 200 && size != 400) return MapMenuMessages.INVALID_SIZE;
-        new Map(id, size);
+        Map map = new Map(id, size);
+        Player.getLoggedInPlayer().addMap(map);
         return MapMenuMessages.MAP_CREATION_SUCCESSFUL;
     }
 
     public MapMenuMessages chooseExistingMap(Matcher matcher) {
         int id = Integer.parseInt(matcher.group("id"));
-        Map map = Map.getMapById(id);
+        Map map = Player.getLoggedInPlayer().getMapById(id);
         if (map == null) return MapMenuMessages.MAP_NOT_EXIST;
         Map.setCurrentMap(map);
         return MapMenuMessages.MAP_SELECT_SUCCESSFUL;
@@ -109,5 +115,6 @@ public class EnvironmentController {
                texture.equals("LOW_MEADOW") ||
                texture.equals("HIGH_MEADOW");
     }
+
 
 }

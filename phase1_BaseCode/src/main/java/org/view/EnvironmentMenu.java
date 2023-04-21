@@ -1,6 +1,7 @@
 package org.view;
 
 import org.view.CommandsEnum.MapMenuCommands;
+import org.view.CommandsEnum.MapMenuMessages;
 
 import java.util.regex.Matcher;
 
@@ -32,11 +33,13 @@ public class EnvironmentMenu {
             String command = Menu.getScanner().nextLine();
             Matcher matcher = MapMenuCommands.getMatcher(command, MapMenuCommands.CREATE_NEW_MAP);
             if (matcher != null) {
-                System.out.println(Menu.getEnvironmentController().createMap(matcher).getMessage());
-                return true;
+                MapMenuMessages mapMenuMessage = Menu.getEnvironmentController().createMap(matcher);
+                System.out.println(mapMenuMessage.getMessage());
+                if (mapMenuMessage.equals(MapMenuMessages.MAP_CREATION_SUCCESSFUL)) return true;
             } else if ((matcher = MapMenuCommands.getMatcher(command, MapMenuCommands.CUSTOM_EXITING_MAP)) != null) {
-                System.out.println(Menu.getEnvironmentController().chooseExistingMap(matcher).getMessage());
-                return true;
+                MapMenuMessages mapMenuMessage = Menu.getEnvironmentController().createMap(matcher);
+                System.out.println(mapMenuMessage.getMessage());
+                if (mapMenuMessage.equals(MapMenuMessages.MAP_SELECT_SUCCESSFUL)) return true;
             } else if (MapMenuCommands.getMatcher(command, MapMenuCommands.BACK) != null) return false;
             else System.out.println("Invalid command");
         }
