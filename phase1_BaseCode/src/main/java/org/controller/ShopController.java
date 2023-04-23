@@ -1,5 +1,7 @@
 package org.controller;
 
+import org.view.ShopMessages;
+
 import java.util.regex.Matcher;
 
 public class ShopController {
@@ -7,11 +9,11 @@ public class ShopController {
         return null;
     }
 
-    public String buyThing(Matcher matcher) {
+    public ShopMessages buyThing(Matcher matcher) {
         return null;
     }
 
-    public String sellThing(Matcher matcher) {
+    public ShopMessages sellThing(Matcher matcher) {
         return null;
     }
 }
