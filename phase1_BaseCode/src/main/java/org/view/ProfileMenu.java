@@ -1,5 +1,7 @@
 package org.view;
 
+import org.model.Player;
+
 import java.util.regex.Matcher;
 
 public class ProfileMenu {
@@ -35,5 +37,20 @@ public class ProfileMenu {
                 System.out.println("Invalid command");
         }
 
+    }
+
+    private String suggestNewUsername(String username) {
+        int counter = 30;
+        while (Player.getPlayerByUsername(username) != null) {
+            username += counter;
+            counter++;
+        }
+        return username;
+    }
+
+    public boolean acceptSuggestedUsername(String suggestedUsername) {
+        System.out.println("this username already exists!\nYou can register with this username: \"" + suggestedUsername + "\"\n" +
+                "type <YES> to accept!");
+        return Menu.getScanner().nextLine().equals("YES");
     }
 }

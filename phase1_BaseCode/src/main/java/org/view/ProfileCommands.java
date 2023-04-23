@@ -4,18 +4,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum ProfileCommands {
-    CHANGE_USERNAME("^[^\n\\s]*profile\\s+change\\s+-u\\s+((?<username>([^\"][\\S]+))|\"(?<username1>[^\"]+)\")[^\n\\s]*$"),
-    CHANGE_NICKNAME("^[^\n\\s]*profile\\s+change\\s+-n\\s+((?<nickname>([^\"][\\S]+))|\"(?<nickname1>[^\"]+)\")[^\n\\s]*$"),
-    CHANGE_PASSWORD("^[^\n\\s]*profile\\s+change\\s+password\\s+-o\\s+" +
-            "(?<oldpassword>[\\S]+)\\s+-n\\s+(?<newpassword>([\\S]+|random))[^\n\\s]*$"),
-    CHANGE_EMAIL("^[^\n\\s]*profile\\s+change\\s+-e\\s+(?<email>[\\S]+)[^\n\\s]*$"),
-    CHANGE_SLOGAN("^[^\n]*profile\\s+change\\s+-s\\s+((?<slogan>([^\"][\\S]+))|\"(?<slogan1>[^\"]+)\")[^\n]*$"),
-    REMOVE_SLOGAN("^[^\n]*profile\\s+remove\\s+slogan[^\n]*$"),
-    DISPLAY_HIGHSCORE("^[^\n]*profile\\s+display\\s+highscore[^\n]*$"),
-    DISPLAY_RANK("^[^\n]*profile\\s+display\\s+rank[^\n]*$"),
-    DISPLAY_SLOGAN("^[^\n]*profile\\s+display\\s+slogan[^\n]*$"),
-    DISPLAY_PROFILE("^[^\n]*profile\\s+display[^\n]*$"),
-    BACK("^\\s*back\\s*$");
+    CHANGE_USERNAME("^[ \t]**profile\\s+change\\s+-u\\s+((?<username>([^\"][\\S]+))|\"(?<username1>[^\"]+)\")[ \t]*$"),
+    CHANGE_NICKNAME("^[ \t]**profile\\s+change\\s+-n\\s+((?<nickname>([^\"][\\S]+))|\"(?<nickname1>[^\"]+)\")[ \t]*$"),
+    CHANGE_PASSWORD("^[ \t]**profile\\s+change\\s+password\\s+-o\\s+" +
+            "(?<oldpassword>[\\S]+)\\s+-n\\s+(?<newpassword>([\\S]+|random))[ \t]*$"),
+    CHANGE_EMAIL("^[ \t]**profile\\s+change\\s+-e\\s+(?<email>[\\S]+)[ \t]*$"),
+    CHANGE_SLOGAN("^[ \t]*profile\\s+change\\s+-s\\s+((?<slogan>([^\"][\\S]+))|\"(?<slogan1>[^\"]+)\")[ \t]*$"),
+    REMOVE_SLOGAN("^[ \t]*profile\\s+remove\\s+slogan[ \t]*$"),
+    DISPLAY_HIGHSCORE("^[ \t]*profile\\s+display\\s+highscore[ \t]*$"),
+    DISPLAY_RANK("^[ \t]*profile\\s+display\\s+rank[ \t]*$"),
+    DISPLAY_SLOGAN("^[ \t]*profile\\s+display\\s+slogan[ \t]*$"),
+    DISPLAY_PROFILE("^[ \t]*profile\\s+display[ \t]*$"),
+    BACK("^[ \t]*back[ \t]*$");
 
 
     private final String regex;

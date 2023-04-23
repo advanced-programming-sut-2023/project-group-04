@@ -110,7 +110,7 @@ public class Player {
         this.score = score;
     }
 
-    public Player getPlayerByUsername(String username) {
+    public static Player getPlayerByUsername(String username) {
         for (Player player : allPlayers)
             if (player.username.equals(username))
                 return player;
