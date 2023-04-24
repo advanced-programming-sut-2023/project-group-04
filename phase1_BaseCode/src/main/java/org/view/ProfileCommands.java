@@ -7,7 +7,7 @@ public enum ProfileCommands {
     CHANGE_USERNAME("^[ \t]**profile\\s+change\\s+-u\\s+((?<username>([^\"][\\S]+))|\"(?<username1>[^\"]+)\")[ \t]*$"),
     CHANGE_NICKNAME("^[ \t]**profile\\s+change\\s+-n\\s+((?<nickname>([^\"][\\S]+))|\"(?<nickname1>[^\"]+)\")[ \t]*$"),
     CHANGE_PASSWORD("^[ \t]**profile\\s+change\\s+password\\s+-o\\s+" +
-            "(?<oldpassword>[\\S]+)\\s+-n\\s+(?<newpassword>([\\S]+|random))[ \t]*$"),
+            "(?<oldPassword>[\\S]+)\\s+-n\\s+(?<newPassword>([\\S]+|random))[ \t]*$"),
     CHANGE_EMAIL("^[ \t]**profile\\s+change\\s+-e\\s+(?<email>[\\S]+)[ \t]*$"),
     CHANGE_SLOGAN("^[ \t]*profile\\s+change\\s+-s\\s+((?<slogan>([^\"][\\S]+))|\"(?<slogan1>[^\"]+)\")[ \t]*$"),
     REMOVE_SLOGAN("^[ \t]*profile\\s+remove\\s+slogan[ \t]*$"),

@@ -21,10 +21,11 @@ public enum ProfileMessages {
     INCORRECT_EMAIL_FORMAT("Email format is incorrect!"),
     INVALID_QUESTION_NUMBER("you must enter a number between 1 , 3 !"),
     USER_DOES_NOT_EXIST("Username and password didn't match!"),
+    REPEATED_USERNAME("This username is already selected"),
     INCORRECT_PASSWORD("Username and password didn't match!"),
     PASSWORD_CHANGED("your password successfully changed!"),
     CAPTCHA_CORRECT("CAPTCHA is correct"),
-    WITHOUT_ERROR("password haven't any error!");
+    WITHOUT_ERROR("This hasn't any error!");
 
 
     private final String message;
