@@ -19,7 +19,7 @@ public class ProfileMenu {
                 if (profileMessages.equals(ProfileMessages.REPEATED_USERNAME)) {
                     String username = matcher.group("username");
                     String suggestedUsername = Menu.getProfileController().suggestNewUsername(username);
-                    System.out.println(acceptSuggestedUsername(suggestedUsername));
+                    System.out.println(isSuggestedUsernameAccepted(suggestedUsername));
                 }
             } else if ((matcher = ProfileCommands.getMatcher(input, ProfileCommands.CHANGE_NICKNAME)) != null)
                 System.out.println(Menu.getProfileController().changeNickname(matcher).getMessage());
@@ -30,10 +30,21 @@ public class ProfileMenu {
             else if ((matcher = ProfileCommands.getMatcher(input, ProfileCommands.CHANGE_SLOGAN)) != null)
                 System.out.println(Menu.getProfileController().changeSlogan(matcher).getMessage());
 
-            else if ((matcher = ProfileCommands.getMatcher(input, ProfileCommands.CHANGE_PASSWORD)) != null)
-                System.out.println(Menu.getProfileController().changePassword(matcher).getMessage());
-
-            else if (ProfileCommands.getMatcher(input, ProfileCommands.DISPLAY_PROFILE) != null)
+            else if ((matcher = ProfileCommands.getMatcher(input, ProfileCommands.CHANGE_PASSWORD)) != null) {
+                //TODO : ADD CAPTCHA FOR THIS PART FROM ABOLFAZL & COMPLETE PASSWORD ERROR
+                if (matcher.group("newPassword").contains("random")) {
+                    String randomPassword = Menu.getProfileController().generateRandomPassword();
+                    System.out.println(isRandomPasswordAccepted(randomPassword));
+                } else {
+                    ProfileMessages profileMessages = Menu.getProfileController().changePassword(matcher);
+                    String password = matcher.group("newPassword").replaceAll("\"", "");
+                    if (profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY)) {
+                        if (confirmPassword(password))
+                            System.out.println();
+                    }
+                    System.out.println(Menu.getProfileController().changePassword(matcher).getMessage());
+                }
+            } else if (ProfileCommands.getMatcher(input, ProfileCommands.DISPLAY_PROFILE) != null)
                 System.out.println(Menu.getProfileController().displayProfile());
 
             else if (ProfileCommands.getMatcher(input, ProfileCommands.REMOVE_SLOGAN) != null)
@@ -45,7 +56,7 @@ public class ProfileMenu {
             else if (ProfileCommands.getMatcher(input, ProfileCommands.DISPLAY_SLOGAN) != null)
                 System.out.println(Menu.getProfileController().showSlogan());
 
-            else if (ProfileCommands.getMatcher(input, ProfileCommands.DISPLAY_HIGHSCORE) != null)
+            else if (ProfileCommands.getMatcher(input, ProfileCommands.DISPLAY_HIGH_SCORE) != null)
                 System.out.println(Menu.getProfileController().highScore());
 
             else if (ProfileCommands.getMatcher(input, ProfileCommands.BACK) != null)
@@ -56,7 +67,7 @@ public class ProfileMenu {
         }
     }
 
-    public ProfileMessages acceptSuggestedUsername(String suggestedUsername) {
+    private ProfileMessages isSuggestedUsernameAccepted(String suggestedUsername) {
         System.out.println("You can register with this username: \"" + suggestedUsername
                 + "\"\n" + "If you want it type <yes> else type <no>");
         if (Menu.getScanner().nextLine().equalsIgnoreCase("yes")) {
@@ -64,5 +75,24 @@ public class ProfileMenu {
             return ProfileMessages.CHANGE_SUCCESSFULLY;
         }
         return ProfileMessages.CHANGING_USERNAME_FAILED;
+    }
+
+    private ProfileMessages isRandomPasswordAccepted(String randomPassword) {
+        System.out.println("This password that i generate for you :" + randomPassword +
+                "\nIf you want it type <yes> else type <no>");
+        if (Menu.getScanner().nextLine().equalsIgnoreCase("yes")) {
+            Menu.getProfileController().setPassword(randomPassword);
+            return ProfileMessages.CHANGE_SUCCESSFULLY;
+        } else
+            return ProfileMessages.CHANGING_PASSWORD_FAILED;
+    }
+
+    private boolean confirmPassword(String password) {
+        System.out.println("Please enter your new password again");
+        if (Menu.getScanner().nextLine().equals(password)) {
+            Menu.getProfileController().setPassword(password);
+            return true;
+        }
+        return false;
     }
 }
