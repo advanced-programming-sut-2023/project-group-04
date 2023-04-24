@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum ProfileCommands {
-    CHANGE_USERNAME("^[ \t]**profile\\s+change\\s+-u\\s+((?<username>([^\"][\\S]+))|\"(?<username1>[^\"]+)\")[ \t]*$"),
+    CHANGE_USERNAME("^[ \t]*^profile\\s+change(?=.*-u (?<username>\"[^\"]*\"|[^\\s\"]*))(\\s*(-u (\"[^\"]*\"|[^\\s\"]*))){1}[ \t]*$"),
     CHANGE_NICKNAME("^[ \t]**profile\\s+change\\s+-n\\s+((?<nickname>([^\"][\\S]+))|\"(?<nickname1>[^\"]+)\")[ \t]*$"),
     CHANGE_PASSWORD("^[ \t]**profile\\s+change\\s+password\\s+-o\\s+" +
             "(?<oldPassword>[\\S]+)\\s+-n\\s+(?<newPassword>([\\S]+|random))[ \t]*$"),
@@ -31,3 +31,7 @@ public enum ProfileCommands {
     }
 
 }
+
+//^user create(?=.*-u (?"[^"]*"|[^\s"]*))
+// (?=.*-n (?"[^"]*"|[^\s"]*))(?=.*-p (?"[^"]*"|[^\s"]*))
+// (?=.*-e (?"[^"]*"|[^\s"]*))(\s*(-u ("[^"]*"|[^\s"]*)|-n ("[^"]*"|[^\s"]*)|-p ("[^"]*"|[^\s"]*)|-e ("[^"]*"|[^\s"]*))){3,4}$

@@ -1,5 +1,7 @@
 package org.view;
 
+import org.controller.ProfileController;
+
 import java.util.regex.Matcher;
 
 public class ProfileMenu {
@@ -12,11 +14,14 @@ public class ProfileMenu {
 
             if ((matcher = ProfileCommands.getMatcher(input, ProfileCommands.CHANGE_USERNAME)) != null) {
                 ProfileMessages profileMessages = Menu.getProfileController().changeUsername(matcher);
-                if (profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY))
-                    System.out.println(profileMessages.getMessage());
-            }
+                System.out.println(profileMessages.getMessage());
 
-            else if ((matcher = ProfileCommands.getMatcher(input, ProfileCommands.CHANGE_NICKNAME)) != null)
+                if (profileMessages.equals(ProfileMessages.REPEATED_USERNAME)) {
+                    String username = matcher.group("username");
+                    String suggestedUsername = Menu.getProfileController().suggestNewUsername(username);
+                    System.out.println(acceptSuggestedUsername(suggestedUsername));
+                }
+            } else if ((matcher = ProfileCommands.getMatcher(input, ProfileCommands.CHANGE_NICKNAME)) != null)
                 System.out.println(Menu.getProfileController().changeNickname(matcher).getMessage());
 
             else if ((matcher = ProfileCommands.getMatcher(input, ProfileCommands.CHANGE_EMAIL)) != null)
@@ -49,6 +54,15 @@ public class ProfileMenu {
             else
                 System.out.println("Invalid command");
         }
+    }
 
+    public ProfileMessages acceptSuggestedUsername(String suggestedUsername) {
+        System.out.println("You can register with this username: \"" + suggestedUsername
+                + "\"\n" + "If you want it type <yes> else type <no>");
+        if (Menu.getScanner().nextLine().equalsIgnoreCase("yes")) {
+            Menu.getProfileController().setUsername(suggestedUsername);
+            return ProfileMessages.CHANGE_SUCCESSFULLY;
+        }
+        return ProfileMessages.CHANGING_USERNAME_FAILED;
     }
 }

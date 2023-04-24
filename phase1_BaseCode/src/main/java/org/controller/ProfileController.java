@@ -5,13 +5,20 @@ import org.model.Player;
 import org.view.Menu;
 import org.view.ProfileMessages;
 
+import java.util.Random;
 import java.util.regex.Matcher;
 
 public class ProfileController {
 
     public ProfileMessages changeUsername(Matcher matcher) {
+        ProfileMessages profileMessages = checkUsername(matcher);
+        if (profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY))
+            setUsername(matcher.group("username"));
+        return profileMessages;
+    }
 
-        return null;
+    public void setUsername(String username) {
+        Player.getLoggedInPlayer().setUsername(username);
     }
 
     public ProfileMessages changeNickname(Matcher matcher) {
@@ -34,55 +41,46 @@ public class ProfileController {
         return null;
     }
 
-    public ProfileMessages highScore() {
+    public String highScore() {
         return null;
     }
 
-    public ProfileMessages showRank() {
+    public String showRank() {
         return null;
     }
 
-    public ProfileMessages showSlogan() {
+    public String showSlogan() {
         return null;
     }
 
-    public ProfileMessages displayProfile() {
+    public String displayProfile() {
         return null;
     }
 
 
     private ProfileMessages checkUsername(Matcher matcher) {
-        String username;
-        if (matcher.group("username") == null && matcher.group("username1") == null)
+        String username = matcher.group("username");
+        if (username.isEmpty())
             return ProfileMessages.EMPTY_FIELD;
-        if (matcher.group("username") != null) {
-            username = matcher.group("username");
-            if (!isUsernameFormatCorrect(username))
-                return ProfileMessages.INCORRECT_USERNAME_FORMAT;
-            if (Player.getPlayerByUsername(username) != null) {
-                if (acceptSuggestedUsername(suggestNewUsername(username)))
-                    username = suggestNewUsername(username);
-                else
-                    return ProfileMessages.CHANGING_USERNAME_FAILED;
-            }
 
-        }
+        username = username.replaceAll("\"", "");
+        if (isUsernameFormatCorrect(username))
+            return ProfileMessages.INCORRECT_USERNAME_FORMAT;
 
+        else if (Player.getPlayerByUsername(username) != null)
+            return ProfileMessages.REPEATED_USERNAME;
+
+        else return ProfileMessages.CHANGE_SUCCESSFULLY;
     }
 
-    private String suggestNewUsername(String username) {
-        int counter = 30;
+    public String suggestNewUsername(String username) {
         while (Player.getPlayerByUsername(username) != null) {
-            username += counter;
-            counter++;
+            Random rand = new Random();
+            int randomNum = rand.nextInt(1000);
+            if (Player.getPlayerByUsername(username + randomNum) == null)
+                return username + randomNum;
         }
-        return username;
-    }
-
-    public boolean acceptSuggestedUsername(String suggestedUsername) {
-        System.out.println("this username already exists!\nYou can register with this username: \"" + suggestedUsername
-                + "\"\n" + "type <YES> to accept!");
-        return Menu.getScanner().nextLine().equals("YES");
+        return null;
     }
 
     private boolean isUsernameFormatCorrect(String username) {
@@ -90,11 +88,30 @@ public class ProfileController {
     }
 
     private ProfileMessages checkPassword(Matcher matcher) {
+        String oldPassword = matcher.group("oldPassword");
+        if (!Player.getLoggedInPlayer().isPasswordCorrect(oldPassword))
+            return ProfileMessages.PASSWORD_CONFIRM_DOES_NOT_MATCH;
         return null;
     }
 
     private ProfileMessages checkEmail(Matcher matcher) {
-        return null;
+        String email = matcher.group("email");
+        if (email.isEmpty())
+            return ProfileMessages.EMPTY_FIELD;
+        else if (isEmailDuplicated(email))
+            return ProfileMessages.EXISTENCE_EMAIL;
+        else if (!email.matches("^\\w+@\\w+\\.\\w+$"))
+            return ProfileMessages.INCORRECT_EMAIL_FORMAT;
+        else
+            return ProfileMessages.WITHOUT_ERROR;
+    }
+
+    private boolean isEmailDuplicated(String email) {
+        for (Player player : Player.getAllPlayers()) {
+            if (player.getEmail().equals(email))
+                return true;
+        }
+        return false;
     }
 
     private ProfileMessages checkNickname(Matcher matcher) {

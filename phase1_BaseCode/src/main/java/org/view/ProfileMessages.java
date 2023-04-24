@@ -1,6 +1,8 @@
 package org.view;
 
 public enum ProfileMessages {
+    //TODO : update the regex of changing functions
+
     EMPTY_SLOGAN("the slogan is empty!"),
     EMPTY_FIELD("A field is empty!"),
     INCORRECT_USERNAME_FORMAT("username format is incorrect!"),
@@ -9,7 +11,7 @@ public enum ProfileMessages {
     CHANGING_NICKNAME_FAILED("your nickname didn't change"),
     CHANGING_EMAIL_FAILED("your email didn't change"),
     CHANGING_SLOGAN_FAILED("your slogan didn't change"),
-    CHANGE_SUCCESSFULLY("profile updated successfully"),
+    CHANGE_SUCCESSFULLY("Profile updated successfully"),
     PASSWORD_LENGTH_WEAK("The length of the password must be at least <<6>>!"),
     PASSWORD_UPPERCASE_WEAK("The password must have at least one <<UPPERCASE>> letter!"),
     PASSWORD_LOWERCASE_WEAK("The password must have at least one <<lowercase>> letter!"),
