@@ -21,7 +21,7 @@ public enum MapMenuCommands {
             "(\\s+(-x (\\d+))|(-y (\\d+))|(-t (\"[^\"]*\"|[^\\s\"]*))){3}\\s*$"),
     BACK("(\\s*)back(\\s*)");
 
-    private String regex;
+    private final String regex;
     private MapMenuCommands(String regex) {
         this.regex = regex;
     }
