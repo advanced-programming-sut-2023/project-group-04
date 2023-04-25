@@ -34,6 +34,10 @@ public class Player {
         return username;
     }
 
+    public static Player getLoggedInPlayer() {
+        return loggedInPlayer;
+    }
+
     public boolean isPasswordCorrect(String password) {
         return this.password.equals(password);
     }
@@ -106,7 +110,7 @@ public class Player {
         this.score = score;
     }
 
-    public Player getPlayerByUsername(String username) {
+    public static Player getPlayerByUsername(String username) {
         for (Player player : allPlayers)
             if (player.username.equals(username))
                 return player;

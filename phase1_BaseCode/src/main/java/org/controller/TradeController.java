@@ -1,21 +1,23 @@
 package org.controller;
 
+import org.view.CommandsEnum.TradeMessages;
+
 import java.util.regex.Matcher;
 
 public class TradeController {
-    public String registerTrade(Matcher matcher) {
+    public String setTrade(Matcher matcher) {
         return null;
     }
 
-    public String showTradeList() {
+    public TradeMessages showTradeList() {
         return null;
     }
 
-    public String acceptTrade(Matcher matcher) {
+    public TradeMessages acceptTrade(Matcher matcher) {
         return null;
     }
 
-    public String showTradeHistory() {
+    public TradeMessages showTradeHistory() {
         return null;
     }
 }

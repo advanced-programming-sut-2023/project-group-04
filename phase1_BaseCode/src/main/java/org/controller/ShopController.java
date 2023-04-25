@@ -1,17 +1,29 @@
 package org.controller;
 
+import org.view.CommandsEnum.ShopMessages;
+
 import java.util.regex.Matcher;
 
 public class ShopController {
     public String showList() {
-        return null;
+        StringBuilder string = new StringBuilder();
+        return string.toString();
     }
 
-    public String buyThing(Matcher matcher) {
-        return null;
+    public ShopMessages buyThing(Matcher matcher) {
+        String itemsName = removeQuotation(matcher.group("itemsName"));
+        int itemsAmount = Integer.parseInt(matcher.group("itemsAmount"));
+        return ShopMessages.BUY_SUCCESSFULLY;
+
     }
 
-    public String sellThing(Matcher matcher) {
-        return null;
+    public ShopMessages sellThing(Matcher matcher) {
+        String itemsName = removeQuotation(matcher.group("itemsName"));
+        int itemsAmount = Integer.parseInt(matcher.group("itemsAmount"));
+        return ShopMessages.SELL_SUCCESSFULLY;
+    }
+
+    private String removeQuotation(String buffer) {
+        return buffer.replaceAll("\"", "");
     }
 }
