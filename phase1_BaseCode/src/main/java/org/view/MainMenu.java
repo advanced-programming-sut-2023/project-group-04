@@ -3,10 +3,6 @@ package org.view;
 import org.view.CommandsEnum.SignUpCommands;
 
 public class MainMenu {
-    public MainMenu() {
-
-    }
-
     public void run() {
         String input;
         while (true) {
@@ -17,5 +13,4 @@ public class MainMenu {
             }
         }
     }
->>>>>>> origin/AbolfazlPhase1
 }

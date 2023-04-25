@@ -1,43 +1,8 @@
 package org.controller;
 
-<<<<<<< HEAD
+import java.util.Random;
 import java.util.regex.Matcher;
 
-public class LoginController {
-
-    public String createUser(Matcher matcher) {
-        return null;
-    }
-
-    public String setPasswordRecovery(Matcher matcher) {
-        return null;
-    }
-
-    public String passwordConfirm(Matcher matcher) {
-        return null;
-    }
-
-    public String loginUser(Matcher matcher) {
-        return null;
-    }
-
-    public String forgetPassword(Matcher matcher) {
-        return null;
-    }
-
-    public String checkSecurityAnswer(Matcher matcher) {
-        return null;
-    }
-
-    private String passwordGenerator() {return null;}
-
-    private boolean checkPasswordStrength(String password) {
-        return false;
-    }
-
-    private boolean checkPasswordFormat(String password) {return false;}
-
-=======
 import org.model.ASCIIArtGenerator;
 import org.model.Player;
 import org.passay.CharacterRule;
@@ -46,6 +11,7 @@ import org.passay.PasswordGenerator;
 import org.view.CommandsEnum.*;
 import org.view.LoginMenu;
 import org.view.Menu;
+import org.view.SignUpMenu;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -55,18 +21,16 @@ import static org.view.CommandsEnum.SignUpMessages.*;
 public class LoginController {
     
     public SignUpMessages SignUp(Matcher matcher) throws Exception {
-        String username = matcher.group("username");
+        String username = matcher.group("username").replaceAll("\"","");
         String password = matcher.group("password");
-        String passwordConfirmation = matcher.group("passwordConfirmation");
+        String passwordConfirmation = matcher.group("passwordConfirm");
         String email = matcher.group("email");
-        String nickname = matcher.group("nickname");
-        String slogan = matcher.group("slogan");
-        String sloganCommand = matcher.group("sloganCommand");
-        switch (checkSignUpErrors(username, password, passwordConfirmation, email, nickname, sloganCommand, slogan)) {
-            case WITHOUT_ERROR:
-                break;
-            default:
-                return checkSignUpErrors(username, password, passwordConfirmation, email, nickname, sloganCommand, slogan);
+        String nickname = matcher.group("nickname").replaceAll("\"","");
+        String slogan = matcher.group("slogan").replaceAll("\"","");
+        if (checkSignUpErrors(username, password, passwordConfirmation, email, nickname, slogan) == WITHOUT_ERROR) {
+            Player.savePlayers();
+        } else {
+            return checkSignUpErrors(username, password, passwordConfirmation, email, nickname, slogan);
         }
             if (password.equals("random")) {
                 password = generateRandomPassword();
@@ -131,15 +95,12 @@ public class LoginController {
     
     private SignUpMessages checkSignUpErrors(String username, String password,
                                              String passwordConfirmation, String email,
-                                             String nickname, String sloganCommand, String slogan) {
-        if (sloganCommand != null && slogan == null)
-            return EMPTY_SLOGAN;
-        if (username == null || password == null || email == null || nickname == null)
-            return EMPTY_FIELD;
-        else if (!isUsernameFormatCorrect(username))
-            return INCORRECT_USERNAME_FORMAT;
+                                             String nickname, String slogan) {
+        if (slogan != null && slogan == "") return EMPTY_SLOGAN;
+        if (username == null || password == null || email == null || nickname == null) return EMPTY_FIELD;
+        else if (!isUsernameFormatCorrect(username)) return INCORRECT_USERNAME_FORMAT;
         else if (Player.getPlayerByUsername(username) != null) {
-            if (acceptSuggestedUsername(suggestNewUsername(username)))
+            if (new SignUpMenu().acceptSuggestedUsername(suggestNewUsername(username)))
                 username = suggestNewUsername(username);
             else
                 return REGISTRATION_FAILED;
@@ -227,19 +188,13 @@ public class LoginController {
         return PASSWORD_STRONG;
     }
 
-    private String suggestNewUsername(String username) {
-        int counter = 11;
-        while (Player.getPlayerByUsername(username) != null) {
-            username += counter;
-            counter++;
+    public String suggestNewUsername(String username) {
+        Random rand = new Random();
+        while (true) {
+            int randomNum = rand.nextInt(1000);
+            if (Player.getPlayerByUsername(username + randomNum) == null)
+                return username + randomNum;
         }
-        return username;
-    }
-
-    private boolean acceptSuggestedUsername(String suggestedUsername) {
-        System.out.println("this username already exists!\nYou can register with this username: \"" + suggestedUsername + "\"\n" +
-                "type <YES> to accept!");
-        return Menu.getScanner().nextLine().equals("YES");
     }
 
     private boolean isUsernameFormatCorrect(String username) {
@@ -292,5 +247,4 @@ public class LoginController {
         else
             return checkPassword(password);
     }
->>>>>>> origin/AbolfazlPhase1
 }

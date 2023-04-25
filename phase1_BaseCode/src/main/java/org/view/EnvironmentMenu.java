@@ -22,8 +22,10 @@ public class EnvironmentMenu {
                 System.out.println(Menu.getEnvironmentController().setRock(matcher).getMessage());
             else if ((matcher = MapMenuCommands.getMatcher(command, MapMenuCommands.DROP_TREE)) != null)
                 System.out.println(Menu.getEnvironmentController().setTree(matcher).getMessage());
-            else if (MapMenuCommands.getMatcher(command, MapMenuCommands.BACK) != null) return;
-            else System.out.println("Invalid command");
+            else if (MapMenuCommands.getMatcher(command, MapMenuCommands.BACK) != null) {
+                Menu.getEnvironmentController().save();
+                return;
+            }else System.out.println("Invalid command");
         }
     }
 

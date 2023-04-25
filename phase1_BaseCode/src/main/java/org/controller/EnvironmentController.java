@@ -117,4 +117,7 @@ public class EnvironmentController {
     }
 
 
+    public void save() {
+        Player.savePlayers();
+    }
 }

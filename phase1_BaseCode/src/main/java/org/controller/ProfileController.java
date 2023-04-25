@@ -74,7 +74,7 @@ public class ProfileController {
         return ProfileMessages.CHANGE_SUCCESSFULLY;
     }
 
-    public String highScore() {
+    public int highScore() {
         return Player.getLoggedInPlayer().getScore();
     }
 

@@ -1,5 +1,11 @@
 package org.model;
 
+import com.google.gson.Gson;
+
+import java.io.FileWriter;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Player {
@@ -13,29 +19,61 @@ public class Player {
     private String securityQuestion;
     private String securityAnswer;
     private String slogan;
-    private String score;
+    private int score;
     private ArrayList<Map> maps;
 
-    public Player(String username, String password, String nickname, String email, String slogan, String score) {
+    public Player(String username, String password, String nickname, String email,String securityQuestion
+            , String securityAnswer, String slogan) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
         Email = email;
         this.slogan = slogan;
-        this.score = score;
+        this.score = 0;
         this.maps = new ArrayList<>();
+    }
+
+    public static void setLoggedInPlayer(Player player) {
+        Player.loggedInPlayer = player;
     }
 
     public static ArrayList<Player> getAllPlayers() {
         return allPlayers;
     }
 
-    public String getUsername() {
-        return username;
+    public static Object getPlayerByEmail(String email) {
+        for (Player player : Player.allPlayers)
+            if (player.getEmail().equals(email)) return player;
+        return null;
     }
 
-    public static Player getLoggedInPlayer() {
-        return loggedInPlayer;
+    public static void recoveryPlayers() {
+        try {
+            Gson gson = new Gson();
+            Reader reader = Files.newBufferedReader(Paths.get("PLAYERS.json"));
+            ArrayList<Player> allPlayers = gson.fromJson(reader, ArrayList.class);
+            if (allPlayers != null) Player.allPlayers = allPlayers;
+            reader.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void savePlayers() {
+        Gson gson = new Gson();
+        String data = gson.toJson(Player.getAllPlayers());
+        try {
+            FileWriter output = new FileWriter("PLAYERS.json");
+            output.write(data);
+            output.close();
+        }
+        catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public boolean isPasswordCorrect(String password) {
@@ -62,7 +100,7 @@ public class Player {
         return slogan;
     }
 
-    public String getScore() {
+    public int getScore() {
         return score;
     }
 
@@ -106,7 +144,7 @@ public class Player {
         this.slogan = slogan;
     }
 
-    public void setScore(String score) {
+    public void setScore(int score) {
         this.score = score;
     }
 

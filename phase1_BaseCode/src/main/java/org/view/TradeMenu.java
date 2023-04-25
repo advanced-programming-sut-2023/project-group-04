@@ -11,7 +11,6 @@ public class TradeMenu {
 
         while (true) {
             input = Menu.getScanner().nextLine();
-
             if ((matcher = TradeCommands.getMatcher(input,TradeCommands.SET_TRADE)) != null)
                 System.out.println(Menu.getTradeController().setTrade(matcher));
             else if (TradeCommands.getMatcher(input,TradeCommands.TRADE_LIST) != null)
