@@ -1,4 +1,4 @@
-package org.view;
+package org.view.CommandsEnum;
 
 public enum ProfileMessages {
     //TODO : update the regex of changing functions

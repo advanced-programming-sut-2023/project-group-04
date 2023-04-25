@@ -1,6 +1,6 @@
 package org.controller;
 
-import org.view.TradeMessages;
+import org.view.CommandsEnum.TradeMessages;
 
 import java.util.regex.Matcher;
 

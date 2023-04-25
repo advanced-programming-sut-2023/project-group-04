@@ -1,10 +1,10 @@
-package org.view;
+package org.view.CommandsEnum;
 
 public enum TradeMessages {
-    NOT_ENOUGH_AMOUNT("you don't have enough amount of this type"),
+    NOT_ENOUGH_AMOUNT("You don't have enough amount of this type"),
     ACCEPT_TRADE("Accepted"),
-    SET_TRADE("your trade set successfully"),
-    EMPTY_LIST("this list is empty");
+    SET_TRADE("Your trade set successfully"),
+    EMPTY_LIST("This list is empty");
 
 
     private final String message;

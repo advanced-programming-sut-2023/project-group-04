@@ -1,4 +1,4 @@
-package org.view;
+package org.view.CommandsEnum;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

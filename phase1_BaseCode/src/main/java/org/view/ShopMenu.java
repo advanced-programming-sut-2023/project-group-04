@@ -1,5 +1,8 @@
 package org.view;
 
+import org.view.CommandsEnum.ShopCommands;
+import org.view.CommandsEnum.ShopMessages;
+
 import java.util.regex.Matcher;
 
 public class ShopMenu {

@@ -2,7 +2,7 @@ package org.controller;
 
 
 import org.model.Player;
-import org.view.ProfileMessages;
+import org.view.CommandsEnum.ProfileMessages;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;

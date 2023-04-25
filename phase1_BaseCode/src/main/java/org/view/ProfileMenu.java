@@ -1,6 +1,7 @@
 package org.view;
 
-import org.controller.ProfileController;
+import org.view.CommandsEnum.ProfileCommands;
+import org.view.CommandsEnum.ProfileMessages;
 
 import java.util.regex.Matcher;
 

@@ -1,4 +1,4 @@
-package org.view;
+package org.view.CommandsEnum;
 
 public enum ShopMessages {
     BUY_SUCCESSFULLY("Your purchase was successful"),

@@ -1,9 +1,6 @@
 package org.controller;
 
-import org.model.Empire;
-import org.model.Game;
-import org.model.Player;
-import org.view.ShopMessages;
+import org.view.CommandsEnum.ShopMessages;
 
 import java.util.regex.Matcher;
 
