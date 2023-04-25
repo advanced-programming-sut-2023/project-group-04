@@ -1,9 +1,9 @@
 package org.view;
 
 public enum ShopMessages {
-    BUY_SUCCESSFULLY("your purchase was successful"),
+    BUY_SUCCESSFULLY("Your purchase was successful"),
     CERTAINTY("Are you sure?"),
-    SELL_SUCCESSFULLY("your sell was successful");
+    SELL_SUCCESSFULLY("Your sell was successful");
 
 
     private final String message;

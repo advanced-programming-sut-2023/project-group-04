@@ -4,9 +4,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum ShopCommands {
-    SHOW_PRICE_LIST("^[ \t]*show(\\s+)price(\\s+)list[ \t]*$"),
-    BUY_ITEM("^[ \t]*buy\\s+(?=.*(-i\\s+(?<name>[\\S]+)))(?=.*(-a\\s+(?<amount>[\\d]+)))"),
-    SELL_ITEM("^[ \\t]*sell\\s+(?=.*(-i\\s+(?<name>[\\S]+)))(?=.*(-a\\s+(?<amount>[\\d]+)))"),
+    SHOW_PRICE_LIST("^[ \t]*show\\s+price\\s+list[ \t]*$"),
+    BUY_ITEM("^[ \t]*buy(?=.*-i\\s+(?<itemsName>\"[^\"]*\"|[^\\s\"]*))" +
+            "(?=.*-a\\s+(?<itemsAmount>[\\d]*))(\\s*(-i\\s+(\"[^\"]*\"|[^\\s\"]*)|-a\\s+([\\d]*))){2}[ \t]*$"),
+    SELL_ITEM("^[ \t]*sell(?=.*-i\\s+(?<itemsName>\"[^\"]*\"|[^\\s\"]*))" +
+            "(?=.*-a\\s+(?<itemsAmount>[\\d]*))(\\s*(-i\\s+(\"[^\"]*\"|[^\\s\"]*)|-a\\s+([\\d]*))){2}[ \t]*$"),
     BACK("^[ \t]*back[ \t]*$");
 
 
@@ -15,7 +17,6 @@ public enum ShopCommands {
     private ShopCommands(String regex) {
         this.regex = regex;
     }
-
 
     public static Matcher getMatcher(String input, ShopCommands shopCommands) {
         Matcher matcher = Pattern.compile(shopCommands.regex).matcher(input);
