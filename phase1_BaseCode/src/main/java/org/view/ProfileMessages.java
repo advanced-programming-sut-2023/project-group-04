@@ -17,7 +17,7 @@ public enum ProfileMessages {
     PASSWORD_LOWERCASE_WEAK("The password must have at least one <<lowercase>> letter!"),
     PASSWORD_NUMBER_WEAK("The password must have at least one <<digit>>!"),
     PASSWORD_SPECIFIC_CHAR_WEAK("The password must have at least one <<specific character>>!"),
-    PASSWORD_STRONG("password is strong:)"),
+    PASSWORD_HAVE_SPACE("The password must not contain <<space>>"),
     PASSWORD_CONFIRM_DOES_NOT_MATCH("password confirmation doesn't matches!"),
     EXISTENCE_EMAIL("A user with this Email is Already exists!"),
     INCORRECT_EMAIL_FORMAT("Email format is incorrect!"),
@@ -27,6 +27,7 @@ public enum ProfileMessages {
     INCORRECT_PASSWORD("Username and password didn't match!"),
     PASSWORD_CHANGED("your password successfully changed!"),
     CAPTCHA_CORRECT("CAPTCHA is correct"),
+    INCORRECT_CURRENT_PASSWORD("Current password is incorrect!"),
     WITHOUT_ERROR("This hasn't any error!");
 
 

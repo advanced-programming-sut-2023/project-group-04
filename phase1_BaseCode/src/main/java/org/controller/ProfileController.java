@@ -2,12 +2,14 @@ package org.controller;
 
 
 import org.model.Player;
-import org.view.Menu;
 import org.view.ProfileMessages;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.regex.Matcher;
+
+import static java.lang.Math.random;
 
 public class ProfileController {
 
@@ -41,26 +43,39 @@ public class ProfileController {
         String newPassword = removeQuotation(matcher.group("newPassword"));
         ProfileMessages profileMessages;
         profileMessages = checkPassword(matcher);
-        System.out.println(profileMessages.getMessage());
         if (profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY))
             setPassword(newPassword);
         return profileMessages;
     }
 
     public ProfileMessages changeEmail(Matcher matcher) {
-        return null;
+        String email = removeQuotation(matcher.group("email"));
+        ProfileMessages profileMessages = checkEmail(matcher);
+        if (profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY)) {
+            Player.getLoggedInPlayer().setEmail(email);
+        }
+        return profileMessages;
     }
 
     public ProfileMessages changeSlogan(Matcher matcher) {
-        return null;
+        ProfileMessages profileMessages = checkSlogan(matcher);
+        String slogan = removeQuotation(matcher.group("slogan"));
+        if (profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY))
+            setSlogan(slogan);
+        return profileMessages;
+    }
+
+    public void setSlogan(String slogan) {
+        Player.getLoggedInPlayer().setSlogan(slogan);
     }
 
     public ProfileMessages removeSlogan() {
-        return null;
+        Player.getLoggedInPlayer().setSlogan(null);
+        return ProfileMessages.CHANGE_SUCCESSFULLY;
     }
 
     public String highScore() {
-        return null;
+        return Player.getLoggedInPlayer().getScore();
     }
 
     public String showRank() {
@@ -68,11 +83,21 @@ public class ProfileController {
     }
 
     public String showSlogan() {
-        return null;
+        String slogan = Player.getLoggedInPlayer().getSlogan();
+        if (slogan.isEmpty()) {
+            return "Slogan is empty!";
+        }
+        return slogan;
     }
 
     public String displayProfile() {
-        return null;
+        Player player = Player.getLoggedInPlayer();
+        StringBuilder string = new StringBuilder();
+        string.append("username : ").append(player.getUsername()).append("\nnickname : ").append(player.getNickname())
+                .append("\nemail : ").append(player.getEmail()).append("\nslogan : ").append(player.getSlogan())
+                .append("\nscore : ").append(player.getScore());
+
+        return string.toString();
     }
 
 
@@ -113,6 +138,8 @@ public class ProfileController {
             return ProfileMessages.EMPTY_FIELD;
         else if (!Player.getLoggedInPlayer().isPasswordCorrect(oldPassword))
             return ProfileMessages.INCORRECT_PASSWORD;
+        else if (newPassword.contains(" "))
+            return ProfileMessages.PASSWORD_HAVE_SPACE;
         else if (newPassword.length() < 6)
             return ProfileMessages.PASSWORD_LENGTH_WEAK;
         else if (!newPassword.matches(".*[A-Z].*"))
@@ -141,15 +168,15 @@ public class ProfileController {
     }
 
     private ProfileMessages checkEmail(Matcher matcher) {
-        String email = matcher.group("email");
+        String email = removeQuotation(matcher.group("email"));
         if (email.isEmpty())
             return ProfileMessages.EMPTY_FIELD;
         else if (isEmailDuplicated(email))
             return ProfileMessages.EXISTENCE_EMAIL;
-        else if (!email.matches("^\\w+@\\w+\\.\\w+$"))
+        else if (!email.matches("^\\w+@\\w+\\.\\w+$") | email.contains(" "))
             return ProfileMessages.INCORRECT_EMAIL_FORMAT;
         else
-            return ProfileMessages.WITHOUT_ERROR;
+            return ProfileMessages.CHANGE_SUCCESSFULLY;
     }
 
     private boolean isEmailDuplicated(String email) {
@@ -169,7 +196,21 @@ public class ProfileController {
     }
 
     private ProfileMessages checkSlogan(Matcher matcher) {
-        return null;
+        String slogan = removeQuotation(matcher.group("slogan"));
+        if (slogan.isEmpty())
+            return ProfileMessages.EMPTY_FIELD;
+        return ProfileMessages.CHANGE_SUCCESSFULLY;
+    }
+
+    public String giveRandomSlogan() {
+        ArrayList<String> slogans = new ArrayList<>();
+        slogans.add("I shall have my revenge, in this life or the next!");
+        slogans.add("I will not lose I either win or learn!");
+        slogans.add("You are too weak to play with me:)!");
+        slogans.add("If I lose, I will lose in such a way that you doubt that you will win!");
+        slogans.add("Defend your castle, conquer your foes.");
+        int number = (int) (random() / (5));
+        return slogans.get(number);
     }
 
     private String removeQuotation(String buffer) {
