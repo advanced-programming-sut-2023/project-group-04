@@ -6,14 +6,12 @@ import org.view.CommandsEnum.SignUpMessages;
 import java.util.regex.Matcher;
 
 public class LoginMenu {
-    public LoginMenu() {
-    }
 
     public void run() throws Exception {
-        String input, result;
+        String result;
         Matcher matcher;
         while (true) {
-            input = Menu.getScanner().nextLine();
+            String input = Menu.getScanner().nextLine();
             if (SignUpCommands.getMatcher(input, SignUpCommands.I_DONT_HAVE_ACCOUNT) != null) {
                 System.out.println("now you can create a new account!");
                 new SignUpMenu().run();

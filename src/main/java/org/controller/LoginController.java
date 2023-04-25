@@ -14,16 +14,8 @@ import java.util.regex.Matcher;
 
 import static org.view.CommandsEnum.SignUpMessages.*;
 
-
 public class LoginController {
-
-    public LoginController() {
-    }
-
-    public void run() throws Exception {
-        new LoginMenu().run();
-    }
-
+    
     public SignUpMessages SignUp(Matcher matcher) throws Exception {
         String username = matcher.group("username");
         String password = matcher.group("password");
@@ -98,6 +90,7 @@ public class LoginController {
                 + "\n3. " + SecurityQuestion.getQuestion(SecurityQuestion.CAR));
     }
 
+    
     private SignUpMessages checkSignUpErrors(String username, String password,
                                              String passwordConfirmation, String email,
                                              String nickname, String sloganCommand, String slogan) {

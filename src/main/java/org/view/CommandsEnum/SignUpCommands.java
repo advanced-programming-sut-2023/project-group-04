@@ -3,16 +3,28 @@ package org.view.CommandsEnum;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public enum SignUpCommands {
-    CREATE_ACCOUNT("user create -u( (?<username>[^\"\\s]+ |\"[^\"]+\" )?)-p( (?<password>random |\\S+ )?)((?<passwordConfirm>\\S+ ))?-email( (?<Email>\\S+ )?)-n( ?(?<nickName>[^\"\\s]+ ?|\"[^\"]+\" ?)?(?<sloganCommand>-s)?)( (?<slogan>[^\"\\s]+|\"[^\"]+\"))?"),
-    PICK_SECURITY_QUESTION("question pick -q (?<questionNumber>\\d+) -a " +
-            "(?<answer>[^\\s\"]+|\"[^\"]+\") -c (?<answerConfirm>[^\\s\"]+|\"[^\"]+\")"),
-    LOGIN_USER("user login -u (?<username>[^\\s\"]+|\"[^\"]+\") -p (?<password>\\S+)(?<status> --stay-logged-in)?"),
-    FORGET_PASSWORD("forgot my password -u (?<username>[^\\s\"]+|\"[^\"]+\")"),
-    LOGOUT("user logout"),
-    I_DONT_HAVE_ACCOUNT("i dont have an account!")
-    ;
+/*
+("^\\s*forget\\s+my\\s+password(?=.*-u (?<username>\"[^\"]*\"|[^\\s\"]*))(\\s+(-u (\"[^\"]*\"|[^\\s\"]*))){1}\\s*$")
 
+ */
+
+public enum SignUpCommands {
+    CREATE_ACCOUNT("^\\s*settexture(?=.*-u (?<username>\"[^\"]*\"|[^\\s\"]*))" +
+            "(?=.*-p (?<password>\"[^\"]*\"|[^\\s\"]*)\\s+(?<passwordConfirm>\"[^\"]*\"|[^\\s\"]*))" +
+            "(?=.*-e (?<email>\"[^\"]*\"|[^\\s\"]*))(?=.*-n (?<nickname>\"[^\"]*\"|[^\\s\"]*))" +
+            "(?=.*-s (?<slogan>\"[^\"]*\"|[^\\s\"]*))?(\\s+((-u (\"[^\"]*\"|[^\\s\"]*))|" +
+            "(-p (\"[^\"]*\"|[^\\s\"]*)\\s+(\"[^\"]*\"|[^\\s\"]*))|((-e (\"[^\"]*\"|[^\\s\"]*))|" +
+            "((-n (\"[^\"]*\"|[^\\s\"]*))|((-s (\"[^\"]*\"|[^\\s\"]*))){4,5}\\s*$"),
+    PICK_SECURITY_QUESTION("^\\s*question\\s+pick(?=.*-q (?<questionNumber>\\d+))" +
+            "(?=.*-a (?<answer>\"[^\"]*\"|[^\\s\"]*))(?=.*-c (?<answerConfirm>\"[^\"]*\"|[^\\s\"]*))" +
+            "(\\s+(-q (\\d+))|(-a (\"[^\"]*\"|[^\\s\"]*))|(-c (\"[^\"]*\"|[^\\s\"]*))){3}\\s*$"),
+    LOGIN_USER("^\\s*user\\s+login(?=.*-u (?<username>\"[^\"]*\"|[^\\s\"]*))" +
+            "(?=.*-p (?<password>\"[^\"]*\"|[^\\s\"]*))(?=.*(?<status>--stay-logged-in))(\\s+(-u (\"[^\"]*\"|[^\\s\"]*))" +
+            "|(-p (\"[^\"]*\"|[^\\s\"]*))|--stay-logged-in){3}\\s*$"),
+    FORGET_PASSWORD("^\\s*forget\\s+my\\s+password(?=.*-u (?<username>\"[^\"]*\"|[^\\s\"]*))" +
+            "(\\s+(-u (\"[^\"]*\"|[^\\s\"]*))){1}\\s*$"),
+    LOGOUT("\\s*user\\s+logout\\s*"),
+    I_DONT_HAVE_ACCOUNT("\\s*i\\s+dont\\s+have\\s+an\\s+account!\\s*");
 
     private final String regex;
 
@@ -20,9 +32,8 @@ public enum SignUpCommands {
         this.regex = regex;
     }
 
-
     public static Matcher getMatcher(String input, SignUpCommands signUpCommands) {
         Matcher matcher = Pattern.compile(signUpCommands.regex).matcher(input);
-        return matcher.matches() ? matcher : null;
+        return matcher.find() ? matcher : null;
     }
 }

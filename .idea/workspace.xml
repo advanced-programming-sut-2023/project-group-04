@@ -6,17 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="captcha for login added!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/ASCIIArtGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/ASCIIArtGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/CommandsEnum/SecurityQuestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/SecurityQuestion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/CommandsEnum/SignUpCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/SignUpCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/CommandsEnum/SignUpMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/SignUpMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/LoginMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/SignUpMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/SignUpMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/SignUpCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/SignUpCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/SignUpMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/SignUpMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/LoginMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,11 +103,6 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="824e0c4a-c771-4a62-9ecc-749d39d96932" value="TOOL_WINDOW" />
-      </map>
-    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="824e0c4a-c771-4a62-9ecc-749d39d96932">
@@ -139,6 +127,11 @@
             </State>
           </value>
         </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="824e0c4a-c771-4a62-9ecc-749d39d96932" value="TOOL_WINDOW" />
       </map>
     </option>
   </component>
