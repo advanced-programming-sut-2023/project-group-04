@@ -9,7 +9,7 @@ public enum ProfileCommands {
     CHANGE_NICKNAME("^[ \t]*profile\\s+change(?=.*-n (?<nickname>\"[^\"]*\"|[^\\s\"]*))" +
             "(\\s*(-n (\"[^\"]*\"|[^\\s\"]*))){1}[ \t]*$"),
     CHANGE_PASSWORD("^[ \t]*profile\\s+change(?=.*-o\\s+(?<oldPassword>\"[^\"]*\"|[^\\s\"]*))" +
-            "(?=.*-n\\s+(?<newPassword>\"[^\"]*\"|[^\\s\"]*)) " +
+            "(?=.*-n\\s+(?<newPassword>\"[^\"]*\"|[^\\s\"]*))" +
             "(\\s*(-o\\s+(\"[^\"]*\"|[^\\s\"]*)|-n\\s+(\"[^\"]*\"|[^\\s\"]*))){2}[ \t]*$"),
     CHANGE_EMAIL("^[ \t]*profile\\s+change(?=.*-e (?<email>\"[^\"]*\"|[^\\s\"]*))" +
             "(\\s*(-e (\"[^\"]*\"|[^\\s\"]*))){1}[ \t]*$"),
