@@ -22,11 +22,11 @@ public class ProfileController {
     }
 
     public void setUsername(String username) {
-        Player.getLoggedInPlayer().setUsername(username);
+        Player.getCurrentPlayer().setUsername(username);
     }
 
     public void setPassword(String password) {
-        Player.getLoggedInPlayer().setPassword(password);
+        Player.getCurrentPlayer().setPassword(password);
     }
 
     public ProfileMessages changeNickname(Matcher matcher) {
@@ -35,14 +35,13 @@ public class ProfileController {
         if (nickname.isEmpty()) {
             return ProfileMessages.EMPTY_FIELD;
         }
-        Player.getLoggedInPlayer().setNickname(nickname);
+        Player.getCurrentPlayer().setNickname(nickname);
         return ProfileMessages.CHANGE_SUCCESSFULLY;
     }
 
     public ProfileMessages changePassword(Matcher matcher) {
         String newPassword = removeQuotation(matcher.group("newPassword"));
-        ProfileMessages profileMessages;
-        profileMessages = checkPassword(matcher);
+        ProfileMessages profileMessages = checkPassword(matcher);
         if (profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY))
             setPassword(newPassword);
         return profileMessages;
@@ -52,7 +51,7 @@ public class ProfileController {
         String email = removeQuotation(matcher.group("email"));
         ProfileMessages profileMessages = checkEmail(matcher);
         if (profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY)) {
-            Player.getLoggedInPlayer().setEmail(email);
+            Player.getCurrentPlayer().setEmail(email);
         }
         return profileMessages;
     }
@@ -66,16 +65,16 @@ public class ProfileController {
     }
 
     public void setSlogan(String slogan) {
-        Player.getLoggedInPlayer().setSlogan(slogan);
+        Player.getCurrentPlayer().setSlogan(slogan);
     }
 
     public ProfileMessages removeSlogan() {
-        Player.getLoggedInPlayer().setSlogan(null);
+        Player.getCurrentPlayer().setSlogan(null);
         return ProfileMessages.CHANGE_SUCCESSFULLY;
     }
 
     public int highScore() {
-        return Player.getLoggedInPlayer().getScore();
+        return Player.getCurrentPlayer().getScore();
     }
 
     public String showRank() {
@@ -83,7 +82,7 @@ public class ProfileController {
     }
 
     public String showSlogan() {
-        String slogan = Player.getLoggedInPlayer().getSlogan();
+        String slogan = Player.getCurrentPlayer().getSlogan();
         if (slogan.isEmpty()) {
             return "Slogan is empty!";
         }
@@ -91,7 +90,7 @@ public class ProfileController {
     }
 
     public String displayProfile() {
-        Player player = Player.getLoggedInPlayer();
+        Player player = Player.getCurrentPlayer();
         StringBuilder string = new StringBuilder();
         string.append("username : ").append(player.getUsername()).append("\nnickname : ").append(player.getNickname())
                 .append("\nemail : ").append(player.getEmail()).append("\nslogan : ").append(player.getSlogan())
@@ -133,10 +132,9 @@ public class ProfileController {
     private ProfileMessages checkPassword(Matcher matcher) {
         String oldPassword = removeQuotation(matcher.group("oldPassword"));
         String newPassword = removeQuotation(matcher.group("newPassword"));
-
         if (oldPassword.isEmpty() | newPassword.isEmpty())
             return ProfileMessages.EMPTY_FIELD;
-        else if (!Player.getLoggedInPlayer().isPasswordCorrect(oldPassword))
+        else if (!Player.getCurrentPlayer().isPasswordCorrect(oldPassword))
             return ProfileMessages.INCORRECT_PASSWORD;
         else if (newPassword.contains(" "))
             return ProfileMessages.PASSWORD_HAVE_SPACE;
@@ -160,7 +158,6 @@ public class ProfileController {
         int PASSWORD_LENGTH = 16;
         SecureRandom random = new SecureRandom();
         StringBuilder randomPassword = new StringBuilder(PASSWORD_LENGTH);
-
         for (int i = 0; i < PASSWORD_LENGTH; i++) {
             randomPassword.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
         }

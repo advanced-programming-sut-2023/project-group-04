@@ -9,12 +9,10 @@ import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
 import org.passay.PasswordGenerator;
 import org.view.CommandsEnum.*;
-import org.view.LoginMenu;
 import org.view.Menu;
 import org.view.SignUpMenu;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
 
 import static org.view.CommandsEnum.SignUpMessages.*;
 
@@ -36,7 +34,7 @@ public class LoginController {
                 password = generateRandomPassword();
                 if (slogan.equals("random")) {
                     slogan = giveRandomSlogan();
-                    showSloganAndPassword(slogan, password);
+                    System.out.println(showSloganAndPassword(slogan, password));
                     while (!Menu.getScanner().nextLine().equals(password)) {
                         System.out.println("confirmation failed!\nplease enter password correctly!: ");
                     }
@@ -80,19 +78,17 @@ public class LoginController {
         }
     }
 
-    private void showSloganAndPassword(String slogan, String password) {
-        System.out.print("Your slogan is \"" + slogan + "\"\n" +
+    private String showSloganAndPassword(String slogan, String password) {
+        return "Your slogan is \"" + slogan + "\"\n" +
                 "Your random password is: " + password + "\n" +
-                "Please re-enter your password here: ");
+                "Please re-enter your password here: ";
     }
 
-    private void showSecurityQuestions() {
-        System.out.println("Pick your security question: 1. " + SecurityQuestion.getQuestion(SecurityQuestion.PET)
+    private String showSecurityQuestions() {
+        return "Pick your security question: 1. " + SecurityQuestion.getQuestion(SecurityQuestion.PET)
                 + "\n2. " + SecurityQuestion.getQuestion(SecurityQuestion.TEACHER)
-                + "\n3. " + SecurityQuestion.getQuestion(SecurityQuestion.CAR));
+                + "\n3. " + SecurityQuestion.getQuestion(SecurityQuestion.CAR);
     }
-
-    
     private SignUpMessages checkSignUpErrors(String username, String password,
                                              String passwordConfirmation, String email,
                                              String nickname, String slogan) {
@@ -164,15 +160,22 @@ public class LoginController {
         CharacterRule lowerCase = new CharacterRule(EnglishCharacterData.LowerCase, 2);
         CharacterRule uppercase = new CharacterRule(EnglishCharacterData.UpperCase, 2);
         CharacterRule digit = new CharacterRule(EnglishCharacterData.Digit, 2);
-        CharacterRule specificCharacter = new CharacterRule(EnglishCharacterData.Special, 2);
-        return new PasswordGenerator().generatePassword(8, specificCharacter, lowerCase, uppercase, digit);
+        String password = new PasswordGenerator().generatePassword(6, lowerCase, uppercase, digit);
+        String specificChars = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+        Random random = new Random();
+        for (int i = 0; i < 2; i++) {
+            char randomChar = specificChars.charAt(random.nextInt(specificChars.length() - 1));
+            int charAddPlace = random.nextInt(5+i);
+            password = password.substring(0,charAddPlace) + randomChar + password.substring(charAddPlace);
+        }
+        return password;
     }
 
     private boolean checkEmailExistence(String email) {
         return Player.getPlayerByEmail(email) != null;
     }
 
-    private SignUpMessages checkPassword(String password) {
+    private SignUpMessages checkPassword(String password, String passwordConfirm) {
         if (password.equals("random"))
             return PASSWORD_STRONG;
         else if (password.length() < 6)
@@ -185,6 +188,8 @@ public class LoginController {
             return PASSWORD_NUMBER_WEAK;
         else if (!password.matches(".*[^a-zA-Z0-9].*"))
             return PASSWORD_SPECIFIC_CHAR_WEAK;
+        else if (!password.equals(passwordConfirm))
+            return PASSWORD_CONFIRM_DOES_NOT_MATCH;
         return PASSWORD_STRONG;
     }
 
@@ -198,53 +203,51 @@ public class LoginController {
     }
 
     private boolean isUsernameFormatCorrect(String username) {
-        return username.matches("[a-zA-Z\\s\\_0-9]+");
+        return username.matches("\\w+");
     }
 
-
-    public SignUpMessages signIn(Matcher matcher) throws Exception {
-        String username = matcher.group("username");
+    public String signIn(Matcher matcher) throws Exception {
+        String username = matcher.group("username").replaceAll("\"","");
         String password = matcher.group("password");
         String status = matcher.group("status");
-        if (Player.getPlayerByUsername(username) == null)
-            return USER_DOES_NOT_EXIST;
+        if (Player.getPlayerByUsername(username) == null) return USER_DOES_NOT_EXIST.getMessage();
         if (!Player.getPlayerByUsername(username).isPasswordCorrect(password)) {
             Player.getPlayerByUsername(username).increaseNumberOfAttempts();
-            System.out.println("Please try again after <<"
-                    + Player.getPlayerByUsername(username).getNumberOfAttempts() * 5 + ">> seconds!");
-            return INCORRECT_PASSWORD;
+            return INCORRECT_PASSWORD.getMessage() + "\nPlease try again after <<"
+                    + Player.getNumberOfAttempts() * 5 + ">> seconds!";
         }
         // TODO: 4/19/2023  //Stay logged in not handled!!
-        if (generateCaptcha().equals(CAPTCHA_CORRECT)) {
-            Player.getPlayerByUsername(username).setNumberOfAttemptsToZero();
-        }
-        Player.setLoggedInPlayer(Player.getPlayerByUsername(username));
-            return LOGIN_SUCCESSFUL;
-
+        if (generateCaptcha().equals(CAPTCHA_CORRECT)) Player.resetNumberOfAttempts();
+        Player.setCurrentPlayer(Player.getPlayerByUsername(username));
+            return LOGIN_SUCCESSFUL.getMessage();
     }
 
-    public SignUpMessages forgetPassword(Matcher matcher) {
-        String username = matcher.group("username");
-        if (Player.getPlayerByUsername(username) == null)
-            return USER_DOES_NOT_EXIST;
+    public String getSecurityQuestion(String username) {
         Player player = Player.getPlayerByUsername(username);
-        System.out.println("Do you remember the answer of your security question?");
-        System.out.println(player.getSecurityQuestion());
-        String securityAnswer = Menu.getScanner().nextLine();
-        if (!player.isSecurityAnswerCorrect(securityAnswer))
-            return ANSWER_DOES_NOT_MATCH;
-        System.out.print("please enter your new password: ");
-        String password = Menu.getScanner().nextLine();
-        if (checkPassword(password).equals(PASSWORD_STRONG))
-        {
-            System.out.print("please enter your password again to confirm: ");
-            String passwordConfirm = Menu.getScanner().nextLine();
-            if (!passwordConfirm.equals(password))
-                return PASSWORD_CONFIRM_DOES_NOT_MATCH;
-            player.setPassword(password);
-            return PASSWORD_CHANGED;
+        if (player == null) return SignUpMessages.USER_DOES_NOT_EXIST.getMessage();
+        Player.setCurrentPlayer(player);
+        return player.getSecurityQuestion();
+    }
+
+    public String checkSecurityAnswer(String securityAnswer) {
+        Player player = Player.getCurrentPlayer();
+        if (!player.isSecurityAnswerCorrect(securityAnswer)) return SignUpMessages.ANSWER_DOES_NOT_MATCH.getMessage();
+        else return "please enter your new password: ";
+    }
+
+    public SignUpMessages setNewPassword(Matcher matcher) {
+        String password = matcher.group("password");
+        String passwordConfirm = matcher.group("passwordConfirm");
+        SignUpMessages signUpMessage = checkPassword(password,passwordConfirm);
+        if (!signUpMessage.equals(SignUpMessages.PASSWORD_STRONG)) return signUpMessage;
+        Player.getCurrentPlayer().setPassword(password);
+        return SignUpMessages.PASSWORD_CHANGED;
+    }
+
+    public void delay() {
+        long startTime = System.currentTimeMillis();
+        while (true) {
+            if (System.currentTimeMillis() == startTime + 5000 * Player.getNumberOfAttempts()) return;
         }
-        else
-            return checkPassword(password);
     }
 }

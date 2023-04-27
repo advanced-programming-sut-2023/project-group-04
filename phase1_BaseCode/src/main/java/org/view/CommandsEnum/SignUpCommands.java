@@ -24,7 +24,11 @@ public enum SignUpCommands {
     FORGET_PASSWORD("^\\s*forget\\s+my\\s+password(?=.*-u (?<username>\"[^\"]*\"|[^\\s\"]*))" +
             "(\\s+(-u (\"[^\"]*\"|[^\\s\"]*))){1}\\s*$"),
     LOGOUT("\\s*user\\s+logout\\s*"),
-    I_DONT_HAVE_ACCOUNT("\\s*i\\s+dont\\s+have\\s+an\\s+account!\\s*");
+    BACK("\\s*back\\s*"),
+    I_DONT_HAVE_ACCOUNT("\\s*i\\s+dont\\s+have\\s+an\\s+account!\\s*"),
+    SET_NEW_PASSWORD("^\\s*new\\s+password(?=.*-p (?<password>\"[^\"]*\"|[^\\s\"]*))" +
+            "(?=.*-c (?<passwordConfirm>\"[^\"]*\"|[^\\s\"]*))(\\s+(-p (\"[^\"]*\"|[^\\s\"]*))" +
+            "|(-c (\"[^\"]*\"|[^\\s\"]*))){2}\\s*$");
 
     private final String regex;
 

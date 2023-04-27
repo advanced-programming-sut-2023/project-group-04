@@ -1,13 +1,9 @@
 package org.controller;
 
-import com.google.gson.Gson;
 import org.model.Map;
 import org.model.Player;
 import org.view.CommandsEnum.MapMenuMessages;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Random;
 import java.util.regex.Matcher;
 
@@ -17,13 +13,13 @@ public class EnvironmentController {
         int size = Integer.parseInt(matcher.group("size"));
         if (size != 200 && size != 400) return MapMenuMessages.INVALID_SIZE;
         Map map = new Map(id, size);
-        Player.getLoggedInPlayer().addMap(map);
+        Player.getCurrentPlayer().addMap(map);
         return MapMenuMessages.MAP_CREATION_SUCCESSFUL;
     }
 
     public MapMenuMessages chooseExistingMap(Matcher matcher) {
         int id = Integer.parseInt(matcher.group("id"));
-        Map map = Player.getLoggedInPlayer().getMapById(id);
+        Map map = Player.getCurrentPlayer().getMapById(id);
         if (map == null) return MapMenuMessages.MAP_NOT_EXIST;
         Map.setCurrentMap(map);
         return MapMenuMessages.MAP_SELECT_SUCCESSFUL;

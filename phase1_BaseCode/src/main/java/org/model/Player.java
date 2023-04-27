@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Player {
 
-    private static Player loggedInPlayer;
+    private static Player currentPlayer;
     private static ArrayList<Player> allPlayers;
     private String username;
     private String password;
@@ -21,6 +21,8 @@ public class Player {
     private String slogan;
     private int score;
     private ArrayList<Map> maps;
+
+    private static int numberOfAttempts = 0;
 
     public Player(String username, String password, String nickname, String email,String securityQuestion
             , String securityAnswer, String slogan) {
@@ -33,8 +35,8 @@ public class Player {
         this.maps = new ArrayList<>();
     }
 
-    public static void setLoggedInPlayer(Player player) {
-        Player.loggedInPlayer = player;
+    public static void setCurrentPlayer(Player player) {
+        Player.currentPlayer = player;
     }
 
     public static ArrayList<Player> getAllPlayers() {
@@ -155,8 +157,8 @@ public class Player {
         return null;
     }
 
-    public static Player getLoggedInPlayer() {
-        return loggedInPlayer;
+    public static Player getCurrentPlayer() {
+        return currentPlayer;
     }
 
     public Map getMapById(int id) {
@@ -171,5 +173,17 @@ public class Player {
 
     public void addMap(Map map) {
         this.maps.add(map);
+    }
+
+    public void increaseNumberOfAttempts() {
+        numberOfAttempts++;
+    }
+
+    public static int getNumberOfAttempts() {
+        return numberOfAttempts;
+    }
+
+    public static void resetNumberOfAttempts(){
+        numberOfAttempts = 0;
     }
 }
