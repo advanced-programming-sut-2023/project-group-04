@@ -10,6 +10,8 @@ public class Empire {
     private final HashMap<String, Integer> popularity;
     private final HashMap<String, Integer> resources;
 
+    private final HashMap<String, Integer> food;
+
     public Empire(Player owner) {
         this.owner = owner;
         this.fearRate = 0;
@@ -19,7 +21,8 @@ public class Empire {
         initializePopularity();
         this.resources = new HashMap<>();
         initializeResource();
-
+        this.food = new HashMap<>();
+        initializeFood();
     }
 
     private void initializePopularity() {
@@ -30,11 +33,15 @@ public class Empire {
     }
 
     private void initializeResource() {
-//        String[] resource = {"wheat","flour","hops","ale","stone","iron","wood","pitch","food"};
-//        for (:) {
-//
-//        }
+        String[] resources = {"wheat", "flour", "hops", "ale", "stone", "iron", "wood", "pitch"};
+        for (String resource : resources) this.resources.put(resource, 0);
+    }
 
+    private void initializeFood() {
+        this.food.put("meet", 0);
+        this.food.put("apples", 0);
+        this.food.put("cheese", 0);
+        this.food.put("bread", 0);
     }
 
     public Player getOwner() {

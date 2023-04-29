@@ -18,7 +18,7 @@ import static org.view.CommandsEnum.SignUpMessages.*;
 
 public class LoginController {
     
-    public SignUpMessages SignUp(Matcher matcher) throws Exception {
+    public String SignUp(Matcher matcher) {
         String username = matcher.group("username").replaceAll("\"","");
         String password = matcher.group("password");
         String passwordConfirmation = matcher.group("passwordConfirm");
@@ -26,45 +26,33 @@ public class LoginController {
         String nickname = matcher.group("nickname").replaceAll("\"","");
         String slogan = matcher.group("slogan").replaceAll("\"","");
         if (checkSignUpErrors(username, password, passwordConfirmation, email, nickname, slogan) == WITHOUT_ERROR) {
-            Player.savePlayers();
         } else {
-            return checkSignUpErrors(username, password, passwordConfirmation, email, nickname, slogan);
+            return checkSignUpErrors(username, password, passwordConfirmation, email, nickname, slogan).getMessage();
         }
             if (password.equals("random")) {
                 password = generateRandomPassword();
                 if (slogan.equals("random")) {
                     slogan = giveRandomSlogan();
-                    System.out.println(showSloganAndPassword(slogan, password));
-                    while (!Menu.getScanner().nextLine().equals(password)) {
-                        System.out.println("confirmation failed!\nplease enter password correctly!: ");
-                    }
+                    Player player = new Player(username, password, nickname, email, slogan);
+                    Player.setCurrentPlayer(player);
+                    return showSloganAndPassword(slogan, password);
                 } else {
-                    System.out.print("Your random password is: " + password + "\n" +
-                            "Please re-enter your password here: ");
-                    while (!Menu.getScanner().nextLine().equals(password)) {
-                        System.out.println("confirmation failed!\nplease enter your password correctly!: ");
-                    }
+                    Player player = new Player(username, password, nickname, email, slogan);
+                    Player.setCurrentPlayer(player);
+                    return "Your random password is: " + password;
                 }
             } else {
                 if (slogan != null)
                     if (slogan.equals("random")) {
                         slogan = giveRandomSlogan();
-                        System.out.println("Your random slogan is \"" + slogan + "\"");
+                        Player player = new Player(username, password, nickname, email, slogan);
+                        Player.setCurrentPlayer(player);
+                        return "Your random slogan is \"" + slogan + "\"";
                     }
             }
-            showSecurityQuestions();
-            Matcher pickQuestionMatcher = SignUpCommands.getMatcher(Menu.getScanner().nextLine(), SignUpCommands.PICK_SECURITY_QUESTION);
-            if (setSecurityQuestion(pickQuestionMatcher).equals(SET_QUESTION_SUCCESSFUL)) {
-                String securityQuestion, securityAnswer = pickQuestionMatcher.group("answer");
-                securityQuestion = giveSecurityQuestionWithNumber(pickQuestionMatcher);
-                if (generateCaptcha().equals(CAPTCHA_CORRECT)) {
-                    Player player = new Player(username, password, nickname, email, securityQuestion, securityAnswer, slogan);
-                    player.addPlayer(player);
-                }
-            } else {
-                return setSecurityQuestion(pickQuestionMatcher);
-            }
-            return REGISTRATION_SUCCESSFUL;
+            Player player = new Player(username, password, nickname, email, slogan);
+            Player.setCurrentPlayer(player);
+            return REGISTRATION_SUCCESSFUL.getMessage();
     }
 
     private String giveSecurityQuestionWithNumber(Matcher matcher) {
@@ -79,12 +67,10 @@ public class LoginController {
     }
 
     private String showSloganAndPassword(String slogan, String password) {
-        return "Your slogan is \"" + slogan + "\"\n" +
-                "Your random password is: " + password + "\n" +
-                "Please re-enter your password here: ";
+        return "Your slogan is \"" + slogan + "\"\nYour random password is: " + password;
     }
 
-    private String showSecurityQuestions() {
+    public String showSecurityQuestions() {
         return "Pick your security question: 1. " + SecurityQuestion.getQuestion(SecurityQuestion.PET)
                 + "\n2. " + SecurityQuestion.getQuestion(SecurityQuestion.TEACHER)
                 + "\n3. " + SecurityQuestion.getQuestion(SecurityQuestion.CAR);
@@ -100,12 +86,10 @@ public class LoginController {
                 username = suggestNewUsername(username);
             else
                 return REGISTRATION_FAILED;
-        } else if (checkPassword(password).equals(PASSWORD_STRONG)) {
+        } else if (checkPassword(password, passwordConfirmation).equals(PASSWORD_STRONG)) {
         } else
-            return checkPassword(password);
-        if (!password.equals("random") && !password.equals(passwordConfirmation))
-            return PASSWORD_CONFIRM_DOES_NOT_MATCH;
-        else if (checkEmailExistence(email))
+            return checkPassword(password, passwordConfirmation);
+        if (checkEmailExistence(email))
             return EXISTENCE_EMAIL;
         else if (!email.matches("[a-zA-Z0-9_.]+@[a-zA-Z0-9_.]+\\.[a-zA-Z0-9_.]+"))
             return INCORRECT_EMAIL_FORMAT;
@@ -133,7 +117,7 @@ public class LoginController {
     }
 
 
-    private SignUpMessages setSecurityQuestion(Matcher matcher) {
+    public SignUpMessages setSecurityQuestion(Matcher matcher) {
         int questionNumber = Integer.parseInt(matcher.group("questionNumber"));
         String answer = matcher.group("answer");
         String answerConfirm = matcher.group("answer");
@@ -247,7 +231,26 @@ public class LoginController {
     public void delay() {
         long startTime = System.currentTimeMillis();
         while (true) {
-            if (System.currentTimeMillis() == startTime + 5000 * Player.getNumberOfAttempts()) return;
+            if (System.currentTimeMillis() == startTime + 5000L * Player.getNumberOfAttempts()) return;
         }
+    }
+
+    public SignUpMessages finishRegister(Matcher pickQuestionMatcher) throws Exception {
+        String securityQuestion, securityAnswer = pickQuestionMatcher.group("answer");
+        securityQuestion = giveSecurityQuestionWithNumber(pickQuestionMatcher);
+        if (generateCaptcha().equals(CAPTCHA_CORRECT)) {
+            Player player = Player.getCurrentPlayer();
+            player.setSecurityQuestion(securityQuestion);
+            player.setSecurityAnswer(securityAnswer);
+            Player.addPlayer(player);
+            Player.savePlayers();
+        }
+        return SignUpMessages.REGISTRATION_SUCCESSFUL;
+    }
+
+    public String checkRandomPassword(String password) {
+        if (Player.getCurrentPlayer().isPasswordCorrect(password))
+            return "password confirmed!";
+        return "confirmation failed!\nplease enter password correctly!: ";
     }
 }

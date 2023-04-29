@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Player {
 
     private static Player currentPlayer;
-    private static ArrayList<Player> allPlayers;
+    private static ArrayList<Player> allPlayers = new ArrayList<>();
     private String username;
     private String password;
     private String nickname;
@@ -24,8 +24,7 @@ public class Player {
 
     private static int numberOfAttempts = 0;
 
-    public Player(String username, String password, String nickname, String email,String securityQuestion
-            , String securityAnswer, String slogan) {
+    public Player(String username, String password, String nickname, String email, String slogan) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
@@ -54,7 +53,7 @@ public class Player {
             Gson gson = new Gson();
             Reader reader = Files.newBufferedReader(Paths.get("PLAYERS.json"));
             ArrayList<Player> allPlayers = gson.fromJson(reader, ArrayList.class);
-            if (allPlayers != null) Player.allPlayers = allPlayers;
+            if (allPlayers != null) Player.allPlayers = (ArrayList<Player>) allPlayers;
             reader.close();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -186,4 +185,6 @@ public class Player {
     public static void resetNumberOfAttempts(){
         numberOfAttempts = 0;
     }
+
+
 }

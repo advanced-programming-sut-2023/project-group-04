@@ -5,10 +5,12 @@ import java.util.ArrayList;
 public class Game {
     private static Game currentGame;
     private MapCell[][] map;
-    public ArrayList<Empire> allEmpires;
+    private final ArrayList<Empire> allEmpires;
+    private Empire currentEmpire;
 
     public Game(ArrayList<Empire> allEmpires) {
         this.allEmpires = allEmpires;
+        currentEmpire = allEmpires.get(0);
     }
 
     public void initializeMap() {
@@ -35,5 +37,15 @@ public class Game {
 
     public static Game getCurrentGame() {
         return currentGame;
+    }
+
+    public Empire getCurrentEmpire() {
+        return currentEmpire;
+    }
+
+    public void nextEmpire() {
+        int index = allEmpires.indexOf(currentEmpire) + 1;
+        if (index == allEmpires.size()) index = 0;
+        currentEmpire = allEmpires.get(index);
     }
 }

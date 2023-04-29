@@ -1,17 +1,33 @@
 package org.controller;
 
+import com.google.gson.Gson;
+import org.model.Empire;
+import org.model.Game;
 import org.model.MapCell;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class GameController {
     public String showPopularityFactors() {
-        return null;
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
+        HashMap<String, Integer> popularityFactors = empire.getPopularity();
+        String popularity = "<<popularity factors>>\n";
+        for (String key : popularityFactors.keySet()) {
+            popularity += key + " :" + popularityFactors.get(key) + "\n";
+        }
+        return popularity;
     }
 
     public String showPopularity() {
-        return null;
+        int popularitySum = 0;
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
+        HashMap<String, Integer> popularityFactors = empire.getPopularity();
+        for (String key : popularityFactors.keySet()) {
+            popularitySum += popularityFactors.get(key);
+        }
+        return "your popularity is: <<" + popularitySum + ">>";
     }
 
     public String showFoodList() {
@@ -89,6 +105,7 @@ public class GameController {
     public String digTunnel(Matcher matcher) {
         return null;
     }
+
     public String engineerBuild(Matcher matcher) {
         return null;
     }
