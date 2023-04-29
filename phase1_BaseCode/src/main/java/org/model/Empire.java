@@ -80,4 +80,7 @@ public class Empire {
         return resources;
     }
 
+    public HashMap<String, Integer> getFood() {
+        return food;
+    }
 }

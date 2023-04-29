@@ -30,7 +30,13 @@ public class GameController {
     }
 
     public String showFoodList() {
-        return null;
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
+        HashMap<String, Integer> foodList = empire.getFood();
+        String foods = "<<food list>> :\n";
+        for (String key : foodList.keySet()) {
+            foods += key + ": " + foodList.get(key) + "\n";
+        }
+        return foods;
     }
 
     public String changeFoodRate(Matcher matcher) {
@@ -40,7 +46,8 @@ public class GameController {
     }
 
     public String showFoodRate() {
-        return null;
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
+        return "your food rate is : <<" + empire.getFoodRate() + ">>\n";
     }
 
     public String changeTaxRate(Matcher matcher) {
@@ -50,7 +57,8 @@ public class GameController {
     }
 
     public String showTaxRate() {
-        return null;
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
+        return "your tax rate is : <<" + empire.getTaxRate() + ">>\n";
     }
 
     public String changeFearRate(Matcher matcher) {
@@ -60,7 +68,8 @@ public class GameController {
     }
 
     public String showFearRate() {
-        return null;
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
+        return "your fear rate is : <<" + empire.getFearRate() + ">>\n";
     }
 
     public String dropBuilding(Matcher matcher) {
