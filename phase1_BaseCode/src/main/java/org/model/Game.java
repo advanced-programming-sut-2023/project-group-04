@@ -8,6 +8,8 @@ public class Game {
     private final ArrayList<Empire> allEmpires;
     private Empire currentEmpire;
 
+    int empireIndex = 0;
+
     public Game(ArrayList<Empire> allEmpires) {
         this.allEmpires = allEmpires;
         currentEmpire = allEmpires.get(0);
@@ -23,6 +25,7 @@ public class Game {
             }
         }
     }
+
     public MapCell[][] getMap() {
         return map;
     }
@@ -48,4 +51,6 @@ public class Game {
         if (index == allEmpires.size()) index = 0;
         currentEmpire = allEmpires.get(index);
     }
+
+
 }

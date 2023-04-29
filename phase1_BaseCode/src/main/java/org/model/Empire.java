@@ -79,4 +79,5 @@ public class Empire {
     public HashMap<String, Integer> getResources() {
         return resources;
     }
+
 }

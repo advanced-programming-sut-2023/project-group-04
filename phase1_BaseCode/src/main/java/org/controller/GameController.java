@@ -1,6 +1,5 @@
 package org.controller;
 
-import com.google.gson.Gson;
 import org.model.Empire;
 import org.model.Game;
 import org.model.MapCell;
@@ -35,7 +34,9 @@ public class GameController {
     }
 
     public String changeFoodRate(Matcher matcher) {
-        return null;
+        //TODO : ADD LOGIC TO CHECK FOOD RATE ; SET AUTO -2;
+        Game.getCurrentGame().getCurrentEmpire().setFoodRate(Integer.parseInt(matcher.group("foodRate")));
+        return "Food rate changed successfully";
     }
 
     public String showFoodRate() {
@@ -43,7 +44,9 @@ public class GameController {
     }
 
     public String changeTaxRate(Matcher matcher) {
-        return null;
+        //TODO : ADD LOGIC TO CHECK TAX RATE ; SET AUTO 0;
+        Game.getCurrentGame().getCurrentEmpire().setTaxRate(Integer.parseInt(matcher.group("taxRate")));
+        return "Tax rate changed successfully";
     }
 
     public String showTaxRate() {
@@ -51,7 +54,9 @@ public class GameController {
     }
 
     public String changeFearRate(Matcher matcher) {
-        return null;
+        //TODO : ADD LOGIC TO CHECK FEAR RATE ; SET AUTO -2;
+        Game.getCurrentGame().getCurrentEmpire().setFearRate(Integer.parseInt(matcher.group("fearRate")));
+        return "Fear rate changed successfully";
     }
 
     public String showFearRate() {
