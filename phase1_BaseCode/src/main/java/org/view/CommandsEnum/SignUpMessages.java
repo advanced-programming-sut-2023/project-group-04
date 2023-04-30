@@ -24,7 +24,8 @@ public enum SignUpMessages {
     ANSWER_DOES_NOT_MATCH("Security answer is incorrect!"),
     PASSWORD_CHANGED("Your password successfully changed!"),
     CAPTCHA_CORRECT("CAPTCHA is correct"),
-    WITHOUT_ERROR("Password haven't any error!");
+    WITHOUT_ERROR("Password haven't any error!"),
+    ;
 
     private final String message;
 

@@ -120,7 +120,7 @@ public class LoginController {
     public SignUpMessages setSecurityQuestion(Matcher matcher) {
         int questionNumber = Integer.parseInt(matcher.group("questionNumber"));
         String answer = matcher.group("answer");
-        String answerConfirm = matcher.group("answer");
+        String answerConfirm = matcher.group("answerConfirm");
         if (questionNumber > 3)
             return INVALID_QUESTION_NUMBER;
         else if (!answer.equals(answerConfirm))
