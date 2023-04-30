@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum ProfileCommands {
-    CHANGE_USERNAME("^[ \t]*^profile\\s+change(?=.*-u (?<username>\"[^\"]*\"|[^\\s\"]*))" +
+    CHANGE_USERNAME("^[ \t]*profile\\s+change(?=.*-u (?<username>\"[^\"]*\"|[^\\s\"]*))" +
             "(\\s*(-u (\"[^\"]*\"|[^\\s\"]*))){1}[ \t]*$"),
     CHANGE_NICKNAME("^[ \t]*profile\\s+change(?=.*-n (?<nickname>\"[^\"]*\"|[^\\s\"]*))" +
             "(\\s*(-n (\"[^\"]*\"|[^\\s\"]*))){1}[ \t]*$"),
