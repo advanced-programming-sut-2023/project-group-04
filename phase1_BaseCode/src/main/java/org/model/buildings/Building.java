@@ -1,6 +1,5 @@
 package org.model.buildings;
 
-import org.model.buildings.BuildingsDictionary;
 import org.model.Empire;
 
 import java.util.HashMap;
@@ -29,8 +28,12 @@ public class Building {
         return buildingsDictionary.getType();
     }
 
-    public int getHp() {
+    public int getCurrentHp() {
         return hp;
+    }
+
+    public int getBasicHp() {
+        return buildingsDictionary.getHp();
     }
 
     public HashMap<String, Integer> getPrices() {

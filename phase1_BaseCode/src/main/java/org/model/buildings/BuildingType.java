@@ -6,7 +6,7 @@ public enum BuildingType {
     FOOD("Food Processing Buildings"),
     INDUSTRY("Industry"),
     KEEPS("Keeps and Strongholds"),
-    TOWER("Towers and Gatehourses"),
+    TOWER("Towers and Gatehouses"),
     TOWN("Town Buildings"),
     WEAPON("Weapon Buildings");
 

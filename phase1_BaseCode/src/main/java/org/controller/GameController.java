@@ -2,13 +2,16 @@ package org.controller;
 
 import org.model.Empire;
 import org.model.Game;
+import org.model.Map;
 import org.model.MapCell;
+import org.model.buildings.Building;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class GameController {
+    //TODO : CREATE GAME MESSAGES AND REPLACE RETURN TYPE OF SOME FUNCTIONS;
     public String showPopularityFactors() {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         HashMap<String, Integer> popularityFactors = empire.getPopularity();
@@ -77,6 +80,19 @@ public class GameController {
     }
 
     public String selectBuilding(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        int mapSize = Map.getCurrentMap().getMapSize();
+        if (x <= 0 || x > mapSize || y <= 0 || y > mapSize)
+            return null;
+        Building building = Game.getCurrentGame().getMapCellByAddress(x, y).getBuilding();
+        if (building == null)
+            return null;
+
+        if (building.getBuildingOwner().equals(Game.getCurrentGame().getCurrentEmpire()))
+            return null;
+
+        Game.getCurrentGame().setSelectedBuilding(building);
         return null;
     }
 
@@ -85,7 +101,21 @@ public class GameController {
     }
 
     public String repair(Matcher matcher) {
+        Building selectedBuilding = Game.getCurrentGame().getSelectedBuilding();
+        if (!selectedBuilding.getType().equals("Castle Buildings"))
+            return null;
+
+        HashMap<String, Integer> requirementMaterial = new HashMap<>();
+        HashMap<String, Integer> prices = selectedBuilding.getPrices();
+        int currentHp = selectedBuilding.getCurrentHp();
+        int basicHp = selectedBuilding.getBasicHp();
+        Float requirementPercentage = (float) (currentHp / basicHp);
+        for (String key : prices.keySet()) {
+            Integer cost = prices.get(key);
+            //requirementMaterial.put(key,(Integer)(cost * requirementPercentage));
+        }
         return null;
+//        if ()
     }
 
     public String selectUnit(Matcher matcher) {

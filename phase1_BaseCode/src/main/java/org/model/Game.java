@@ -1,5 +1,7 @@
 package org.model;
 
+import org.model.buildings.Building;
+
 import java.util.ArrayList;
 
 public class Game {
@@ -7,6 +9,15 @@ public class Game {
     private MapCell[][] map;
     private final ArrayList<Empire> allEmpires;
     private Empire currentEmpire;
+    private Building selectedBuilding;
+
+    public Building getSelectedBuilding() {
+        return selectedBuilding;
+    }
+
+    public void setSelectedBuilding(Building selectedBuilding) {
+        this.selectedBuilding = selectedBuilding;
+    }
 
     int empireIndex = 0;
 
@@ -34,7 +45,7 @@ public class Game {
         return allEmpires;
     }
 
-    public MapCell getCellByAxises(int x, int y) {
+    public MapCell getMapCellByAddress(int x, int y) {
         return map[x][y];
     }
 

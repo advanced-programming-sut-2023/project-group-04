@@ -1,7 +1,5 @@
 package org.model.buildings;
 
-import org.model.buildings.BuildingType;
-
 import java.util.HashMap;
 
 public enum BuildingsDictionary {
@@ -139,5 +137,6 @@ public enum BuildingsDictionary {
     public int getWorkerNumber() {
         return workerNumber;
     }
+
 }
 
