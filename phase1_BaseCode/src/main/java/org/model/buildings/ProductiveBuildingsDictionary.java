@@ -39,6 +39,10 @@ public enum ProductiveBuildingsDictionary {
         return rate;
     }
 
+    public BuildingsDictionary getBuildingsDictionary() {
+        return buildingsDictionary;
+    }
+
     public String getInputResource() {
         return inputResource;
     }

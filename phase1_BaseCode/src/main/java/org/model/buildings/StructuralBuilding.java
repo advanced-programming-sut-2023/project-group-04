@@ -5,17 +5,16 @@ import org.model.MapCell;
 
 import java.util.ArrayList;
 
-public class StructuralBuilding extends Building{
+public class StructuralBuilding extends Building {
 
     private StructuralBuildingsDictionary structuralBuildingsDictionary;
     private int freeSpace;
     private final ArrayList<MapCell> unAvailableNeighbors;
     private boolean isOpen;
 
-    public StructuralBuilding(Empire buildingOwner, BuildingsDictionary buildingsDictionary,
-                              StructuralBuildingsDictionary structuralBuildingsDictionary,
+    public StructuralBuilding(Empire buildingOwner, StructuralBuildingsDictionary structuralBuildingsDictionary,
                               ArrayList<MapCell> unAvailableNeighbors) {
-        super(buildingOwner, buildingsDictionary);
+        super(buildingOwner, structuralBuildingsDictionary.getBuildingsDictionary());
         this.structuralBuildingsDictionary = structuralBuildingsDictionary;
         this.freeSpace = 0;
         this.unAvailableNeighbors = unAvailableNeighbors;

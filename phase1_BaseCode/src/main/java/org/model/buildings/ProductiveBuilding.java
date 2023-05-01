@@ -6,9 +6,8 @@ import org.model.Empire;
 public class ProductiveBuilding extends Building {
     private final ProductiveBuildingsDictionary productiveBuildingsDictionary;
 
-    public ProductiveBuilding(Empire buildingOwner, BuildingsDictionary buildingsDictionary,
-                              ProductiveBuildingsDictionary productiveBuildingsDictionary) {
-        super(buildingOwner, buildingsDictionary);
+    public ProductiveBuilding(Empire buildingOwner, ProductiveBuildingsDictionary productiveBuildingsDictionary) {
+        super(buildingOwner, productiveBuildingsDictionary.getBuildingsDictionary());
         this.productiveBuildingsDictionary = productiveBuildingsDictionary;
     }
 

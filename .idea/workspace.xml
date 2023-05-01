@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="add some regexes to GameCommands">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/CommandsEnum/GameCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/CommandsEnum/GameCommands.java" afterDir="false" />
+    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="complete GameCommands">
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/ProductiveBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/ProductiveBuilding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/ProductiveBuildingsDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/ProductiveBuildingsDictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StorageBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StorageBuilding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StorageBuildingsDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StorageBuildingsDictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StructuralBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StructuralBuilding.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,8 +76,16 @@
       <workItem from="1681491693947" duration="1446000" />
       <workItem from="1681934274355" duration="23000" />
       <workItem from="1682920646113" duration="1194000" />
-      <workItem from="1682965005844" duration="3726000" />
+      <workItem from="1682965005844" duration="4535000" />
     </task>
+    <task id="LOCAL-00001" summary="complete GameCommands">
+      <created>1682973681030</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1682973681030</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,7 +131,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add some regexes to GameCommands" />
-    <option name="LAST_COMMIT_MESSAGE" value="add some regexes to GameCommands" />
+    <MESSAGE value="complete GameCommands" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete GameCommands" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

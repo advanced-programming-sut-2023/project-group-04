@@ -3,11 +3,11 @@ package org.model.buildings;
 import java.util.HashMap;
 
 public enum StorageBuildingsDictionary {
-    ARMOURY(BuildingsDictionary.ARMORY,0, new HashMap<>() {
+    ARMOURY(BuildingsDictionary.ARMORY, 0, new HashMap<>() {
     }),
-    STOCKPILE(BuildingsDictionary.STOCKPILE,0, new HashMap<>() {
+    STOCKPILE(BuildingsDictionary.STOCKPILE, 0, new HashMap<>() {
     }),
-    GRANARY(BuildingsDictionary.GRANARY,0, new HashMap<>() {
+    GRANARY(BuildingsDictionary.GRANARY, 0, new HashMap<>() {
     });
 
     private BuildingsDictionary buildingsDictionary;
@@ -22,6 +22,10 @@ public enum StorageBuildingsDictionary {
 
     public int getCapacity() {
         return capacity;
+    }
+
+    public BuildingsDictionary getBuildingsDictionary() {
+        return buildingsDictionary;
     }
 
     public HashMap<String, Integer> getObjects() {
