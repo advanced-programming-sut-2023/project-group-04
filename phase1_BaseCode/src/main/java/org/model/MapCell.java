@@ -16,6 +16,7 @@ public class MapCell {
     private ArrayList<Person> people;
     private Machine machine;
     private boolean tunnel;
+    private String tree;
 
     public MapCell(int x, int y, String groundTexture) {
         this.xAxis = x;
@@ -23,6 +24,7 @@ public class MapCell {
         this.groundTexture = groundTexture;
         this.people = new ArrayList<>();
         this.tunnel = false;
+        this.tree = null;
     }
 
     public int getX() {
@@ -67,5 +69,13 @@ public class MapCell {
 
     public void setTunnel(boolean tunnel) {
         this.tunnel = tunnel;
+    }
+
+    public String getTree() {
+        return tree;
+    }
+
+    public void setTree(String treeType) {
+        this.tree = treeType;
     }
 }

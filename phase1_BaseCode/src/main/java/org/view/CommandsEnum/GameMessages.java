@@ -12,7 +12,9 @@ public enum GameMessages {
     BEING_CLOSE_TO_BUILDING("The opponent soldiers is so close to the building!"),
     INVALID_MOVE("You can't move unit to that ground!"),
     INVALID_COMMUTING("You can't commute in this area!"),
-    
+    SET_SUCCESSFUL("Setting building was successful!"),
+    CAN_NOT_REPAIR("You can't repair this building!"),
+
     ;
 
     private final String message;

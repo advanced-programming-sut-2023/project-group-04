@@ -5,13 +5,13 @@ import org.model.Game;
 import org.model.Map;
 import org.model.MapCell;
 import org.model.buildings.Building;
+import org.view.CommandsEnum.GameMessages;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class GameController {
-    //TODO : CREATE GAME MESSAGES AND REPLACE RETURN TYPE OF SOME FUNCTIONS;
     public String showPopularityFactors() {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         HashMap<String, Integer> popularityFactors = empire.getPopularity();
@@ -75,36 +75,33 @@ public class GameController {
         return "your fear rate is : <<" + empire.getFearRate() + ">>\n";
     }
 
-    public String dropBuilding(Matcher matcher) {
+    public GameMessages dropBuilding(Matcher matcher) {
         return null;
     }
 
-    public String selectBuilding(Matcher matcher) {
+    public GameMessages selectBuilding(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         int mapSize = Map.getCurrentMap().getMapSize();
         if (x <= 0 || x > mapSize || y <= 0 || y > mapSize)
-            return null;
+            return GameMessages.INVALID_POSITION;
         Building building = Game.getCurrentGame().getMapCellByAddress(x, y).getBuilding();
         if (building == null)
-            return null;
-
-        if (building.getBuildingOwner().equals(Game.getCurrentGame().getCurrentEmpire()))
-            return null;
-
+            return GameMessages.BUILDING_NOT_EXIST;
+        if (!building.getBuildingOwner().equals(Game.getCurrentGame().getCurrentEmpire()))
+            return GameMessages.NOT_OWNING_THE_BUILDING;
         Game.getCurrentGame().setSelectedBuilding(building);
-        return null;
+        return GameMessages.SET_SUCCESSFUL;
     }
 
     public String createUnit(Matcher matcher) {
         return null;
     }
 
-    public String repair(Matcher matcher) {
+    public GameMessages repair(Matcher matcher) {
         Building selectedBuilding = Game.getCurrentGame().getSelectedBuilding();
         if (!selectedBuilding.getType().equals("Castle Buildings"))
-            return null;
-
+            return GameMessages.CAN_NOT_REPAIR;
         HashMap<String, Integer> requirementMaterial = new HashMap<>();
         HashMap<String, Integer> prices = selectedBuilding.getPrices();
         int currentHp = selectedBuilding.getCurrentHp();
@@ -116,6 +113,7 @@ public class GameController {
         }
         return null;
 //        if ()
+        // TODO: 5/1/2023 Please complete repair
     }
 
     public String selectUnit(Matcher matcher) {
