@@ -9,7 +9,6 @@ public class Building {
     private BuildingsDictionary buildingsDictionary;
     private int hp;
 
-
     public Building(Empire buildingOwner, BuildingsDictionary buildingsDictionary) {
         this.buildingOwner = buildingOwner;
         this.buildingsDictionary = buildingsDictionary;
@@ -24,7 +23,7 @@ public class Building {
         return buildingsDictionary.getName();
     }
 
-    public String getType() {
+    public BuildingType getType() {
         return buildingsDictionary.getType();
     }
 

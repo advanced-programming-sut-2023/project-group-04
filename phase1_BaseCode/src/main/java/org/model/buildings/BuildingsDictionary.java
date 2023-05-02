@@ -40,8 +40,8 @@ public enum BuildingsDictionary {
     }, 0, 0, 0),
     STABLE("stable", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    //    TUNNELER_GUILD("", "", 0, new HashMap<String, Integer>() {
-//    }, 0, 0, 0),
+    TUNNELER_GUILD("", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
+    }, 0, 0, 0),
     APPLE_ORCHARD("apple orchard", BuildingType.FARM, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
     DIARY_FARMER("diary farmer", BuildingType.FARM, 0, new HashMap<String, Integer>() {
