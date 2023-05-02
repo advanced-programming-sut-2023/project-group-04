@@ -13,7 +13,7 @@ public class MapCell {
     private final int yAxis;
     private final String groundTexture;
     private Building building;
-    private ArrayList<Person> people;
+    private final ArrayList<Person> people;
     private Machine machine;
     private boolean tunnel;
 
@@ -24,7 +24,6 @@ public class MapCell {
         this.people = new ArrayList<>();
         this.tunnel = false;
     }
-
     public int getX() {
         return xAxis;
     }

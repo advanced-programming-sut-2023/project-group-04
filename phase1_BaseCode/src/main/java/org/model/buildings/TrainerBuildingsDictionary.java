@@ -10,16 +10,16 @@ public enum TrainerBuildingsDictionary {
     ENGINEER_GUILD(BuildingsDictionary.ENGINEER_GUILD,new ArrayList<>(){}),
     TUNNELER_GUILD(BuildingsDictionary.TUNNELER_GUILD,new ArrayList<>(){});
 
-    private BuildingsDictionary buildingsDictionary;
+    private BuildingsDictionary buildingDictionary;
     private ArrayList<String> availableSoldiers;
 
-    TrainerBuildingsDictionary(BuildingsDictionary buildingsDictionary, ArrayList<String> availableSoldiers) {
-        this.buildingsDictionary = buildingsDictionary;
+    TrainerBuildingsDictionary(BuildingsDictionary buildingDictionary, ArrayList<String> availableSoldiers) {
+        this.buildingDictionary = buildingDictionary;
         this.availableSoldiers = availableSoldiers;
     }
 
-    public BuildingsDictionary getBuildingsDictionary() {
-        return buildingsDictionary;
+    public BuildingsDictionary getBuildingDictionary() {
+        return buildingDictionary;
     }
 
     public ArrayList<String> getAvailableSoldiers() {

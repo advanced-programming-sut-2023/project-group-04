@@ -6,13 +6,17 @@ import java.util.HashMap;
 
 public class Building {
     private Empire buildingOwner;
-    private BuildingsDictionary buildingsDictionary;
+    private final BuildingsDictionary buildingDictionary;
     private int hp;
 
-    public Building(Empire buildingOwner, BuildingsDictionary buildingsDictionary) {
+    public Building(Empire buildingOwner, BuildingsDictionary buildingDictionary) {
         this.buildingOwner = buildingOwner;
-        this.buildingsDictionary = buildingsDictionary;
-        this.hp = buildingsDictionary.getHp();
+        this.buildingDictionary = buildingDictionary;
+        this.hp = buildingDictionary.getHp();
+    }
+
+    public BuildingsDictionary getBuildingDictionary() {
+        return buildingDictionary;
     }
 
     public Empire getBuildingOwner() {
@@ -20,11 +24,11 @@ public class Building {
     }
 
     public String getName() {
-        return buildingsDictionary.getName();
+        return buildingDictionary.getName();
     }
 
     public BuildingType getType() {
-        return buildingsDictionary.getType();
+        return buildingDictionary.getType();
     }
 
     public int getCurrentHp() {
@@ -32,23 +36,23 @@ public class Building {
     }
 
     public int getBasicHp() {
-        return buildingsDictionary.getHp();
+        return buildingDictionary.getHp();
     }
 
     public HashMap<String, Integer> getPrices() {
-        return buildingsDictionary.getPrices();
+        return buildingDictionary.getPrices();
     }
 
     public int getSize() {
-        return buildingsDictionary.getSize();
+        return buildingDictionary.getSize();
     }
 
     public int getWorkerNumber() {
-        return buildingsDictionary.getWorkerNumber();
+        return buildingDictionary.getWorkerNumber();
     }
 
     public int getEngineerNumber() {
-        return buildingsDictionary.getEngineerNumber();
+        return buildingDictionary.getEngineerNumber();
     }
 
     public void setBuildingOwner(Empire buildingOwner) {
@@ -57,6 +61,10 @@ public class Building {
 
     public void decreaseHp(int hp) {
         this.hp -= hp;
+    }
+
+    public void repair() {
+        this.hp = this.buildingDictionary.getHp();
     }
 
 }

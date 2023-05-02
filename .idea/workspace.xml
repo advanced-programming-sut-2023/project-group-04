@@ -5,9 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="add getBuildingDictionary to enum!">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/Empire.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/Empire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/MapCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/MapCell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/BuildingType.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/BuildingType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/BuildingsDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/BuildingsDictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/ProductiveBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/ProductiveBuilding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/ProductiveBuildingsDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/ProductiveBuildingsDictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StorageBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StorageBuilding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StorageBuildingsDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StorageBuildingsDictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StructuralBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StructuralBuilding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StructuralBuildingsDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StructuralBuildingsDictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/TowerBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/TowerBuilding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/TowerBuildingsDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/TowerBuildingsDictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/TrainerBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/TrainerBuilding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/TrainerBuildingsDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/TrainerBuildingsDictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/TrapBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/TrapBuilding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/TrapBuildingsDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/TrapBuildingsDictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/person/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/person/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/CommandsEnum/GameCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/CommandsEnum/GameCommands.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +36,9 @@
   </component>
   <component name="Git.Merge.Settings">
     <option name="BRANCH" value="keyhanBranch" />
+  </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="main" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -49,8 +72,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "keyhanBranch",
-    "last_opened_file_path": "D:/code/APproject/project-group-04",
+    "git-widget-placeholder": "yousefBranchPhase1",
+    "last_opened_file_path": "D:/project-group-04/phase1_BaseCode",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",

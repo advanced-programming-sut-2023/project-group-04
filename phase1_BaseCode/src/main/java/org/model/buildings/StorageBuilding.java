@@ -6,35 +6,35 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class StorageBuilding extends Building {
-    private static final ArrayList<StorageBuilding> allStorage = new ArrayList<>();
     private final StorageBuildingsDictionary storageBuildingsDictionary;
-    private final HashMap<String, Integer> objects;
+    private final HashMap<String, Integer> resources;
     private int freeSpace;
 
     public StorageBuilding(Empire buildingOwner, StorageBuildingsDictionary storageBuildingsDictionary) {
-        super(buildingOwner, storageBuildingsDictionary.getBuildingsDictionary());
+        super(buildingOwner, storageBuildingsDictionary.getBuildingDictionary());
         this.storageBuildingsDictionary = storageBuildingsDictionary;
         this.freeSpace = storageBuildingsDictionary.getCapacity();
-        this.objects = storageBuildingsDictionary.getObjects();
+        this.resources = storageBuildingsDictionary.getObjects();
     }
 
     public HashMap<String, Integer> getContent() {
-        return objects;
+        return resources;
     }
 
-    public void addToStorage(String object, int amount) {
+    public int getResourceAmount(String resource) {
+        return this.resources.get(resource);
     }
 
-    public void removeFromStorage(String object, int amount) {
-    }
-
-    public static ArrayList<StorageBuilding> getAllStorage() {
-        return allStorage;
+    public void changeResourcesAmount(String resource, int amount) {
+        this.resources.put(resource,this.resources.get(resource) + amount);
+        this.freeSpace -= amount;
     }
 
     public int getFreeSpace() {
         return freeSpace;
     }
 
-
+    public StorageBuildingsDictionary getStorageBuildingsDictionary() {
+        return storageBuildingsDictionary;
+    }
 }

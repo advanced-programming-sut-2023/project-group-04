@@ -5,8 +5,8 @@ import org.model.Player;
 
 public class Person {
 
-    private Empire personOwner;
-    private int hp;
+    private final Empire personOwner;
+    private final int hp;
 
     public Person(Empire personOwner, int hp) {
         this.personOwner = personOwner;

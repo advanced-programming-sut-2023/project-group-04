@@ -91,13 +91,13 @@ public enum BuildingsDictionary {
     POLETURNER("poleturner", BuildingType.WEAPON, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0);
 
-    private String name;
-    private BuildingType type;
-    private int hp;
-    private HashMap<String, Integer> prices;
-    private int size;
-    private int engineerNumber;
-    private int workerNumber;
+    private final String name;
+    private final BuildingType type;
+    private final int hp;
+    private final HashMap<String, Integer> prices;
+    private final int size;
+    private final int engineerNumber;
+    private final int workerNumber;
 
     BuildingsDictionary(String name, BuildingType type, int hp,
                         HashMap<String, Integer> prices, int size, int engineerNumber, int workerNumber) {

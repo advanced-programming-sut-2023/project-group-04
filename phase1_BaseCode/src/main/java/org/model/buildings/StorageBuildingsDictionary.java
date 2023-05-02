@@ -10,7 +10,7 @@ public enum StorageBuildingsDictionary {
     GRANARY(BuildingsDictionary.GRANARY, 0, new HashMap<>() {
     });
 
-    private BuildingsDictionary buildingsDictionary;
+    private BuildingsDictionary buildingDictionary;
     private int capacity;
     private HashMap<String, Integer> objects;
 
@@ -24,8 +24,8 @@ public enum StorageBuildingsDictionary {
         return capacity;
     }
 
-    public BuildingsDictionary getBuildingsDictionary() {
-        return buildingsDictionary;
+    public BuildingsDictionary getBuildingDictionary() {
+        return buildingDictionary;
     }
 
     public HashMap<String, Integer> getObjects() {

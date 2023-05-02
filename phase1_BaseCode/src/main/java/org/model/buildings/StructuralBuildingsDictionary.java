@@ -8,16 +8,16 @@ public enum StructuralBuildingsDictionary {
     DRAW_BRIDGE(BuildingsDictionary.DRAW_BRIDGE,0),
     HOVEL(BuildingsDictionary.HOVEL,0);
 
-    private BuildingsDictionary buildingsDictionary;
-    private int capacity;
+    private final BuildingsDictionary buildingDictionary;
+    private final int capacity;
 
-    private StructuralBuildingsDictionary(BuildingsDictionary buildingsDictionary, int capacity) {
+    private StructuralBuildingsDictionary(BuildingsDictionary buildingDictionary, int capacity) {
         this.capacity = capacity;
-        this.buildingsDictionary = buildingsDictionary;
+        this.buildingDictionary = buildingDictionary;
     }
 
-    public BuildingsDictionary getBuildingsDictionary() {
-        return buildingsDictionary;
+    public BuildingsDictionary getBuildingDictionary() {
+        return buildingDictionary;
     }
 
     public int getCapacity() {
