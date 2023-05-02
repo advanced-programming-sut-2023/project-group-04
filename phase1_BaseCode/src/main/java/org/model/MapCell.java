@@ -78,4 +78,12 @@ public class MapCell {
     public void setTree(String treeType) {
         this.tree = treeType;
     }
+
+    public ArrayList<Soldier> getSoldiers() {
+        ArrayList<Soldier> soldiers = new ArrayList<>();
+        for (Person person : people)
+            if (person instanceof Soldier)
+                soldiers.add((Soldier) person);
+        return soldiers;
+    }
 }
