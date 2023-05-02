@@ -4,7 +4,7 @@ import org.model.buildings.BuildingsDictionary;
 
 public enum ProductiveBuildingsDictionary {
     MILL(BuildingsDictionary.MILL,0,"","",""),
-    IRON_MINE(BuildingsDictionary.ARMORY,0,"","",""),
+    IRON_MINE(BuildingsDictionary.ARMOURY,0,"","",""),
     OX_TETHER(BuildingsDictionary.OX_TETHER,0,"","",""),
     PITCH_RIG(BuildingsDictionary.PITCH_RIG,0,"","",""),
     QUARRY(BuildingsDictionary.QUARRY,0,"","",""),

@@ -3,7 +3,7 @@ package org.model.buildings;
 import java.util.HashMap;
 
 public enum StorageBuildingsDictionary {
-    ARMOURY(BuildingsDictionary.ARMORY, 0, new HashMap<>() {
+    ARMOURY(BuildingsDictionary.ARMOURY, 0, new HashMap<>() {
     }),
     STOCKPILE(BuildingsDictionary.STOCKPILE, 0, new HashMap<>() {
     }),

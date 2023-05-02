@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="complete GameCommands">
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/ProductiveBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/ProductiveBuilding.java" afterDir="false" />
+    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="add getBuildingDictionary to enum!">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/BuildingsDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/BuildingsDictionary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/ProductiveBuildingsDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/ProductiveBuildingsDictionary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StorageBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StorageBuilding.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StorageBuildingsDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StorageBuildingsDictionary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StructuralBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/buildings/StructuralBuilding.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/AbolfazlPhase1" />
+    <option name="BRANCH" value="keyhanBranch" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">

@@ -4,102 +4,102 @@ import java.util.HashMap;
 
 public enum BuildingsDictionary {
 
-    SMALL_STONE_GATEHOUSE("", "", 0, new HashMap<String, Integer>() {
+    SMALL_STONE_GATEHOUSE("small stone gatehouse", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    LARGE_STONE_GATEHOUSE("", "", 0, new HashMap<String, Integer>() {
+    LARGE_STONE_GATEHOUSE("large stone gatehouse", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    DRAW_BRIDGE("", "", 0, new HashMap<String, Integer>() {
+    DRAW_BRIDGE("draw bridge", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    LOOKOUT_TOWER("", "", 0, new HashMap<String, Integer>() {
+    LOOKOUT_TOWER("lookout tower", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    PERIMETER_TOWER("", "", 0, new HashMap<String, Integer>() {
+    PERIMETER_TOWER("perimeter", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    DEFENCE_TURRET("", "", 0, new HashMap<String, Integer>() {
+    DEFENCE_TURRET("defence turret", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    SQUARE_TOWER("", "", 0, new HashMap<String, Integer>() {
+    SQUARE_TOWER("square tower", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    ROUND_TOWER("", "", 0, new HashMap<String, Integer>() {
+    ROUND_TOWER("round tower", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    ARMORY("", "", 0, new HashMap<String, Integer>() {
+    ARMOURY("armoury", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    BARRACKS("", "", 0, new HashMap<String, Integer>() {
+    BARRACKS("barracks", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    MERCENARY_POST("", "", 0, new HashMap<String, Integer>() {
+    MERCENARY_POST("mercenary post", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    ENGINEER_GUILD("", "", 0, new HashMap<String, Integer>() {
+    ENGINEER_GUILD("engineer guild", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    KILLING_PIT("", "", 0, new HashMap<String, Integer>() {
+    KILLING_PIT("killing pit", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    OIL_SMELTER("", "", 0, new HashMap<String, Integer>() {
+    OIL_SMELTER("oil smelter", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    PITCH_DITCH("", "", 0, new HashMap<String, Integer>() {
+    PITCH_DITCH("pitch ditch", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    CAGED_WAR_DOGS("", "", 0, new HashMap<String, Integer>() {
+    CAGED_WAR_DOGS("caged war dogs", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    SIEGE_TENT("", "", 0, new HashMap<String, Integer>() {
+    SIEGE_TENT("siege tent", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    STABLE("", "", 0, new HashMap<String, Integer>() {
+    STABLE("stable", BuildingType.CASTLE, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    TUNNELER_GUILD("", "", 0, new HashMap<String, Integer>() {
+    //    TUNNELER_GUILD("", "", 0, new HashMap<String, Integer>() {
+//    }, 0, 0, 0),
+    APPLE_ORCHARD("apple orchard", BuildingType.FARM, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    APPLE_ORCHARD("", "", 0, new HashMap<String, Integer>() {
+    DIARY_FARMER("diary farmer", BuildingType.FARM, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    DIARY_FARMER("", "", 0, new HashMap<String, Integer>() {
+    HOPS_FARMER("hops farmer", BuildingType.FARM, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    HOPS_FARMER("", "", 0, new HashMap<String, Integer>() {
+    HUNTER_POST("hunter post", BuildingType.FARM, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    HUNTER_POST("", "", 0, new HashMap<String, Integer>() {
+    WHEAT_FARMER("wheat", BuildingType.FARM, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    WHEAT_FARMER("", "", 0, new HashMap<String, Integer>() {
+    BAKERY("bakery", BuildingType.FOOD, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    BAKERY("", "", 0, new HashMap<String, Integer>() {
+    BREWER("brewer", BuildingType.FOOD, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    BREWER("", "", 0, new HashMap<String, Integer>() {
+    GRANARY("granary", BuildingType.FOOD, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    GRANARY("", "", 0, new HashMap<String, Integer>() {
+    INN("inn", BuildingType.FOOD, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    INN("", "", 0, new HashMap<String, Integer>() {
+    MILL("mill", BuildingType.FOOD, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    MILL("", "", 0, new HashMap<String, Integer>() {
+    IRON_MINE("iron mine", BuildingType.INDUSTRY, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    IRON_MINE("", "", 0, new HashMap<String, Integer>() {
+    MARKET("market", BuildingType.INDUSTRY, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    MARKET("", "", 0, new HashMap<String, Integer>() {
+    OX_TETHER("ox tether", BuildingType.INDUSTRY, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    OX_TETHER("", "", 0, new HashMap<String, Integer>() {
+    PITCH_RIG("pitch rig", BuildingType.INDUSTRY, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    PITCH_RIG("", "", 0, new HashMap<String, Integer>() {
+    QUARRY("quarry", BuildingType.INDUSTRY, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    QUARRY("", "", 0, new HashMap<String, Integer>() {
+    STOCKPILE("stockpile", BuildingType.INDUSTRY, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    STOCKPILE("", "", 0, new HashMap<String, Integer>() {
+    WOODCUTTER("woodcutter", BuildingType.INDUSTRY, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    WOODCUTTER("", "", 0, new HashMap<String, Integer>() {
+    HOVEL("hovel", BuildingType.TOWN, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    HOVEL("", "", 0, new HashMap<String, Integer>() {
+    CHURCH("church", BuildingType.TOWN, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    CHURCH("", "", 0, new HashMap<String, Integer>() {
+    CATHEDRAL("cathedral", BuildingType.TOWN, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    CATHEDRAL("", "", 0, new HashMap<String, Integer>() {
+    ARMOURER("armourer", BuildingType.WEAPON, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    ARMOURER("", "", 0, new HashMap<String, Integer>() {
+    BLACKSMITH("blacksmith", BuildingType.WEAPON, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    BLACKSMITH("", "", 0, new HashMap<String, Integer>() {
+    FLETCHER("fletcher", BuildingType.WEAPON, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0),
-    FLETCHER("", "", 0, new HashMap<String, Integer>() {
-    }, 0, 0, 0),
-    POLETURNER("", "", 0, new HashMap<String, Integer>() {
+    POLETURNER("poleturner", BuildingType.WEAPON, 0, new HashMap<String, Integer>() {
     }, 0, 0, 0);
 
     private String name;
-    private String type;
+    private BuildingType type;
     private int hp;
     private HashMap<String, Integer> prices;
     private int size;
     private int engineerNumber;
     private int workerNumber;
 
-    BuildingsDictionary(String name, String type, int hp,
+    BuildingsDictionary(String name, BuildingType type, int hp,
                         HashMap<String, Integer> prices, int size, int engineerNumber, int workerNumber) {
         this.name = name;
         this.type = type;
@@ -114,7 +114,7 @@ public enum BuildingsDictionary {
         return name;
     }
 
-    public String getType() {
+    public BuildingType getType() {
         return type;
     }
 
