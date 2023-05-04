@@ -82,5 +82,4 @@ public class SignUpMenu {
             else System.out.println("Invalid command!");
         }
     }
-    // TODO: 4/21/2023 رجکس هارو از کیهان بگیر و جاشو عوض کن یادت باشه تریم نکردیا الان!!
 }

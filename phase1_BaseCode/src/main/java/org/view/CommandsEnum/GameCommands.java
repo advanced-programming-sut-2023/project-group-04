@@ -26,8 +26,8 @@ public enum GameCommands {
     POUR_OIL(""),
     DIG_TUNNEL(""),
     BUILD_EQUIPMENT(""),
-    DISBAND_UNIT("");
-
+    DISBAND_UNIT(""),
+    SHOW_MAP("\\s*show\\s+map\\s+-x\\s+(?<xAsis>\\d+)\\s+-y\\s+(?<yAsis>\\d+)\\s*");
 
     private final String regex;
 
