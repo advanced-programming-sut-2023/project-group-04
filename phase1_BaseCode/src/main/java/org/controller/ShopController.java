@@ -1,5 +1,7 @@
 package org.controller;
 
+import org.model.Empire;
+import org.model.Game;
 import org.view.CommandsEnum.ShopMessages;
 
 import java.util.regex.Matcher;
@@ -13,6 +15,9 @@ public class ShopController {
     public ShopMessages buyThing(Matcher matcher) {
         String itemsName = removeQuotation(matcher.group("itemsName"));
         int itemsAmount = Integer.parseInt(matcher.group("itemsAmount"));
+        Empire currentEmpire = Game.getCurrentGame().getCurrentEmpire();
+
+        currentEmpire.getResources().computeIfPresent(itemsName,(key,val) -> val + itemsAmount);
         return ShopMessages.BUY_SUCCESSFULLY;
 
     }

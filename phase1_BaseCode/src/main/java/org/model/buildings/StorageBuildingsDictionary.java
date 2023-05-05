@@ -31,4 +31,12 @@ public enum StorageBuildingsDictionary {
     public HashMap<String, Integer> getObjects() {
         return objects;
     }
+
+    public static StorageBuildingsDictionary getDictionaryByName(String buildingName) {
+        for (StorageBuildingsDictionary storageBuildingsDictionary : StorageBuildingsDictionary.values()) {
+            if (storageBuildingsDictionary.buildingsDictionary.getName().equals(buildingName))
+                return storageBuildingsDictionary;
+        }
+        return null;
+    }
 }

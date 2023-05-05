@@ -1,12 +1,10 @@
 package org.model.buildings;
 
-import java.util.PrimitiveIterator;
-
 public enum StructuralBuildingsDictionary {
-    SMALL_STONE_GATEHOUSE(BuildingsDictionary.SMALL_STONE_GATEHOUSE,0),
-    LARGE_STONE_GATEHOUSE(BuildingsDictionary.LARGE_STONE_GATEHOUSE,0),
-    DRAW_BRIDGE(BuildingsDictionary.DRAW_BRIDGE,0),
-    HOVEL(BuildingsDictionary.HOVEL,0);
+    SMALL_STONE_GATEHOUSE(BuildingsDictionary.SMALL_STONE_GATEHOUSE, 0),
+    LARGE_STONE_GATEHOUSE(BuildingsDictionary.LARGE_STONE_GATEHOUSE, 0),
+    DRAW_BRIDGE(BuildingsDictionary.DRAW_BRIDGE, 0),
+    HOVEL(BuildingsDictionary.HOVEL, 0);
 
     private BuildingsDictionary buildingsDictionary;
     private int capacity;
@@ -22,5 +20,13 @@ public enum StructuralBuildingsDictionary {
 
     public int getCapacity() {
         return capacity;
+    }
+
+    public static StructuralBuildingsDictionary getDictionaryByName(String buildingName) {
+        for (StructuralBuildingsDictionary structuralBuildingsDictionary : StructuralBuildingsDictionary.values()) {
+            if (structuralBuildingsDictionary.buildingsDictionary.getName().equals(buildingName))
+                return structuralBuildingsDictionary;
+        }
+        return null;
     }
 }
