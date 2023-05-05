@@ -24,6 +24,8 @@ public class MainMenu {
             } else if ((MainMenuCommands.getMatcher(input, MainMenuCommands.START_GAME)) != null) {
                 System.out.println("the game has started!");
                 new GameMenu().run();
+            } else {
+                System.out.println("invalid command!");
             }
         }
     }

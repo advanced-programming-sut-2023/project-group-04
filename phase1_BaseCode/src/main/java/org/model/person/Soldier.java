@@ -26,4 +26,8 @@ public class Soldier extends Person {
     public int getFireRange() {
         return soldiersDictionary.getFireRange();
     }
+
+    public String getSoldierName() {
+        return soldiersDictionary.getSoldierName();
+    }
 }

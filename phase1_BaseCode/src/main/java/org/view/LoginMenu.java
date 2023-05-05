@@ -24,6 +24,8 @@ public class LoginMenu {
             else if ((matcher = SignUpCommands.getMatcher(input, SignUpCommands.FORGET_PASSWORD)) != null) {
                 String username = matcher.group("username");
                 forgetPassword(username);
+            } else {
+                System.out.println("invalid command!");
             }
         }
     }

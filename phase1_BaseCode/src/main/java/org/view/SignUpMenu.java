@@ -56,7 +56,6 @@ public class SignUpMenu {
                 }
             } else System.out.println("invalid command!");
         }
-        // TODO: 4/30/2023 handle several time input for security question
     }
 
     private void enterPassword() {

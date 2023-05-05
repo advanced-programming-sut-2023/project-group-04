@@ -10,6 +10,8 @@ public class Game {
     private final ArrayList<Empire> allEmpires;
     private Empire currentEmpire;
     private Building selectedBuilding;
+    private int mapFirstX;
+    private int mapFirstY;
 
     public Building getSelectedBuilding() {
         return selectedBuilding;
@@ -63,5 +65,19 @@ public class Game {
         currentEmpire = allEmpires.get(index);
     }
 
+    public int getMapFirstX() {
+        return mapFirstX;
+    }
 
+    public void setMapFirstX(int mapFirstX) {
+        this.mapFirstX = mapFirstX;
+    }
+
+    public int getMapFirstY() {
+        return mapFirstY;
+    }
+
+    public void setMapFirstY(int mapFirstY) {
+        this.mapFirstY = mapFirstY;
+    }
 }
