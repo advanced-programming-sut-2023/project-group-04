@@ -3,24 +3,24 @@ package org.model.person;
 import java.util.HashMap;
 
 public enum SoldiersDictionary {
-    ARCHER("archer", 12,"bow","",0, 125, 0, 16,5),
-    CROSSBOWMAN("crossbowman", 20,"crossBow","leather",0, 125, 0, 8,3),
-    SPEARMAN("spearman", 8,"spear","",0, 150, 0, 12,0),
-    PIKEMAN("pikeman", 20,"pike","metal",0, 150, 0, 8,0),
-    MACEMAN("maceman", 20,"mace","leather",0, 175, 0, 12,0),
-    SWORDSMAN("swordsman", 40,"sword","metal",0, 200, 0, 4,0),
-    KNIGHT("knight", 40,"sword","metal&horse",0, 200, 0, 20,0),
-    TUNNELER("tunneler", 25,"pickAxe","",0, 150, 0, 16,0),
-    LADDERMAN("ladderman", 5,"","",0, 0, 0, 16,0),
-    ENGINEER("engineer", 30,"","",0, 0, 0, 12,0),
-    BLACKMONKS("blackmonks", 10,"staff","",0, 150, 0, 8,0),
-    ARABIANBOWS("arabianbows", 75,"bow","",0, 125, 0, 16,5),
-    SLAVE("slave", 5,"torch","",0, 100, 0, 16,0),
-    SLINGER("slinger", 12,"sling","",0, 125, 0, 16,2),
-    ASSASSIN("assassin", 60,"scimitar","",0, 150, 0, 12,0),
-    HORSE_ARCHER("horse_archer", 80,"bow","horse",0, 125, 0, 20,6),
-    ARABIAN_SWORDSMAN("arabian_swordsman", 80,"scimitar","metalArmour",0, 175, 0, 20,0),
-    FIRE_THROWER("fire_thrower", 100,"greekFire","", 0, 175, 0, 20,8);
+    ARCHER("archer", 12,"bow","",250, 125, 80, 16,5),
+    CROSSBOWMAN("crossbowman", 20,"crossBow","leather",270, 125, 100, 8,3),
+    SPEARMAN("spearman", 8,"spear","",220, 150, 60, 12,0),
+    PIKEMAN("pikeman", 20,"pike","metal",290, 150, 120, 8,0),
+    MACEMAN("maceman", 20,"mace","leather",300, 175, 100, 12,0),
+    SWORDSMAN("swordsman", 40,"sword","metal",350, 200, 60, 4,0),
+    KNIGHT("knight", 40,"sword","metal&horse",400, 200, 120, 20,0),
+    TUNNELER("tunneler", 25,"pickAxe","",270, 150, 60, 16,0),
+    LADDERMAN("ladderman", 5,"","",210, 0, 60, 16,0),
+    ENGINEER("engineer", 30,"","",220, 0, 60, 12,0),
+    BLACKMONKS("blackmonks", 10,"staff","",270, 150, 100, 8,0),
+    ARABIANBOWS("arabianbows", 75,"bow","",270, 125, 80, 16,5),
+    SLAVE("slave", 5,"torch","",200, 100, 20, 16,0),
+    SLINGER("slinger", 12,"sling","",250, 125, 60, 16,2),
+    ASSASSIN("assassin", 60,"scimitar","",300, 150, 100, 12,0),
+    HORSE_ARCHER("horse_archer", 80,"bow","horse",340, 125, 100, 20,6),
+    ARABIAN_SWORDSMAN("arabian_swordsman", 80,"scimitar","metalArmour",360, 175, 120, 20,0),
+    FIRE_THROWER("fire_thrower", 100,"greekFire","", 400, 175, 80, 20,8);
 
     int hp;
     private int offensivePower;
