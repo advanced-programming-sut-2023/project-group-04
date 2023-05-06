@@ -7,20 +7,20 @@ public enum TowerBuildingsDictionary {
     SQUARE_TOWER(BuildingsDictionary.SQUARE_TOWER, 0, 0, 0),
     ROUND_TOWER(BuildingsDictionary.ROUND_TOWER, 0, 0, 0);
 
-    private BuildingsDictionary buildingsDictionary;
+    private BuildingsDictionary buildingDictionary;
     private int fireRange;
     private int defendRange;
     private int soldierCapacity;
 
     TowerBuildingsDictionary(BuildingsDictionary buildingsDictionary, int fireRange, int defendRange, int soldierCapacity) {
-        this.buildingsDictionary = buildingsDictionary;
+        this.buildingDictionary = buildingsDictionary;
         this.fireRange = fireRange;
         this.defendRange = defendRange;
         this.soldierCapacity = soldierCapacity;
     }
 
-    public BuildingsDictionary getBuildingsDictionary() {
-        return buildingsDictionary;
+    public BuildingsDictionary getBuildingDictionary() {
+        return buildingDictionary;
     }
 
     public int getFireRange() {

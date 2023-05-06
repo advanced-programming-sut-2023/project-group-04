@@ -4,27 +4,27 @@ import org.model.buildings.BuildingsDictionary;
 import org.model.Empire;
 
 public class ProductiveBuilding extends Building {
-    private final ProductiveBuildingsDictionary productiveBuildingsDictionary;
+    private final ProductiveBuildingsDictionary productiveBuildingDictionary;
 
-    public ProductiveBuilding(Empire buildingOwner, ProductiveBuildingsDictionary productiveBuildingsDictionary) {
-        super(buildingOwner, productiveBuildingsDictionary.getBuildingsDictionary());
-        this.productiveBuildingsDictionary = productiveBuildingsDictionary;
+    public ProductiveBuilding(Empire buildingOwner, ProductiveBuildingsDictionary productiveBuildingDictionary) {
+        super(buildingOwner, productiveBuildingDictionary.getBuildingDictionary());
+        this.productiveBuildingDictionary = productiveBuildingDictionary;
     }
 
     public int getRate() {
-        return productiveBuildingsDictionary.getRate();
+        return productiveBuildingDictionary.getRate();
     }
 
     public String getInputResource() {
-        return productiveBuildingsDictionary.getInputResource();
+        return productiveBuildingDictionary.getInputResource();
     }
 
     public String getOutputResource() {
-        return productiveBuildingsDictionary.getInputResource();
+        return productiveBuildingDictionary.getInputResource();
     }
 
     public String getGroundTexture() {
-        return productiveBuildingsDictionary.getGroundTexture();
+        return productiveBuildingDictionary.getGroundTexture();
     }
 
 

@@ -20,7 +20,7 @@ public enum ProductiveBuildingsDictionary {
     BAKERY(BuildingsDictionary.BAKERY, 0, "", "", ""),
     BREWER(BuildingsDictionary.BREWER, 0, "", "", "");
 
-    private BuildingsDictionary buildingsDictionary;
+    private BuildingsDictionary buildingDictionary;
     private int rate;
     private String inputResource;
     private String outputResource;
@@ -37,8 +37,8 @@ public enum ProductiveBuildingsDictionary {
         return rate;
     }
 
-    public BuildingsDictionary getBuildingsDictionary() {
-        return buildingsDictionary;
+    public BuildingsDictionary getBuildingDictionary() {
+        return buildingDictionary;
     }
 
     public String getInputResource() {

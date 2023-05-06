@@ -10,7 +10,7 @@ public enum BuildingType {
     TOWN("Town Buildings"),
     WEAPON("Weapon Buildings");
 
-    private String buildingType;
+    private final String buildingType;
 
     BuildingType(String name) {
         this.buildingType = name;

@@ -7,7 +7,7 @@ public class TowerBuilding extends Building {
 
 
     public TowerBuilding(Empire buildingOwner, TowerBuildingsDictionary towerBuildingsDictionary) {
-        super(buildingOwner, towerBuildingsDictionary.getBuildingsDictionary());
+        super(buildingOwner, towerBuildingsDictionary.getBuildingDictionary());
         this.towerBuildingsDictionary = towerBuildingsDictionary;
     }
 
