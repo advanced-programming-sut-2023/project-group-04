@@ -9,14 +9,16 @@ public class SignUpMenu {
 
     public void run() throws Exception {
         Matcher matcher;
-        String input, result;
+        String input, result = "";
         while (true) {
             input = Menu.getScanner().nextLine();
             if ((matcher = SignUpCommands.getMatcher(input, SignUpCommands.CREATE_ACCOUNT)) != null) {
-                result = Menu.getLoginController().SignUp(matcher);
+                result = Menu.getLoginController().SignUp(matcher, input);
                 result = signUp(result);
                 if (result.equals(SignUpMessages.REGISTRATION_SUCCESSFUL.getMessage()))
                     return;
+            } else {
+                System.out.println("Invalid command!");
             }
         }
 
@@ -38,7 +40,7 @@ public class SignUpMenu {
         }
         if (result.equals(SignUpMessages.REGISTRATION_SUCCESSFUL.getMessage()))
             return pickQuestion();
-        return null;
+        return "";
     }
 
     private String pickQuestion() throws Exception {

@@ -15,7 +15,7 @@ public enum SignUpMessages {
     PASSWORD_CONFIRM_DOES_NOT_MATCH("Password confirmation doesn't matches!"),
     EXISTENCE_EMAIL("A user with this Email is Already exists!"),
     INCORRECT_EMAIL_FORMAT("Email format is incorrect!"),
-    INVALID_QUESTION_NUMBER("You must enter a number between 1 , 3 !"),
+    INVALID_QUESTION_NUMBER("You must enter a number between [1,3]!"),
     ANSWER_CONFIRM_DOES_NOT_MATCH("The security answer confirmation doesn't matches!"),
     SET_QUESTION_SUCCESSFUL("Set question was successful!"),
     LOGIN_SUCCESSFUL("User logged in successfully!"),
