@@ -24,7 +24,7 @@ public enum StructuralBuildingsDictionary {
 
     public static StructuralBuildingsDictionary getDictionaryByName(String buildingName) {
         for (StructuralBuildingsDictionary structuralBuildingsDictionary : StructuralBuildingsDictionary.values()) {
-            if (structuralBuildingsDictionary.buildingsDictionary.getName().equals(buildingName))
+            if (structuralBuildingsDictionary.getBuildingDictionary().getName().equals(buildingName))
                 return structuralBuildingsDictionary;
         }
         return null;

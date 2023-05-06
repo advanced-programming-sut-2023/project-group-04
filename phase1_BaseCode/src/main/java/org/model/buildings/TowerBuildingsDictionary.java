@@ -37,7 +37,7 @@ public enum TowerBuildingsDictionary {
 
     public static TowerBuildingsDictionary getDictionaryByName(String buildingName) {
         for (TowerBuildingsDictionary towerBuildingsDictionary : TowerBuildingsDictionary.values()) {
-            if (towerBuildingsDictionary.buildingsDictionary.getName().equals(buildingName))
+            if (towerBuildingsDictionary.getBuildingDictionary().getName().equals(buildingName))
                 return towerBuildingsDictionary;
         }
         return null;

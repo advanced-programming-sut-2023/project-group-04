@@ -13,9 +13,9 @@ public class ShopController {
         String list = "YOUR RESOURCES:\n";
         for (ResourcesDictionary resourcesDictionary : ResourcesDictionary.values()) {
             list += "resource name : " + resourcesDictionary.getName();
-            list += "amount : " + currentEmpire.getResources().get(resourcesDictionary.getName());
-            list += "buy price : " + resourcesDictionary.getPrice();
-            list += "sell price : " + resourcesDictionary.getPrice() / 2;
+            list += "\namount : " + currentEmpire.getResources().get(resourcesDictionary.getName());
+            list += "\nbuy price : " + resourcesDictionary.getPrice();
+            list += "\nsell price : " + resourcesDictionary.getPrice() / 2;
         }
         return list;
     }

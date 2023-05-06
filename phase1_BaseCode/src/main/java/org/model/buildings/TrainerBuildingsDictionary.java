@@ -30,7 +30,7 @@ public enum TrainerBuildingsDictionary {
 
     public static TrainerBuildingsDictionary getDictionaryByName(String buildingName) {
         for (TrainerBuildingsDictionary trainerBuildingsDictionary : TrainerBuildingsDictionary.values()) {
-            if (trainerBuildingsDictionary.buildingsDictionary.getName().equals(buildingName))
+            if (trainerBuildingsDictionary.getBuildingDictionary().getName().equals(buildingName))
                 return trainerBuildingsDictionary;
         }
         return null;

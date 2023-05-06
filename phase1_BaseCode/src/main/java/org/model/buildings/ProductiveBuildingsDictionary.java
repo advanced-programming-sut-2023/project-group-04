@@ -55,7 +55,7 @@ public enum ProductiveBuildingsDictionary {
 
     public static ProductiveBuildingsDictionary getDictionaryByName(String buildingName) {
         for (ProductiveBuildingsDictionary productiveBuildingsDictionary : ProductiveBuildingsDictionary.values()) {
-            if (productiveBuildingsDictionary.buildingsDictionary.getName().equals(buildingName))
+            if (productiveBuildingsDictionary.getBuildingDictionary().getName().equals(buildingName))
                 return productiveBuildingsDictionary;
         }
         return null;

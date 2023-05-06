@@ -23,7 +23,7 @@ public enum TrapBuildingsDictionary {
 
     public static TrapBuildingsDictionary getDictionaryByName(String buildingName) {
         for (TrapBuildingsDictionary trapBuildingsDictionary : TrapBuildingsDictionary.values()) {
-            if (trapBuildingsDictionary.buildingsDictionary.getName().equals(buildingName))
+            if (trapBuildingsDictionary.getBuildingDictionary().getName().equals(buildingName))
                 return trapBuildingsDictionary;
         }
         return null;
