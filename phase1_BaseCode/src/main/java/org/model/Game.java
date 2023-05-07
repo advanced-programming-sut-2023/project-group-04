@@ -1,7 +1,7 @@
 package org.model;
 
 import org.model.buildings.Building;
-import org.model.buildings.StorageBuilding;
+import org.model.person.Person;
 
 import java.util.ArrayList;
 
@@ -11,6 +11,7 @@ public class Game {
     private final ArrayList<Empire> allEmpires;
     private Empire currentEmpire;
     private Building selectedBuilding;
+    private ArrayList<Person> selectedUnit;
 
     public Game(ArrayList<Empire> allEmpires) {
         this.allEmpires = allEmpires;
@@ -62,4 +63,11 @@ public class Game {
         currentEmpire = allEmpires.get(index);
     }
 
+    public ArrayList<Person> getSelectedUnit() {
+        return selectedUnit;
+    }
+
+    public void selectUnit(ArrayList<Person> selectedUnit) {
+        this.selectedUnit = selectedUnit;
+    }
 }

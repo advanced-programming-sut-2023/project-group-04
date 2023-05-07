@@ -6,11 +6,12 @@ import org.model.buildings.Building;
 
 public class Engineer extends Person{
 
+    private static final int  requiredGold = 0;
     private Building buildingWorkPlace;
     private Machine machineWorkPlace;
 
-    public Engineer(Empire personOwner, int hp) {
-        super(personOwner, hp);
+    public Engineer(Empire personOwner) {
+        super(personOwner, 0);
         this.buildingWorkPlace = null;
         this.machineWorkPlace = null;
     }
@@ -29,5 +30,9 @@ public class Engineer extends Person{
 
     public void setMachineWorkPlace(Machine machineWorkPlace) {
         this.machineWorkPlace = machineWorkPlace;
+    }
+
+    public static int getRequiredGold() {
+        return requiredGold;
     }
 }

@@ -1,6 +1,7 @@
 package org.model.buildings;
 
 import org.model.Empire;
+import org.model.MapCell;
 
 import java.util.HashMap;
 
@@ -8,11 +9,13 @@ public class Building {
     private Empire buildingOwner;
     private final BuildingsDictionary buildingDictionary;
     private int hp;
+    private final MapCell mapCell;
 
-    public Building(Empire buildingOwner, BuildingsDictionary buildingDictionary) {
+    public Building(Empire buildingOwner, BuildingsDictionary buildingDictionary, MapCell mapCell) {
         this.buildingOwner = buildingOwner;
         this.buildingDictionary = buildingDictionary;
         this.hp = buildingDictionary.getHp();
+        this.mapCell = mapCell;
     }
 
     public BuildingsDictionary getBuildingDictionary() {
@@ -67,4 +70,11 @@ public class Building {
         this.hp = this.buildingDictionary.getHp();
     }
 
+    public int getHp() {
+        return hp;
+    }
+
+    public MapCell getMapCell() {
+        return mapCell;
+    }
 }

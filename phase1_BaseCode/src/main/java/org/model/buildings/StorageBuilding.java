@@ -1,6 +1,7 @@
 package org.model.buildings;
 
 import org.model.Empire;
+import org.model.MapCell;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,8 +11,8 @@ public class StorageBuilding extends Building {
     private final HashMap<String, Integer> resources;
     private int freeSpace;
 
-    public StorageBuilding(Empire buildingOwner, StorageBuildingsDictionary storageBuildingsDictionary) {
-        super(buildingOwner, storageBuildingsDictionary.getBuildingDictionary());
+    public StorageBuilding(Empire buildingOwner, StorageBuildingsDictionary storageBuildingsDictionary, MapCell mapCell) {
+        super(buildingOwner, storageBuildingsDictionary.getBuildingDictionary(), mapCell);
         this.storageBuildingsDictionary = storageBuildingsDictionary;
         this.freeSpace = storageBuildingsDictionary.getCapacity();
         this.resources = storageBuildingsDictionary.getObjects();

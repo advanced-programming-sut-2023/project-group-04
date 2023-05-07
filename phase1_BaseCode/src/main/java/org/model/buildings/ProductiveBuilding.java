@@ -1,13 +1,14 @@
 package org.model.buildings;
 
+import org.model.MapCell;
 import org.model.buildings.BuildingsDictionary;
 import org.model.Empire;
 
 public class ProductiveBuilding extends Building {
     private final ProductiveBuildingsDictionary productiveBuildingDictionary;
 
-    public ProductiveBuilding(Empire buildingOwner, ProductiveBuildingsDictionary productiveBuildingDictionary) {
-        super(buildingOwner, productiveBuildingDictionary.getBuildingDictionary());
+    public ProductiveBuilding(Empire buildingOwner, ProductiveBuildingsDictionary productiveBuildingDictionary, MapCell mapCell) {
+        super(buildingOwner, productiveBuildingDictionary.getBuildingDictionary(), mapCell);
         this.productiveBuildingDictionary = productiveBuildingDictionary;
     }
 

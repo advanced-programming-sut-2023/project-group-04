@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-//        Player.recoveryPlayers();
+        Player.recoveryPlayers();
         new LoginMenu().run();
     }
 }

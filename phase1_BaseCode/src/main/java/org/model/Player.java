@@ -1,6 +1,8 @@
 package org.model;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 
 import java.io.FileWriter;
 import java.io.Reader;
@@ -52,8 +54,12 @@ public class Player {
         try {
             Gson gson = new Gson();
             Reader reader = Files.newBufferedReader(Paths.get("PLAYERS.json"));
-            ArrayList<Player> allPlayers = gson.fromJson(reader, ArrayList.class);
-            if (allPlayers != null) Player.allPlayers = (ArrayList<Player>) allPlayers;
+            JsonArray allPlayersJson = gson.fromJson(reader, JsonArray.class);
+            ArrayList<Player> allPlayers = new ArrayList<>();
+            if (allPlayersJson != null)
+                for(JsonElement player : allPlayersJson)
+                        allPlayers.add(gson.fromJson(player,Player.class));
+            Player.allPlayers = allPlayers;
             reader.close();
         } catch (Exception ex) {
             ex.printStackTrace();
