@@ -13,6 +13,7 @@ public class Game {
     private Building selectedBuilding;
     private int mapFirstX;
     private int mapFirstY;
+    private ArrayList<Person> selectedUnit;
 
     public Game(ArrayList<Empire> allEmpires) {
         this.allEmpires = allEmpires;
@@ -78,5 +79,12 @@ public class Game {
 
     public void setMapFirstY(int mapFirstY) {
         this.mapFirstY = mapFirstY;
+    }
+    public ArrayList<Person> getSelectedUnit() {
+        return selectedUnit;
+    }
+
+    public void selectUnit(ArrayList<Person> selectedUnit) {
+        this.selectedUnit = selectedUnit;
     }
 }

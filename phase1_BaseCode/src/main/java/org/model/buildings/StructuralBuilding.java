@@ -12,8 +12,9 @@ public class StructuralBuilding extends Building {
     private final String direction;
     private boolean isOpen;
 
-    public StructuralBuilding(Empire buildingOwner, StructuralBuildingsDictionary structuralBuildingsDictionary, String direction) {
-        super(buildingOwner, structuralBuildingsDictionary.getBuildingDictionary());
+    public StructuralBuilding(Empire buildingOwner, StructuralBuildingsDictionary structuralBuildingsDictionary
+            , String direction, MapCell mapCell) {
+        super(buildingOwner, structuralBuildingsDictionary.getBuildingDictionary(), mapCell);
         this.structuralBuildingsDictionary = structuralBuildingsDictionary;
         this.freeSpace = 0;
         this.direction = direction;

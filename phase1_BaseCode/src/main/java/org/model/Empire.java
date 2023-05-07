@@ -1,6 +1,7 @@
 package org.model;
 
 import org.model.buildings.StorageBuilding;
+import org.model.person.Person;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,8 +11,10 @@ public class Empire {
     private int foodRate;
     private int taxRate;
     private int fearRate;
+    private final ArrayList<Person> population = new ArrayList<>();
     private final HashMap<String, Integer> popularity;
     private final HashMap<String, Integer> resources;
+    private final HashMap<String, Integer> weaponAndArmour;
     private final HashMap<String, Integer> food;
     private final ArrayList<StorageBuilding> allStockPiles;
     private final ArrayList<StorageBuilding> allGranaries;
@@ -26,11 +29,25 @@ public class Empire {
         initializePopularity();
         this.resources = new HashMap<>();
         initializeResource();
+        this.weaponAndArmour = new HashMap<>();
+        initializeWeaponAndArmor();
         this.food = new HashMap<>();
         initializeFood();
         allStockPiles = new ArrayList<>();
         allGranaries = new ArrayList<>();
         allArmouries = new ArrayList<>();
+    }
+
+    private void initializeWeaponAndArmor() {
+        this.weaponAndArmour.put("",0);
+        this.weaponAndArmour.put("",0);
+        this.weaponAndArmour.put("",0);
+        this.weaponAndArmour.put("",0);
+        this.weaponAndArmour.put("",0);
+        this.weaponAndArmour.put("",0);
+        this.weaponAndArmour.put("",0);
+        this.weaponAndArmour.put("",0);
+        //todo: add weapon and armour --> keyhan
     }
 
     private void initializePopularity() {
@@ -92,7 +109,7 @@ public class Empire {
         return food;
     }
 
-    public void ChangeResourceAmount(String resource, int amount) {
+    public void changeResourceAmount(String resource, int amount) {
         this.resources.put(resource, resources.get(resource) + amount);
     }
 
@@ -126,5 +143,29 @@ public class Empire {
 
     public void addArmoury(StorageBuilding armoury) {
         this.allArmouries.add(armoury);
+    }
+
+    public void addPerson(Person person) {
+        this.population.add(person);
+    }
+
+    public void removePerson(Person person) {
+        this.population.remove(person);
+    }
+
+    public void removePerson(int index) {
+        this.population.remove(index);
+    }
+
+    public ArrayList<Person> getPopulation() {
+        return population;
+    }
+
+    public int getWeaponAndArmourAmount(String weaponOrArmour) {
+        return weaponAndArmour.get(weaponOrArmour);
+    }
+
+    public void changeWeaponAndArmourAmount(String type, int count) {
+
     }
 }

@@ -1,5 +1,7 @@
 package org.model.person;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashMap;
 
 public enum SoldiersDictionary {
@@ -43,7 +45,6 @@ public enum SoldiersDictionary {
         this.fireRange = fireRange;
         this.soldierName = soldierName;
     }
-
     public int getOffensivePower() {
         return offensivePower;
     }
@@ -62,5 +63,35 @@ public enum SoldiersDictionary {
 
     public String getSoldierName() {
         return soldierName;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public String getWeapon() {
+        return weapon;
+    }
+
+    public String getShield() {
+        return shield;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public static SoldiersDictionary getSoldierDictionaryByName(String name) {
+        for (SoldiersDictionary soldierDictionary : SoldiersDictionary.values())
+            if (soldierDictionary.getName().equals(name))
+                return soldierDictionary;
+        return null;
+    }
+
+    public static ArrayList<String> getAllSoldierTypes() {
+         ArrayList<String> allSoldiersType = new ArrayList<>();
+        for (SoldiersDictionary soldierDictionary : SoldiersDictionary.values())
+            allSoldiersType.add(soldierDictionary.getName());
+        return allSoldiersType;
     }
 }
