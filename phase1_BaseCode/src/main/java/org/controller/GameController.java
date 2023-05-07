@@ -4,9 +4,8 @@ import org.model.Empire;
 import org.model.Game;
 import org.model.Map;
 import org.model.MapCell;
-import org.model.buildings.Building;
-import org.view.CommandsEnum.GameMessages;
 import org.model.buildings.*;
+import org.view.CommandsEnum.GameMessages;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -91,11 +90,11 @@ public class GameController {
         if (BuildingsDictionary.getDictionaryByName(buildingName) == null)
             return "Incorrect building type!";
         //TODO: CHECK GROUND TEXTURE
-        return createBuilding(empire,x, y, "", buildingName);//todo: handle direction
+        return createBuilding(empire, x, y, "", buildingName);//todo: handle direction
         //TODO: DRAW BRIDGE ONLY CAN BE PLACED IN FRONT OF GATEHOUSES
     }
 
-    private String createBuilding(Empire empire, int x, int y, String direction , String buildingName) {
+    private String createBuilding(Empire empire, int x, int y, String direction, String buildingName) {
         ProductiveBuildingsDictionary productiveBuildingDictionary;
         StorageBuildingsDictionary storageBuildingDictionary;
         StructuralBuildingsDictionary structuralBuildingDictionary;
@@ -135,7 +134,7 @@ public class GameController {
 
     private void initBuildings(Building building) {
         if (building.getBuildingDictionary().equals(BuildingsDictionary.SMALL_STONE_GATEHOUSE) |
-        building.getBuildingDictionary().equals(BuildingsDictionary.LARGE_STONE_GATEHOUSE))
+                building.getBuildingDictionary().equals(BuildingsDictionary.LARGE_STONE_GATEHOUSE))
             Game.getCurrentGame().getCurrentEmpire().activateTaxRate();
     }
 
@@ -166,7 +165,6 @@ public class GameController {
         if (building == null)
             return null;
         if (!building.getBuildingOwner().equals(Game.getCurrentGame().getCurrentEmpire()))
-            return null;
             return GameMessages.BUILDING_NOT_EXIST;
         if (!building.getBuildingOwner().equals(Game.getCurrentGame().getCurrentEmpire()))
             return GameMessages.NOT_OWNING_THE_BUILDING;
@@ -185,7 +183,7 @@ public class GameController {
         int basicHp = selectedBuilding.getBasicHp();
         float requirementPercentage = (float) (currentHp / basicHp);
         for (String key : prices.keySet())
-            requirementMaterial.put(key,(int)(prices.get(key) * requirementPercentage));
+            requirementMaterial.put(key, (int) (prices.get(key) * requirementPercentage));
         if (!buyBuilding(empire, requirementMaterial)) return "not enough resource to repair!";
         selectedBuilding.repair();
         return "success!";
