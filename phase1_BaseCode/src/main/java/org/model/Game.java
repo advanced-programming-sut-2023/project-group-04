@@ -2,6 +2,7 @@ package org.model;
 
 import org.model.buildings.Building;
 import org.model.buildings.StorageBuilding;
+import org.model.person.Person;
 
 import java.util.ArrayList;
 

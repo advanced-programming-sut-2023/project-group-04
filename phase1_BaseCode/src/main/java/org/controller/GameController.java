@@ -5,8 +5,9 @@ import org.model.Game;
 import org.model.Map;
 import org.model.MapCell;
 import org.model.buildings.*;
-import org.view.CommandsEnum.GameMessages;
 import org.model.person.*;
+import org.model.person.Person;
+import org.view.CommandsEnum.GameMessages;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -78,7 +79,7 @@ public class GameController {
     }
 
     public String dropBuilding(Matcher matcher) {
-        //TODO: STRUCTURAL BUILDINGS MUST HAVE A DIRECTION FIELD....DIRECTION MUST BE OPTION FIELD IN DROPBUILDING
+        //TODO: STRUCTURAL BUILDINGS MUST HAVE A DIRECTION FIELD....DIRECTION MUST BE OPTION FIELD IN DROP BUILDING
         //TODO: CHANGE RETURN TYPE AND RETURNS -----> **ABOLFAZL**
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         int x = Integer.parseInt(matcher.group("x"));
@@ -95,7 +96,7 @@ public class GameController {
         //TODO: DRAW BRIDGE ONLY CAN BE PLACED IN FRONT OF GATEHOUSES
     }
 
-    private String createBuilding(Empire empire, int x, int y, String direction,String buildingName) {
+    private String createBuilding(Empire empire, int x, int y, String direction, String buildingName) {
         ProductiveBuildingsDictionary productiveBuildingDictionary;
         StorageBuildingsDictionary storageBuildingDictionary;
         StructuralBuildingsDictionary structuralBuildingDictionary;
@@ -423,7 +424,7 @@ public class GameController {
             default:
                 return "invalid direction!";
         }
-        MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x,y);
+        MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
         for (Person person : unit) {
             Engineer engineer = (Engineer) person;
             if (engineer.hasOil()) {
@@ -443,8 +444,8 @@ public class GameController {
         if (unit == null || unit.size() == 0) return "no unit or empty unit selected!";
         for (Person person : unit)
             if (!(person instanceof Tunneler)) return "selected unit is not tunneler!";
-        MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x,y);
-        ((Tunneler)unit.get(0)).setAimTunnel(mapCell);
+        MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
+        ((Tunneler) unit.get(0)).setAimTunnel(mapCell);
         return "tunnel set for tunneler successful!";
     }
 
