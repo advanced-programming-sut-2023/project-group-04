@@ -16,6 +16,7 @@ public class MapCell {
     private final ArrayList<Person> people;
     private Machine machine;
     private boolean tunnel;
+    private boolean oil;
 
     public MapCell(int x, int y, String groundTexture) {
         this.xAxis = x;
@@ -23,6 +24,7 @@ public class MapCell {
         this.groundTexture = groundTexture;
         this.people = new ArrayList<>();
         this.tunnel = false;
+        this.oil = false;
     }
     public int getX() {
         return xAxis;
@@ -46,6 +48,14 @@ public class MapCell {
 
     public boolean hasTunnel() {
         return tunnel;
+    }
+
+    public boolean isOily() {
+        return oil;
+    }
+
+    public void setOilCondition(boolean oil) {
+        this.oil = oil;
     }
 
     public Machine getMachine() {
