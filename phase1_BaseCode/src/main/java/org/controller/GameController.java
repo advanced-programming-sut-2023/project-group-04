@@ -87,14 +87,14 @@ public class GameController {
         if (!checkCoordinates(x, y)) return "incorrect coordinates!";
         if (Game.getCurrentGame().getMapCellByAddress(x, y).getBuilding() != null)
             return "a building already exist in this place!";
-        if (BuildingsDictionary.getDictionaryByName(type) == null)
+        if (BuildingsDictionary.getDictionaryByName(buildingName) == null)
             return "Incorrect building type!";
         //TODO: CHECK GROUND TEXTURE VALIDATION
-        return createBuilding(empire, x, y, "");//todo: handle direction
+        return createBuilding(empire, x, y, "", buildingName);//todo: handle direction
         //TODO: DRAW BRIDGE ONLY CAN BE PLACED IN FRONT OF GATEHOUSES
     }
 
-    private String createBuilding(Empire empire, int x, int y, String direction) {
+    private String createBuilding(Empire empire, int x, int y, String direction,String buildingName) {
         ProductiveBuildingsDictionary productiveBuildingDictionary;
         StorageBuildingsDictionary storageBuildingDictionary;
         StructuralBuildingsDictionary structuralBuildingDictionary;
@@ -104,26 +104,26 @@ public class GameController {
         Building building = null;
         HashMap<String, Integer> prices = null;
         MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
-        if ((productiveBuildingDictionary = ProductiveBuildingsDictionary.getDictionaryByName(type)) != null) {
+        if ((productiveBuildingDictionary = ProductiveBuildingsDictionary.getDictionaryByName(buildingName)) != null) {
             prices = productiveBuildingDictionary.getBuildingDictionary().getPrices();
             building = new ProductiveBuilding(empire, productiveBuildingDictionary, mapCell);
-        } else if ((storageBuildingDictionary = StorageBuildingsDictionary.getDictionaryByName(type)) != null) {
+        } else if ((storageBuildingDictionary = StorageBuildingsDictionary.getDictionaryByName(buildingName)) != null) {
             prices = storageBuildingDictionary.getBuildingDictionary().getPrices();
             building = new StorageBuilding(empire, storageBuildingDictionary, mapCell);
-        } else if ((structuralBuildingDictionary = StructuralBuildingsDictionary.getDictionaryByName(type)) != null) {
+        } else if ((structuralBuildingDictionary = StructuralBuildingsDictionary.getDictionaryByName(buildingName)) != null) {
             prices = structuralBuildingDictionary.getBuildingDictionary().getPrices();
             building = new StructuralBuilding(empire, structuralBuildingDictionary, direction, mapCell);
-        } else if ((towerBuildingDictionary = TowerBuildingsDictionary.getDictionaryByName(type)) != null) {
+        } else if ((towerBuildingDictionary = TowerBuildingsDictionary.getDictionaryByName(buildingName)) != null) {
             prices = towerBuildingDictionary.getBuildingDictionary().getPrices();
             building = new TowerBuilding(empire, towerBuildingDictionary, mapCell);
-        } else if ((trainerBuildingDictionary = TrainerBuildingsDictionary.getDictionaryByName(type)) != null) {
+        } else if ((trainerBuildingDictionary = TrainerBuildingsDictionary.getDictionaryByName(buildingName)) != null) {
             prices = trainerBuildingDictionary.getBuildingDictionary().getPrices();
             building = new TrainerBuilding(empire, trainerBuildingDictionary, mapCell);
-        } else if ((trapBuildingDictionary = TrapBuildingsDictionary.getDictionaryByName(type)) != null) {
+        } else if ((trapBuildingDictionary = TrapBuildingsDictionary.getDictionaryByName(buildingName)) != null) {
             prices = trapBuildingDictionary.getBuildingDictionary().getPrices();
             building = new TrapBuilding(empire, trapBuildingDictionary, mapCell);
         } else {
-            BuildingsDictionary buildingDictionary = BuildingsDictionary.getDictionaryByName(type);
+            BuildingsDictionary buildingDictionary = BuildingsDictionary.getDictionaryByName(buildingName);
             prices = buildingDictionary.getPrices();
             building = new Building(empire, buildingDictionary, mapCell);
         }
