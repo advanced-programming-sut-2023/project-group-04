@@ -1,5 +1,8 @@
 package org.model;
 
+import org.model.buildings.StorageBuilding;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Empire {
@@ -9,13 +12,15 @@ public class Empire {
     private int fearRate;
     private final HashMap<String, Integer> popularity;
     private final HashMap<String, Integer> resources;
-
     private final HashMap<String, Integer> food;
+    private final ArrayList<StorageBuilding> allStockPiles;
+    private final ArrayList<StorageBuilding> allGranaries;
+    private final ArrayList<StorageBuilding> allArmouries;
 
     public Empire(Player owner) {
         this.owner = owner;
         this.fearRate = 0;
-        this.taxRate = 0;
+        this.taxRate = -100;
         this.foodRate = 0;
         this.popularity = new HashMap<>();
         initializePopularity();
@@ -23,6 +28,9 @@ public class Empire {
         initializeResource();
         this.food = new HashMap<>();
         initializeFood();
+        allStockPiles = new ArrayList<>();
+        allGranaries = new ArrayList<>();
+        allArmouries = new ArrayList<>();
     }
 
     private void initializePopularity() {
@@ -82,5 +90,41 @@ public class Empire {
 
     public HashMap<String, Integer> getFood() {
         return food;
+    }
+
+    public void ChangeResourceAmount(String resource, int amount) {
+        this.resources.put(resource, resources.get(resource) + amount);
+    }
+
+    public void activateTaxRate() {
+        this.taxRate = 0;
+    }
+
+    public int getResourceAmount(String resource) {
+        return this.resources.get(resource);
+    }
+
+    public ArrayList<StorageBuilding> getAllStockPiles() {
+        return allStockPiles;
+    }
+
+    public void addStockPile(StorageBuilding stockPile) {
+        this.allStockPiles.add(stockPile);
+    }
+
+    public ArrayList<StorageBuilding> getAllGranaries() {
+        return allGranaries;
+    }
+
+    public void addGranary(StorageBuilding granary) {
+        this.allGranaries.add(granary);
+    }
+
+    public ArrayList<StorageBuilding> getAllArmouries() {
+        return allArmouries;
+    }
+
+    public void addArmoury(StorageBuilding armoury) {
+        this.allArmouries.add(armoury);
     }
 }

@@ -1,6 +1,7 @@
 package org.model;
 
 import org.model.buildings.Building;
+import org.model.buildings.StorageBuilding;
 
 import java.util.ArrayList;
 
@@ -12,16 +13,6 @@ public class Game {
     private Building selectedBuilding;
     private int mapFirstX;
     private int mapFirstY;
-
-    public Building getSelectedBuilding() {
-        return selectedBuilding;
-    }
-
-    public void setSelectedBuilding(Building selectedBuilding) {
-        this.selectedBuilding = selectedBuilding;
-    }
-
-    int empireIndex = 0;
 
     public Game(ArrayList<Empire> allEmpires) {
         this.allEmpires = allEmpires;
@@ -37,6 +28,14 @@ public class Game {
                 map[i][j] = new MapCell(i, j, mapTemplate[i][j]);
             }
         }
+    }
+
+    public Building getSelectedBuilding() {
+        return selectedBuilding;
+    }
+
+    public void setSelectedBuilding(Building selectedBuilding) {
+        this.selectedBuilding = selectedBuilding;
     }
 
     public MapCell[][] getMap() {

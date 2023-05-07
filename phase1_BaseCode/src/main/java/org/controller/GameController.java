@@ -6,12 +6,14 @@ import org.model.Map;
 import org.model.MapCell;
 import org.model.buildings.Building;
 import org.view.CommandsEnum.GameMessages;
+import org.model.buildings.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class GameController {
+    //TODO : CREATE GAME MESSAGES AND REPLACE RETURN TYPE OF SOME FUNCTIONS;
     public String showPopularityFactors() {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         HashMap<String, Integer> popularityFactors = empire.getPopularity();
@@ -75,18 +77,96 @@ public class GameController {
         return "your fear rate is : <<" + empire.getFearRate() + ">>\n";
     }
 
-    public GameMessages dropBuilding(Matcher matcher) {
-        return null;
+    public String dropBuilding(Matcher matcher) {
+        //TODO: STRUCTURAL BUILDINGS MUST HAVE A DIRECTION FIELD....DIRECTION MUST BE OPTION FIELD IN DROPBUILDING
+        //TODO: CHANGE RETURN TYPE AND RETURNS -----> **ABOLFAZL**
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        String buildingName = matcher.group("type");
+        //todo: handle direction
+        if (!checkCoordinates(x, y)) return "incorrect coordinates!";
+        if (Game.getCurrentGame().getMapCellByAddress(x, y).getBuilding() != null)
+            return "a building already exist in this place!";
+        if (BuildingsDictionary.getDictionaryByName(buildingName) == null)
+            return "Incorrect building type!";
+        //TODO: CHECK GROUND TEXTURE
+        return createBuilding(empire,x, y, "", buildingName);//todo: handle direction
+        //TODO: DRAW BRIDGE ONLY CAN BE PLACED IN FRONT OF GATEHOUSES
+    }
+
+    private String createBuilding(Empire empire, int x, int y, String direction , String buildingName) {
+        ProductiveBuildingsDictionary productiveBuildingDictionary;
+        StorageBuildingsDictionary storageBuildingDictionary;
+        StructuralBuildingsDictionary structuralBuildingDictionary;
+        TowerBuildingsDictionary towerBuildingDictionary;
+        TrainerBuildingsDictionary trainerBuildingDictionary;
+        TrapBuildingsDictionary trapBuildingDictionary;
+        Building building = null;
+        HashMap<String, Integer> prices = null;
+        if ((productiveBuildingDictionary = ProductiveBuildingsDictionary.getDictionaryByName(buildingName)) != null) {
+            prices = productiveBuildingDictionary.getBuildingDictionary().getPrices();
+            building = new ProductiveBuilding(empire, productiveBuildingDictionary);
+        } else if ((storageBuildingDictionary = StorageBuildingsDictionary.getDictionaryByName(buildingName)) != null) {
+            prices = storageBuildingDictionary.getBuildingDictionary().getPrices();
+            building = new StorageBuilding(empire, storageBuildingDictionary);
+        } else if ((structuralBuildingDictionary = StructuralBuildingsDictionary.getDictionaryByName(buildingName)) != null) {
+            prices = structuralBuildingDictionary.getBuildingDictionary().getPrices();
+            building = new StructuralBuilding(empire, structuralBuildingDictionary, direction);
+        } else if ((towerBuildingDictionary = TowerBuildingsDictionary.getDictionaryByName(buildingName)) != null) {
+            prices = towerBuildingDictionary.getBuildingDictionary().getPrices();
+            building = new TowerBuilding(empire, towerBuildingDictionary);
+        } else if ((trainerBuildingDictionary = TrainerBuildingsDictionary.getDictionaryByName(buildingName)) != null) {
+            prices = trainerBuildingDictionary.getBuildingDictionary().getPrices();
+            building = new TrainerBuilding(empire, trainerBuildingDictionary);
+        } else if ((trapBuildingDictionary = TrapBuildingsDictionary.getDictionaryByName(buildingName)) != null) {
+            prices = trapBuildingDictionary.getBuildingDictionary().getPrices();
+            building = new TrapBuilding(empire, trapBuildingDictionary);
+        } else {
+            BuildingsDictionary buildingDictionary = BuildingsDictionary.getDictionaryByName(buildingName);
+            prices = buildingDictionary.getPrices();
+            building = new Building(empire, buildingDictionary);
+        }
+        if (!buyBuilding(empire, prices)) return "not enough resource to build!";
+        Game.getCurrentGame().getMapCellByAddress(x, y).setBuilding(building);
+        initBuildings(building);
+        return "building dropped successfully";
+    }
+
+    private void initBuildings(Building building) {
+        if (building.getBuildingDictionary().equals(BuildingsDictionary.SMALL_STONE_GATEHOUSE) |
+        building.getBuildingDictionary().equals(BuildingsDictionary.LARGE_STONE_GATEHOUSE))
+            Game.getCurrentGame().getCurrentEmpire().activateTaxRate();
+    }
+
+    private boolean buyBuilding(Empire empire, HashMap<String, Integer> prices) {
+        for (String resource : prices.keySet())
+            if (empire.getResourceAmount(resource) < prices.get(resource)) return false;
+        for (String resource : prices.keySet()) {
+            empire.ChangeResourceAmount(resource, -(prices.get(resource)));
+            for (StorageBuilding storageBuilding : empire.getAllStockPiles()) {
+                int resourceAmountInStorage = storageBuilding.getResourceAmount(resource);
+                if (resourceAmountInStorage <= prices.get(resource)) {
+                    prices.put(resource, prices.get(resource) - resourceAmountInStorage);
+                    storageBuilding.changeResourcesAmount(resource, -resourceAmountInStorage);
+                } else {
+                    storageBuilding.changeResourcesAmount(resource, -prices.get(resource));
+                    break;
+                }
+            }
+        }
+        return true;
     }
 
     public GameMessages selectBuilding(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
-        int mapSize = Map.getCurrentMap().getMapSize();
-        if (x <= 0 || x > mapSize || y <= 0 || y > mapSize)
-            return GameMessages.INVALID_POSITION;
+        if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
         Building building = Game.getCurrentGame().getMapCellByAddress(x, y).getBuilding();
         if (building == null)
+            return null;
+        if (!building.getBuildingOwner().equals(Game.getCurrentGame().getCurrentEmpire()))
+            return null;
             return GameMessages.BUILDING_NOT_EXIST;
         if (!building.getBuildingOwner().equals(Game.getCurrentGame().getCurrentEmpire()))
             return GameMessages.NOT_OWNING_THE_BUILDING;
@@ -94,26 +174,26 @@ public class GameController {
         return GameMessages.SET_SUCCESSFUL;
     }
 
-    public String createUnit(Matcher matcher) {
-        return null;
-    }
-
-    public GameMessages repair(Matcher matcher) {
+    public String repair(Matcher matcher) {
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
         Building selectedBuilding = Game.getCurrentGame().getSelectedBuilding();
-        if (!selectedBuilding.getType().equals("Castle Buildings"))
-            return GameMessages.CAN_NOT_REPAIR;
+        if (!selectedBuilding.getType().equals(BuildingType.CASTLE))
+            return null;
         HashMap<String, Integer> requirementMaterial = new HashMap<>();
         HashMap<String, Integer> prices = selectedBuilding.getPrices();
         int currentHp = selectedBuilding.getCurrentHp();
         int basicHp = selectedBuilding.getBasicHp();
-        Float requirementPercentage = (float) (currentHp / basicHp);
-        for (String key : prices.keySet()) {
-            Integer cost = prices.get(key);
-            //requirementMaterial.put(key,(Integer)(cost * requirementPercentage));
-        }
+        float requirementPercentage = (float) (currentHp / basicHp);
+        for (String key : prices.keySet())
+            requirementMaterial.put(key,(int)(prices.get(key) * requirementPercentage));
+        if (!buyBuilding(empire, requirementMaterial)) return "not enough resource to repair!";
+        selectedBuilding.repair();
+        return "success!";
+    }
+
+    public String createUnit(Matcher matcher) {
         return null;
 //        if ()
-        // TODO: 5/1/2023 Please complete repair
     }
 
     public String selectUnit(Matcher matcher) {
@@ -164,5 +244,9 @@ public class GameController {
         return null;
     }
 
+    private boolean checkCoordinates(int x, int y) {
+        int mapSize = Map.getCurrentMap().getMapSize();
+        return x > 0 && x <= mapSize && y > 0 && y <= mapSize;
+    }
 
 }

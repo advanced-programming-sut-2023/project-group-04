@@ -39,7 +39,7 @@ public class EnvironmentMenu {
                 System.out.println(mapMenuMessage.getMessage());
                 if (mapMenuMessage.equals(MapMenuMessages.MAP_CREATION_SUCCESSFUL)) return true;
             } else if ((matcher = MapMenuCommands.getMatcher(command, MapMenuCommands.CUSTOM_EXITING_MAP)) != null) {
-                MapMenuMessages mapMenuMessage = Menu.getEnvironmentController().createMap(matcher);
+                MapMenuMessages mapMenuMessage = Menu.getEnvironmentController().chooseExistingMap(matcher);
                 System.out.println(mapMenuMessage.getMessage());
                 if (mapMenuMessage.equals(MapMenuMessages.MAP_SELECT_SUCCESSFUL)) return true;
             } else if (MapMenuCommands.getMatcher(command, MapMenuCommands.BACK) != null) return false;
