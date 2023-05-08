@@ -231,6 +231,7 @@ public class LoginController {
         SignUpMessages signUpMessage = checkPassword(password, passwordConfirm);
         if (!signUpMessage.equals(SignUpMessages.PASSWORD_STRONG)) return signUpMessage;
         Player.getCurrentPlayer().setPassword(password);
+        Player.savePlayers();
         return SignUpMessages.PASSWORD_CHANGED;
     }
 
