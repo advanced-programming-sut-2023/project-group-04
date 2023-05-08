@@ -12,7 +12,7 @@ public class Trade {
     private String message;
     private int id;
 
-    public Trade(String resourceName, int resourceAmount, int price, String message , Empire tradeOwner) {
+    public Trade(String resourceName, int resourceAmount, int price, String message, Empire tradeOwner) {
         this.tradeOwner = tradeOwner;
         this.resourceName = resourceName;
         this.resourceAmount = resourceAmount;
@@ -43,13 +43,8 @@ public class Trade {
         return id;
     }
 
-    public void removeTradeById(int id) {
-        for (Trade trade: allTrades) {
-            if (trade.getId() == id) {
-                allTrades.remove(trade);
-                break;
-            }
-        }
+    public void removeTrade() {
+        allTrades.remove(this);
     }
 
     public Empire getTradeOwner() {
@@ -58,5 +53,13 @@ public class Trade {
 
     public static ArrayList<Trade> getAllTrades() {
         return allTrades;
+    }
+
+    public static Trade getTradeById(int id) {
+        for (Trade trade : allTrades) {
+            if (trade.getId() == id)
+                return trade;
+        }
+        return null;
     }
 }
