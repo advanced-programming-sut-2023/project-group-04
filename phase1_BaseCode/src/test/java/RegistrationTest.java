@@ -186,7 +186,7 @@ public class RegistrationTest {
     public void getUserSecurityQuestionWhoHaveNotRegisterYet() {
         String username = "usef";
         String result = loginController.getSecurityQuestion(username);
-        Assertions.assertEquals(SignUpMessages.USER_DOES_NOT_EXIST.getMessage(), result);
+        Assertions.assertEquals(SignUpMessages.USER_NOT_FOUND.getMessage(), result);
     }
 
     @Test
