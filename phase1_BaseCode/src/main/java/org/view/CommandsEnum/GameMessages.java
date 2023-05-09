@@ -14,7 +14,12 @@ public enum GameMessages {
     INVALID_COMMUTING("You can't commute in this area!"),
     SET_SUCCESSFUL("Setting building was successful!"),
     CAN_NOT_REPAIR("You can't repair this building!"),
-
+    CHANGE_FOOD_RATE("Food rate changed successfully!"),
+    CHANGE_TAX_RATE("Tax rate changed successfully!"),
+    CHANGE_FEAR_RATE("Fear rate changed successfully!"),
+    INCORRECT_BUILDING_TYPE("Building type is incorrect!"),
+    SUCCESSFUL_DROP("building dropped successfully!"),
+    SUCCESSFUL_REPAIR("Repairing was successfully!"),
     ;
 
     private final String message;

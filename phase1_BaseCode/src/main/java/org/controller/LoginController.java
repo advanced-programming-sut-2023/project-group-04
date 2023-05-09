@@ -22,14 +22,14 @@ public class LoginController {
         String username = matcher.group("username").replaceAll("\"", "");
         String password = matcher.group("password");
         String passwordConfirmation = matcher.group("passwordConfirm");
-        String email = matcher.group("email");
+        String email = matcher.group("email").toLowerCase();
         String nickname = matcher.group("nickname").replaceAll("\"", "");
         String slogan = "";
         if (matcher.group("slogan") != null)
             slogan = matcher.group("slogan").replaceAll("\"", "");
-        if (checkSignUpErrors(username.toLowerCase(), password, passwordConfirmation, email, nickname, slogan, input) == WITHOUT_ERROR) {
+        if (checkSignUpErrors(username, password, passwordConfirmation, email, nickname, slogan, input) == WITHOUT_ERROR) {
         } else {
-            return checkSignUpErrors(username.toLowerCase(), password, passwordConfirmation, email, nickname, slogan, input).getMessage();
+            return checkSignUpErrors(username, password, passwordConfirmation, email, nickname, slogan, input).getMessage();
         }
         if (Player.getPlayerByUsername(username) != null) {
             String newUsername = suggestNewUsername(username);
@@ -42,11 +42,11 @@ public class LoginController {
             password = generateRandomPassword();
             if (slogan.equals("random")) {
                 slogan = giveRandomSlogan();
-                Player player = new Player(username.toLowerCase(), password, nickname, email, slogan);
+                Player player = new Player(username, password, nickname, email, slogan);
                 Player.setCurrentPlayer(player);
                 return showSloganAndPassword(slogan, password);
             } else {
-                Player player = new Player(username.toLowerCase(), password, nickname, email, slogan);
+                Player player = new Player(username, password, nickname, email, slogan);
                 Player.setCurrentPlayer(player);
                 return "Your random password is: " + password;
             }
@@ -54,12 +54,12 @@ public class LoginController {
             if (slogan != null)
                 if (slogan.equals("random")) {
                     slogan = giveRandomSlogan();
-                    Player player = new Player(username.toLowerCase(), password, nickname, email, slogan);
+                    Player player = new Player(username, password, nickname, email, slogan);
                     Player.setCurrentPlayer(player);
                     return "Your random slogan is \"" + slogan + "\"";
                 }
         }
-        Player player = new Player(username.toLowerCase(), password, nickname, email, slogan);
+        Player player = new Player(username, password, nickname, email, slogan);
         Player.setCurrentPlayer(player);
         return REGISTRATION_SUCCESSFUL.getMessage();
     }
@@ -196,7 +196,7 @@ public class LoginController {
     }
 
     public String signIn(Matcher matcher) throws Exception {
-        String username = matcher.group("username").toLowerCase().replaceAll("\"", "");
+        String username = matcher.group("username").replaceAll("\"", "");
         String password = matcher.group("password");
         String status = matcher.group("status");
         if (Player.getPlayerByUsername(username) == null) return USER_DOES_NOT_EXIST.getMessage();
@@ -231,6 +231,7 @@ public class LoginController {
         SignUpMessages signUpMessage = checkPassword(password, passwordConfirm);
         if (!signUpMessage.equals(SignUpMessages.PASSWORD_STRONG)) return signUpMessage;
         Player.getCurrentPlayer().setPassword(password);
+        Player.savePlayers();
         return SignUpMessages.PASSWORD_CHANGED;
     }
 

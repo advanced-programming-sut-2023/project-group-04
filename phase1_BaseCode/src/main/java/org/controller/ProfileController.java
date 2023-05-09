@@ -23,10 +23,12 @@ public class ProfileController {
 
     public void setUsername(String username) {
         Player.getCurrentPlayer().setUsername(username);
+        Player.savePlayers();
     }
 
     public void setPassword(String password) {
         Player.getCurrentPlayer().setPassword(password);
+        Player.savePlayers();
     }
 
     public ProfileMessages changeNickname(Matcher matcher) {
@@ -36,6 +38,7 @@ public class ProfileController {
             return ProfileMessages.EMPTY_FIELD;
         }
         Player.getCurrentPlayer().setNickname(nickname);
+        Player.savePlayers();
         return ProfileMessages.CHANGE_SUCCESSFULLY;
     }
 
@@ -52,6 +55,7 @@ public class ProfileController {
         ProfileMessages profileMessages = checkEmail(matcher);
         if (profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY)) {
             Player.getCurrentPlayer().setEmail(email);
+            Player.savePlayers();
         }
         return profileMessages;
     }
@@ -66,10 +70,12 @@ public class ProfileController {
 
     public void setSlogan(String slogan) {
         Player.getCurrentPlayer().setSlogan(slogan);
+        Player.savePlayers();
     }
 
     public ProfileMessages removeSlogan() {
         Player.getCurrentPlayer().setSlogan(null);
+        Player.savePlayers();
         return ProfileMessages.CHANGE_SUCCESSFULLY;
     }
 
