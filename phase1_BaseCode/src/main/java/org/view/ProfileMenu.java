@@ -62,8 +62,10 @@ public class ProfileMenu {
             else if (ProfileCommands.getMatcher(input, ProfileCommands.DISPLAY_HIGH_SCORE) != null)
                 System.out.println(Menu.getProfileController().highScore());
 
-            else if (ProfileCommands.getMatcher(input, ProfileCommands.BACK) != null)
+            else if (ProfileCommands.getMatcher(input, ProfileCommands.BACK) != null) {
+                System.out.println("You are in main menu now!");
                 return;
+            }
             else System.out.println("Invalid command");
         }
     }

@@ -8,7 +8,8 @@ public enum MapCommands {
             "(?=.*(?<down>down) (?<downNumber>\\d*))?(?=.*(?<right>right) (?<rightNumber>\\d*))?" +
             "(?=.*(?<left>left) (?<leftNumber>\\d*))?(\\s+(up (\\d*))|(-down (\\d*))|" +
             "(right (\\d*))|(left (\\d*))?){0,4}\\s*/"),
-    SHOW_DETAILS("\\s*show\\s+details\\s+-x\\s+(?<xAsis>\\d+)\\s+-y(?<yAsis>\\d+)\\s*")
+    SHOW_DETAILS("\\s*show\\s+details\\s+-x\\s+(?<xAsis>\\d+)\\s+-y(?<yAsis>\\d+)\\s*"),
+    BACK("\\s*back\\s*"),
     ;
 
     private String regex;

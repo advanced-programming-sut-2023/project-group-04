@@ -22,7 +22,7 @@ public class LoginController {
         String username = matcher.group("username").replaceAll("\"", "");
         String password = matcher.group("password");
         String passwordConfirmation = matcher.group("passwordConfirm");
-        String email = matcher.group("email").toLowerCase();
+        String email = matcher.group("email").replaceAll("\"", "").toLowerCase();
         String nickname = matcher.group("nickname").replaceAll("\"", "");
         String slogan = "";
         if (matcher.group("slogan") != null)
@@ -108,7 +108,7 @@ public class LoginController {
         asciiArtGenerator.printTextArt(String.valueOf(randomCaptchaNumber), ASCIIArtGenerator.ART_SIZE);
         System.out.println("enter the Captcha code / if it is not readable type : <<change captcha>>");
         input = Menu.getScanner().nextLine();
-        if (input.equals("change captcha"))
+        if (input.matches("\\s*change\\s+captcha\\s*"))
             generateCaptcha();
         else {
             if (input.equals(String.valueOf(randomCaptchaNumber)))
@@ -124,8 +124,8 @@ public class LoginController {
 
     public SignUpMessages setSecurityQuestion(Matcher matcher) {
         int questionNumber = Integer.parseInt(matcher.group("questionNumber"));
-        String answer = matcher.group("answer");
-        String answerConfirm = matcher.group("answerConfirm");
+        String answer = matcher.group("answer").replaceAll("\"", "");
+        String answerConfirm = matcher.group("answerConfirm").replaceAll("\"", "");
         if (questionNumber > 3)
             return INVALID_QUESTION_NUMBER;
         else if (!answer.equals(answerConfirm))
@@ -167,6 +167,8 @@ public class LoginController {
     private SignUpMessages checkPassword(String password, String passwordConfirm) {
         if (password.equals("random"))
             return PASSWORD_STRONG;
+        else if (password.matches(".*\\s.*"))
+            return PASSWORD_INCORRECT_FORMAT;
         else if (password.length() < 6)
             return PASSWORD_LENGTH_WEAK;
         else if (!password.matches(".*[A-Z].*"))
@@ -212,8 +214,8 @@ public class LoginController {
     }
 
     public String getSecurityQuestion(String username) {
-        Player player = Player.getPlayerByUsername(username);
-        if (player == null) return SignUpMessages.USER_DOES_NOT_EXIST.getMessage();
+        Player player = Player.getPlayerByUsername(username.replaceAll("\"" , ""));
+        if (player == null) return USER_NOT_FOUND.getMessage();
         Player.setCurrentPlayer(player);
         return player.getSecurityQuestion();
     }
@@ -226,8 +228,8 @@ public class LoginController {
     }
 
     public SignUpMessages setNewPassword(Matcher matcher) {
-        String password = matcher.group("password");
-        String passwordConfirm = matcher.group("passwordConfirm");
+        String password = matcher.group("password").replaceAll("\"", "");
+        String passwordConfirm = matcher.group("passwordConfirm").replaceAll("\"", "");
         SignUpMessages signUpMessage = checkPassword(password, passwordConfirm);
         if (!signUpMessage.equals(SignUpMessages.PASSWORD_STRONG)) return signUpMessage;
         Player.getCurrentPlayer().setPassword(password);
@@ -243,7 +245,8 @@ public class LoginController {
     }
 
     public SignUpMessages finishRegister(Matcher pickQuestionMatcher) throws Exception {
-        String securityQuestion, securityAnswer = pickQuestionMatcher.group("answer");
+        String securityQuestion,
+                securityAnswer = pickQuestionMatcher.group("answer").replaceAll("\"", "");
         securityQuestion = giveSecurityQuestionWithNumber(pickQuestionMatcher);
         if (generateCaptcha().equals(CAPTCHA_CORRECT)) {
             Player player = Player.getCurrentPlayer();

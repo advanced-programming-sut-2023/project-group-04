@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class GameController {
-    //TODO : CREATE GAME MESSAGES AND REPLACE RETURN TYPE OF SOME FUNCTIONS;
     public String showPopularityFactors() {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         HashMap<String, Integer> popularityFactors = empire.getPopularity();

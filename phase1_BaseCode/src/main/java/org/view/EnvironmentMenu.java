@@ -8,7 +8,10 @@ import java.util.regex.Matcher;
 public class EnvironmentMenu {
     public void run() {
         System.out.println("You can change map environment now!");
-        if (!getWorkingMap()) return;
+        if (!getWorkingMap()) {
+            System.out.println("You are in main menu now!");
+            return;
+        }
         while (true) {
             String command = Menu.getScanner().nextLine();
             Matcher matcher;
@@ -24,6 +27,7 @@ public class EnvironmentMenu {
                 System.out.println(Menu.getEnvironmentController().setTree(matcher).getMessage());
             else if (MapMenuCommands.getMatcher(command, MapMenuCommands.BACK) != null) {
                 Menu.getEnvironmentController().save();
+                System.out.println("You are in main menu now!");
                 return;
             }else System.out.println("Invalid command");
         }

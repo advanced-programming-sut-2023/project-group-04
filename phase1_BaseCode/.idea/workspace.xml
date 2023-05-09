@@ -5,21 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3c26bbef-ef7d-476d-8606-22db4eb3873b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_passay_passay_1_6_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_1_2023_5_55_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_1_2023_5_55_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PLAYERS.json" beforeDir="false" afterPath="$PROJECT_DIR$/PLAYERS.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/ProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/person/SoldiersDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/person/SoldiersDictionary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/GameMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/GameMessages.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/MainMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/MainMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/MapCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/MapCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/SignUpMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/SignUpMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/EnvironmentMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/EnvironmentMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/GameMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/LoginMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/MapMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/MapMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/ProfileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/ProfileMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/ShopMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/ShopMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/TradeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/TradeMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +100,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/phase1_BaseCode$RegistrationTest.ic" NAME="RegistrationTest Coverage Results" MODIFIED="1683556983778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

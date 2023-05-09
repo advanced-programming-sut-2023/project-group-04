@@ -12,6 +12,7 @@ public enum MainMenuCommands {
             "-user\\s+(?<username>[^\"\\s]+|\"[^\"]+\")+"),
     //TODO fix start game regex keyhaaaaaaan!
     SHOW_MAP("\\s*show\\s+map\\s+-x\\s+(?<xAsis>\\d+)\\s+-y\\s+(?<yAsis>\\d+)\\s*"),
+    BACK("\\s*back\\s*"),
     ;
     private final String regex;
 
