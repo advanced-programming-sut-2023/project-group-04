@@ -9,15 +9,16 @@ public class Trade {
     private String resourceName;
     private int resourceAmount;
     private int price;
-    private String message;
+    private final String senderMessage;
+    private String receiverMessage;
     private int id;
 
-    public Trade(String resourceName, int resourceAmount, int price, String message, Empire tradeOwner) {
+    public Trade(String resourceName, int resourceAmount, int price, String senderMessage, Empire tradeOwner) {
         this.tradeOwner = tradeOwner;
         this.resourceName = resourceName;
         this.resourceAmount = resourceAmount;
         this.price = price;
-        this.message = message;
+        this.senderMessage = senderMessage;
         id = lastId;
         lastId++;
         allTrades.add(this);
@@ -35,8 +36,16 @@ public class Trade {
         return price;
     }
 
-    public String getMessage() {
-        return message;
+    public String getSenderMessage() {
+        return senderMessage;
+    }
+
+    public String getReceiverMessage() {
+        return receiverMessage;
+    }
+
+    public void setReceiverMessage(String receiverMessage) {
+        this.receiverMessage = receiverMessage;
     }
 
     public int getId() {

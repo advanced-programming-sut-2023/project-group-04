@@ -16,6 +16,7 @@ public class Empire {
     private final ArrayList<StorageBuilding> allStockPiles;
     private final ArrayList<StorageBuilding> allGranaries;
     private final ArrayList<StorageBuilding> allArmouries;
+    private ArrayList<Trade> allTrades;
 
     public Empire(Player owner) {
         this.owner = owner;
@@ -31,6 +32,7 @@ public class Empire {
         allStockPiles = new ArrayList<>();
         allGranaries = new ArrayList<>();
         allArmouries = new ArrayList<>();
+        allTrades = new ArrayList<>();
     }
 
     private void initializePopularity() {
@@ -122,6 +124,10 @@ public class Empire {
 
     public ArrayList<StorageBuilding> getAllArmouries() {
         return allArmouries;
+    }
+
+    public ArrayList<Trade> getAllTrades() {
+        return allTrades;
     }
 
     public void addArmoury(StorageBuilding armoury) {
