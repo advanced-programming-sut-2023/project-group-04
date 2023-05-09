@@ -44,7 +44,10 @@ public class GameController {
 
     public GameMessages changeFoodRate(Matcher matcher) {
         //TODO : ADD LOGIC TO CHECK FOOD RATE ; SET AUTO -2;
-        Game.getCurrentGame().getCurrentEmpire().setFoodRate(Integer.parseInt(matcher.group("foodRate")));
+        int foodRate = Integer.parseInt(matcher.group("foodRate"));
+        if (foodRate < -2 || foodRate > 2)
+            return GameMessages.INVALID_FOOD_RATE;
+        Game.getCurrentGame().getCurrentEmpire().setFoodRate(foodRate);
         return GameMessages.CHANGE_FOOD_RATE;
     }
 
@@ -55,7 +58,10 @@ public class GameController {
 
     public GameMessages changeTaxRate(Matcher matcher) {
         //TODO : ADD LOGIC TO CHECK TAX RATE ; SET AUTO 0;
-        Game.getCurrentGame().getCurrentEmpire().setTaxRate(Integer.parseInt(matcher.group("taxRate")));
+        int taxRate = Integer.parseInt(matcher.group("taxRate"));
+        if (taxRate < -3 || taxRate > 8)
+            return GameMessages.INVALID_TAX_RATE;
+        Game.getCurrentGame().getCurrentEmpire().setTaxRate(taxRate);
         return GameMessages.CHANGE_TAX_RATE;
     }
 
@@ -66,7 +72,10 @@ public class GameController {
 
     public GameMessages changeFearRate(Matcher matcher) {
         //TODO : ADD LOGIC TO CHECK FEAR RATE ; SET AUTO -2;
-        Game.getCurrentGame().getCurrentEmpire().setFearRate(Integer.parseInt(matcher.group("fearRate")));
+        int fearRate = Integer.parseInt(matcher.group("fearRate"));
+        if (fearRate < -5 || fearRate > 5)
+            return GameMessages.INVALID_FEAR_RATE;
+        Game.getCurrentGame().getCurrentEmpire().setFearRate(fearRate);
         return GameMessages.CHANGE_FEAR_RATE;
     }
 
@@ -132,7 +141,7 @@ public class GameController {
     }
 
     private void initBuildings(Building building) {
-        if (building.getBuildingDictionary().equals(BuildingsDictionary.SMALL_STONE_GATEHOUSE) |
+        if (building.getBuildingDictionary().equals(BuildingsDictionary.SMALL_STONE_GATEHOUSE) ||
                 building.getBuildingDictionary().equals(BuildingsDictionary.LARGE_STONE_GATEHOUSE))
             Game.getCurrentGame().getCurrentEmpire().activateTaxRate();
     }
