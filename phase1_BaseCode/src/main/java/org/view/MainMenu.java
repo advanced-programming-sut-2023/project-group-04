@@ -5,7 +5,9 @@ import org.view.CommandsEnum.MainMenuCommands;
 import java.util.regex.Matcher;
 
 public class MainMenu {
-    public void run() {
+    public MainMenu() {
+    }
+    public void run() throws Exception {
         String input;
         Matcher matcher;
         while (true) {

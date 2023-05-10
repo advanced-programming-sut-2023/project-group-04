@@ -101,7 +101,7 @@ public class LoginController {
         return WITHOUT_ERROR;
     }
 
-    private SignUpMessages generateCaptcha() throws Exception {
+    public SignUpMessages generateCaptcha() throws Exception {
         String input = null;
         ASCIIArtGenerator asciiArtGenerator = new ASCIIArtGenerator();
         int randomCaptchaNumber = (int) (Math.random() * (99999999 - 1000 + 1) + 1000);
