@@ -3,6 +3,9 @@ package org.view.CommandsEnum;
 public enum GameMessages {
     INVALID_POSITION("Position is invalid!"),
     UNSUITABLE("Ground texture isn't suitable for drop this building!"),
+    INVALID_FOOD_RATE("Please enter a <integer> number between [-2,2]!"),
+    INVALID_TAX_RATE("Please enter a <integer> number between [-3,8]!"),
+    INVALID_FEAR_RATE("Please enter a <integer> number between [-5,5]!"),
     EXISTENCE_BUILDING("A building already exist in this coordinates!"),
     BUILDING_NOT_EXIST("There isn't any building in this coordinates!"),
     NOT_OWNING_THE_BUILDING("You don't own this building!"),
@@ -14,7 +17,12 @@ public enum GameMessages {
     INVALID_COMMUTING("You can't commute in this area!"),
     SET_SUCCESSFUL("Setting building was successful!"),
     CAN_NOT_REPAIR("You can't repair this building!"),
-
+    CHANGE_FOOD_RATE("Food rate changed successfully!"),
+    CHANGE_TAX_RATE("Tax rate changed successfully!"),
+    CHANGE_FEAR_RATE("Fear rate changed successfully!"),
+    INCORRECT_BUILDING_TYPE("Building type is incorrect!"),
+    SUCCESSFUL_DROP("building dropped successfully!"),
+    SUCCESSFUL_REPAIR("Repairing was successfully!"),
     ;
 
     private final String message;

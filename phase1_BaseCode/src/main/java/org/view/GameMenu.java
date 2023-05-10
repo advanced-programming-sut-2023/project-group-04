@@ -19,6 +19,8 @@ public class GameMenu {
                     System.out.println("You successfully entered \"Map Menu\"");
                     new MapMenu().run();
                 }
+            } else {
+                System.out.println("Invalid command!");
             }
         }
     }

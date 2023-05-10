@@ -34,14 +34,14 @@ public class LoginMenu {
         //TODO: handle random password
         String output = Menu.getLoginController().getSecurityQuestion(username);
         System.out.println(output);
-        if (!output.equals(SignUpMessages.USER_DOES_NOT_EXIST.getMessage())) {
+        if (!output.equals(SignUpMessages.USER_NOT_FOUND.getMessage())) {
             while (true) {
                 String securityAnswer = Menu.getScanner().nextLine();
                 if (SignUpCommands.getMatcher(securityAnswer, SignUpCommands.BACK) != null) {
                     System.out.println("You are in login menu now!");
                     return;
                 }
-                output = Menu.getLoginController().checkSecurityAnswer(securityAnswer);
+                output = Menu.getLoginController().checkSecurityAnswer(securityAnswer.replaceAll("\"", ""));
                 System.out.println(output);
                 if (!output.contains(SignUpMessages.ANSWER_DOES_NOT_MATCH.getMessage())) {
                     while (true) {

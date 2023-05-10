@@ -46,9 +46,13 @@ public class GameController {
         return foods;
     }
 
-    public String changeFoodRate(Matcher matcher) {
-        Game.getCurrentGame().getCurrentEmpire().setFoodRate(Integer.parseInt(matcher.group("foodRate")));
-        return "Food rate changed successfully";
+    public GameMessages changeFoodRate(Matcher matcher) {
+        //TODO : ADD LOGIC TO CHECK FOOD RATE ; SET AUTO -2;
+        int foodRate = Integer.parseInt(matcher.group("foodRate"));
+        if (foodRate < -2 || foodRate > 2)
+            return GameMessages.INVALID_FOOD_RATE;
+        Game.getCurrentGame().getCurrentEmpire().setFoodRate(foodRate);
+        return GameMessages.CHANGE_FOOD_RATE;
     }
 
     public String showFoodRate() {
@@ -56,9 +60,13 @@ public class GameController {
         return "your food rate is : <<" + empire.getFoodRate() + ">>\n";
     }
 
-    public String changeTaxRate(Matcher matcher) {
-        Game.getCurrentGame().getCurrentEmpire().setTaxRate(Integer.parseInt(matcher.group("taxRate")));
-        return "Tax rate changed successfully";
+    public GameMessages changeTaxRate(Matcher matcher) {
+        //TODO : ADD LOGIC TO CHECK TAX RATE ; SET AUTO 0;
+        int taxRate = Integer.parseInt(matcher.group("taxRate"));
+        if (taxRate < -3 || taxRate > 8)
+            return GameMessages.INVALID_TAX_RATE;
+        Game.getCurrentGame().getCurrentEmpire().setTaxRate(taxRate);
+        return GameMessages.CHANGE_TAX_RATE;
     }
 
     public String showTaxRate() {
@@ -66,9 +74,13 @@ public class GameController {
         return "your tax rate is : <<" + empire.getTaxRate() + ">>\n";
     }
 
-    public String changeFearRate(Matcher matcher) {
-        Game.getCurrentGame().getCurrentEmpire().setFearRate(Integer.parseInt(matcher.group("fearRate")));
-        return "Fear rate changed successfully";
+    public GameMessages changeFearRate(Matcher matcher) {
+        //TODO : ADD LOGIC TO CHECK FEAR RATE ; SET AUTO -2;
+        int fearRate = Integer.parseInt(matcher.group("fearRate"));
+        if (fearRate < -5 || fearRate > 5)
+            return GameMessages.INVALID_FEAR_RATE;
+        Game.getCurrentGame().getCurrentEmpire().setFearRate(fearRate);
+        return GameMessages.CHANGE_FEAR_RATE;
     }
 
     public String showFearRate() {
@@ -76,25 +88,25 @@ public class GameController {
         return "your fear rate is : <<" + empire.getFearRate() + ">>\n";
     }
 
-    public String dropBuilding(Matcher matcher) {
-        //TODO: STRUCTURAL BUILDINGS MUST HAVE A DIRECTION FIELD....DIRECTION MUST BE OPTION FIELD IN DROP BUILDING
+    public GameMessages dropBuilding(Matcher matcher) {
+        //TODO: STRUCTURAL BUILDINGS MUST HAVE A DIRECTION FIELD....DIRECTION MUST BE OPTION FIELD IN DROPBUILDING
         //TODO: CHANGE RETURN TYPE AND RETURNS -----> **ABOLFAZL**
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         String buildingName = matcher.group("type");
         //todo: handle direction
-        if (!checkCoordinates(x, y)) return "incorrect coordinates!";
+        if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
         if (Game.getCurrentGame().getMapCellByAddress(x, y).getBuilding() != null)
-            return "a building already exist in this place!";
+            return GameMessages.EXISTENCE_BUILDING;
         if (BuildingsDictionary.getDictionaryByName(buildingName) == null)
-            return "Incorrect building type!";
-        //TODO: CHECK GROUND TEXTURE VALIDATION
+            return GameMessages.INCORRECT_BUILDING_TYPE;
+        //TODO: CHECK GROUND TEXTURE
         return createBuilding(empire, x, y, "", buildingName);//todo: handle direction
         //TODO: DRAW BRIDGE ONLY CAN BE PLACED IN FRONT OF GATEHOUSES
     }
 
-    private String createBuilding(Empire empire, int x, int y, String direction, String buildingName) {
+    private GameMessages createBuilding(Empire empire, int x, int y, String direction, String buildingName) {
         ProductiveBuildingsDictionary productiveBuildingDictionary;
         StorageBuildingsDictionary storageBuildingDictionary;
         StructuralBuildingsDictionary structuralBuildingDictionary;
@@ -127,10 +139,10 @@ public class GameController {
             prices = buildingDictionary.getPrices();
             building = new Building(empire, buildingDictionary, mapCell);
         }
-        if (!buyBuilding(empire, prices)) return "not enough resource to build!";
-        mapCell.setBuilding(building);
+        if (!buyBuilding(empire, prices)) return GameMessages.NOT_ENOUGH_RESOURCE;
+        Game.getCurrentGame().getMapCellByAddress(x, y).setBuilding(building);
         initBuildings(building);
-        return "building dropped successfully";
+        return GameMessages.SUCCESSFUL_DROP;
     }
 
     private void initBuildings(Building building) {
@@ -166,18 +178,18 @@ public class GameController {
         if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
         Building building = Game.getCurrentGame().getMapCellByAddress(x, y).getBuilding();
         if (building == null)
-            return null;
-        if (!building.getBuildingOwner().equals(Game.getCurrentGame().getCurrentEmpire()))
-            return null;
+            return GameMessages.BUILDING_NOT_EXIST;
+        if (!building.getBuildingOwner().equals(Game.getCurrentGame().getCurrentEmpire().getOwner()))
+            return GameMessages.NOT_OWNING_THE_BUILDING;
         Game.getCurrentGame().setSelectedBuilding(building);
         return GameMessages.SET_SUCCESSFUL;
     }
 
-    public String repair(Matcher matcher) {
+    public GameMessages repair(Matcher matcher) {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         Building selectedBuilding = Game.getCurrentGame().getSelectedBuilding();
         if (!selectedBuilding.getType().equals(BuildingType.CASTLE))
-            return null;
+            return GameMessages.CAN_NOT_REPAIR;
         HashMap<String, Integer> requirementMaterial = new HashMap<>();
         HashMap<String, Integer> prices = selectedBuilding.getPrices();
         int currentHp = selectedBuilding.getCurrentHp();
@@ -185,9 +197,9 @@ public class GameController {
         float requirementPercentage = (float) (currentHp / basicHp);
         for (String key : prices.keySet())
             requirementMaterial.put(key, (int) (prices.get(key) * requirementPercentage));
-        if (!buyBuilding(empire, requirementMaterial)) return "not enough resource to repair!";
+        if (!buyBuilding(empire, requirementMaterial)) return GameMessages.NOT_ENOUGH_RESOURCE;
         selectedBuilding.repair();
-        return "success!";
+        return GameMessages.SUCCESSFUL_REPAIR;
     }
 
     public String createUnit(Matcher matcher) {

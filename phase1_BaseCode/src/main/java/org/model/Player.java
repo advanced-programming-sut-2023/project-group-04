@@ -7,6 +7,7 @@ import org.model.map.Map;
 
 import java.io.FileWriter;
 import java.io.Reader;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -55,12 +56,15 @@ public class Player {
         try {
             Gson gson = new Gson();
             Reader reader = Files.newBufferedReader(Paths.get("PLAYERS.json"));
-            JsonArray allPlayersJson = gson.fromJson(reader, JsonArray.class);
             ArrayList<Player> allPlayers = new ArrayList<>();
-            if (allPlayersJson != null)
-                for(JsonElement player : allPlayersJson)
-                        allPlayers.add(gson.fromJson(player,Player.class));
-            Player.allPlayers = allPlayers;
+                    JsonArray jsonArray = gson.fromJson(reader, JsonArray.class);
+            if (jsonArray != null)
+            {
+                for (JsonElement jsonElement : jsonArray) {
+                    allPlayers.add(gson.fromJson(jsonElement,Player.class));
+                }
+                Player.allPlayers = allPlayers;
+            }
             reader.close();
         } catch (Exception ex) {
             ex.printStackTrace();

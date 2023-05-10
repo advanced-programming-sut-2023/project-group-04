@@ -38,10 +38,6 @@ public class ShopMenu {
                         System.out.println(ShopMessages.CANCEL.getMessage());
                 }
             }
-
-            else if (ShopCommands.getMatcher(input, ShopCommands.BACK) != null)
-                return;
-
             else
                 System.out.println("Invalid command");
         }

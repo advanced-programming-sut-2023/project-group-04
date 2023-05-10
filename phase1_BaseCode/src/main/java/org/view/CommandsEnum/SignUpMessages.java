@@ -25,6 +25,8 @@ public enum SignUpMessages {
     PASSWORD_CHANGED("Your password successfully changed!"),
     CAPTCHA_CORRECT("CAPTCHA is correct"),
     WITHOUT_ERROR("Password haven't any error!"),
+    PASSWORD_INCORRECT_FORMAT("Password format is incorrect!"),
+    USER_NOT_FOUND("User not found!"),
     ;
 
     private final String message;
