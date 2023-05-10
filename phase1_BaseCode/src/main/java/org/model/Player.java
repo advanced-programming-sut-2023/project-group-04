@@ -3,6 +3,7 @@ package org.model;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import org.model.map.Map;
 
 import java.io.FileWriter;
 import java.io.Reader;
@@ -22,7 +23,7 @@ public class Player {
     private String securityAnswer;
     private String slogan;
     private int score;
-    private ArrayList<Map> maps;
+    private final ArrayList<Map> maps;
 
     private static int numberOfAttempts = 0;
 
@@ -166,9 +167,9 @@ public class Player {
         return currentPlayer;
     }
 
-    public Map getMapById(int id) {
+    public Map getMapByName(String name) {
         for (Map map1 : maps)
-            if (map1.getId() == id)
+            if (map1.getMapName().equals(name))
                 return map1;
         return null;
     }

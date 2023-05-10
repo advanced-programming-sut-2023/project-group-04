@@ -1,55 +1,54 @@
-package org.model;
+package org.model.map;
+
+import org.model.person.Soldier;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Map {
     private static final String[] allGroundTextures = {"GROUND", "SANDY_GROUND", "STONE_GROUND", "IRON_GROUND", "GRASSLAND",
             "LOW_MEADOW", "HIGH_MEADOW", "OIL", "PLAIN", "LOW_WATER", "RIVER", "SMALL_POND", "LARGE_POND", "BEACH", "SEA"};
     private static final String[] allTrees = {"LITTLE_CHERRY", "LARGE_CHERRY", "OLIVE", "COCONUT", "DATE"};
+    private static final String[] availableColors = {"red", "green", "blue", "yellow", "purple","orange"};
+    private ArrayList<String> allColors = new ArrayList<>();
     private static Map currentMap;
-    private int id;
-    private final String[][] mapTexture;
-    private final String[][] mapTrees;
+    private final String mapName;
+    private final MapTile[][] map;
 
-    public Map(int id, int mapSize) {
+    public Map(String mapName, int mapSize) {
         currentMap = this;
-        this.mapTexture = new String[mapSize][mapSize];
+        this.mapName = mapName;
+        this.map = new MapTile[mapSize][mapSize];
         for (int i = 0; i < mapSize; i++)
             for (int j = 0; j < mapSize; j++)
-                mapTexture[i][j] = "GROUND";
-        this.mapTrees = new String[mapSize][mapSize];
-        for (int i = 0; i < mapSize; i++)
-            for (int j = 0; j < mapSize; j++)
-                mapTrees[i][j] = null;
+                map[i][j] = new MapTile();
     }
 
     public static Map getCurrentMap() {
         return currentMap;
     }
 
-    public String[][] getMap() {
-        return mapTexture;
+    public static void setCurrentMap(Map currentMap) {
+        Map.currentMap = currentMap;
     }
 
-    public String getBlockTexture(int x, int y) {
-        return mapTexture[x][y];
+    public String getMapName() {
+        return mapName;
     }
 
     public int getMapSize() {
-        return this.mapTexture.length;
+        return map.length;
     }
 
-    public int getId() {
-        return id;
+    public MapTile getMapTile(int i, int j) {
+        return map[i][j];
     }
 
-    public void setBlockTexture(int x, int y, String groundTexture) {
-        this.mapTexture[x-1][y-1] = groundTexture;
+    public ArrayList<String> getAllColors() {
+        return allColors;
     }
 
-    public static void setCurrentMap(Map currentMap) {
-        Map.currentMap = currentMap;
+    public void addUsedColor(String color) {
+        this.allColors.add(color);
     }
 
     public static boolean validGroundTexture(String groundTexture) {
@@ -66,7 +65,11 @@ public class Map {
         return false;
     }
 
-    public void setTree(int x, int y, String treeType) {
-        this.mapTrees[x-1][y-1] = treeType;
+    public static boolean isValidColor(String color) {
+        for (String colorName : availableColors)
+            if (colorName.equals(color))
+                return true;
+        return false;
     }
+
 }

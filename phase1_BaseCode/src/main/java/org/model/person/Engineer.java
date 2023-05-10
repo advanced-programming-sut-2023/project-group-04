@@ -8,13 +8,14 @@ import org.model.buildings.Building;
 public class Engineer extends Person{
 
     private static final int  requiredGold = 0;
+    private static final int hp = 0;
+    private static final int speed = 0;
     private Building buildingWorkPlace;
     private Machine machineWorkPlace;
-
     private boolean oil;
 
     public Engineer(Empire personOwner, MapCell mapCell) {
-        super(personOwner, 0, mapCell);
+        super(personOwner, hp, mapCell, speed);
         this.buildingWorkPlace = null;
         this.machineWorkPlace = null;
         this.oil = false;

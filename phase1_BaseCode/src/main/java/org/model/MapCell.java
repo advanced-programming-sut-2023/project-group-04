@@ -12,21 +12,24 @@ public class MapCell {
     private final int xAxis;
     private final int yAxis;
     private final String groundTexture;
+    private String tree;
     private Building building;
     private final ArrayList<Person> people;
     private Machine machine;
     private boolean tunnel;
     private boolean oil;
-    private String tree;
 
-    public MapCell(int x, int y, String groundTexture) {
+
+    public MapCell(int x, int y, String groundTexture, String tree) {
         this.xAxis = x;
         this.yAxis = y;
         this.groundTexture = groundTexture;
-        this.people = new ArrayList<>();
+        this.tree = tree;
+        this.building = null;
+        this.people = null;
+        this.machine = null;
         this.tunnel = false;
         this.oil = false;
-        this.tree = null;
     }
     public int getX() {
         return xAxis;
@@ -70,6 +73,10 @@ public class MapCell {
 
     public void addPeople(Person person) {
         this.people.add(person);
+    }
+
+    public void removePeople(Person person) {
+        this.people.remove(person);
     }
 
     public void setMachine(Machine machine) {

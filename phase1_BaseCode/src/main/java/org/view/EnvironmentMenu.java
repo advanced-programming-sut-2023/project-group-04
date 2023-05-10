@@ -22,6 +22,12 @@ public class EnvironmentMenu {
                 System.out.println(Menu.getEnvironmentController().setRock(matcher).getMessage());
             else if ((matcher = MapMenuCommands.getMatcher(command, MapMenuCommands.DROP_TREE)) != null)
                 System.out.println(Menu.getEnvironmentController().setTree(matcher).getMessage());
+            else if ((matcher = MapMenuCommands.getMatcher(command, MapMenuCommands.SET_HEADQUARTER)) != null)
+                System.out.println(Menu.getEnvironmentController().setHeadQuarter(matcher).getMessage());
+            else if ((matcher = MapMenuCommands.getMatcher(command, MapMenuCommands.DROP_UNIT)) != null)
+                System.out.println(Menu.getEnvironmentController().dropUnit(matcher).getMessage());
+            else if ((matcher = MapMenuCommands.getMatcher(command, MapMenuCommands.DROP_BUILDING)) != null)
+                System.out.println(Menu.getEnvironmentController().dropBuilding(matcher).getMessage());
             else if (MapMenuCommands.getMatcher(command, MapMenuCommands.BACK) != null) {
                 Menu.getEnvironmentController().save();
                 return;
@@ -39,7 +45,7 @@ public class EnvironmentMenu {
                 System.out.println(mapMenuMessage.getMessage());
                 if (mapMenuMessage.equals(MapMenuMessages.MAP_CREATION_SUCCESSFUL)) return true;
             } else if ((matcher = MapMenuCommands.getMatcher(command, MapMenuCommands.CUSTOM_EXITING_MAP)) != null) {
-                MapMenuMessages mapMenuMessage = Menu.getEnvironmentController().chooseExistingMap(matcher);
+                MapMenuMessages mapMenuMessage = Menu.getEnvironmentController().customExistingMap(matcher);
                 System.out.println(mapMenuMessage.getMessage());
                 if (mapMenuMessage.equals(MapMenuMessages.MAP_SELECT_SUCCESSFUL)) return true;
             } else if (MapMenuCommands.getMatcher(command, MapMenuCommands.BACK) != null) return false;

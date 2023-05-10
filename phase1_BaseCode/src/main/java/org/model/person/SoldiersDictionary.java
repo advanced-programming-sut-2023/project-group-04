@@ -45,6 +45,11 @@ public enum SoldiersDictionary {
         this.fireRange = fireRange;
         this.soldierName = soldierName;
     }
+
+    public String getName() {
+        return soldierName;
+    }
+
     public int getOffensivePower() {
         return offensivePower;
     }
@@ -87,6 +92,8 @@ public enum SoldiersDictionary {
                 return soldierDictionary;
         return null;
     }
+
+
 
     public static ArrayList<String> getAllSoldierTypes() {
          ArrayList<String> allSoldiersType = new ArrayList<>();

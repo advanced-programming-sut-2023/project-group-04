@@ -1,21 +1,16 @@
 package org.model.person;
 
 import org.model.Empire;
-import org.model.Map;
 import org.model.MapCell;
-import org.model.Player;
-
-import java.util.ArrayList;
 
 public class Soldier extends Person {
 
     private SoldiersDictionary soldiersDictionary;
     private int mode;
-
     private MapCell aim;
 
     public Soldier(Empire personOwner, SoldiersDictionary soldiersDictionary, MapCell mapCell) {
-        super(personOwner, soldiersDictionary.getHp(), mapCell);
+        super(personOwner, soldiersDictionary.getHp(), mapCell, soldiersDictionary.getSpeed());
     }
 
     public SoldiersDictionary getSoldiersDictionary() {
@@ -32,10 +27,6 @@ public class Soldier extends Person {
 
     public int getDefensivePower() {
         return soldiersDictionary.getDefensivePower();
-    }
-
-    public int getSpeed() {
-        return soldiersDictionary.getSpeed();
     }
 
     public int getFireRange() {

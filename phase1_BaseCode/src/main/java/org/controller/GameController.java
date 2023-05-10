@@ -2,15 +2,16 @@ package org.controller;
 
 import org.model.Empire;
 import org.model.Game;
-import org.model.Map;
+import org.model.map.Map;
 import org.model.MapCell;
 import org.model.buildings.*;
 import org.model.person.*;
-import org.model.person.Person;
 import org.view.CommandsEnum.GameMessages;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Random;
 import java.util.regex.Matcher;
 
 public class GameController {
@@ -46,7 +47,6 @@ public class GameController {
     }
 
     public String changeFoodRate(Matcher matcher) {
-        //TODO : ADD LOGIC TO CHECK FOOD RATE ; SET AUTO -2;
         Game.getCurrentGame().getCurrentEmpire().setFoodRate(Integer.parseInt(matcher.group("foodRate")));
         return "Food rate changed successfully";
     }
@@ -57,7 +57,6 @@ public class GameController {
     }
 
     public String changeTaxRate(Matcher matcher) {
-        //TODO : ADD LOGIC TO CHECK TAX RATE ; SET AUTO 0;
         Game.getCurrentGame().getCurrentEmpire().setTaxRate(Integer.parseInt(matcher.group("taxRate")));
         return "Tax rate changed successfully";
     }
@@ -68,7 +67,6 @@ public class GameController {
     }
 
     public String changeFearRate(Matcher matcher) {
-        //TODO : ADD LOGIC TO CHECK FEAR RATE ; SET AUTO -2;
         Game.getCurrentGame().getCurrentEmpire().setFearRate(Integer.parseInt(matcher.group("fearRate")));
         return "Fear rate changed successfully";
     }
@@ -226,8 +224,10 @@ public class GameController {
             if (removeAblePeople.size() == count) break;
         }
         if (removeAblePeople.size() < count) return false;
-        for (Person person : removeAblePeople)
+        for (Person person : removeAblePeople) {
+            person.getMapCell().removePeople(person);
             empire.removePerson(person);
+        }
         return true;
     }
 
@@ -244,7 +244,9 @@ public class GameController {
         buySoldierRequirement(empire, gold, weapon, armour, count);
         for (int i = 0; i < count; i++) {
             MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
-            mapCell.addPeople(new Soldier(empire, soldierDictionary, mapCell));
+            if (soldierDictionary.equals(SoldiersDictionary.ASSASSIN))
+                mapCell.addPeople(new Assassins(empire, mapCell));
+            else mapCell.addPeople(new Soldier(empire, soldierDictionary, mapCell));
         }
         return "create unit successful";
     }
@@ -312,8 +314,15 @@ public class GameController {
         if (!checkCoordinates(x, y)) return "incorrect coordinate";
         ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
         if (unit == null || unit.size() == 0) return "no unit or empty unit selected!";
-        for (Person person : unit)
+        MapCell destination = Game.getCurrentGame().getMapCellByAddress(x, y);
+        if (destination.getGroundTexture().contains("ROCK") || destination.getGroundTexture().equals("SEA") ||
+                destination.getGroundTexture().equals("RIVER") || destination.getGroundTexture().equals("LOW_WATER"))
+            return "selected destination is on water or rock!";
+        for (Person person : unit) {
+            if (person instanceof Soldier) ((Soldier) person).setAim(null);
             person.setCurrentDestination(Game.getCurrentGame().getMapCellByAddress(x, y));
+            Game.getCurrentGame().addMoveAblePerson(person);
+        }
         return "move troop successful";
     }
 
@@ -326,8 +335,10 @@ public class GameController {
         ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
         if (unit == null || unit.size() == 0) return "no unit or empty unit selected!";
         for (Person person : unit) {
+            if (person instanceof Soldier) ((Soldier) person).setAim(null);
             person.setCurrentDestination(Game.getCurrentGame().getMapCellByAddress(x1, y1));
             person.setNextDestination(Game.getCurrentGame().getMapCellByAddress(x2, y2));
+            Game.getCurrentGame().addMoveAblePerson(person);
         }
         return "patrol unit successful";
     }
@@ -394,9 +405,13 @@ public class GameController {
                 return "selected unit is not soldier!";
         MapCell aimMapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
         for (Person person : aimMapCell.getPeople())
-            if (!person.getPersonOwner().equals(Game.getCurrentGame().getCurrentEmpire()))
-                for (Person person1 : unit)
+            if (!person.getPersonOwner().equals(Game.getCurrentGame().getCurrentEmpire())) {
+                for (Person person1 : unit) {
+                    person.setCurrentDestination(null);
                     ((Soldier) person).setAim(aimMapCell);
+                }
+                break;
+            }
         return "attack set successful!";
     }
 
@@ -453,17 +468,170 @@ public class GameController {
         return null;
     }
 
-    public String disbandUnit(Matcher matcher) {
-        return null;
+    public String disbandUnit() {
+        ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
+        if (unit == null || unit.size() == 0) return "no unit or empty unit selected!";
+        MapCell mapCell = unit.get(0).getMapCell();
+        for (Person person : unit) {
+            mapCell.removePeople(person);
+            mapCell.addPeople(new Person(Game.getCurrentGame().getCurrentEmpire(), mapCell));
+        }
+        return "unit disbanded!";
     }
 
-    public String nextTurn() {
-        //next turn start
-        return null;
+    public void nextTurn() {
+        moveAndPatrolTroops();
+        fights();
+        updateRates();
+        updateThingsWithRate();
+        buildingOperations();
+        checkEndGame();
+    }
+
+
+    private void moveAndPatrolTroops() {
+        for (Person person : Game.getCurrentGame().getToMovePeople()) {
+            if (person.getCurrentDestination() != null) {
+                ArrayList<MapCell> path = routing(person.getMapCell(), person.getCurrentDestination());
+                if (path == null) continue;
+                int moveTileNumber = Math.min(person.getSpeed(), path.size() - 1);
+                MapCell goal = path.get(moveTileNumber);
+                for (int i = 0; i < moveTileNumber; i++) {
+                    //todo : handle the traps //todo: gate must be handle at first
+                }
+                goal.addPeople(person);
+                person.changePosition(goal);
+                path.get(0).removePeople(person);
+                if (person.getMapCell().equals(goal)) {
+                    if (person.getNextDestination() != null) person.swapDestinations();
+                    else {
+                        person.setCurrentDestination(null);
+                        Game.getCurrentGame().removeMovedPerson(person);
+                    }
+                }
+            }
+        }
+    }
+
+    private void fights() {
+        for (int i = 0; i < Game.getCurrentGame().getMapSize(); i++) {
+            for (MapCell mapCell : Game.getCurrentGame().getMap()[i]) {
+                if (mapCell.getPeople() != null) {
+                    for (Empire empire : Game.getCurrentGame().getAllEmpires()) {
+                        ArrayList<Soldier> thisEmpire = new ArrayList<>();
+                        ArrayList<Soldier> otherEmpires = new ArrayList<>();
+                        for (Person person : mapCell.getPeople()) {
+                            if (person instanceof Soldier) {
+                                Soldier soldier = (Soldier) person;
+                                int index = new Random().nextInt(otherEmpires.size());
+                                if (person.getPersonOwner().equals(empire)) thisEmpire.add(soldier);
+                                else otherEmpires.add(index, soldier);
+                            }
+                        }
+                        for (int j = 0; j < thisEmpire.size(); j++) {
+                            int damage = thisEmpire.get(j).getDefensivePower() - otherEmpires.get(j).getDefensivePower();
+                            if (damage > 0) otherEmpires.get(j).damagePerson(damage);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void updateRates() {
+        for (Empire empire : Game.getCurrentGame().getAllEmpires()) {
+            //food rate
+            int availableFood = 0;
+            for (String food : empire.getFood().keySet()) availableFood += empire.getFoodAmount(food);
+            int requiredFood = (int) ((empire.getFoodRate() + 2) * empire.getPopulation().size() / 2);
+            if (availableFood < requiredFood) empire.setFoodRate(-2);
+            //tax rate
+            if (empire.getTaxRate() < 0) {
+                int totalTax = (int) ((empire.getTaxRate() * (-0.2) + 0.4) * empire.getPopulation().size());
+                if (empire.getResourceAmount("gold") < totalTax) empire.setTaxRate(0);
+            }
+        }
+    }
+
+    private void updateThingsWithRate() {
+        for (Empire empire : Game.getCurrentGame().getAllEmpires()) {
+            //food
+            int foodTypes = 0;
+            for (String food : empire.getFood().keySet())
+                if (empire.getFood().get(food) != 0) foodTypes++;
+            empire.changePopularity("food", foodTypes - 1);
+            empire.changePopularity("food", 4 * empire.getFoodRate());
+            int requiredFood = (int) ((empire.getFoodRate() + 2) * empire.getPopulation().size() / 2);
+            while (requiredFood > 0) {
+                for (String food : empire.getFood().keySet()) {
+                    if (empire.getFoodAmount(food) > 0) {
+                        empire.changeFoodAmount(food, -1);
+                        requiredFood--;
+                    }
+                }
+            }
+            //tax
+            int taxRate = empire.getTaxRate();
+            int totalTax = (int) ((Math.abs(taxRate) * 0.2 + 0.4) * empire.getPopulation().size());
+            if (taxRate < 0) totalTax *= (-1);
+            empire.changeResourceAmount("gold", totalTax);
+            int totalPopularity = (-2) * taxRate + (totalTax <= 0 ? 1 : 0);
+            empire.changePopularity("tax", totalPopularity);
+            //fear
+            empire.changePopularity("fear", -empire.getFearRate());
+            // religion
+            //todo : update popularity by buildings that add popularity
+        }
+    }
+
+    private void buildingOperations() {
+
+    }
+
+    private void checkEndGame() {
+
+    }
+
+    private boolean BFS(MapCell origin, MapCell destination, HashMap<MapCell, MapCell> predecessor) {
+        LinkedList<MapCell> queue = new LinkedList<MapCell>();
+        ArrayList<MapCell> visited = new ArrayList<>();
+        visited.add(origin);
+        queue.add(origin);
+        while (!queue.isEmpty()) {
+            MapCell currentNode = queue.remove();
+            int x = currentNode.getX();
+            int y = currentNode.getY();
+            MapCell[] neighbors = new MapCell[]{
+                    Game.getCurrentGame().getMapCellByAddress(x + 1, y),
+                    Game.getCurrentGame().getMapCellByAddress(x - 1, y),
+                    Game.getCurrentGame().getMapCellByAddress(x, y + 1),
+                    Game.getCurrentGame().getMapCellByAddress(x, y - 1)
+            };
+            for (MapCell nextNode : neighbors) {
+                if (nextNode.getBuilding() != null || nextNode.getGroundTexture().contains("ROCK") ||
+                        nextNode.getGroundTexture().equals("SEA")) continue;
+                if (!visited.contains(nextNode)) {
+                    visited.add(nextNode);
+                    predecessor.put(nextNode, currentNode);
+                    queue.add(nextNode);
+                    if (nextNode.equals(destination)) return true;
+                }
+            }
+        }
+        return false;
     }
 
     private ArrayList<MapCell> routing(MapCell origin, MapCell destination) {
-        return null;
+        HashMap<MapCell, MapCell> predecessor = new HashMap<>();
+        if (!BFS(origin, destination, predecessor)) return null;
+        ArrayList<MapCell> path = new ArrayList<>();
+        MapCell crawl = destination;
+        while (!crawl.equals(origin)) {
+            path.add(0, crawl);
+            crawl = predecessor.get(crawl);
+        }
+        path.add(0, origin);
+        return path;
     }
 
     private boolean checkCoordinates(int x, int y) {

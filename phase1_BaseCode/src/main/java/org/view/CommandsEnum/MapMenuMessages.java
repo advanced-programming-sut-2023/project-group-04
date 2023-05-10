@@ -14,9 +14,18 @@ public enum MapMenuMessages {
     INVALID_TREE_TYPE("Invalid tree type!"),
     SET_TREE_SUCCESSFUL("Tree dropped successfully!"),
     TREE_GROUND_TEXTURE_ERROR("You can't drop tree on this Tile (ground type not match)!"),
-    ROCK_GROUND_TEXTURE_ERROR("You can't drop rock on this Tile (ground type not match)!");
+    ROCK_GROUND_TEXTURE_ERROR("You can't drop rock on this Tile (ground type not match)!"), 
+    INVALID_COLOR("This color is invalid!"), 
+    USED_COLOR("Headquarter has been set for this color before!"), 
+    USED_TILE("Selected tile is in use!"), 
+    HEADQUARTER_SET("Headquarter set successful1"),
+    INVALID_SOLDIER_NUMBER("Soldiers count is invalid!"),
+    INVALID_SOLDIER_TYPE("Entered Soldier type is invalid!"),
+    DROP_UNIT_SUCCESS("Unit dropped successfully!"),
+    INVALID_BUILDING_TYPE("Entered building type is invalid!"),
+    DROP_BUILDING_SUCCESS("building dropped successfully!");
 
-    private String message;
+    private final String message;
     private MapMenuMessages(String message) {
         this.message = message;
     }

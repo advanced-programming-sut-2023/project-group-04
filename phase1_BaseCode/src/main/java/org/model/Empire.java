@@ -109,6 +109,14 @@ public class Empire {
         return food;
     }
 
+    public int getFoodAmount(String foodName) {
+        return this.food.get(foodName);
+    }
+
+    public void changeFoodAmount(String foodName, int amount) {
+        this.food.put(foodName, food.get(foodName) + amount);
+    }
+
     public void changeResourceAmount(String resource, int amount) {
         this.resources.put(resource, resources.get(resource) + amount);
     }
@@ -167,5 +175,9 @@ public class Empire {
 
     public void changeWeaponAndArmourAmount(String type, int count) {
 
+    }
+
+    public void changePopularity(String type, int number) {
+        popularity.put(type, popularity.get(type) + number);
     }
 }

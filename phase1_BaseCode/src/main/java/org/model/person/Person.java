@@ -1,24 +1,29 @@
 package org.model.person;
 
 import org.model.Empire;
-import org.model.Map;
 import org.model.MapCell;
-import org.model.Player;
-
-import java.util.ArrayList;
-import java.util.Objects;
 
 public class Person {
 
     private final Empire personOwner;
-    private final int hp;
+    private int hp;
     private MapCell mapCell;
     private MapCell currentDestination;
     private MapCell nextDestination;
+    private int speed;
 
-    public Person(Empire personOwner, int hp, MapCell mapCell) {
+    public Person(Empire personOwner, int hp, MapCell mapCell, int speed) {
         this.personOwner = personOwner;
         this.hp = hp;
+        this.mapCell = mapCell;
+        this.currentDestination = null;
+        this.nextDestination = null;
+        this.speed = speed;
+    }
+
+    public Person(Empire personOwner, MapCell mapCell) {
+        this.personOwner = personOwner;
+        this.hp = 0;
         this.mapCell = mapCell;
     }
 
@@ -46,6 +51,10 @@ public class Person {
         this.currentDestination = currentDestination;
     }
 
+    public MapCell getNextDestination() {
+        return nextDestination;
+    }
+
     public void setNextDestination(MapCell nextDestination) {
         this.nextDestination = nextDestination;
     }
@@ -54,5 +63,13 @@ public class Person {
         MapCell temp = nextDestination;
         nextDestination = currentDestination;
         currentDestination = temp;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void damagePerson(int hp) {
+        this.hp -= hp;
     }
 }

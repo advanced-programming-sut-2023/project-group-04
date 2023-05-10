@@ -1,7 +1,10 @@
 package org.controller;
 
-import org.model.Map;
+import org.model.buildings.BuildingsDictionary;
+import org.model.map.Map;
 import org.model.Player;
+import org.model.map.MapTile;
+import org.model.person.SoldiersDictionary;
 import org.view.CommandsEnum.MapMenuMessages;
 
 import java.util.Random;
@@ -9,17 +12,17 @@ import java.util.regex.Matcher;
 
 public class EnvironmentController {
     public MapMenuMessages createMap(Matcher matcher) {
-        int id = Integer.parseInt(matcher.group("mapId"));
+        String mapName = matcher.group("mapName");
         int size = Integer.parseInt(matcher.group("size"));
         if (size != 200 && size != 400) return MapMenuMessages.INVALID_SIZE;
-        Map map = new Map(id, size);
+        Map map = new Map(mapName, size);
         Player.getCurrentPlayer().addMap(map);
         return MapMenuMessages.MAP_CREATION_SUCCESSFUL;
     }
 
-    public MapMenuMessages chooseExistingMap(Matcher matcher) {
-        int id = Integer.parseInt(matcher.group("id"));
-        Map map = Player.getCurrentPlayer().getMapById(id);
+    public MapMenuMessages customExistingMap(Matcher matcher) {
+         String mapName = matcher.group("mapName");
+        Map map = Player.getCurrentPlayer().getMapByName(mapName);
         if (map == null) return MapMenuMessages.MAP_NOT_EXIST;
         Map.setCurrentMap(map);
         return MapMenuMessages.MAP_SELECT_SUCCESSFUL;
@@ -31,7 +34,7 @@ public class EnvironmentController {
         String type = matcher.group("type");
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
         if (!Map.validGroundTexture(type)) return MapMenuMessages.INVALID_GROUND_TEXTURE;
-        Map.getCurrentMap().setBlockTexture(x,y, type);
+        Map.getCurrentMap().getMapTile(x,y).setTexture(type);
         return MapMenuMessages.SET_TEXTURE_SUCCESSFUL;
     }
 
@@ -46,7 +49,7 @@ public class EnvironmentController {
         if (!Map.validGroundTexture(type)) return MapMenuMessages.INVALID_GROUND_TEXTURE;
         for (int i = x1; i < x2; i++)
             for (int j = y1; j < y2; j++)
-                Map.getCurrentMap().setBlockTexture(i, j, type);
+                Map.getCurrentMap().getMapTile(i,j).setTexture(type);
         return MapMenuMessages.SET_TEXTURE_SUCCESSFUL;
     }
 
@@ -54,7 +57,7 @@ public class EnvironmentController {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
-        Map.getCurrentMap().setBlockTexture(x,y, "GROUND");
+        Map.getCurrentMap().getMapTile(x,y).setTexture("GROUND");
         return MapMenuMessages.TILE_CLEAR_SUCCESSFUL;
     }
 
@@ -64,8 +67,9 @@ public class EnvironmentController {
         String direction = matcher.group("direction");
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
         if ((direction = getDirection(direction)) == null) return MapMenuMessages.INVALID_DIRECTION;
-        if (!Map.getCurrentMap().getBlockTexture(x,y).equals("GROUND")) return MapMenuMessages.ROCK_GROUND_TEXTURE_ERROR;
-        Map.getCurrentMap().setBlockTexture(x, y, "ROCK-"+direction);
+        if (!Map.getCurrentMap().getMapTile(x,y).getTexture().equals("GROUND"))
+            return MapMenuMessages.ROCK_GROUND_TEXTURE_ERROR;
+        Map.getCurrentMap().getMapTile(x,y).setTexture("ROCK-"+direction);
         return MapMenuMessages.ROCK_SET_SUCCESSFUL;
     }
 
@@ -76,8 +80,62 @@ public class EnvironmentController {
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
         if (!Map.validTreeType(type)) return MapMenuMessages.INVALID_TREE_TYPE;
         if (!checkValidTreeTexture(x,y)) return MapMenuMessages.TREE_GROUND_TEXTURE_ERROR;
-        Map.getCurrentMap().setTree(x, y, type);
+        Map.getCurrentMap().getMapTile(x,y).setTree(type);
         return MapMenuMessages.SET_TREE_SUCCESSFUL;
+    }
+
+    public MapMenuMessages setHeadQuarter(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        String color = matcher.group("color");
+        if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
+        if (!Map.isValidColor(color)) return MapMenuMessages.INVALID_COLOR;
+        if (Map.getCurrentMap().getAllColors().contains(color)) return MapMenuMessages.USED_COLOR;
+        MapTile mapTile = Map.getCurrentMap().getMapTile(x,y);
+        if (mapTile.isHeadQuarter() || mapTile.getBuilding() != null || mapTile.getSoldier() != null)
+            return MapMenuMessages.USED_TILE;
+        if (!mapTile.getTexture().equals("GROUND")) return MapMenuMessages.INVALID_GROUND_TEXTURE;
+        mapTile.setOwnerColor(color);
+        mapTile.setHeadQuarter();
+        return MapMenuMessages.HEADQUARTER_SET;
+    }
+
+    public MapMenuMessages dropUnit(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        String color = matcher.group("color");
+        String soldierType = matcher.group("type");
+        int count = Integer.parseInt(matcher.group("count"));
+        if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
+        if (!Map.isValidColor(color)) return MapMenuMessages.INVALID_COLOR;
+        MapTile mapTile = Map.getCurrentMap().getMapTile(x,y);
+        if (mapTile.isHeadQuarter() || mapTile.getBuilding() != null || mapTile.getSoldier() != null)
+            return MapMenuMessages.USED_TILE;
+        if (!mapTile.getTexture().equals("GROUND")) return MapMenuMessages.INVALID_GROUND_TEXTURE;
+        if (count <= 0) return MapMenuMessages.INVALID_SOLDIER_NUMBER;
+        if (SoldiersDictionary.getSoldierDictionaryByName(soldierType) == null)
+            return MapMenuMessages.INVALID_SOLDIER_TYPE;
+        mapTile.setOwnerColor(color);
+        mapTile.setSoldier(soldierType, count);
+        return MapMenuMessages.DROP_UNIT_SUCCESS;
+    }
+
+    public MapMenuMessages dropBuilding(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        String color = matcher.group("color");
+        String buildingType = matcher.group("type");
+        if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
+        if (!Map.isValidColor(color)) return MapMenuMessages.INVALID_COLOR;
+        MapTile mapTile = Map.getCurrentMap().getMapTile(x,y);
+        if (mapTile.isHeadQuarter() || mapTile.getBuilding() != null || mapTile.getSoldier() != null)
+            return MapMenuMessages.USED_TILE;
+        if (!mapTile.getTexture().equals("GROUND")) return MapMenuMessages.INVALID_GROUND_TEXTURE;
+        if (BuildingsDictionary.getDictionaryByName(buildingType) == null)
+            return MapMenuMessages.INVALID_BUILDING_TYPE;
+        mapTile.setOwnerColor(color);
+        mapTile.setBuilding(buildingType);
+        return MapMenuMessages.DROP_BUILDING_SUCCESS;
     }
 
     private boolean checkCoordinate(int x, int y) {
@@ -105,13 +163,12 @@ public class EnvironmentController {
     }
 
     private boolean checkValidTreeTexture(int x, int y) {
-        String texture = Map.getCurrentMap().getBlockTexture(x,y);
+        String texture = Map.getCurrentMap().getMapTile(x,y).getTexture();
         return texture.equals("GROUND") ||
                texture.equals("GRASSLAND") ||
                texture.equals("LOW_MEADOW") ||
                texture.equals("HIGH_MEADOW");
     }
-
 
     public void save() {
         Player.savePlayers();
