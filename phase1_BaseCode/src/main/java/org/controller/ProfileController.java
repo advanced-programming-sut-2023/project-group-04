@@ -74,7 +74,7 @@ public class ProfileController {
     }
 
     public ProfileMessages removeSlogan() {
-        Player.getCurrentPlayer().setSlogan(null);
+        Player.getCurrentPlayer().setSlogan("");
         Player.savePlayers();
         return ProfileMessages.CHANGE_SUCCESSFULLY;
     }

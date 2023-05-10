@@ -9,7 +9,7 @@ public class MainMenu {
 
     }
 
-    public void run() {
+    public void run() throws Exception {
         String input;
         Matcher matcher;
         while (true) {
