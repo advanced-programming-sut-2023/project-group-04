@@ -44,8 +44,7 @@ public class ProfileMenu {
                         if (!confirmPassword(password))
                             System.out.println(ProfileMessages.INCORRECT_CURRENT_PASSWORD.getMessage());
                         else System.out.println(ProfileMessages.CHANGE_SUCCESSFULLY.getMessage());
-                    }
-                    else System.out.println(ProfileMessages.CHANGING_PASSWORD_FAILED.getMessage());
+                    } else System.out.println(ProfileMessages.CHANGING_PASSWORD_FAILED.getMessage());
                 }
             } else if (ProfileCommands.getMatcher(input, ProfileCommands.DISPLAY_PROFILE) != null)
                 System.out.println(Menu.getProfileController().displayProfile());

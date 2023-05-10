@@ -30,16 +30,16 @@ public class ProfileController {
     }
 
     public ProfileMessages changeNickname(Matcher matcher) {
-        String nickname = removeQuotation(matcher.group("nickname"));
-
-        if (nickname.isEmpty()) {
+        if (matcher.group("nickname") == null)
             return ProfileMessages.EMPTY_FIELD;
-        }
+        String nickname = removeQuotation(matcher.group("nickname"));
         Player.getCurrentPlayer().setNickname(nickname);
         return ProfileMessages.CHANGE_SUCCESSFULLY;
     }
 
     public ProfileMessages changePassword(Matcher matcher) {
+        if (matcher.group("newPassword") == null)
+            return ProfileMessages.EMPTY_FIELD;
         String newPassword = removeQuotation(matcher.group("newPassword"));
         ProfileMessages profileMessages = checkPassword(matcher);
         if (profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY))
@@ -48,6 +48,8 @@ public class ProfileController {
     }
 
     public ProfileMessages changeEmail(Matcher matcher) {
+        if (matcher.group("email") == null)
+            return ProfileMessages.EMPTY_FIELD;
         String email = removeQuotation(matcher.group("email"));
         ProfileMessages profileMessages = checkEmail(matcher);
         if (profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY)) {
@@ -57,6 +59,8 @@ public class ProfileController {
     }
 
     public ProfileMessages changeSlogan(Matcher matcher) {
+        if (matcher.group("slogan") == null)
+            return ProfileMessages.EMPTY_FIELD;
         ProfileMessages profileMessages = checkSlogan(matcher);
         String slogan = removeQuotation(matcher.group("slogan"));
         if (profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY))
@@ -101,10 +105,9 @@ public class ProfileController {
 
 
     private ProfileMessages checkUsername(Matcher matcher) {
-        String username = removeQuotation(matcher.group("username"));
-
-        if (username.isEmpty())
+        if (matcher.group("username") == null)
             return ProfileMessages.EMPTY_FIELD;
+        String username = removeQuotation(matcher.group("username"));
 
         if (isUsernameFormatCorrect(username))
             return ProfileMessages.INCORRECT_USERNAME_FORMAT;
@@ -130,6 +133,8 @@ public class ProfileController {
     }
 
     private ProfileMessages checkPassword(Matcher matcher) {
+        if (matcher.group("oldPassword") == null || matcher.group("newPassword") == null)
+            return ProfileMessages.EMPTY_FIELD;
         String oldPassword = removeQuotation(matcher.group("oldPassword"));
         String newPassword = removeQuotation(matcher.group("newPassword"));
         if (oldPassword.isEmpty() | newPassword.isEmpty())
@@ -165,10 +170,10 @@ public class ProfileController {
     }
 
     private ProfileMessages checkEmail(Matcher matcher) {
-        String email = removeQuotation(matcher.group("email"));
-        if (email.isEmpty())
+        if (matcher.group("email") == null)
             return ProfileMessages.EMPTY_FIELD;
-        else if (isEmailDuplicated(email))
+        String email = removeQuotation(matcher.group("email"));
+        if (isEmailDuplicated(email))
             return ProfileMessages.EXISTENCE_EMAIL;
         else if (!email.matches("^\\w+@\\w+\\.\\w+$") | email.contains(" "))
             return ProfileMessages.INCORRECT_EMAIL_FORMAT;
@@ -193,9 +198,9 @@ public class ProfileController {
     }
 
     private ProfileMessages checkSlogan(Matcher matcher) {
-        String slogan = removeQuotation(matcher.group("slogan"));
-        if (slogan.isEmpty())
+        if (matcher.group("slogan") == null)
             return ProfileMessages.EMPTY_FIELD;
+        String slogan = removeQuotation(matcher.group("slogan"));
         return ProfileMessages.CHANGE_SUCCESSFULLY;
     }
 

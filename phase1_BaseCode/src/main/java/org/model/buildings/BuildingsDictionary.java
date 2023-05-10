@@ -91,8 +91,8 @@ public enum BuildingsDictionary {
             put("gold", 400);
         }
     }, 1, 0, 0),
-    //    TUNNELER_GUILD("", BuildingType.CASTLE, 0, new HashMap<>() {
-//    }, 0, 0, 0),
+    TUNNELER_GUILD("tunneler guild", BuildingType.CASTLE, 0, new HashMap<>() {
+    }, 0, 0, 0),
     APPLE_ORCHARD("apple orchard", BuildingType.FARM, 0, new HashMap<>() {
         {
             put("wood", 5);

@@ -1,32 +1,102 @@
 package org.model.buildings;
 
+import java.util.ArrayList;
+
 public enum ProductiveBuildingsDictionary {
-    MILL(BuildingsDictionary.MILL, 0, "wheat", "floor", ""),
-    IRON_MINE(BuildingsDictionary.ARMOURY, 0, "", "", "iron"),
-    OX_TETHER(BuildingsDictionary.OX_TETHER, 0, "", "", ""),
-    PITCH_RIG(BuildingsDictionary.PITCH_RIG, 0, "", "", ""),
-    QUARRY(BuildingsDictionary.QUARRY, 0, "", "", ""),
-    WOODCUTTER(BuildingsDictionary.WOODCUTTER, 0, "", "", ""),
-    ARMOURER(BuildingsDictionary.ARMOURER, 0, "", "", ""),
-    BLACKSMITH(BuildingsDictionary.BLACKSMITH, 0, "", "", ""),
-    FLETCHER(BuildingsDictionary.FLETCHER, 0, "", "", ""),
-    POLETURNER(BuildingsDictionary.POLETURNER, 0, "", "", ""),
-    STABLE(BuildingsDictionary.STABLE, 0, "", "", ""),
-    APPLE_ORCHARD(BuildingsDictionary.APPLE_ORCHARD, 0, "", "", ""),
-    DAIRY_FARMER(BuildingsDictionary.DIARY_FARMER, 0, "", "", ""),
-    HOPS_FARMER(BuildingsDictionary.HOPS_FARMER, 0, "", "", ""),
-    WHEAT_FARMER(BuildingsDictionary.WHEAT_FARMER, 0, "", "", ""),
-    HUNTER_POST(BuildingsDictionary.HUNTER_POST, 0, "", "", ""),
-    BAKERY(BuildingsDictionary.BAKERY, 0, "", "", ""),
-    BREWER(BuildingsDictionary.BREWER, 0, "", "", "");
+    MILL(BuildingsDictionary.MILL, 0, "wheat", new ArrayList<>() {
+        {
+            add("floor");
+        }
+    }, ""),
+    IRON_MINE(BuildingsDictionary.IRON_MINE, 0, null, new ArrayList<>() {
+        {
+            add("iron");
+        }
+    }, "iron"),
+    OX_TETHER(BuildingsDictionary.OX_TETHER, 0, null, new ArrayList<>() {
+    }, ""),
+    PITCH_RIG(BuildingsDictionary.PITCH_RIG, 0, "", new ArrayList<>() {
+        {
+            add("pitch");
+        }
+    }, ""),
+    QUARRY(BuildingsDictionary.QUARRY, 0, "", new ArrayList<>() {
+        {
+            add("stone");
+        }
+    }, ""),
+    WOODCUTTER(BuildingsDictionary.WOODCUTTER, 0, "", new ArrayList<>() {
+        {
+            add("wood");
+        }
+    }, ""),
+    ARMOURER(BuildingsDictionary.ARMOURER, 0, "iron", new ArrayList<>() {
+        {
+            add("metal armour");
+        }
+    }, ""),
+    BLACKSMITH(BuildingsDictionary.BLACKSMITH, 0, "iron", new ArrayList<>(){
+        {add("metal armour");}
+    }, ""),
+    FLETCHER(BuildingsDictionary.FLETCHER, 0, "", new ArrayList<>() {
+        {
+            add("pitch");
+        }
+    }, ""),
+    POLETURNER(BuildingsDictionary.POLETURNER, 0, "", new ArrayList<>() {
+        {
+            add("");
+        }
+    }, ""),
+    STABLE(BuildingsDictionary.STABLE, 0, "", new ArrayList<>() {
+        {
+            add("horse");
+        }
+    }, ""),
+    APPLE_ORCHARD(BuildingsDictionary.APPLE_ORCHARD, 0, "", new ArrayList<>() {
+        {
+            add("apple");
+        }
+    }, ""),
+    DAIRY_FARMER(BuildingsDictionary.DIARY_FARMER, 0, "", new ArrayList<>() {
+        {
+            add("cheese");
+        }
+    }, ""),
+    HOPS_FARMER(BuildingsDictionary.HOPS_FARMER, 0, "", new ArrayList<>() {
+        {
+            add("hop");
+        }
+    }, ""),
+    WHEAT_FARMER(BuildingsDictionary.WHEAT_FARMER, 0, "", new ArrayList<>() {
+        {
+            add("wheat");
+        }
+    }, ""),
+    HUNTER_POST(BuildingsDictionary.HUNTER_POST, 0, "", new ArrayList<>() {
+        {
+            add("meat");
+        }
+    }, ""),
+    BAKERY(BuildingsDictionary.BAKERY, 0, "", new ArrayList<>() {
+        {
+            add("bread");
+        }
+    }, ""),
+    BREWER(BuildingsDictionary.BREWER, 0, "", new ArrayList<>() {
+        {
+            add("");
+        }
+    }, "");
 
     private BuildingsDictionary buildingDictionary;
     private int rate;
     private String inputResource;
-    private String outputResource;
+    private ArrayList<String> outputResource;
     private String groundTexture;
 
-    private ProductiveBuildingsDictionary(BuildingsDictionary buildingsDictionary, int rate, String inputResource, String outputResource, String groundTexture) {
+    private ProductiveBuildingsDictionary(BuildingsDictionary buildingsDictionary, int rate, String inputResource,
+                                          ArrayList<String> outputResource, String groundTexture) {
         this.rate = rate;
         this.inputResource = inputResource;
         this.outputResource = outputResource;
@@ -45,7 +115,7 @@ public enum ProductiveBuildingsDictionary {
         return inputResource;
     }
 
-    public String getOutputResource() {
+    public ArrayList<String> getOutputResource() {
         return outputResource;
     }
 

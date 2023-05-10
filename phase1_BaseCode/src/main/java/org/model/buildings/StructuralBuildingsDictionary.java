@@ -1,10 +1,10 @@
 package org.model.buildings;
 
 public enum StructuralBuildingsDictionary {
-    SMALL_STONE_GATEHOUSE(BuildingsDictionary.SMALL_STONE_GATEHOUSE, 0),
-    LARGE_STONE_GATEHOUSE(BuildingsDictionary.LARGE_STONE_GATEHOUSE, 0),
+    SMALL_STONE_GATEHOUSE(BuildingsDictionary.SMALL_STONE_GATEHOUSE, 8),
+    LARGE_STONE_GATEHOUSE(BuildingsDictionary.LARGE_STONE_GATEHOUSE, 10),
     DRAW_BRIDGE(BuildingsDictionary.DRAW_BRIDGE, 0),
-    HOVEL(BuildingsDictionary.HOVEL, 0);
+    HOVEL(BuildingsDictionary.HOVEL, 8);
 
     private final BuildingsDictionary buildingDictionary;
     private final int capacity;
