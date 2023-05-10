@@ -19,7 +19,7 @@ public class ProfileMenu {
 
                 if (profileMessages.equals(ProfileMessages.REPEATED_USERNAME)) {
                     String username = matcher.group("username");
-                    System.out.println(isSuggestedUsernameAccepted(username));
+                    System.out.println(isSuggestedUsernameAccepted(username).getMessage());
                 }
             } else if ((matcher = ProfileCommands.getMatcher(input, ProfileCommands.CHANGE_NICKNAME)) != null)
                 System.out.println(Menu.getProfileController().changeNickname(matcher).getMessage());
@@ -29,7 +29,9 @@ public class ProfileMenu {
 
             else if ((matcher = ProfileCommands.getMatcher(input, ProfileCommands.CHANGE_SLOGAN)) != null) {
                 if (matcher.group("slogan").contains("random")) {
-                    System.out.println("Your slogan is :" + Menu.getProfileController().giveRandomSlogan());
+                    String randomSlogan = Menu.getProfileController().giveRandomSlogan();
+                    System.out.println("Your slogan is: " + randomSlogan);
+                    System.out.println(Menu.getProfileController().changeRandomSlogan(randomSlogan).getMessage());
                 } else
                     System.out.println(Menu.getProfileController().changeSlogan(matcher).getMessage());
             } else if ((matcher = ProfileCommands.getMatcher(input, ProfileCommands.CHANGE_PASSWORD)) != null) {

@@ -112,7 +112,7 @@ public class ProfileController {
         if (username.isEmpty())
             return ProfileMessages.EMPTY_FIELD;
 
-        if (isUsernameFormatCorrect(username))
+        if (!isUsernameFormatCorrect(username))
             return ProfileMessages.INCORRECT_USERNAME_FORMAT;
 
         else if (isUsernameDuplicated(username))
@@ -138,7 +138,7 @@ public class ProfileController {
     private ProfileMessages checkPassword(Matcher matcher) {
         String oldPassword = removeQuotation(matcher.group("oldPassword"));
         String newPassword = removeQuotation(matcher.group("newPassword"));
-        if (oldPassword.isEmpty() | newPassword.isEmpty())
+        if (oldPassword.isEmpty() || newPassword.isEmpty())
             return ProfileMessages.EMPTY_FIELD;
         else if (!Player.getCurrentPlayer().isPasswordCorrect(oldPassword))
             return ProfileMessages.INCORRECT_PASSWORD;
@@ -176,7 +176,7 @@ public class ProfileController {
             return ProfileMessages.EMPTY_FIELD;
         else if (isEmailDuplicated(email))
             return ProfileMessages.EXISTENCE_EMAIL;
-        else if (!email.matches("^\\w+@\\w+\\.\\w+$") | email.contains(" "))
+        else if (!email.matches("^[a-zA-Z0-9\\.]+@[a-zA-Z0-9\\.]+\\.[a-zA-Z0-9\\.]+$") | email.contains(" "))
             return ProfileMessages.INCORRECT_EMAIL_FORMAT;
         else
             return ProfileMessages.CHANGE_SUCCESSFULLY;
@@ -184,7 +184,7 @@ public class ProfileController {
 
     private boolean isEmailDuplicated(String email) {
         for (Player player : Player.getAllPlayers()) {
-            if (player.getEmail().equals(email))
+            if (player.getEmail().equalsIgnoreCase(email))
                 return true;
         }
         return false;
@@ -221,4 +221,8 @@ public class ProfileController {
     }
 
 
+    public ProfileMessages changeRandomSlogan(String randomSlogan) {
+        Player.getCurrentPlayer().setSlogan(randomSlogan);
+        return ProfileMessages.CHANGE_SUCCESSFULLY;
+    }
 }
