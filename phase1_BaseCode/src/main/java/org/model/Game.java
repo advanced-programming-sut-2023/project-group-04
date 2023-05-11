@@ -68,7 +68,7 @@ public class Game {
         else if ((storageBuildingDictionary = StorageBuildingsDictionary.getDictionaryByName(buildingName)) != null)
             return new StorageBuilding(empire, storageBuildingDictionary, mapCell);
         else if ((structuralBuildingDictionary = StructuralBuildingsDictionary.getDictionaryByName(buildingName)) != null)
-            return new StructuralBuilding(empire, structuralBuildingDictionary, null, mapCell);
+            return new StructuralBuilding(empire, structuralBuildingDictionary, true, mapCell);
         else if ((towerBuildingDictionary = TowerBuildingsDictionary.getDictionaryByName(buildingName)) != null)
             return new TowerBuilding(empire, towerBuildingDictionary, mapCell);
         else if ((trainerBuildingDictionary = TrainerBuildingsDictionary.getDictionaryByName(buildingName)) != null)

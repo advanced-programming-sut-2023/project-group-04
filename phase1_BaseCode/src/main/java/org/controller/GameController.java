@@ -2,9 +2,9 @@ package org.controller;
 
 import org.model.Empire;
 import org.model.Game;
-import org.model.map.Map;
 import org.model.MapCell;
 import org.model.buildings.*;
+import org.model.map.Map;
 import org.model.person.*;
 import org.view.CommandsEnum.GameMessages;
 
@@ -89,24 +89,22 @@ public class GameController {
     }
 
     public GameMessages dropBuilding(Matcher matcher) {
-        //TODO: STRUCTURAL BUILDINGS MUST HAVE A DIRECTION FIELD....DIRECTION MUST BE OPTION FIELD IN DROPBUILDING
-        //TODO: CHANGE RETURN TYPE AND RETURNS -----> **ABOLFAZL**
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         String buildingName = matcher.group("type");
-        //todo: handle direction
+        boolean upDirection = matcher.group("direction").equals("up");
         if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
         if (Game.getCurrentGame().getMapCellByAddress(x, y).getBuilding() != null)
             return GameMessages.EXISTENCE_BUILDING;
         if (BuildingsDictionary.getDictionaryByName(buildingName) == null)
             return GameMessages.INCORRECT_BUILDING_TYPE;
         //TODO: CHECK GROUND TEXTURE
-        return createBuilding(empire, x, y, "", buildingName);//todo: handle direction
+        return createBuilding(empire, x, y, buildingName, upDirection);
         //TODO: DRAW BRIDGE ONLY CAN BE PLACED IN FRONT OF GATEHOUSES
     }
 
-    private GameMessages createBuilding(Empire empire, int x, int y, String direction, String buildingName) {
+    private GameMessages createBuilding(Empire empire, int x, int y, String buildingName, boolean upDirection) {
         ProductiveBuildingsDictionary productiveBuildingDictionary;
         StorageBuildingsDictionary storageBuildingDictionary;
         StructuralBuildingsDictionary structuralBuildingDictionary;
@@ -124,7 +122,7 @@ public class GameController {
             building = new StorageBuilding(empire, storageBuildingDictionary, mapCell);
         } else if ((structuralBuildingDictionary = StructuralBuildingsDictionary.getDictionaryByName(buildingName)) != null) {
             prices = structuralBuildingDictionary.getBuildingDictionary().getPrices();
-            building = new StructuralBuilding(empire, structuralBuildingDictionary, direction, mapCell);
+            building = new StructuralBuilding(empire, structuralBuildingDictionary, upDirection, mapCell);
         } else if ((towerBuildingDictionary = TowerBuildingsDictionary.getDictionaryByName(buildingName)) != null) {
             prices = towerBuildingDictionary.getBuildingDictionary().getPrices();
             building = new TowerBuilding(empire, towerBuildingDictionary, mapCell);
@@ -179,7 +177,7 @@ public class GameController {
         Building building = Game.getCurrentGame().getMapCellByAddress(x, y).getBuilding();
         if (building == null)
             return GameMessages.BUILDING_NOT_EXIST;
-        if (!building.getBuildingOwner().equals(Game.getCurrentGame().getCurrentEmpire().getOwner()))
+        if (!building.getBuildingOwner().equals(Game.getCurrentGame().getCurrentEmpire()))
             return GameMessages.NOT_OWNING_THE_BUILDING;
         Game.getCurrentGame().setSelectedBuilding(building);
         return GameMessages.SET_SUCCESSFUL;
@@ -203,28 +201,26 @@ public class GameController {
     }
 
     public String createUnit(Matcher matcher) {
-        //todo: edit return types and return values
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
-        String soldierType = matcher.group("type");
+        String unitType = matcher.group("type");
         int count = Integer.parseInt(matcher.group("count"));
         Building currentBuilding = Game.getCurrentGame().getSelectedBuilding();
         int buildingPosX = currentBuilding.getMapCell().getX();
         int buildingPosY = currentBuilding.getMapCell().getY();
         MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(buildingPosX, buildingPosY);
         if (!(currentBuilding instanceof TrainerBuilding)) return "invalid building type for creating unit!!";
-        if (!((TrainerBuilding) currentBuilding).getAvailableSoldiers().contains(soldierType))
-            return "invalid unit type!";
+        if (!((TrainerBuilding) currentBuilding).getAvailableSoldiers().contains(unitType)) return "invalid unit type!";
         if (count <= 0) return "invalid troop count!";
-        if (soldierType.equals("engineer")) {
+        if (unitType.equals("engineer")) {
             if (count * Engineer.getRequiredGold() < empire.getResourceAmount("gold")) return "not enough gold";
             mapCell.addPeople(new Engineer(empire, mapCell));
             return "create unit successful";
-        } else if (soldierType.equals("tunneler")) {
+        } else if (unitType.equals("tunneler")) {
             if (count * Tunneler.getRequiredGold() < empire.getResourceAmount("gold")) return "not enough gold";
             mapCell.addPeople(new Tunneler(empire, mapCell));
             return "create unit successful";
         }
-        return addSoldier(empire, soldierType, count, buildingPosX, buildingPosY);
+        return addSoldier(empire, unitType, count, buildingPosX, buildingPosY);
     }
 
     private boolean removeFreePeople(Empire empire, int count) {
@@ -301,8 +297,7 @@ public class GameController {
         String type = matcher.group("type");
         if (!checkCoordinates(x, y)) return "incorrect coordinate";
         if (type != null && !type.equals("engineer") && !type.equals("tunneler") &&
-                !SoldiersDictionary.getAllSoldierTypes().contains(type))
-            return "invalid type!";
+                !SoldiersDictionary.getAllSoldierTypes().contains(type)) return "invalid type!";
         ArrayList<Person> selectedUnit = new ArrayList<>();
         for (Person person : Game.getCurrentGame().getMapCellByAddress(x, y).getPeople()) {
             if (type == null || type.equals(""))
@@ -312,8 +307,7 @@ public class GameController {
             else if (type.equals("tunneler") && person instanceof Tunneler)
                 selectedUnit.add(person);
             else if (person instanceof Soldier)
-                if (((Soldier) person).getSoldierType().equals(type))
-                    selectedUnit.add(person);
+                if (((Soldier) person).getSoldierType().equals(type)) selectedUnit.add(person);
         }
         if (selectedUnit.size() == 0) return "no troop of input type!";
         Game.getCurrentGame().selectUnit(selectedUnit);
@@ -333,6 +327,7 @@ public class GameController {
         for (Person person : unit) {
             if (person instanceof Soldier) ((Soldier) person).setAim(null);
             person.setCurrentDestination(Game.getCurrentGame().getMapCellByAddress(x, y));
+            person.setNextDestination(null);
             Game.getCurrentGame().addMoveAblePerson(person);
         }
         return "move troop successful";
@@ -381,7 +376,7 @@ public class GameController {
         return "mode set successful!";
     }
 
-    public String tileAttack(Matcher matcher) {
+    public String airAttack(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         if (!checkCoordinates(x, y)) return "incorrect coordinate";
@@ -390,19 +385,23 @@ public class GameController {
         for (Person person : unit)
             if (person instanceof Engineer || person instanceof Tunneler)
                 return "selected unit is not soldier!";
-        ArrayList<SoldiersDictionary> longRangeSoldiers = new ArrayList<>() {
-            {
-                add(SoldiersDictionary.ARCHER);
-                add(SoldiersDictionary.CROSSBOWMAN);
-                add(SoldiersDictionary.ARABIANBOWS);
-                add(SoldiersDictionary.HORSE_ARCHER);
-            }
-        };
-        for (Person person : unit)
-            if (!longRangeSoldiers.contains(((Soldier) unit.get(0)).getSoldiersDictionary()))
+        for (Person person : unit) {
+            SoldiersDictionary dictionary = ((Soldier) unit.get(0)).getSoldiersDictionary();
+            if (!dictionary.equals(SoldiersDictionary.ARCHER) && !dictionary.equals(SoldiersDictionary.CROSSBOWMAN) &&
+                    !dictionary.equals(SoldiersDictionary.ARABIANBOWS) && !dictionary.equals(SoldiersDictionary.HORSE_ARCHER))
                 return "selected soldiers not long range!";
-        for (Person person : unit)
-            ((Soldier) person).setAim(Game.getCurrentGame().getMapCellByAddress(x, y));
+        }
+        for (Person person : unit) {
+            boolean inRange = false;
+            Soldier soldier = (Soldier) person;
+            int distance = (int) Math.sqrt(Math.pow(x - soldier.getMapCell().getX(), 2) +
+                    Math.pow(x - soldier.getMapCell().getY(), 2));
+            if (soldier.getSoldiersDictionary().getFireRange() > distance) {
+                soldier.setAim(Game.getCurrentGame().getMapCellByAddress(x, y));
+                inRange = true;
+            }
+            if (!inRange) return "aim out of range!";
+        }
         return "attack set successful!";
     }
 
@@ -413,8 +412,7 @@ public class GameController {
         ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
         if (unit == null || unit.size() == 0) return "no unit or empty unit selected!";
         for (Person person : unit)
-            if (person instanceof Engineer || person instanceof Tunneler)
-                return "selected unit is not soldier!";
+            if (person instanceof Engineer) return "selected unit is not soldier!";
         MapCell aimMapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
         for (Person person : aimMapCell.getPeople())
             if (!person.getPersonOwner().equals(Game.getCurrentGame().getCurrentEmpire())) {
@@ -620,9 +618,7 @@ public class GameController {
                     Game.getCurrentGame().getMapCellByAddress(x, y - 1)
             };
             for (MapCell nextNode : neighbors) {
-                if (nextNode.getBuilding() != null || nextNode.getGroundTexture().contains("ROCK") ||
-                        nextNode.getGroundTexture().equals("SEA")) continue;
-                if (!visited.contains(nextNode)) {
+                if (!visited.contains(nextNode) && checkNode(x,y, nextNode)) {
                     visited.add(nextNode);
                     predecessor.put(nextNode, currentNode);
                     queue.add(nextNode);
@@ -631,6 +627,20 @@ public class GameController {
             }
         }
         return false;
+    }
+
+    private boolean checkNode(int x, int y, MapCell nextNode) {
+        Building nextBuilding = nextNode.getBuilding();
+        if (nextNode.getBuilding() != null) {
+            BuildingsDictionary nextBuildingDictionary = nextBuilding.getBuildingDictionary();
+            if ((nextBuildingDictionary != BuildingsDictionary.SMALL_STONE_GATEHOUSE &&
+                    nextBuildingDictionary != BuildingsDictionary.LARGE_STONE_GATEHOUSE) ||
+                    (((StructuralBuilding) nextNode.getBuilding()).isUpside() && (nextNode.getX() != x)) ||
+                    (!((StructuralBuilding) nextNode.getBuilding()).isUpside() && (nextNode.getX() != y)))
+                return false;
+        } else if (nextNode.getGroundTexture().contains("ROCK") || nextNode.getGroundTexture().equals("SEA"))
+            return false;
+        return true;
     }
 
     private ArrayList<MapCell> routing(MapCell origin, MapCell destination) {

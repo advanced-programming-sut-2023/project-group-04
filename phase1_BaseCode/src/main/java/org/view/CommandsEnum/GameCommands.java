@@ -14,7 +14,8 @@ public enum GameCommands {
     CHANGE_FEAR_RATE("^\\s*fear\\s+rate(?=.*-r\\s+(?<fearRate>[\\d]*))(\\s*(-r\\s+([\\d]*)))\\s*$"),
     SHOW_FEAR_RATE("^\\s*fear\\s+rate\\s+show\\s*$"),
     DROP_BUILDING("^\\s*drop\\s+building(?=.*-type\\s+(?<type>\"[^\"]*\"|[^\\s\"]*))(?=.*-x\\s+(?<x>[\\d]*))" +
-            "(?=.*-y\\s+(?<y>[\\d]*))(\\s*(-type\\s+(\"[^\"]*\"|[^\\s\"]*)|-x\\s+([\\d]*)|-y\\s+([\\d]*))){3}\\s*$"),
+            "(?=.*-y\\s+(?<y>[\\d]*))(?=.*-d\\s+(?<direction>up|right))(\\s*(-type\\s+(\"[^\"]*\"|[^\\s\"]*)|" +
+            "-x\\s+([\\d]*)|-y\\s+([\\d]*)|-d\\s+(up|right))){4}\\s*$"),
     SELECT_BUILDING("^\\s*select\\s+building(?=.*-x\\s+(?<x>[\\d]*))" +
             "(?=.*-y\\s+(?<y>[\\d]*))(\\s*(-x\\s+([\\d]*)|-y\\s+([\\d]*))){2}\\s*$"),
     CREATE_UNIT("^\\s*create\\s+unit(?=.*-type\\s+(?<type>\"[^\"]*\"|[^\\s\"]*))(?=.*-c\\s+(?<x>[\\d]*))" +
