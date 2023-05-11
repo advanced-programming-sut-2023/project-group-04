@@ -12,7 +12,7 @@ import java.util.regex.Matcher;
 
 public class EnvironmentController {
     public MapMenuMessages createMap(Matcher matcher) {
-        String mapName = matcher.group("mapName");
+        String mapName = matcher.group("mapName").replaceAll("\"", "");
         int size = Integer.parseInt(matcher.group("size"));
         if (size != 200 && size != 400) return MapMenuMessages.INVALID_SIZE;
         Map map = new Map(mapName, size);
@@ -21,7 +21,7 @@ public class EnvironmentController {
     }
 
     public MapMenuMessages customExistingMap(Matcher matcher) {
-         String mapName = matcher.group("mapName");
+         String mapName = matcher.group("mapName").replaceAll("\"", "");
         Map map = Player.getCurrentPlayer().getMapByName(mapName);
         if (map == null) return MapMenuMessages.MAP_NOT_EXIST;
         Map.setCurrentMap(map);
@@ -31,7 +31,7 @@ public class EnvironmentController {
     public MapMenuMessages changeBlockTexture(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x")) - 1;
         int y = Integer.parseInt(matcher.group("y")) - 1;
-        String type = matcher.group("type");
+        String type = matcher.group("type").replaceAll("\"", "");
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
         if (!Map.validGroundTexture(type)) return MapMenuMessages.INVALID_GROUND_TEXTURE;
         MapTile mapTile = Map.getCurrentMap().getMapTile(x,y);
@@ -45,7 +45,7 @@ public class EnvironmentController {
         int y1 = Integer.parseInt(matcher.group("y1")) - 1;
         int x2 = Integer.parseInt(matcher.group("x2")) - 1;
         int y2 = Integer.parseInt(matcher.group("y2")) - 1;
-        String type = matcher.group("type");
+        String type = matcher.group("type").replaceAll("\"", "");
         if (!checkCoordinate(x1,y1) || !checkCoordinate(x2,y2) || x2 < x1 || y2 < y1)
             return MapMenuMessages.INCORRECT_COORDINATES;
         if (!Map.validGroundTexture(type)) return MapMenuMessages.INVALID_GROUND_TEXTURE;
@@ -86,7 +86,7 @@ public class EnvironmentController {
     public MapMenuMessages setTree(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x")) - 1;
         int y = Integer.parseInt(matcher.group("y")) - 1;
-        String type = matcher.group("type");
+        String type = matcher.group("type").replaceAll("\"", "");
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
         if (!Map.validTreeType(type)) return MapMenuMessages.INVALID_TREE_TYPE;
         if (!checkValidTreeTexture(x,y)) return MapMenuMessages.TREE_GROUND_TEXTURE_ERROR;
@@ -118,12 +118,13 @@ public class EnvironmentController {
         int x = Integer.parseInt(matcher.group("x")) - 1;
         int y = Integer.parseInt(matcher.group("y")) - 1;
         String color = matcher.group("color");
-        String soldierType = matcher.group("type");
+        String soldierType = matcher.group("type").replaceAll("\"", "");
         int count = Integer.parseInt(matcher.group("count"));
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
         if (!Map.isValidColor(color)) return MapMenuMessages.INVALID_COLOR;
         MapTile mapTile = Map.getCurrentMap().getMapTile(x,y);
-        if (mapTile.isHeadQuarter() || mapTile.getBuilding() != null || mapTile.getSoldier() != null)
+        if (mapTile.isHeadQuarter() || mapTile.getBuilding() != null ||
+                mapTile.getSoldier() != null || mapTile.getTree() != null)
             return MapMenuMessages.USED_TILE;
         if (!mapTile.getTexture().equals("GROUND")) return MapMenuMessages.INVALID_GROUND_TEXTURE;
         if (count <= 0) return MapMenuMessages.INVALID_SOLDIER_NUMBER;
@@ -138,7 +139,7 @@ public class EnvironmentController {
         int x = Integer.parseInt(matcher.group("x")) - 1;
         int y = Integer.parseInt(matcher.group("y")) - 1;
         String color = matcher.group("color");
-        String buildingType = matcher.group("type");
+        String buildingType = matcher.group("type").replaceAll("\"", "");
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
         if (!Map.isValidColor(color)) return MapMenuMessages.INVALID_COLOR;
         MapTile mapTile = Map.getCurrentMap().getMapTile(x,y);
