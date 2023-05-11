@@ -29,8 +29,8 @@ public class EnvironmentController {
     }
 
     public MapMenuMessages changeBlockTexture(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("x"));
-        int y = Integer.parseInt(matcher.group("y"));
+        int x = Integer.parseInt(matcher.group("x")) - 1;
+        int y = Integer.parseInt(matcher.group("y")) - 1;
         String type = matcher.group("type");
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
         if (!Map.validGroundTexture(type)) return MapMenuMessages.INVALID_GROUND_TEXTURE;
@@ -39,31 +39,31 @@ public class EnvironmentController {
     }
 
     public MapMenuMessages changeAreaTexture(Matcher matcher) {
-        int x1 = Integer.parseInt(matcher.group("x1"));
-        int y1 = Integer.parseInt(matcher.group("y1"));
-        int x2 = Integer.parseInt(matcher.group("x2"));
-        int y2 = Integer.parseInt(matcher.group("y2"));
+        int x1 = Integer.parseInt(matcher.group("x1")) - 1;
+        int y1 = Integer.parseInt(matcher.group("y1")) - 1;
+        int x2 = Integer.parseInt(matcher.group("x2")) - 1;
+        int y2 = Integer.parseInt(matcher.group("y2")) - 1;
         String type = matcher.group("type");
         if (!checkCoordinate(x1,y1) || !checkCoordinate(x2,y2) || x2 < x1 || y2 < y1)
             return MapMenuMessages.INCORRECT_COORDINATES;
         if (!Map.validGroundTexture(type)) return MapMenuMessages.INVALID_GROUND_TEXTURE;
-        for (int i = x1; i < x2; i++)
-            for (int j = y1; j < y2; j++)
+        for (int i = x1; i <= x2; i++)
+            for (int j = y1; j <= y2; j++)
                 Map.getCurrentMap().getMapTile(i,j).setTexture(type);
         return MapMenuMessages.SET_TEXTURE_SUCCESSFUL;
     }
 
     public MapMenuMessages clearBlock(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("x"));
-        int y = Integer.parseInt(matcher.group("y"));
+        int x = Integer.parseInt(matcher.group("x")) - 1;
+        int y = Integer.parseInt(matcher.group("y")) - 1;
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
         Map.getCurrentMap().getMapTile(x,y).setTexture("GROUND");
         return MapMenuMessages.TILE_CLEAR_SUCCESSFUL;
     }
 
     public MapMenuMessages setRock(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("x"));
-        int y = Integer.parseInt(matcher.group("y"));
+        int x = Integer.parseInt(matcher.group("x")) - 1;
+        int y = Integer.parseInt(matcher.group("y")) - 1;
         String direction = matcher.group("direction");
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
         if ((direction = getDirection(direction)) == null) return MapMenuMessages.INVALID_DIRECTION;
@@ -74,8 +74,8 @@ public class EnvironmentController {
     }
 
     public MapMenuMessages setTree(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("x"));
-        int y = Integer.parseInt(matcher.group("y"));
+        int x = Integer.parseInt(matcher.group("x")) - 1;
+        int y = Integer.parseInt(matcher.group("y")) - 1;
         String type = matcher.group("type");
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
         if (!Map.validTreeType(type)) return MapMenuMessages.INVALID_TREE_TYPE;
@@ -85,8 +85,8 @@ public class EnvironmentController {
     }
 
     public MapMenuMessages setHeadQuarter(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("x"));
-        int y = Integer.parseInt(matcher.group("y"));
+        int x = Integer.parseInt(matcher.group("x")) - 1;
+        int y = Integer.parseInt(matcher.group("y")) - 1;
         String color = matcher.group("color");
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
         if (!Map.isValidColor(color)) return MapMenuMessages.INVALID_COLOR;
@@ -101,8 +101,8 @@ public class EnvironmentController {
     }
 
     public MapMenuMessages dropUnit(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("x"));
-        int y = Integer.parseInt(matcher.group("y"));
+        int x = Integer.parseInt(matcher.group("x")) - 1;
+        int y = Integer.parseInt(matcher.group("y")) - 1;
         String color = matcher.group("color");
         String soldierType = matcher.group("type");
         int count = Integer.parseInt(matcher.group("count"));
@@ -121,8 +121,8 @@ public class EnvironmentController {
     }
 
     public MapMenuMessages dropBuilding(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("x"));
-        int y = Integer.parseInt(matcher.group("y"));
+        int x = Integer.parseInt(matcher.group("x")) - 1;
+        int y = Integer.parseInt(matcher.group("y")) - 1;
         String color = matcher.group("color");
         String buildingType = matcher.group("type");
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
@@ -140,7 +140,7 @@ public class EnvironmentController {
 
     private boolean checkCoordinate(int x, int y) {
         int size = Map.getCurrentMap().getMapSize();
-        return (x <= size && x >= 1 && y <= size && y>= 1);
+        return (x < size && x >= 0 && y < size && y>= 0);
     }
 
     private String getDirection(String direction) {
