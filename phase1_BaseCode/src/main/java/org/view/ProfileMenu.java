@@ -67,8 +67,7 @@ public class ProfileMenu {
             else if (ProfileCommands.getMatcher(input, ProfileCommands.BACK) != null) {
                 System.out.println("You are in main menu now!");
                 return;
-            }
-            else System.out.println("Invalid command");
+            } else System.out.println("Invalid command");
         }
     }
 
