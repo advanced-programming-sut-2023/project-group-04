@@ -26,7 +26,21 @@ public enum GameMessages {
     MAP_NOT_EXIST("No map with entered id exist!"),
     USER_NOT_EXIST("Any user with this username doesn't exist!"),
     NOT_ENOUGH_HEAD_QUARTER("Head quarters not enough for this players!"),
-    GAME_STARTED("Game successfully started!")
+    GAME_STARTED("Game successfully started!"),
+    INVALID_BUILDING_FOR_CREATE("invalid building type for creating unit!"),
+    INVALID_UNIT_TYPE("invalid unit type!"),
+    INVALID_TROOP_COUNT("invalid troop count!"),
+    NOT_ENOUGH_GOLD("Your gold isn't enough!"),
+    SUCCESSFUL_CREATE_UNIT("Create unit was successful!"),
+    NOT_ENOUGH_WEAPON("Your weapon and armour isn't enough!"),
+    NOT_ENOUGH_POPULATION("Your population isn't enough for creating unit!"),
+    TROOP_NOT_EXIST("Not exist any troop with this type!"),
+    SUCCESSFUL_SELECT_UNIT("unit selected successfully!"),
+    EMPTY_UNIT_SELECT("No unit have been selected!"),
+    SUCCESSFUL_TROOP_MOVE("Moving troop was successful!"),
+    SUCCESSFUL_PATROL_UNIT("Patrolling unit was successful!"),
+    INVALID_MOVE_NAME("invalid mode name"),
+    SUCCESSFUL_SET_MODE("Setting mode was successfully!"),
     ;
 
     private final String message;
