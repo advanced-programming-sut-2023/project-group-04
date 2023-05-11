@@ -9,19 +9,20 @@ public class StructuralBuilding extends Building {
 
     private final StructuralBuildingsDictionary structuralBuildingsDictionary;
     private int freeSpace;
-    private final String direction;
+    private final boolean upDirection;
     private boolean isOpen;
 
-    public StructuralBuilding(Empire buildingOwner, StructuralBuildingsDictionary structuralBuildingsDictionary, String direction) {
-        super(buildingOwner, structuralBuildingsDictionary.getBuildingDictionary());
+    public StructuralBuilding(Empire buildingOwner, StructuralBuildingsDictionary structuralBuildingsDictionary
+            , boolean upDirection, MapCell mapCell) {
+        super(buildingOwner, structuralBuildingsDictionary.getBuildingDictionary(), mapCell);
         this.structuralBuildingsDictionary = structuralBuildingsDictionary;
         this.freeSpace = 0;
-        this.direction = direction;
+        this.upDirection = upDirection;
         this.isOpen = false;
     }
 
-    public String getDirection() {
-        return direction;
+    public boolean isUpside() {
+        return upDirection;
     }
 
     public boolean isOpen() {

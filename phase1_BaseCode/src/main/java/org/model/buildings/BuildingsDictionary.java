@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 public enum BuildingsDictionary {
 
+    HEAD_QUARTER("headquarter", BuildingType.CASTLE, 2000, new HashMap<>() {
+    }, 1, 0, 0),
     SMALL_STONE_GATEHOUSE("small stone gatehouse", BuildingType.CASTLE, 0, new HashMap<>() {
     }, 1, 0, 0),
     LARGE_STONE_GATEHOUSE("large stone gatehouse", BuildingType.CASTLE, 0, new HashMap<>() {
@@ -265,7 +267,7 @@ public enum BuildingsDictionary {
 
     public static BuildingsDictionary getDictionaryByName(String buildingName) {
         for (BuildingsDictionary buildingsDictionary : BuildingsDictionary.values()) {
-            if (buildingsDictionary.getName().equals(buildingName))
+            if (buildingsDictionary.getName().equals(buildingName) && !buildingName.equals("headquarter"))
                 return buildingsDictionary;
         }
         return null;

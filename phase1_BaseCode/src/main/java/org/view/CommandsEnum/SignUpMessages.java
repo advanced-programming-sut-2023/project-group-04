@@ -15,7 +15,7 @@ public enum SignUpMessages {
     PASSWORD_CONFIRM_DOES_NOT_MATCH("Password confirmation doesn't matches!"),
     EXISTENCE_EMAIL("A user with this Email is Already exists!"),
     INCORRECT_EMAIL_FORMAT("Email format is incorrect!"),
-    INVALID_QUESTION_NUMBER("You must enter a number between 1 , 3 !"),
+    INVALID_QUESTION_NUMBER("You must enter a number between [1,3]!"),
     ANSWER_CONFIRM_DOES_NOT_MATCH("The security answer confirmation doesn't matches!"),
     SET_QUESTION_SUCCESSFUL("Set question was successful!"),
     LOGIN_SUCCESSFUL("User logged in successfully!"),
@@ -25,6 +25,8 @@ public enum SignUpMessages {
     PASSWORD_CHANGED("Your password successfully changed!"),
     CAPTCHA_CORRECT("CAPTCHA is correct"),
     WITHOUT_ERROR("Password haven't any error!"),
+    PASSWORD_INCORRECT_FORMAT("Password format is incorrect!"),
+    USER_NOT_FOUND("User not found!"),
     ;
 
     private final String message;

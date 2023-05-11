@@ -2,17 +2,23 @@ package org.model.person;
 
 import org.model.Empire;
 import org.model.Machine.Machine;
+import org.model.MapCell;
 import org.model.buildings.Building;
 
 public class Engineer extends Person{
 
+    private static final int  requiredGold = 0;
+    private static final int hp = 0;
+    private static final int speed = 0;
     private Building buildingWorkPlace;
     private Machine machineWorkPlace;
+    private boolean oil;
 
-    public Engineer(Empire personOwner, int hp) {
-        super(personOwner, hp);
+    public Engineer(Empire personOwner, MapCell mapCell) {
+        super(personOwner, hp, mapCell, speed);
         this.buildingWorkPlace = null;
         this.machineWorkPlace = null;
+        this.oil = false;
     }
 
     public Building getBuildingWorkPlace() {
@@ -29,5 +35,17 @@ public class Engineer extends Person{
 
     public void setMachineWorkPlace(Machine machineWorkPlace) {
         this.machineWorkPlace = machineWorkPlace;
+    }
+
+    public static int getRequiredGold() {
+        return requiredGold;
+    }
+
+    public boolean hasOil() {
+        return oil;
+    }
+
+    public void setOil(boolean oil) {
+        this.oil = oil;
     }
 }

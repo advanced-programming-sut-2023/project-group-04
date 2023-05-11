@@ -2,11 +2,12 @@ package org.view;
 
 import org.view.CommandsEnum.ProfileCommands;
 import org.view.CommandsEnum.ProfileMessages;
+import org.view.CommandsEnum.SignUpMessages;
 
 import java.util.regex.Matcher;
 
 public class ProfileMenu {
-    public void run() {
+    public void run() throws Exception {
         String input;
         Matcher matcher;
 
@@ -19,7 +20,7 @@ public class ProfileMenu {
 
                 if (profileMessages.equals(ProfileMessages.REPEATED_USERNAME)) {
                     String username = matcher.group("username");
-                    System.out.println(isSuggestedUsernameAccepted(username));
+                    System.out.println(isSuggestedUsernameAccepted(username).getMessage());
                 }
             } else if ((matcher = ProfileCommands.getMatcher(input, ProfileCommands.CHANGE_NICKNAME)) != null)
                 System.out.println(Menu.getProfileController().changeNickname(matcher).getMessage());
@@ -29,16 +30,18 @@ public class ProfileMenu {
 
             else if ((matcher = ProfileCommands.getMatcher(input, ProfileCommands.CHANGE_SLOGAN)) != null) {
                 if (matcher.group("slogan").contains("random")) {
-                    System.out.println("Your slogan is :" + Menu.getProfileController().giveRandomSlogan());
+                    String randomSlogan = Menu.getProfileController().giveRandomSlogan();
+                    System.out.println("Your slogan is: " + randomSlogan);
+                    System.out.println(Menu.getProfileController().changeRandomSlogan(randomSlogan).getMessage());
                 } else
                     System.out.println(Menu.getProfileController().changeSlogan(matcher).getMessage());
             } else if ((matcher = ProfileCommands.getMatcher(input, ProfileCommands.CHANGE_PASSWORD)) != null) {
-                //TODO : ADD CAPTCHA FOR THIS PART FROM ABOLFAZL
                 if (matcher.group("newPassword").contains("random")) {
-                    System.out.println(isRandomPasswordAccepted());
+                    System.out.println(isRandomPasswordAccepted().getMessage());
                 } else {
                     ProfileMessages profileMessages = Menu.getProfileController().changePassword(matcher);
-                    System.out.println(Menu.getProfileController().changePassword(matcher).getMessage());
+                    if (!profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY))
+                        System.out.println(profileMessages.getMessage());
                     String password = matcher.group("newPassword").replaceAll("\"", "");
                     if (profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY)) {
                         if (!confirmPassword(password))
@@ -61,8 +64,10 @@ public class ProfileMenu {
             else if (ProfileCommands.getMatcher(input, ProfileCommands.DISPLAY_HIGH_SCORE) != null)
                 System.out.println(Menu.getProfileController().highScore());
 
-            else if (ProfileCommands.getMatcher(input, ProfileCommands.BACK) != null)
+            else if (ProfileCommands.getMatcher(input, ProfileCommands.BACK) != null) {
+                System.out.println("You are in main menu now!");
                 return;
+            }
             else System.out.println("Invalid command");
         }
     }
@@ -78,10 +83,13 @@ public class ProfileMenu {
         return ProfileMessages.CHANGING_USERNAME_FAILED;
     }
 
-    private ProfileMessages isRandomPasswordAccepted() {
+    private ProfileMessages isRandomPasswordAccepted() throws Exception {
+        SignUpMessages signUpMessages = Menu.getLoginController().generateCaptcha();
         String randomPassword = Menu.getProfileController().generateRandomPassword();
-        System.out.println("This password that i generate for you :" + randomPassword +
-                "\nIf you want it re-enter it again:");
+        if (signUpMessages.equals(SignUpMessages.CAPTCHA_CORRECT)) {
+            System.out.println("This password that i generate for you :" + randomPassword +
+                    "\nIf you want it re-enter it again:");
+        }
         if (Menu.getScanner().nextLine().equals(randomPassword)) {
             Menu.getProfileController().setPassword(randomPassword);
             return ProfileMessages.CHANGE_SUCCESSFULLY;
@@ -89,12 +97,16 @@ public class ProfileMenu {
             return ProfileMessages.CHANGING_PASSWORD_FAILED;
     }
 
-    private boolean confirmPassword(String password) {
+    private boolean confirmPassword(String password) throws Exception {
+        Menu.getLoginController().generateCaptcha();
         System.out.println("Please re-enter your new password again:");
-        if (Menu.getScanner().nextLine().equals(password)) {
-            Menu.getProfileController().setPassword(password);
-            return true;
+        while (true) {
+            String newPassword = Menu.getScanner().nextLine();
+            if (newPassword.equals(password)) {
+                Menu.getProfileController().setPassword(password);
+                return true;
+            }
+            System.out.println("Please enter your new password correctly!:");
         }
-        return false;
     }
 }

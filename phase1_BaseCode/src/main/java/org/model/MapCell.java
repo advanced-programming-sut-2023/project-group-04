@@ -12,17 +12,24 @@ public class MapCell {
     private final int xAxis;
     private final int yAxis;
     private final String groundTexture;
+    private String tree;
     private Building building;
     private final ArrayList<Person> people;
     private Machine machine;
     private boolean tunnel;
+    private boolean oil;
 
-    public MapCell(int x, int y, String groundTexture) {
+
+    public MapCell(int x, int y, String groundTexture, String tree) {
         this.xAxis = x;
         this.yAxis = y;
         this.groundTexture = groundTexture;
-        this.people = new ArrayList<>();
+        this.tree = tree;
+        this.building = null;
+        this.people = null;
+        this.machine = null;
         this.tunnel = false;
+        this.oil = false;
     }
     public int getX() {
         return xAxis;
@@ -48,6 +55,14 @@ public class MapCell {
         return tunnel;
     }
 
+    public boolean isOily() {
+        return oil;
+    }
+
+    public void setOilCondition(boolean oil) {
+        this.oil = oil;
+    }
+
     public Machine getMachine() {
         return machine;
     }
@@ -60,11 +75,31 @@ public class MapCell {
         this.people.add(person);
     }
 
+    public void removePeople(Person person) {
+        this.people.remove(person);
+    }
+
     public void setMachine(Machine machine) {
         this.machine = machine;
     }
 
     public void setTunnel(boolean tunnel) {
         this.tunnel = tunnel;
+    }
+
+    public String getTree() {
+        return tree;
+    }
+
+    public void setTree(String treeType) {
+        this.tree = treeType;
+    }
+
+    public ArrayList<Soldier> getSoldiers() {
+        ArrayList<Soldier> soldiers = new ArrayList<>();
+        for (Person person : people)
+            if (person instanceof Soldier)
+                soldiers.add((Soldier) person);
+        return soldiers;
     }
 }

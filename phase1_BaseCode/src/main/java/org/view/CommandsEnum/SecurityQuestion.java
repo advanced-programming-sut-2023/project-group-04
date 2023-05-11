@@ -1,7 +1,7 @@
 package org.view.CommandsEnum;
 
 public enum SecurityQuestion {
-    PET(" What was my first pet’s name?"),
+    PET("What was my first pet’s name?"),
     TEACHER("What is the name of my first teacher?"),
     CAR("What is the name of my favorite car?");
 

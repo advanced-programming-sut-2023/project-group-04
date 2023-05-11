@@ -1,9 +1,13 @@
 package org.model;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import org.model.map.Map;
 
 import java.io.FileWriter;
 import java.io.Reader;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -20,7 +24,7 @@ public class Player {
     private String securityAnswer;
     private String slogan;
     private int score;
-    private ArrayList<Map> maps;
+    private final ArrayList<Map> maps;
 
     private static int numberOfAttempts = 0;
 
@@ -52,8 +56,15 @@ public class Player {
         try {
             Gson gson = new Gson();
             Reader reader = Files.newBufferedReader(Paths.get("PLAYERS.json"));
-            ArrayList<Player> allPlayers = gson.fromJson(reader, ArrayList.class);
-            if (allPlayers != null) Player.allPlayers = (ArrayList<Player>) allPlayers;
+            ArrayList<Player> allPlayers = new ArrayList<>();
+                    JsonArray jsonArray = gson.fromJson(reader, JsonArray.class);
+            if (jsonArray != null)
+            {
+                for (JsonElement jsonElement : jsonArray) {
+                    allPlayers.add(gson.fromJson(jsonElement,Player.class));
+                }
+                Player.allPlayers = allPlayers;
+            }
             reader.close();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -160,9 +171,9 @@ public class Player {
         return currentPlayer;
     }
 
-    public Map getMapById(int id) {
+    public Map getMapByName(String name) {
         for (Map map1 : maps)
-            if (map1.getId() == id)
+            if (map1.getMapName().equals(name))
                 return map1;
         return null;
     }

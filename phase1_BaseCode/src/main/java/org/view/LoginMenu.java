@@ -24,6 +24,8 @@ public class LoginMenu {
             else if ((matcher = SignUpCommands.getMatcher(input, SignUpCommands.FORGET_PASSWORD)) != null) {
                 String username = matcher.group("username");
                 forgetPassword(username);
+            } else {
+                System.out.println("invalid command!");
             }
         }
     }
@@ -32,21 +34,29 @@ public class LoginMenu {
         //TODO: handle random password
         String output = Menu.getLoginController().getSecurityQuestion(username);
         System.out.println(output);
-        if (!output.equals(SignUpMessages.USER_DOES_NOT_EXIST.getMessage())) {
-            String securityAnswer = Menu.getScanner().nextLine();
-            if (SignUpCommands.getMatcher(securityAnswer,SignUpCommands.BACK) != null) return;
-            output = Menu.getLoginController().checkSecurityAnswer(securityAnswer);
-            System.out.println(output);
-            if (!output.equals(SignUpMessages.ANSWER_DOES_NOT_MATCH.getMessage())) {
-                while (true) {
-                    String newPassword = Menu.getScanner().nextLine();
-                    Matcher matcher = SignUpCommands.getMatcher(newPassword,SignUpCommands.SET_NEW_PASSWORD);
-                    if (matcher != null) {
-                        SignUpMessages signUpMessage = Menu.getLoginController().setNewPassword(matcher);
-                        System.out.println(signUpMessage.getMessage());
-                        if (signUpMessage.equals(SignUpMessages.PASSWORD_CHANGED)) return;
-                    }else if (SignUpCommands.getMatcher(newPassword, SignUpCommands.BACK) != null) return;
-                    else System.out.println("Invalid command");
+        if (!output.equals(SignUpMessages.USER_NOT_FOUND.getMessage())) {
+            while (true) {
+                String securityAnswer = Menu.getScanner().nextLine();
+                if (SignUpCommands.getMatcher(securityAnswer, SignUpCommands.BACK) != null) {
+                    System.out.println("You are in login menu now!");
+                    return;
+                }
+                output = Menu.getLoginController().checkSecurityAnswer(securityAnswer.replaceAll("\"", ""));
+                System.out.println(output);
+                if (!output.contains(SignUpMessages.ANSWER_DOES_NOT_MATCH.getMessage())) {
+                    while (true) {
+                        String newPassword = Menu.getScanner().nextLine();
+                        Matcher matcher = SignUpCommands.getMatcher(newPassword, SignUpCommands.SET_NEW_PASSWORD);
+                        if (matcher != null) {
+                            SignUpMessages signUpMessage = Menu.getLoginController().setNewPassword(matcher);
+                            System.out.println(signUpMessage.getMessage());
+                            if (signUpMessage.equals(SignUpMessages.PASSWORD_CHANGED)) return;
+                        } else if (SignUpCommands.getMatcher(newPassword, SignUpCommands.BACK) != null) {
+                            System.out.println("You are in login menu now!");
+                            return;
+                        }
+                        else System.out.println("Invalid command");
+                    }
                 }
             }
         }
