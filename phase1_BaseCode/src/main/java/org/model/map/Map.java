@@ -8,7 +8,7 @@ public class Map {
     private static final String[] allGroundTextures = {"GROUND", "SANDY_GROUND", "STONE_GROUND", "IRON_GROUND", "GRASSLAND",
             "LOW_MEADOW", "HIGH_MEADOW", "OIL", "PLAIN", "LOW_WATER", "RIVER", "SMALL_POND", "LARGE_POND", "BEACH", "SEA"};
     private static final String[] allTrees = {"LITTLE_CHERRY", "LARGE_CHERRY", "OLIVE", "COCONUT", "DATE"};
-    private static final String[] availableColors = {"red", "green", "blue", "yellow", "purple","orange"};
+    private static final String[] availableColors = {"red", "green", "blue", "yellow", "purple","orange", "white","black"};
     private ArrayList<String> allColors = new ArrayList<>();
     private static Map currentMap;
     private final String mapName;

@@ -34,7 +34,9 @@ public class EnvironmentController {
         String type = matcher.group("type");
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
         if (!Map.validGroundTexture(type)) return MapMenuMessages.INVALID_GROUND_TEXTURE;
-        Map.getCurrentMap().getMapTile(x,y).setTexture(type);
+        MapTile mapTile = Map.getCurrentMap().getMapTile(x,y);
+        if (mapTile.getTree() != null) return MapMenuMessages.TREE_EXIST;
+        mapTile.setTexture(type);
         return MapMenuMessages.SET_TEXTURE_SUCCESSFUL;
     }
 
@@ -47,9 +49,13 @@ public class EnvironmentController {
         if (!checkCoordinate(x1,y1) || !checkCoordinate(x2,y2) || x2 < x1 || y2 < y1)
             return MapMenuMessages.INCORRECT_COORDINATES;
         if (!Map.validGroundTexture(type)) return MapMenuMessages.INVALID_GROUND_TEXTURE;
-        for (int i = x1; i < x2; i++)
-            for (int j = y1; j < y2; j++)
-                Map.getCurrentMap().getMapTile(i,j).setTexture(type);
+        for (int i = x1; i < x2; i++) {
+            for (int j = y1; j < y2; j++) {
+                MapTile mapTile = Map.getCurrentMap().getMapTile(i,j);
+                if (mapTile.getTree() != null) return MapMenuMessages.TREE_EXIST;
+                mapTile.setTexture(type);
+            }
+        }
         return MapMenuMessages.SET_TEXTURE_SUCCESSFUL;
     }
 
@@ -57,7 +63,9 @@ public class EnvironmentController {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
-        Map.getCurrentMap().getMapTile(x,y).setTexture("GROUND");
+        MapTile mapTile = Map.getCurrentMap().getMapTile(x,y);
+        mapTile.setTexture("GROUND");
+        mapTile.setTree(null);
         return MapMenuMessages.TILE_CLEAR_SUCCESSFUL;
     }
 
@@ -67,9 +75,11 @@ public class EnvironmentController {
         String direction = matcher.group("direction");
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
         if ((direction = getDirection(direction)) == null) return MapMenuMessages.INVALID_DIRECTION;
-        if (!Map.getCurrentMap().getMapTile(x,y).getTexture().equals("GROUND"))
+        MapTile mapTile = Map.getCurrentMap().getMapTile(x,y);
+        if (!mapTile.getTexture().equals("GROUND"))
             return MapMenuMessages.ROCK_GROUND_TEXTURE_ERROR;
-        Map.getCurrentMap().getMapTile(x,y).setTexture("ROCK-"+direction);
+        if (mapTile.getTree() != null) return MapMenuMessages.TREE_EXIST;
+        mapTile.setTexture("ROCK-"+direction);
         return MapMenuMessages.ROCK_SET_SUCCESSFUL;
     }
 
@@ -80,7 +90,9 @@ public class EnvironmentController {
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
         if (!Map.validTreeType(type)) return MapMenuMessages.INVALID_TREE_TYPE;
         if (!checkValidTreeTexture(x,y)) return MapMenuMessages.TREE_GROUND_TEXTURE_ERROR;
-        Map.getCurrentMap().getMapTile(x,y).setTree(type);
+        MapTile mapTile = Map.getCurrentMap().getMapTile(x,y);
+        if (mapTile.getTree() != null) return MapMenuMessages.TREE_EXIST;
+        mapTile.setTree(type);
         return MapMenuMessages.SET_TREE_SUCCESSFUL;
     }
 
@@ -95,8 +107,10 @@ public class EnvironmentController {
         if (mapTile.isHeadQuarter() || mapTile.getBuilding() != null || mapTile.getSoldier() != null)
             return MapMenuMessages.USED_TILE;
         if (!mapTile.getTexture().equals("GROUND")) return MapMenuMessages.INVALID_GROUND_TEXTURE;
+        if (mapTile.getTree() != null) return MapMenuMessages.TREE_EXIST;
         mapTile.setOwnerColor(color);
         mapTile.setHeadQuarter();
+        Map.getCurrentMap().addUsedColor(color);
         return MapMenuMessages.HEADQUARTER_SET;
     }
 
@@ -131,6 +145,7 @@ public class EnvironmentController {
         if (mapTile.isHeadQuarter() || mapTile.getBuilding() != null || mapTile.getSoldier() != null)
             return MapMenuMessages.USED_TILE;
         if (!mapTile.getTexture().equals("GROUND")) return MapMenuMessages.INVALID_GROUND_TEXTURE;
+        if (mapTile.getTree() != null) return MapMenuMessages.TREE_EXIST;
         if (BuildingsDictionary.getDictionaryByName(buildingType) == null)
             return MapMenuMessages.INVALID_BUILDING_TYPE;
         mapTile.setOwnerColor(color);

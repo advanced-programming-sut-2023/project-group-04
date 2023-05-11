@@ -23,7 +23,8 @@ public enum MapMenuMessages {
     INVALID_SOLDIER_TYPE("Entered Soldier type is invalid!"),
     DROP_UNIT_SUCCESS("Unit dropped successfully!"),
     INVALID_BUILDING_TYPE("Entered building type is invalid!"),
-    DROP_BUILDING_SUCCESS("building dropped successfully!");
+    DROP_BUILDING_SUCCESS("Building dropped successfully!"),
+    TREE_EXIST("A tree exist in this block!");
 
     private final String message;
     private MapMenuMessages(String message) {
