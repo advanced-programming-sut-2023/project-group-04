@@ -8,10 +8,8 @@ public enum MainMenuCommands {
     ENTER_PROFILE_MENU("\\s*enter\\s+profile\\s+menu\\s*"),
     ENTER_ENVIRONMENT_MENU("\\s*enter\\s+environment\\s+menu\\s*"),
     ENTER_SHOP_MENU("\\s*enter\\s+shop\\s+menu\\s*"),
-    START_GAME("\\s*start\\s+game\\s+-playerNumber\\s+(?<playerNumbers>\\d+)\\s+" +
-            "-user\\s+(?<username>[^\"\\s]+|\"[^\"]+\")+"),
-    //TODO fix start game regex keyhaaaaaaan!
-    SHOW_MAP("\\s*show\\s+map\\s+-x\\s+(?<xAsis>\\d+)\\s+-y\\s+(?<yAsis>\\d+)\\s*"),
+    START_GAME("\\s*start\\s+game(?=.*-n (?<mapName>\"[^\\\"]*\"|[^\\s\\\"]*))" +
+            "(?=.*-users\\s+{(?<allUsers>[^\\s\\\"]+)})(\\s+((-n (\"[^\\\"]*\"|[^\\s\\\"]*))|(-users\\s+{\\S+}))){2}\\s*"),
     BACK("\\s*back\\s*"),
     ;
     private final String regex;

@@ -81,43 +81,43 @@ public class MapController {
 
     public String changeMapView(Matcher matcher) {
         int x = getXPos(matcher);
-        int y = getYpos(matcher);
+        int y = getYPos(matcher);
         return showMap(x, y);
-    }
-
-    private int getYpos(Matcher matcher) {
-        int y = 0;
-        if (matcher.group("right") != null) {
-            if (matcher.group("rightNumber") != null)
-                y += Integer.parseInt(matcher.group("rightNumber"));
-            else y += 1;
-        }
-        if (matcher.group("left") != null) {
-            if (matcher.group("leftNumber") != null)
-                y -= Integer.parseInt(matcher.group("leftNumber"));
-            else y -= 1;
-        }
-        return y;
     }
 
     private int getXPos(Matcher matcher) {
         int x = 0;
-        if (matcher.group("down") != null) {
-            if (matcher.group("downNumber") != null)
-                x += Integer.parseInt(matcher.group("downNumber"));
+        if (matcher.group("right") != null) {
+            if (matcher.group("rightNumber") != null)
+                x += Integer.parseInt(matcher.group("rightNumber"));
             else x += 1;
         }
-        if (matcher.group("up") != null) {
-            if (matcher.group("upNumber") != null)
-                x -= Integer.parseInt(matcher.group("upNumber"));
+        if (matcher.group("left") != null) {
+            if (matcher.group("leftNumber") != null)
+                x -= Integer.parseInt(matcher.group("leftNumber"));
             else x -= 1;
         }
         return x;
     }
 
+    private int getYPos(Matcher matcher) {
+        int y = 0;
+        if (matcher.group("down") != null) {
+            if (matcher.group("downNumber") != null)
+                y += Integer.parseInt(matcher.group("downNumber"));
+            else y += 1;
+        }
+        if (matcher.group("up") != null) {
+            if (matcher.group("upNumber") != null)
+                y -= Integer.parseInt(matcher.group("upNumber"));
+            else y -= 1;
+        }
+        return y;
+    }
+
     public String showMapDetail(Matcher matcher) {
-        int xAsis = Integer.parseInt(matcher.group("xAsis"));
-        int yAsis = Integer.parseInt(matcher.group("yAsis"));
+        int xAsis = Integer.parseInt(matcher.group("xAsis")) - 1;
+        int yAsis = Integer.parseInt(matcher.group("yAsis")) - 1;
         Game currentGame = Game.getCurrentGame();
         MapCell[][] map = currentGame.getMap();
         if (xAsis >= map.length || yAsis >= map.length)

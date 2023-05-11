@@ -23,6 +23,10 @@ public enum GameMessages {
     INCORRECT_BUILDING_TYPE("Building type is incorrect!"),
     SUCCESSFUL_DROP("building dropped successfully!"),
     SUCCESSFUL_REPAIR("Repairing was successfully!"),
+    MAP_NOT_EXIST("No map with entered id exist!"),
+    USER_NOT_EXIST("Any user with this username doesn't exist!"),
+    NOT_ENOUGH_HEAD_QUARTER("Head quarters not enough for this players!"),
+    GAME_STARTED("Game successfully started!")
     ;
 
     private final String message;

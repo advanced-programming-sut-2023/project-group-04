@@ -3,6 +3,7 @@ package org.controller;
 import org.model.Empire;
 import org.model.Game;
 import org.model.MapCell;
+import org.model.Player;
 import org.model.buildings.*;
 import org.model.map.Map;
 import org.model.person.*;
@@ -661,4 +662,37 @@ public class GameController {
         return x > 0 && x <= mapSize && y > 0 && y <= mapSize;
     }
 
+    public GameMessages startGame(Matcher matcher) {
+        String mapName = matcher.group("mapName").replaceAll("\"", "");
+        if (Player.getCurrentPlayer().getMapByName(mapName) == null)
+            return GameMessages.MAP_NOT_EXIST;
+        String allUsers = matcher.group("allUsers");
+        String[] players;
+        if (allUsers.contains("/")) players = allUsers.split("/");
+        else players = new String[]{allUsers};
+        if (!validPlayers(players))
+            return GameMessages.USER_NOT_EXIST;
+        ArrayList<Empire> allEmpires = getEmpiresByPlayersName(players);
+        int colorNumbers = Player.getCurrentPlayer().getMapByName(mapName).getAllColors().size();
+        if (colorNumbers != allEmpires.size())
+            return GameMessages.NOT_ENOUGH_HEAD_QUARTER;
+        new Game(allEmpires, mapName);
+        return GameMessages.GAME_STARTED;
+    }
+
+    private boolean validPlayers(String[] players) {
+        for (String playerUsername : players)
+            if (Player.getPlayerByUsername(playerUsername) == null)
+                return false;
+        return true;
+    }
+
+    private ArrayList<Empire> getEmpiresByPlayersName(String[] players) {
+        ArrayList<Empire> empires = new ArrayList<>();
+        empires.add(new Empire(Player.getCurrentPlayer()));
+        for (String playerUsername : players) {
+            empires.add(new Empire(Player.getPlayerByUsername(playerUsername)));
+        }
+        return empires;
+    }
 }
