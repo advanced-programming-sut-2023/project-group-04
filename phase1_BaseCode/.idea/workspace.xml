@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="update game controller!">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_1_2023_5_55_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_1_2023_5_55_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/EnvironmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/EnvironmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/map/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/MapMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/MapMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Empire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/Empire.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683800395607</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="GameMessages updated!">
+      <created>1683900660881</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1683900660881</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -172,6 +180,11 @@
     <MESSAGE value="merged with usef's code!" />
     <MESSAGE value="environment menu updated!" />
     <MESSAGE value="update game controller!" />
-    <option name="LAST_COMMIT_MESSAGE" value="update game controller!" />
+    <MESSAGE value="GameMessages updated!" />
+    <option name="LAST_COMMIT_MESSAGE" value="GameMessages updated!" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/phase1_BaseCode$RegistrationTest_emailFormat.ic" NAME="RegistrationTest.emailFormat Coverage Results" MODIFIED="1683501851709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/phase1_BaseCode$RegistrationTest.ic" NAME="RegistrationTest Coverage Results" MODIFIED="1683644025429" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

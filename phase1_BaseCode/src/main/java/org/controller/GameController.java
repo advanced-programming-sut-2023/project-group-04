@@ -562,8 +562,8 @@ public class GameController {
                 for (int i = 0; i < moveTileNumber; i++) {
                     if (path.get(i).getBuilding() instanceof TrapBuilding) {
                         TrapBuilding building = (TrapBuilding) path.get(i).getBuilding();
-                        if (person.getHp() > building.getDamage())
-                            person.damagePerson(building.getDamage());
+                        person.damagePerson(building.getDamage());
+                        kill(person);
                     }
                 }
                 goal.addPeople(person);
@@ -581,8 +581,12 @@ public class GameController {
     }
 
     private void kill(Person person) {
-        if (person.getHp() < 0)
-
+        if (person.getHp() < 0) {
+            person.getMapCell().removePeople(person);
+            Game.getCurrentGame().removeMovedPerson(person);
+            if (person instanceof Soldier) Game.getCurrentGame().removeAttackingSoldier((Soldier) person);
+            person.getPersonOwner().removePerson(person);
+        }
     }
 
     private void fights() {
@@ -590,19 +594,21 @@ public class GameController {
             for (MapCell mapCell : Game.getCurrentGame().getMap()[i]) {
                 if (mapCell.getPeople() != null) {
                     for (Empire empire : Game.getCurrentGame().getAllEmpires()) {
-                        ArrayList<Soldier> thisEmpire = new ArrayList<>();
-                        ArrayList<Soldier> otherEmpires = new ArrayList<>();
+                        ArrayList<Soldier> thisEmpireSoldiers = new ArrayList<>();
+                        ArrayList<Soldier> otherEmpiresSoldiers = new ArrayList<>();
                         for (Person person : mapCell.getPeople()) {
                             if (person instanceof Soldier) {
                                 Soldier soldier = (Soldier) person;
-                                int index = new Random().nextInt(otherEmpires.size());
-                                if (person.getPersonOwner().equals(empire)) thisEmpire.add(soldier);
-                                else otherEmpires.add(index, soldier);
+                                int index = new Random().nextInt(otherEmpiresSoldiers.size());
+                                if (person.getPersonOwner().equals(empire)) thisEmpireSoldiers.add(soldier);
+                                else otherEmpiresSoldiers.add(index, soldier);
                             }
                         }
-                        for (int j = 0; j < thisEmpire.size(); j++) {
-                            int damage = thisEmpire.get(j).getDefensivePower() - otherEmpires.get(j).getDefensivePower();
-                            if (damage > 0) otherEmpires.get(j).damagePerson(damage);
+                        for (int j = 0; j < thisEmpireSoldiers.size(); j++) {
+                            int damage = thisEmpireSoldiers.get(j).getDefensivePower() -
+                                    otherEmpiresSoldiers.get(j).getDefensivePower();
+                            otherEmpiresSoldiers.get(j).damagePerson(damage);
+                            kill(otherEmpiresSoldiers.get(j));
                         }
                     }
                 }
@@ -627,34 +633,56 @@ public class GameController {
 
     private void updateThingsWithRate() {
         for (Empire empire : Game.getCurrentGame().getAllEmpires()) {
-            //food
-            int foodTypes = 0;
-            for (String food : empire.getFood().keySet())
-                if (empire.getFood().get(food) != 0) foodTypes++;
-            empire.changePopularity("food", foodTypes - 1);
-            empire.changePopularity("food", 4 * empire.getFoodRate());
-            int requiredFood = (int) ((empire.getFoodRate() + 2) * empire.getPopulation().size() / 2);
-            while (requiredFood > 0) {
-                for (String food : empire.getFood().keySet()) {
-                    if (empire.getFoodAmount(food) > 0) {
-                        empire.changeFoodAmount(food, -1);
-                        requiredFood--;
-                    }
-                }
-            }
-            //tax
-            int taxRate = empire.getTaxRate();
-            int totalTax = (int) ((Math.abs(taxRate) * 0.2 + 0.4) * empire.getPopulation().size());
-            if (taxRate < 0) totalTax *= (-1);
-            empire.changeResourceAmount("gold", totalTax);
-            int totalPopularity = (-2) * taxRate + (totalTax <= 0 ? 1 : 0);
-            empire.changePopularity("tax", totalPopularity);
-            //fear
+            updateFood(empire);
+            updateTax(empire);
             empire.changePopularity("fear", -empire.getFearRate());
-            // religion
-            //todo : update popularity by buildings that add popularity
+            updateReligion(empire);
         }
     }
+
+    private void updateFood(Empire empire) {
+        int foodTypes = 0;
+        for (String food : empire.getFood().keySet())
+            if (empire.getFood().get(food) != 0) foodTypes++;
+        empire.changePopularity("food", foodTypes - 1);
+        empire.changePopularity("food", 4 * empire.getFoodRate());
+        int requiredFood = (int) ((empire.getFoodRate() + 2) * empire.getPopulation().size() / 2);
+        while (requiredFood > 0) {
+            for (String food : empire.getFood().keySet()) {
+                if (empire.getFoodAmount(food) > 0) {
+                    empire.changeFoodAmount(food, -1);
+                    requiredFood--;
+                }
+            }
+        }
+    }
+
+    private void updateTax(Empire empire) {
+        int taxRate = empire.getTaxRate();
+        int totalTax = (int) ((Math.abs(taxRate) * 0.2 + 0.4) * empire.getPopulation().size());
+        if (taxRate < 0) totalTax *= (-1);
+        empire.changeResourceAmount("gold", totalTax);
+        int totalPopularity = (-2) * taxRate + (totalTax <= 0 ? 1 : 0);
+        empire.changePopularity("tax", totalPopularity);
+    }
+
+    private void updateReligion(Empire empire) {
+        for (int i = 0; i < Game.getCurrentGame().getMapSize(); i++) {
+            for (MapCell mapCell : Game.getCurrentGame().getMap()[i]) {
+                Building building = mapCell.getBuilding();
+                if (building != null) {
+                    BuildingsDictionary buildingsDictionary = building.getBuildingDictionary();
+                    if (buildingsDictionary.equals(BuildingsDictionary.CHURCH))
+                        empire.changePopularity("religion", 1);
+                    if (buildingsDictionary.equals(BuildingsDictionary.CATHEDRAL))
+                        empire.changePopularity("religion", 2);
+                    if (buildingsDictionary.equals(BuildingsDictionary.INN))
+                        empire.changePopularity("ale", 1);
+                }
+            }
+        }
+    }
+
 
     private void buildingOperations() {
         for (int i = 0; i < Game.getCurrentGame().getMapSize(); i++) {

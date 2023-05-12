@@ -56,6 +56,7 @@ public class Empire {
         this.popularity.put("religion", 0);
         this.popularity.put("tax", 0);
         this.popularity.put("fear", 0);
+        this.popularity.put("ale", 0);
     }
 
     private void initializeResource() {
