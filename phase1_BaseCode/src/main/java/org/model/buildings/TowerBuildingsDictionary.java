@@ -1,11 +1,11 @@
 package org.model.buildings;
 
 public enum TowerBuildingsDictionary {
-    LOOKOUT_TOWER(BuildingsDictionary.LOOKOUT_TOWER, 0, 0, 0),
-    PERIMETER_TOWER(BuildingsDictionary.PERIMETER_TOWER, 0, 0, 0),
-    DEFENCE_TURRET(BuildingsDictionary.DEFENCE_TURRET, 0, 0, 0),
-    SQUARE_TOWER(BuildingsDictionary.SQUARE_TOWER, 0, 0, 0),
-    ROUND_TOWER(BuildingsDictionary.ROUND_TOWER, 0, 0, 0);
+    LOOKOUT_TOWER(BuildingsDictionary.LOOKOUT_TOWER, 3, 0, 8),
+    PERIMETER_TOWER(BuildingsDictionary.PERIMETER_TOWER, 3, 0, 8),
+    DEFENCE_TURRET(BuildingsDictionary.DEFENCE_TURRET, 5, 0, 10),
+    SQUARE_TOWER(BuildingsDictionary.SQUARE_TOWER, 5, 0, 12),
+    ROUND_TOWER(BuildingsDictionary.ROUND_TOWER, 5, 0, 15);
 
     private BuildingsDictionary buildingDictionary;
     private int fireRange;

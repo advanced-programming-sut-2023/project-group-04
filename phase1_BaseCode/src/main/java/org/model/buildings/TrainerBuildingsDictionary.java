@@ -4,13 +4,38 @@ import java.util.ArrayList;
 
 public enum TrainerBuildingsDictionary {
     BARRACKS(BuildingsDictionary.BARRACKS, new ArrayList<>() {
+        {
+            add("archer");
+            add("crossbowman");
+            add("spearman");
+            add("pikeman");
+            add("maceman");
+            add("swordsman");
+            add("knight");
+        }
     }),
     MERCENARY_POST(BuildingsDictionary.MERCENARY_POST, new ArrayList<>() {
+        {
+            add("arabianbow");
+            add("slave");
+            add("slinger");
+            add("assassin");
+            add("horse_archer");
+            add("arabian_swordsman");
+            add("fire_thrower");
+        }
     }),
     ENGINEER_GUILD(BuildingsDictionary.ENGINEER_GUILD, new ArrayList<>() {
+        {
+            add("engineer");
+            add("ladderman");
+        }
+    }),
+    TUNNELER_GUILD(BuildingsDictionary.TUNNELER_GUILD, new ArrayList<>() {
+        {
+            add("tunneler");
+        }
     });
-//    TUNNELER_GUILD(BuildingsDictionary.TUNNELER_GUILD, new ArrayList<>() {
-//    });
 
     private BuildingsDictionary buildingDictionary;
     private ArrayList<String> availableSoldiers;

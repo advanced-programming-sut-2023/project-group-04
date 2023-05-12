@@ -618,7 +618,7 @@ public class GameController {
                     Game.getCurrentGame().getMapCellByAddress(x, y - 1)
             };
             for (MapCell nextNode : neighbors) {
-                if (!visited.contains(nextNode) && checkNode(x,y, nextNode)) {
+                if (!visited.contains(nextNode) && checkNode(x, y, nextNode)) {
                     visited.add(nextNode);
                     predecessor.put(nextNode, currentNode);
                     queue.add(nextNode);

@@ -2,8 +2,8 @@ package org.model.buildings;
 
 public enum TrapBuildingsDictionary {
 
-    KILLING_PIT(BuildingsDictionary.KILLING_PIT, 0),
-    PITCH_DITCH(BuildingsDictionary.KILLING_PIT, 0);
+    KILLING_PIT(BuildingsDictionary.KILLING_PIT, 300),
+    PITCH_DITCH(BuildingsDictionary.PITCH_DITCH, 300);
 
     private BuildingsDictionary buildingDictionary;
     private int damage;
