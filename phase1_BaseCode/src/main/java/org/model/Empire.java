@@ -41,15 +41,14 @@ public class Empire {
     }
 
     private void initializeWeaponAndArmor() {
-        this.weaponAndArmour.put("",0);
-        this.weaponAndArmour.put("",0);
-        this.weaponAndArmour.put("",0);
-        this.weaponAndArmour.put("",0);
-        this.weaponAndArmour.put("",0);
-        this.weaponAndArmour.put("",0);
-        this.weaponAndArmour.put("",0);
-        this.weaponAndArmour.put("",0);
-        //todo: add weapon and armour --> keyhan
+        this.weaponAndArmour.put("bow", 0);
+        this.weaponAndArmour.put("crossbow", 0);
+        this.weaponAndArmour.put("spear", 0);
+        this.weaponAndArmour.put("pike", 0);
+        this.weaponAndArmour.put("mace", 0);
+        this.weaponAndArmour.put("sword", 0);
+        this.weaponAndArmour.put("leather armour", 0);
+        this.weaponAndArmour.put("metal armour", 0);
     }
 
     private void initializePopularity() {

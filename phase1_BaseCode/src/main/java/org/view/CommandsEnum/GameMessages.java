@@ -3,6 +3,7 @@ package org.view.CommandsEnum;
 public enum GameMessages {
     INVALID_POSITION("Position is invalid!"),
     UNSUITABLE("Ground texture isn't suitable for drop this building!"),
+    EMPTY_FIELD("A field is empty!"),
     INVALID_FOOD_RATE("Please enter a <integer> number between [-2,2]!"),
     INVALID_TAX_RATE("Please enter a <integer> number between [-3,8]!"),
     INVALID_FEAR_RATE("Please enter a <integer> number between [-5,5]!"),
@@ -30,7 +31,7 @@ public enum GameMessages {
     NOT_ENOUGH_HEAD_QUARTER("Head quarters not enough for this players!"),
     GAME_STARTED("Game successfully started!"),
     INVALID_BUILDING_FOR_CREATE("invalid building type for creating unit!"),
-    INVALID_UNIT_TYPE("invalid unit type!"),
+    INVALID_UNIT_TYPE("Invalid unit type!"),
     INVALID_TROOP_COUNT("invalid troop count!"),
     NOT_ENOUGH_GOLD("Your gold isn't enough!"),
     SUCCESSFUL_CREATE_UNIT("Create unit was successful!"),
@@ -44,7 +45,7 @@ public enum GameMessages {
     INVALID_MOVE_NAME("invalid mode name"),
     SUCCESSFUL_SET_MODE("Setting mode was successfully!"),
     NOT_SOLDIER("Selected unit is not soldier!"),
-    FEW_RANGE("selected soldiers haven't long range!"),
+    FEW_RANGE("Selected soldiers haven't long range!"),
     AIM_OUT_OF_RANGE("Aim out of range!"),
     SUCCESSFUL_ATTACK("Attacking was successful!"),
     NOT_ENGINEER("Selected unit isn't engineer!"),
@@ -54,7 +55,9 @@ public enum GameMessages {
     NOT_TUNNELER("Selected unit isn't tunneler!"),
     SET_TUNNEL_SUCCESSFUL("Setting tunnel for tunneler was successful!"),
     SUCCESSFUL_DISBAND("Unit disbanded!"),
-    NO_ENEMY("no enemy or building in target tile!");
+    NO_ENEMY("No enemy or building in target tile!"),
+    INCORRECT_OUTPUT("This building can't produce selected good!"),
+    SET_OUTPUT_SUCCESSFUL("Selected object set successful!");
 
     private final String message;
 

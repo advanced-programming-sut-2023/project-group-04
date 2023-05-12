@@ -423,7 +423,7 @@ public class GameController {
             Soldier soldier = (Soldier) person;
             int distance = (int) Math.sqrt(Math.pow(x - soldier.getMapCell().getX(), 2) +
                     Math.pow(y - soldier.getMapCell().getY(), 2));
-            if (soldier.getSoldiersDictionary().getFireRange() > distance){
+            if (soldier.getSoldiersDictionary().getFireRange() > distance) {
                 inRange = true;
                 soldier.setAim(Game.getCurrentGame().getMapCellByAddress(x, y));
             }
@@ -509,6 +509,7 @@ public class GameController {
     }
 
     public GameMessages engineerBuild(Matcher matcher) {
+        //TODO : KIR TO IN FUNCTION
         return null;
     }
 
@@ -525,6 +526,21 @@ public class GameController {
             empire.addPerson(newPerson);
         }
         return GameMessages.SUCCESSFUL_DISBAND;
+    }
+
+    public GameMessages setOutput(Matcher matcher) {
+        if (matcher.group("output") == null)
+            return GameMessages.EMPTY_FIELD;
+        String output = matcher.group("output").replaceAll("\"", "");
+        Building building = Game.getCurrentGame().getSelectedBuilding();
+        if (!(building instanceof ProductiveBuilding))
+            return GameMessages.INCORRECT_BUILDING_TYPE;
+
+        ProductiveBuilding productiveBuilding = (ProductiveBuilding) building;
+        if (!productiveBuilding.getDictionary().getOutputResource().contains(output))
+            return GameMessages.INCORRECT_OUTPUT;
+        productiveBuilding.setOutputResource(output);
+        return GameMessages.SET_OUTPUT_SUCCESSFUL;
     }
 
     public void nextTurn() {
@@ -544,7 +560,11 @@ public class GameController {
                 int moveTileNumber = Math.min(person.getSpeed(), path.size() - 1);
                 MapCell goal = path.get(moveTileNumber);
                 for (int i = 0; i < moveTileNumber; i++) {
-                    //todo : handle the traps
+                    if (path.get(i).getBuilding() instanceof TrapBuilding) {
+                        TrapBuilding building = (TrapBuilding) path.get(i).getBuilding();
+                        if (person.getHp() > building.getDamage())
+                            person.damagePerson(building.getDamage());
+                    }
                 }
                 goal.addPeople(person);
                 person.changePosition(goal);
@@ -558,6 +578,11 @@ public class GameController {
                 }
             }
         }
+    }
+
+    private void kill(Person person) {
+        if (person.getHp() < 0)
+
     }
 
     private void fights() {
@@ -632,6 +657,54 @@ public class GameController {
     }
 
     private void buildingOperations() {
+        for (int i = 0; i < Game.getCurrentGame().getMapSize(); i++) {
+            for (MapCell mapCell : Game.getCurrentGame().getMap()[i]) {
+                Building building = mapCell.getBuilding();
+                if (!(building instanceof ProductiveBuilding)) continue;
+                ProductiveBuilding productiveBuilding = ((ProductiveBuilding) building);
+                ProductiveBuildingsDictionary dictionary = productiveBuilding.getDictionary();
+                String input = dictionary.getInputResource();
+                String output = productiveBuilding.getOutputResource();
+                int rate = dictionary.getRate();
+                Empire ownerEmpire = productiveBuilding.getBuildingOwner();
+                buildingProduction(input, output, rate, ownerEmpire);
+            }
+        }
+    }
+
+    private void buildingProduction(String input, String output, int rate, Empire owner) {
+        ArrayList<StorageBuilding> storageBuildings;
+        if (input != null) {
+            if (owner.getResourceAmount(input) < 1)
+                return;
+            owner.changeResourceAmount(input, -1);
+            storageBuildings = getStorageBuildingsByObjectName(input, owner);
+            for (StorageBuilding storageBuilding : storageBuildings) {
+                if (storageBuilding.getResourceAmount(input) > 0)
+                    storageBuilding.changeResourcesAmount(input, -1);
+            }
+        }
+        storageBuildings = getStorageBuildingsByObjectName(output, owner);
+        owner.changeResourceAmount(output, rate);
+        for (StorageBuilding storageBuilding : storageBuildings) {
+            int freeSpace = storageBuilding.getFreeSpace();
+            if (freeSpace >= rate) {
+                storageBuilding.changeResourcesAmount(output, rate);
+                break;
+            } else if (freeSpace > 1) {
+                storageBuilding.changeResourcesAmount(output, freeSpace);
+                rate -= freeSpace;
+            }
+        }
+    }
+
+    private ArrayList<StorageBuilding> getStorageBuildingsByObjectName(String input, Empire owner) {
+        if (StorageBuildingsDictionary.STOCKPILE.getObjects().contains(input))
+            return owner.getAllStockPiles();
+        else if (StorageBuildingsDictionary.ARMOURY.getObjects().contains(input))
+            return owner.getAllArmouries();
+        else
+            return owner.getAllGranaries();
 
     }
 

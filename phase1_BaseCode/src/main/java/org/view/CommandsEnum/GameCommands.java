@@ -41,6 +41,8 @@ public enum GameCommands {
             "(\\s*(-x\\s+([\\d]*)|-y\\s+([\\d]*))){2}\\s*$"),
     BUILD_EQUIPMENT("^\\s*build(?=.*-q\\s+(?<name>\"[^\"]*\"|[^\\s\"]*))" +
             "(\\s*(-q\\s+(\"[^\"]*\"|[^\\s\"]*))){1}\\s*$"),
+    SET_OUTPUT("^\\s*set\\s+output(?=.*-o\\s+(?<output>\"[^\"]*\"|[^\\s\"]*))" +
+            "(\\s*(-q\\s+(\"[^\"]*\"|[^\\s\"]*))){1}\\s*$"),
     DISBAND_UNIT("^\\s*disband\\s+unit\\s*$");
 
 

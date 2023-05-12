@@ -71,8 +71,8 @@ public class Person {
         return speed;
     }
 
-    public void damagePerson(int hp) {
-        this.hp -= hp;
+    public void damagePerson(int damage) {
+        this.hp -= damage;
     }
 
     public int getMode() {
