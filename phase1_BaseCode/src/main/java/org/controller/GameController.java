@@ -108,7 +108,7 @@ public class GameController {
             if (texture.equals(invalidTexture)) return false;
         if (texture.contains("ROCK") || !mapCell.getTree().equals("LITTLE_CHERRY")) return false;
         ProductiveBuildingsDictionary dictionary = ProductiveBuildingsDictionary.getDictionaryByName(buildingName);
-        return dictionary == null || dictionary.getGroundTexture().contains(texture);
+        return dictionary == null || dictionary.getAcceptableTexture().contains(texture);
     }
 
     private boolean checkDrawBridge(int x, int y, boolean upDirection) {
@@ -170,6 +170,8 @@ public class GameController {
         if (building.getBuildingDictionary().equals(BuildingsDictionary.SMALL_STONE_GATEHOUSE) ||
                 building.getBuildingDictionary().equals(BuildingsDictionary.LARGE_STONE_GATEHOUSE))
             Game.getCurrentGame().getCurrentEmpire().activateTaxRate();
+        if (building.getBuildingDictionary().equals(BuildingsDictionary.MARKET))
+            Game.getCurrentGame().activeMarket();
     }
 
     private boolean buyBuilding(Empire empire, HashMap<String, Integer> prices) {

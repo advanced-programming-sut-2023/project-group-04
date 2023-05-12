@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_1_2023_5_55_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_1_2023_5_55_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/EnvironmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/EnvironmentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/buildings/ProductiveBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/buildings/ProductiveBuilding.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/buildings/StorageBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/buildings/StorageBuilding.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/person/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/person/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/person/Soldier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/person/Soldier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/GameMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/GameMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/MapMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/MapMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +45,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "TODO_SCOPE": "All Places",
-    "git-widget-placeholder": "yousefBranchPhase1",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "E:/InteliJ/project-clone/phase1_BaseCode",
     "project.structure.last.edited": "Project",

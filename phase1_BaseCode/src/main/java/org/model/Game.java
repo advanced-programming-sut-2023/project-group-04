@@ -20,6 +20,7 @@ public class Game {
     private ArrayList<Person> selectedUnit;
     private final ArrayList<Person> toMovePeople;
     private final ArrayList<Soldier> attackingSoldiers;
+    private boolean activeMarket;
 
     public Game(ArrayList<Empire> allEmpires, String mapName) {
         currentGame = this;
@@ -163,5 +164,13 @@ public class Game {
 
     public int getMapSize() {
         return map.length;
+    }
+
+    public boolean isActiveMarket() {
+        return activeMarket;
+    }
+
+    public void activeMarket() {
+        this.activeMarket = true;
     }
 }
