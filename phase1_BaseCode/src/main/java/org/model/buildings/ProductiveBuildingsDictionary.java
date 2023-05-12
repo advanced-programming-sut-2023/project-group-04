@@ -9,16 +9,7 @@ public enum ProductiveBuildingsDictionary {
         {
             add(ResourcesDictionary.FLOUR.getName());
         }
-    }, new ArrayList<>() {
-        {
-            add("GROUND");
-            add("SANDY_GROUND");
-            add("GRASSLAND");
-            add("LOW_MEADOW");
-            add("HIGH_MEADOW");
-            add("PLAIN");
-        }
-    }),
+    }, null),
     IRON_MINE(BuildingsDictionary.IRON_MINE, 4, null, new ArrayList<>() {
         {
             add(ResourcesDictionary.IRON.getName());
@@ -29,16 +20,7 @@ public enum ProductiveBuildingsDictionary {
         }
     }),
     OX_TETHER(BuildingsDictionary.OX_TETHER, 0, null, new ArrayList<>() {
-    }, new ArrayList<>() {
-        {
-            add("GROUND");
-            add("SANDY_GROUND");
-            add("GRASSLAND");
-            add("LOW_MEADOW");
-            add("HIGH_MEADOW");
-            add("PLAIN");
-        }
-    }),
+    }, null),
     PITCH_RIG(BuildingsDictionary.PITCH_RIG, 2, null, new ArrayList<>() {
         {
             add(ResourcesDictionary.PITCH.getName());
@@ -61,89 +43,35 @@ public enum ProductiveBuildingsDictionary {
         {
             add(ResourcesDictionary.WOOD.getName());
         }
-    }, new ArrayList<>() {
-        {
-            add("GROUND");
-            add("SANDY_GROUND");
-            add("GRASSLAND");
-            add("LOW_MEADOW");
-            add("HIGH_MEADOW");
-            add("PLAIN");
-        }
-    }),
+    }, null),
     ARMOURER(BuildingsDictionary.ARMOURER, 1, "iron", new ArrayList<>() {
         {
             add(ResourcesDictionary.METAL_ARMOUR.getName());
         }
-    }, new ArrayList<>() {
-        {
-            add("GROUND");
-            add("SANDY_GROUND");
-            add("GRASSLAND");
-            add("LOW_MEADOW");
-            add("HIGH_MEADOW");
-            add("PLAIN");
-        }
-    }),
+    }, null),
     BLACKSMITH(BuildingsDictionary.BLACKSMITH, 1, "iron", new ArrayList<>() {
         {
             add(ResourcesDictionary.SWORD.getName());
             add(ResourcesDictionary.MACE.getName());
         }
-    }, new ArrayList<>() {
-        {
-            add("GROUND");
-            add("SANDY_GROUND");
-            add("GRASSLAND");
-            add("LOW_MEADOW");
-            add("HIGH_MEADOW");
-            add("PLAIN");
-        }
-    }),
+    }, null),
     FLETCHER(BuildingsDictionary.FLETCHER, 1, "", new ArrayList<>() {
         {
             add(ResourcesDictionary.BOW.getName());
             add(ResourcesDictionary.CROSSBOW.getName());
         }
-    }, new ArrayList<>() {
-        {
-            add("GROUND");
-            add("SANDY_GROUND");
-            add("GRASSLAND");
-            add("LOW_MEADOW");
-            add("HIGH_MEADOW");
-            add("PLAIN");
-        }
-    }),
+    }, null),
     POLETURNER(BuildingsDictionary.POLETURNER, 1, "", new ArrayList<>() {
         {
             add(ResourcesDictionary.SPEAR.getName());
             add(ResourcesDictionary.PIKE.getName());
         }
-    }, new ArrayList<>() {
-        {
-            add("GROUND");
-            add("SANDY_GROUND");
-            add("GRASSLAND");
-            add("LOW_MEADOW");
-            add("HIGH_MEADOW");
-            add("PLAIN");
-        }
-    }),
+    }, null),
     STABLE(BuildingsDictionary.STABLE, 4, "", new ArrayList<>() {
         {
             add("horse");
         }
-    }, new ArrayList<>() {
-        {
-            add("GROUND");
-            add("SANDY_GROUND");
-            add("GRASSLAND");
-            add("LOW_MEADOW");
-            add("HIGH_MEADOW");
-            add("PLAIN");
-        }
-    }),
+    }, null),
     APPLE_ORCHARD(BuildingsDictionary.APPLE_ORCHARD, 5, null, new ArrayList<>() {
         {
             add(ResourcesDictionary.APPLE.getName());
@@ -188,44 +116,17 @@ public enum ProductiveBuildingsDictionary {
         {
             add(ResourcesDictionary.MEAT.getName());
         }
-    }, new ArrayList<>() {
-        {
-            add("GROUND");
-            add("SANDY_GROUND");
-            add("GRASSLAND");
-            add("LOW_MEADOW");
-            add("HIGH_MEADOW");
-            add("PLAIN");
-        }
-    }),
+    }, null),
     BAKERY(BuildingsDictionary.BAKERY, 4, "wheat", new ArrayList<>() {
         {
             add(ResourcesDictionary.BREAD.getName());
         }
-    }, new ArrayList<>() {
-        {
-            add("GROUND");
-            add("SANDY_GROUND");
-            add("GRASSLAND");
-            add("LOW_MEADOW");
-            add("HIGH_MEADOW");
-            add("PLAIN");
-        }
-    }),
+    }, null),
     BREWER(BuildingsDictionary.BREWER, 1, "hop", new ArrayList<>() {
         {
             add(ResourcesDictionary.ALE.getName());
         }
-    }, new ArrayList<>() {
-        {
-            add("GROUND");
-            add("SANDY_GROUND");
-            add("GRASSLAND");
-            add("LOW_MEADOW");
-            add("HIGH_MEADOW");
-            add("PLAIN");
-        }
-    });
+    }, null);
 
     private BuildingsDictionary buildingDictionary;
     private int rate;

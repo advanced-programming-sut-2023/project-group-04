@@ -1,8 +1,9 @@
 package org.model.buildings;
 
-import org.model.MapCell;
-import org.model.buildings.BuildingsDictionary;
 import org.model.Empire;
+import org.model.MapCell;
+
+import java.util.ArrayList;
 
 public class ProductiveBuilding extends Building {
     private final ProductiveBuildingsDictionary productiveBuildingDictionary;
@@ -24,8 +25,8 @@ public class ProductiveBuilding extends Building {
         return productiveBuildingDictionary.getInputResource();
     }
 
-    public String getGroundTexture() {
-        return productiveBuildingDictionary.getGroundTexture();
+    public ArrayList<String> getGroundTexture() {
+        return productiveBuildingDictionary.getAcceptableTexture();
     }
 
 
