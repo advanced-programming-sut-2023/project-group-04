@@ -24,7 +24,9 @@ public enum MapMenuMessages {
     DROP_UNIT_SUCCESS("Unit dropped successfully!"),
     INVALID_BUILDING_TYPE("Entered building type is invalid!"),
     DROP_BUILDING_SUCCESS("Building dropped successfully!"),
-    TREE_EXIST("A tree exist in this block!");
+    TREE_EXIST("A tree exist in this block!"),
+    MAP_EXIST("A map with entered name already exist!"),
+    HEADQUARTER_NOT_SET("There is no headquarter with this color!");
 
     private final String message;
     private MapMenuMessages(String message) {

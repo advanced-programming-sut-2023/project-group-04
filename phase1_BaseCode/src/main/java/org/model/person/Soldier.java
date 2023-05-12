@@ -6,7 +6,6 @@ import org.model.MapCell;
 public class Soldier extends Person {
 
     private SoldiersDictionary soldiersDictionary;
-    private int mode;
     private MapCell aim;
 
     public Soldier(Empire personOwner, SoldiersDictionary soldiersDictionary, MapCell mapCell) {
@@ -35,14 +34,6 @@ public class Soldier extends Person {
 
     public String getSoldierName() {
         return soldiersDictionary.getSoldierName();
-    }
-
-    public int getMode() {
-        return mode;
-    }
-
-    public void setMode(int mode) {
-        this.mode = mode;
     }
 
     public MapCell getAim() {

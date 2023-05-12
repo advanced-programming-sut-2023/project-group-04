@@ -23,7 +23,8 @@ public enum GameMessages {
     INCORRECT_BUILDING_TYPE("Building type is incorrect!"),
     SUCCESSFUL_DROP("building dropped successfully!"),
     SUCCESSFUL_REPAIR("Repairing was successfully!"),
-    ;
+    INVALID_DRAWBRIDGE_POSITION("Draw bridge could only be placed near gates!"),
+    INVALID_TEXTURE_TREE("Building can't be build(invalid texture or tree in selected tile)!");
 
     private final String message;
 

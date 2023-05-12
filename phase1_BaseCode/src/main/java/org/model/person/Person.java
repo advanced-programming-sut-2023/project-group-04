@@ -11,6 +11,7 @@ public class Person {
     private MapCell currentDestination;
     private MapCell nextDestination;
     private int speed;
+    private int mode;
 
     public Person(Empire personOwner, int hp, MapCell mapCell, int speed) {
         this.personOwner = personOwner;
@@ -19,6 +20,7 @@ public class Person {
         this.currentDestination = null;
         this.nextDestination = null;
         this.speed = speed;
+        this.mode = 0;
     }
 
     public Person(Empire personOwner, MapCell mapCell) {
@@ -71,5 +73,13 @@ public class Person {
 
     public void damagePerson(int hp) {
         this.hp -= hp;
+    }
+
+    public int getMode() {
+        return mode;
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
     }
 }
