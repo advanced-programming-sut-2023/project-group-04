@@ -41,6 +41,17 @@ public enum GameMessages {
     SUCCESSFUL_PATROL_UNIT("Patrolling unit was successful!"),
     INVALID_MOVE_NAME("invalid mode name"),
     SUCCESSFUL_SET_MODE("Setting mode was successfully!"),
+    NOT_SOLDIER("Selected unit is not soldier!"),
+    FEW_RANGE("selected soldiers haven't long range!"),
+    AIM_OUT_OF_RANGE("Aim out of range!"),
+    SUCCESSFUL_ATTACK("Attacking was successful!"),
+    NOT_ENGINEER("Selected unit isn't engineer!"),
+    INVALID_DIRECTION("Invalid direction!"),
+    SUCCESSFUL_POUR("Pouring oil was successful!"),
+    DOES_NOT_HAVE_OIL("Selected engineer doesn't have oil!"),
+    NOT_TUNNELER("Selected unit isn't tunneler!"),
+    SET_TUNNEL_SUCCESSFUL("Setting tunnel for tunneler was successful!"),
+    SUCCESSFUL_DISBAND("Unit disbanded!"),
     ;
 
     private final String message;

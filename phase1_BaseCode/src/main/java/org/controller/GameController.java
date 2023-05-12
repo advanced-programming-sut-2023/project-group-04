@@ -211,7 +211,7 @@ public class GameController {
         MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(buildingPosX, buildingPosY);
         if (!(currentBuilding instanceof TrainerBuilding)) return GameMessages.INVALID_BUILDING_FOR_CREATE;
         if (!((TrainerBuilding) currentBuilding).getAvailableSoldiers().contains(unitType))
-            return GameMessages.INVALID_UNIT_TYPE;
+            return GameMessages.INVALID_SOLDIER_TYPE;
         if (count <= 0) return GameMessages.INVALID_TROOP_COUNT;
         if (unitType.equals("engineer")) {
             if (count * Engineer.getRequiredGold() < empire.getResourceAmount("gold"))
@@ -379,20 +379,20 @@ public class GameController {
         return GameMessages.SUCCESSFUL_SET_MODE;
     }
 
-    public String airAttack(Matcher matcher) {
+    public GameMessages airAttack(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
-        if (!checkCoordinates(x, y)) return "incorrect coordinate";
+        if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
         ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
-        if (unit == null || unit.size() == 0) return "no unit or empty unit selected!";
+        if (unit == null || unit.size() == 0) return GameMessages.EMPTY_UNIT_SELECT;
         for (Person person : unit)
             if (person instanceof Engineer || person instanceof Tunneler)
-                return "selected unit is not soldier!";
+                return GameMessages.NOT_SOLDIER;
         for (Person person : unit) {
             SoldiersDictionary dictionary = ((Soldier) unit.get(0)).getSoldiersDictionary();
             if (!dictionary.equals(SoldiersDictionary.ARCHER) && !dictionary.equals(SoldiersDictionary.CROSSBOWMAN) &&
                     !dictionary.equals(SoldiersDictionary.ARABIANBOWS) && !dictionary.equals(SoldiersDictionary.HORSE_ARCHER))
-                return "selected soldiers not long range!";
+                return GameMessages.FEW_RANGE;
         }
         for (Person person : unit) {
             boolean inRange = false;
@@ -403,19 +403,19 @@ public class GameController {
                 soldier.setAim(Game.getCurrentGame().getMapCellByAddress(x, y));
                 inRange = true;
             }
-            if (!inRange) return "aim out of range!";
+            if (!inRange) return GameMessages.AIM_OUT_OF_RANGE;
         }
-        return "attack set successful!";
+        return GameMessages.SUCCESSFUL_ATTACK;
     }
 
-    public String Attack(Matcher matcher) {
+    public GameMessages Attack(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
-        if (!checkCoordinates(x, y)) return "incorrect coordinate";
+        if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
         ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
-        if (unit == null || unit.size() == 0) return "no unit or empty unit selected!";
+        if (unit == null || unit.size() == 0) return GameMessages.EMPTY_UNIT_SELECT;
         for (Person person : unit)
-            if (person instanceof Engineer) return "selected unit is not soldier!";
+            if (person instanceof Engineer) return GameMessages.NOT_SOLDIER;
         MapCell aimMapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
         for (Person person : aimMapCell.getPeople())
             if (!person.getPersonOwner().equals(Game.getCurrentGame().getCurrentEmpire())) {
@@ -425,14 +425,14 @@ public class GameController {
                 }
                 break;
             }
-        return "attack set successful!";
+        return GameMessages.SUCCESSFUL_ATTACK;
     }
 
-    public String pourOil(Matcher matcher) {
+    public GameMessages pourOil(Matcher matcher) {
         ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
-        if (unit == null || unit.size() == 0) return "no unit or empty unit selected!";
+        if (unit == null || unit.size() == 0) return GameMessages.EMPTY_UNIT_SELECT;
         for (Person person : unit)
-            if (!(person instanceof Engineer)) return "selected unit is not engineer!";
+            if (!(person instanceof Engineer)) return GameMessages.NOT_ENGINEER;
         int x = unit.get(0).getMapCell().getX();
         int y = unit.get(0).getMapCell().getY();
         String direction = matcher.group("direction");
@@ -450,7 +450,7 @@ public class GameController {
                 x--;
                 break;
             default:
-                return "invalid direction!";
+                return GameMessages.INVALID_DIRECTION;
         }
         MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
         for (Person person : unit) {
@@ -458,38 +458,38 @@ public class GameController {
             if (engineer.hasOil()) {
                 engineer.setOil(false);
                 mapCell.setOilCondition(true);
-                return "pour oil successful!";
+                return GameMessages.SUCCESSFUL_POUR;
             }
         }
-        return "selected engineers don't have oil!";
+        return GameMessages.DOES_NOT_HAVE_OIL;
     }
 
-    public String digTunnel(Matcher matcher) {
+    public GameMessages digTunnel(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
-        if (!checkCoordinates(x, y)) return "incorrect coordinate";
+        if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
         ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
-        if (unit == null || unit.size() == 0) return "no unit or empty unit selected!";
+        if (unit == null || unit.size() == 0) return GameMessages.EMPTY_UNIT_SELECT;
         for (Person person : unit)
-            if (!(person instanceof Tunneler)) return "selected unit is not tunneler!";
+            if (!(person instanceof Tunneler)) return GameMessages.NOT_TUNNELER;
         MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
         ((Tunneler) unit.get(0)).setAimTunnel(mapCell);
-        return "tunnel set for tunneler successful!";
+        return GameMessages.SET_TUNNEL_SUCCESSFUL;
     }
 
-    public String engineerBuild(Matcher matcher) {
+    public GameMessages engineerBuild(Matcher matcher) {
         return null;
     }
 
-    public String disbandUnit() {
+    public GameMessages disbandUnit() {
         ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
-        if (unit == null || unit.size() == 0) return "no unit or empty unit selected!";
+        if (unit == null || unit.size() == 0) return GameMessages.EMPTY_UNIT_SELECT;
         MapCell mapCell = unit.get(0).getMapCell();
         for (Person person : unit) {
             mapCell.removePeople(person);
             mapCell.addPeople(new Person(Game.getCurrentGame().getCurrentEmpire(), mapCell));
         }
-        return "unit disbanded!";
+        return GameMessages.SUCCESSFUL_DISBAND;
     }
 
     public void nextTurn() {
@@ -674,7 +674,7 @@ public class GameController {
         else players = new String[]{allUsers};
         if (!validPlayers(players))
             return GameMessages.USER_NOT_EXIST;
-        ArrayList<Empire> allEmpires = getEmpiresByPlayersName(players);
+        ArrayList<Empire> allEmpires = setEmpireForPlayers(players);
         int colorNumbers = Player.getCurrentPlayer().getMapByName(mapName).getAllColors().size();
         if (colorNumbers != allEmpires.size())
             return GameMessages.NOT_ENOUGH_HEAD_QUARTER;
@@ -689,7 +689,7 @@ public class GameController {
         return true;
     }
 
-    private ArrayList<Empire> getEmpiresByPlayersName(String[] players) {
+    private ArrayList<Empire> setEmpireForPlayers(String[] players) {
         ArrayList<Empire> empires = new ArrayList<>();
         empires.add(new Empire(Player.getCurrentPlayer()));
         for (String playerUsername : players) {

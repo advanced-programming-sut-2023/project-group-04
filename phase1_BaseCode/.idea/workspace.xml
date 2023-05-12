@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="start game added &amp; some bugs fixed!">
+    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="some GameController function's Messages added!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/GameMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/GameMessages.java" afterDir="false" />
@@ -47,14 +47,18 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "TODO_SCOPE": "All Places",
+    "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "E:/InteliJ/project-clone/phase1_BaseCode",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
     "ChangesTree.GroupingKeys": [
@@ -76,6 +80,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1683198305540</updated>
+      <workItem from="1683876653216" duration="1539000" />
     </task>
     <task id="LOCAL-00001" summary="game controller update">
       <created>1683454838020</created>
@@ -175,8 +180,18 @@
       <option name="project" value="LOCAL" />
       <updated>1683841099060</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="some GameController function's Messages added!">
+      <created>1683847593625</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1683847593625</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -198,7 +213,8 @@
     <MESSAGE value="update game controller!" />
     <MESSAGE value="some bug fixed!" />
     <MESSAGE value="start game added &amp; some bugs fixed!" />
-    <option name="LAST_COMMIT_MESSAGE" value="start game added &amp; some bugs fixed!" />
+    <MESSAGE value="some GameController function's Messages added!" />
+    <option name="LAST_COMMIT_MESSAGE" value="some GameController function's Messages added!" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/phase1_BaseCode$RegistrationTest.ic" NAME="RegistrationTest Coverage Results" MODIFIED="1683644025429" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
