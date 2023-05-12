@@ -17,7 +17,7 @@ public enum BuildingsDictionary {
         {
             put("wood", 10);
         }
-    }, 1, 0, 0),
+    }, 1, 1, 0),
     LOOKOUT_TOWER("lookout tower", BuildingType.CASTLE, 2400, new HashMap<>() {
         {
             put("stone", 10);
