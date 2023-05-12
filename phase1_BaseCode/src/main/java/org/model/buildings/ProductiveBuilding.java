@@ -12,6 +12,10 @@ public class ProductiveBuilding extends Building {
         this.productiveBuildingDictionary = productiveBuildingDictionary;
     }
 
+    public ProductiveBuildingsDictionary getDictionary() {
+        return productiveBuildingDictionary;
+    }
+
     public int getRate() {
         return productiveBuildingDictionary.getRate();
     }

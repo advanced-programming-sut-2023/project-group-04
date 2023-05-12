@@ -15,6 +15,7 @@ public class EnvironmentController {
         String mapName = matcher.group("mapName");
         int size = Integer.parseInt(matcher.group("size"));
         if (size != 200 && size != 400) return MapMenuMessages.INVALID_SIZE;
+        if (Player.getCurrentPlayer().getMapByName(mapName) != null) return MapMenuMessages.MAP_EXIST;
         Map map = new Map(mapName, size);
         Player.getCurrentPlayer().addMap(map);
         return MapMenuMessages.MAP_CREATION_SUCCESSFUL;
@@ -141,6 +142,7 @@ public class EnvironmentController {
         String buildingType = matcher.group("type");
         if (!checkCoordinate(x,y)) return MapMenuMessages.INCORRECT_COORDINATES;
         if (!Map.isValidColor(color)) return MapMenuMessages.INVALID_COLOR;
+        if (!Map.getCurrentMap().getAllColors().contains(color)) return MapMenuMessages.HEADQUARTER_NOT_SET;
         MapTile mapTile = Map.getCurrentMap().getMapTile(x,y);
         if (mapTile.isHeadQuarter() || mapTile.getBuilding() != null || mapTile.getSoldier() != null)
             return MapMenuMessages.USED_TILE;

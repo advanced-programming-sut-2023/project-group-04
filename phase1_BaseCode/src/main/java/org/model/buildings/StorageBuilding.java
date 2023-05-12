@@ -15,7 +15,9 @@ public class StorageBuilding extends Building {
         super(buildingOwner, storageBuildingsDictionary.getBuildingDictionary(), mapCell);
         this.storageBuildingsDictionary = storageBuildingsDictionary;
         this.freeSpace = storageBuildingsDictionary.getCapacity();
-        this.resources = storageBuildingsDictionary.getObjects();
+        this.resources = new HashMap<>();
+        for (String resource : storageBuildingsDictionary.getObjects())
+            this.resources.put(resource, 0);
     }
 
     public HashMap<String, Integer> getContent() {
