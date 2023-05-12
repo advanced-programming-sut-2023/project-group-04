@@ -509,7 +509,7 @@ public class GameController {
     }
 
     public GameMessages engineerBuild(Matcher matcher) {
-        //TODO : KIR TO IN FUNCTION
+        //TODO : KIR TO IN METHOD
         return null;
     }
 
@@ -683,7 +683,6 @@ public class GameController {
         }
     }
 
-
     private void buildingOperations() {
         for (int i = 0; i < Game.getCurrentGame().getMapSize(); i++) {
             for (MapCell mapCell : Game.getCurrentGame().getMap()[i]) {
@@ -737,6 +736,7 @@ public class GameController {
     }
 
     private void checkEndGame() {
+
 
     }
 

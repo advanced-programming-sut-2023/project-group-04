@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="update game controller!">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_1_2023_5_55_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_1_2023_5_55_PM__Changes_.xml" afterDir="false" />
+    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="game controller updated!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Empire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/Empire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/buildings/BuildingsDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/buildings/BuildingsDictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/GameCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/GameCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/MainMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/MainMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/GameMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +161,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683900660881</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="game controller updated!">
+      <created>1683910697558</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1683910697558</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -181,7 +190,8 @@
     <MESSAGE value="environment menu updated!" />
     <MESSAGE value="update game controller!" />
     <MESSAGE value="GameMessages updated!" />
-    <option name="LAST_COMMIT_MESSAGE" value="GameMessages updated!" />
+    <MESSAGE value="game controller updated!" />
+    <option name="LAST_COMMIT_MESSAGE" value="game controller updated!" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/phase1_BaseCode$RegistrationTest_emailFormat.ic" NAME="RegistrationTest.emailFormat Coverage Results" MODIFIED="1683501851709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

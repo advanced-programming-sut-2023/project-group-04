@@ -1,5 +1,6 @@
 package org.model;
 
+import org.model.buildings.Building;
 import org.model.buildings.StorageBuilding;
 import org.model.person.Person;
 
@@ -20,8 +21,9 @@ public class Empire {
     private final ArrayList<StorageBuilding> allGranaries;
     private final ArrayList<StorageBuilding> allArmouries;
     private ArrayList<Trade> allTrades;
+    private final Building headquarter;
 
-    public Empire(Player owner) {
+    public Empire(Player owner, Building headquarter) {
         this.owner = owner;
         this.fearRate = 0;
         this.taxRate = -100;
@@ -38,6 +40,7 @@ public class Empire {
         allGranaries = new ArrayList<>();
         allArmouries = new ArrayList<>();
         allTrades = new ArrayList<>();
+        this.headquarter = headquarter;
     }
 
     private void initializeWeaponAndArmor() {
@@ -180,10 +183,14 @@ public class Empire {
     }
 
     public void changeWeaponAndArmourAmount(String type, int count) {
-
+        weaponAndArmour.computeIfPresent(type, (key, val) -> val + count);
     }
 
     public void changePopularity(String type, int number) {
         popularity.put(type, popularity.get(type) + number);
+    }
+
+    public Building getHeadquarter() {
+        return headquarter;
     }
 }

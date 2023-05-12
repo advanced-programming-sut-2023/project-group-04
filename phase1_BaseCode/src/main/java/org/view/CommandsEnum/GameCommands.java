@@ -43,7 +43,9 @@ public enum GameCommands {
             "(\\s*(-q\\s+(\"[^\"]*\"|[^\\s\"]*))){1}\\s*$"),
     SET_OUTPUT("^\\s*set\\s+output(?=.*-o\\s+(?<output>\"[^\"]*\"|[^\\s\"]*))" +
             "(\\s*(-q\\s+(\"[^\"]*\"|[^\\s\"]*))){1}\\s*$"),
-    DISBAND_UNIT("^\\s*disband\\s+unit\\s*$");
+    DISBAND_UNIT("^\\s*disband\\s+unit\\s*$"),
+    SHOW_MAP("\\s*show\\s+map\\s+-x\\s+(?<xAsis>\\d+)\\s+-y\\s+(?<yAsis>\\d+)\\s*"),
+    BACK("\\s*back\\s*");
 
 
     private final String regex;

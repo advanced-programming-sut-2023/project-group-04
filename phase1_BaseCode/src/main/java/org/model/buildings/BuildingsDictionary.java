@@ -3,17 +3,36 @@ package org.model.buildings;
 import java.util.HashMap;
 
 public enum BuildingsDictionary {
-
-    HEAD_QUARTER("headquarter", BuildingType.CASTLE, 2000, new HashMap<>() {
+    LOW_WALL("low wall", BuildingType.CASTLE, 2500, new HashMap<>() {
+        {
+            put("stone", 2);
+        }
+    }, 1, 0, 0),
+    STONE_WALL("stone wall", BuildingType.CASTLE, 3000, new HashMap<>() {
+        {
+            put("stone", 4);
+        }
+    },1, 0, 0),
+    CRENULATED_WALL("crenulated wall", BuildingType.CASTLE, 3500, new HashMap<>() {
+        {
+            put("stone", 6);
+        }
+    },1, 0, 0),
+    STAIRS("stairs", BuildingType.CASTLE, 2000, new HashMap<>() {
+        {
+            put("stone", 4);
+        }
+    },1, 0, 0),
+    HEAD_QUARTER("headquarter", BuildingType.CASTLE, 6000, new HashMap<>() {
     }, 1, 0, 0),
     SMALL_STONE_GATEHOUSE("small stone gatehouse", BuildingType.CASTLE, 2600, new HashMap<>() {
     }, 1, 0, 0),
-    LARGE_STONE_GATEHOUSE("large stone gatehouse", BuildingType.CASTLE, 0, new HashMap<>() {
+    LARGE_STONE_GATEHOUSE("large stone gatehouse", BuildingType.CASTLE, 3200, new HashMap<>() {
         {
             put("stone", 20);
         }
     }, 1, 0, 0),
-    DRAW_BRIDGE("draw bridge", BuildingType.CASTLE, 0, new HashMap<>() {
+    DRAW_BRIDGE("draw bridge", BuildingType.CASTLE, 2200, new HashMap<>() {
         {
             put("wood", 10);
         }
@@ -23,53 +42,53 @@ public enum BuildingsDictionary {
             put("stone", 10);
         }
     }, 1, 0, 0),
-    PERIMETER_TOWER("perimeter", BuildingType.CASTLE, 0, new HashMap<>() {
+    PERIMETER_TOWER("perimeter", BuildingType.CASTLE, 2400, new HashMap<>() {
         {
             put("stone", 10);
         }
     }, 1, 0, 0),
-    DEFENCE_TURRET("defence turret", BuildingType.CASTLE, 0, new HashMap<>() {
+    DEFENCE_TURRET("defence turret", BuildingType.CASTLE, 2600, new HashMap<>() {
         {
             put("stone", 15);
         }
     }, 1, 0, 0),
-    SQUARE_TOWER("square tower", BuildingType.CASTLE, 0, new HashMap<>() {
+    SQUARE_TOWER("square tower", BuildingType.CASTLE, 2800, new HashMap<>() {
         {
             put("stone", 35);
         }
     }, 1, 0, 0),
-    ROUND_TOWER("round tower", BuildingType.CASTLE, 0, new HashMap<>() {
+    ROUND_TOWER("round tower", BuildingType.CASTLE, 3000, new HashMap<>() {
         {
             put("stone", 40);
         }
     }, 1, 0, 0),
-    ARMOURY("armoury", BuildingType.CASTLE, 0, new HashMap<>() {
+    ARMOURY("armoury", BuildingType.CASTLE, 1500, new HashMap<>() {
         {
             put("wood", 5);
         }
     }, 1, 0, 0),
-    BARRACKS("barracks", BuildingType.CASTLE, 0, new HashMap<>() {
+    BARRACKS("barracks", BuildingType.CASTLE, 1500, new HashMap<>() {
         {
             put("stone", 15);
         }
     }, 1, 0, 0),
-    MERCENARY_POST("mercenary post", BuildingType.CASTLE, 0, new HashMap<>() {
+    MERCENARY_POST("mercenary post", BuildingType.CASTLE, 1500, new HashMap<>() {
         {
             put("wood", 15);
         }
     }, 1, 0, 0),
-    ENGINEER_GUILD("engineer guild", BuildingType.CASTLE, 0, new HashMap<>() {
+    ENGINEER_GUILD("engineer guild", BuildingType.CASTLE, 1500, new HashMap<>() {
         {
             put("wood", 10);
             put("gold", 100);
         }
     }, 1, 0, 0),
-    KILLING_PIT("killing pit", BuildingType.CASTLE, 0, new HashMap<>() {
+    KILLING_PIT("killing pit", BuildingType.CASTLE, -1, new HashMap<>() {
         {
             put("wood", 6);
         }
     }, 1, 0, 0),
-    OIL_SMELTER("oil smelter", BuildingType.CASTLE, 0, new HashMap<>() {
+    OIL_SMELTER("oil smelter", BuildingType.CASTLE, 1500, new HashMap<>() {
         {
             put("iron", 10);
             put("gold", 100);
@@ -80,15 +99,15 @@ public enum BuildingsDictionary {
             put("pitch", 1);
         }
     }, 1, 0, 0),
-    CAGED_WAR_DOGS("caged war dogs", BuildingType.CASTLE, 0, new HashMap<>() {
+    CAGED_WAR_DOGS("caged war dogs", BuildingType.CASTLE, -1, new HashMap<>() {
         {
             put("wood", 10);
             put("gold", 100);
         }
     }, 1, 0, 0),
-    SIEGE_TENT("siege tent", BuildingType.CASTLE, 0, new HashMap<>() {
+    SIEGE_TENT("siege tent", BuildingType.CASTLE, 500, new HashMap<>() {
     }, 1, 1, 0),
-    STABLE("stable", BuildingType.CASTLE, 0, new HashMap<>() {
+    STABLE("stable", BuildingType.CASTLE, 2500, new HashMap<>() {
         {
             put("wood", 20);
             put("gold", 400);
