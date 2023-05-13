@@ -179,22 +179,9 @@ public class GameController {
 
     private boolean buyBuilding(Empire empire, HashMap<String, Integer> prices) {
         for (String resource : prices.keySet())
-            if (empire.getResourceAmount(resource) < prices.get(resource)) return false;
-        for (String resource : prices.keySet()) {
+            if (empire.getAvailableResource(resource) < prices.get(resource)) return false;
+        for (String resource : prices.keySet())
             empire.changeResourceAmount(resource, -(prices.get(resource)));
-            if (!resource.equals("gold")) {
-                for (StorageBuilding storageBuilding : empire.getAllStockPiles()) {
-                    int resourceAmountInStorage = storageBuilding.getResourceAmount(resource);
-                    if (resourceAmountInStorage <= prices.get(resource)) {
-                        prices.put(resource, prices.get(resource) - resourceAmountInStorage);
-                        storageBuilding.changeResourcesAmount(resource, -resourceAmountInStorage);
-                    } else {
-                        storageBuilding.changeResourcesAmount(resource, -prices.get(resource));
-                        break;
-                    }
-                }
-            }
-        }
         return true;
     }
 
@@ -242,13 +229,13 @@ public class GameController {
             return GameMessages.INVALID_SOLDIER_TYPE;
         if (count <= 0) return GameMessages.INVALID_TROOP_COUNT;
         if (unitType.equals("engineer")) {
-            if (count * Engineer.getRequiredGold() < empire.getResourceAmount("gold"))
+            if (count * Engineer.getRequiredGold() < empire.getAvailableResource("gold"))
                 return GameMessages.NOT_ENOUGH_GOLD;
             if (!removeFreePeople(empire, count)) return GameMessages.NOT_ENOUGH_POPULATION;
             mapCell.addPeople(new Engineer(empire, mapCell));
             return GameMessages.SUCCESSFUL_CREATE_UNIT;
         } else if (unitType.equals("tunneler")) {
-            if (count * Tunneler.getRequiredGold() < empire.getResourceAmount("gold"))
+            if (count * Tunneler.getRequiredGold() < empire.getAvailableResource("gold"))
                 return GameMessages.NOT_ENOUGH_GOLD;
             if (!removeFreePeople(empire, count)) return GameMessages.NOT_ENOUGH_POPULATION;
             mapCell.addPeople(new Tunneler(empire, mapCell));
@@ -295,33 +282,8 @@ public class GameController {
 
     private void buySoldierRequirement(Empire empire, int gold, String weapon, String armour, int count) {
         empire.changeResourceAmount("gold", count * gold);
-        empire.changeWeaponAndArmourAmount(weapon, count);
-        empire.changeWeaponAndArmourAmount(armour, count);
-        int weaponNum = count;
-        int armourNum = count;
-        for (StorageBuilding armoury : empire.getAllArmouries()) {
-            int existWeaponNum = armoury.getResourceAmount(weapon);
-            int existArmourNum = armoury.getResourceAmount(armour);
-            if (weaponNum > 0) {
-                if (existWeaponNum <= weaponNum) {
-                    armoury.changeResourcesAmount(weapon, -existWeaponNum);
-                    weaponNum -= existWeaponNum;
-                } else {
-                    armoury.changeResourcesAmount(weapon, -weaponNum);
-                    weaponNum = 0;
-                }
-            }
-            if (armourNum > 0) {
-                if (existArmourNum <= armourNum) {
-                    armoury.changeResourcesAmount(armour, -existArmourNum);
-                    armourNum -= existArmourNum;
-                } else {
-                    armoury.changeResourcesAmount(armour, -armourNum);
-                    armourNum = 0;
-                }
-            }
-            if (armourNum == 0 && weaponNum == 0) return;
-        }
+        empire.changeResourceAmount(weapon, count);
+        empire.changeResourceAmount(armour, count);
     }
 
     public GameMessages selectUnit(Matcher matcher) {

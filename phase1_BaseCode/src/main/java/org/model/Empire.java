@@ -172,6 +172,18 @@ public class Empire {
             }
         }
     }
+
+    public int getAvailableResource(String resource) {
+        if (resource.equals("gold")) return resources.get("gold");
+        if (StorageBuildingsDictionary.STOCKPILE.getObjects().contains(resource))
+            return resources.get(resource);
+        else if (StorageBuildingsDictionary.ARMOURY.getObjects().contains(resource))
+            return weaponAndArmour.get(resource);
+        else if (StorageBuildingsDictionary.GRANARY.getObjects().contains(resource))
+            return food.get(resource);
+        return -10000;
+    }
+
     public void activateTaxRate() {
         this.taxRate = 0;
     }
