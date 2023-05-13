@@ -27,7 +27,7 @@ public class ProfileController {
     }
 
     public void setPassword(String password) {
-        Player.getCurrentPlayer().setPassword(password);
+        Player.getCurrentPlayer().setPassword(Player.getSHA256Hash(password));
         Player.savePlayers();
     }
 

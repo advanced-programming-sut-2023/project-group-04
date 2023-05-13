@@ -1,18 +1,18 @@
 package org.controller;
 
-import java.util.Random;
-import java.util.regex.Matcher;
-
 import org.model.ASCIIArtGenerator;
 import org.model.Player;
 import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
 import org.passay.PasswordGenerator;
-import org.view.CommandsEnum.*;
+import org.view.CommandsEnum.SecurityQuestion;
+import org.view.CommandsEnum.SignUpMessages;
 import org.view.Menu;
 import org.view.SignUpMenu;
 
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.regex.Matcher;
 
 import static org.view.CommandsEnum.SignUpMessages.*;
 
@@ -42,11 +42,11 @@ public class LoginController {
             password = generateRandomPassword();
             if (slogan.equals("random")) {
                 slogan = giveRandomSlogan();
-                Player player = new Player(username, password, nickname, email, slogan);
+                Player player = new Player(username, Player.getSHA256Hash(password), nickname, email, slogan);
                 Player.setCurrentPlayer(player);
                 return showSloganAndPassword(slogan, password);
             } else {
-                Player player = new Player(username, password, nickname, email, slogan);
+                Player player = new Player(username, Player.getSHA256Hash(password), nickname, email, slogan);
                 Player.setCurrentPlayer(player);
                 return "Your random password is: " + password;
             }
@@ -54,12 +54,12 @@ public class LoginController {
             if (slogan != null)
                 if (slogan.equals("random")) {
                     slogan = giveRandomSlogan();
-                    Player player = new Player(username, password, nickname, email, slogan);
+                    Player player = new Player(username, Player.getSHA256Hash(password), nickname, email, slogan);
                     Player.setCurrentPlayer(player);
                     return "Your random slogan is \"" + slogan + "\"";
                 }
         }
-        Player player = new Player(username, password, nickname, email, slogan);
+        Player player = new Player(username, Player.getSHA256Hash(password), nickname, email, slogan);
         Player.setCurrentPlayer(player);
         return REGISTRATION_SUCCESSFUL.getMessage();
     }
@@ -202,7 +202,7 @@ public class LoginController {
         String password = matcher.group("password");
         String status = matcher.group("status");
         if (Player.getPlayerByUsername(username) == null) return USER_DOES_NOT_EXIST.getMessage();
-        if (!Player.getPlayerByUsername(username).isPasswordCorrect(password)) {
+        if (!Player.getPlayerByUsername(username).isPasswordCorrect(Player.getSHA256Hash(password))) {
             Player.getPlayerByUsername(username).increaseNumberOfAttempts();
             return INCORRECT_PASSWORD.getMessage() + "\nPlease try again after <<"
                     + Player.getNumberOfAttempts() * 5 + ">> seconds!";
@@ -214,7 +214,7 @@ public class LoginController {
     }
 
     public String getSecurityQuestion(String username) {
-        Player player = Player.getPlayerByUsername(username.replaceAll("\"" , ""));
+        Player player = Player.getPlayerByUsername(username.replaceAll("\"", ""));
         if (player == null) return USER_NOT_FOUND.getMessage();
         Player.setCurrentPlayer(player);
         return player.getSecurityQuestion();
@@ -232,7 +232,7 @@ public class LoginController {
         String passwordConfirm = matcher.group("passwordConfirm").replaceAll("\"", "");
         SignUpMessages signUpMessage = checkPassword(password, passwordConfirm);
         if (!signUpMessage.equals(SignUpMessages.PASSWORD_STRONG)) return signUpMessage;
-        Player.getCurrentPlayer().setPassword(password);
+        Player.getCurrentPlayer().setPassword(Player.getSHA256Hash(password));
         Player.savePlayers();
         return SignUpMessages.PASSWORD_CHANGED;
     }
