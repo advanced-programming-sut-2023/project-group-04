@@ -124,6 +124,10 @@ public class Empire {
 
     public void changeResourceAmount(String resource, int amount) {
         ArrayList<StorageBuilding> storages = new ArrayList<>();
+        if (resource.equals("gold")) {
+            resources.computeIfPresent("gold", (key, val) -> val + amount);
+            return;
+        }
         if (StorageBuildingsDictionary.STOCKPILE.getObjects().contains(resource)) {
             resources.computeIfPresent(resource, (key, val) -> val + amount);
             storages = allStockPiles;
