@@ -61,10 +61,12 @@ public class GameController {
     }
 
     public GameMessages changeTaxRate(Matcher matcher) {
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
         int taxRate = Integer.parseInt(matcher.group("taxRate"));
+        if (empire.getTaxRate() == -100) return GameMessages.TAX_NOT_ACTIVE;
         if (taxRate < -3 || taxRate > 8)
             return GameMessages.INVALID_TAX_RATE;
-        Game.getCurrentGame().getCurrentEmpire().setTaxRate(taxRate);
+        empire.setTaxRate(taxRate);
         return GameMessages.CHANGE_TAX_RATE;
     }
 
@@ -673,13 +675,11 @@ public class GameController {
 
     private void updateRates() {
         for (Empire empire : Game.getCurrentGame().getAllEmpires()) {
-            //food rate
             int availableFood = 0;
             for (String food : empire.getFood().keySet()) availableFood += empire.getFoodAmount(food);
             int requiredFood = (int) ((empire.getFoodRate() + 2) * empire.getPopulation().size() / 2);
             if (availableFood < requiredFood) empire.setFoodRate(-2);
-            //tax rate
-            if (empire.getTaxRate() < 0) {
+            if (empire.getTaxRate() < 0 && empire.getTaxRate() != -100) {
                 int totalTax = (int) ((empire.getTaxRate() * (-0.2) + 0.4) * empire.getPopulation().size());
                 if (empire.getResourceAmount("gold") < totalTax) empire.setTaxRate(0);
             }

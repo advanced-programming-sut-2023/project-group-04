@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="BuildingsDictionary updated!">
+    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="GameController updated!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Empire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/Empire.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/MapCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/MapCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/GameCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/GameCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/GameMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/GameMessages.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +172,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683921234018</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="GameController updated!">
+      <created>1683960611849</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1683960611849</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -197,7 +203,8 @@
     <MESSAGE value="GameMessages updated!" />
     <MESSAGE value="game controller updated!" />
     <MESSAGE value="BuildingsDictionary updated!" />
-    <option name="LAST_COMMIT_MESSAGE" value="BuildingsDictionary updated!" />
+    <MESSAGE value="GameController updated!" />
+    <option name="LAST_COMMIT_MESSAGE" value="GameController updated!" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/phase1_BaseCode$RegistrationTest_emailFormat.ic" NAME="RegistrationTest.emailFormat Coverage Results" MODIFIED="1683501851709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
