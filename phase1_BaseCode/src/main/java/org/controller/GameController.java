@@ -689,7 +689,7 @@ public class GameController {
         while (requiredFood > 0) {
             for (String food : empire.getFood().keySet()) {
                 if (empire.getFoodAmount(food) > 0) {
-                    empire.changeFoodAmount(food, -1);
+                    empire.changeResourceAmount(food, -1);
                     requiredFood--;
                 }
             }
@@ -741,36 +741,10 @@ public class GameController {
     private void buildingProduction(String input, String output, int rate, Empire owner) {
         ArrayList<StorageBuilding> storageBuildings;
         if (input != null) {
-            if (owner.getResourceAmount(input) < 1)
-                return;
+            if (owner.getAvailableResource(input) < 1) return;
             owner.changeResourceAmount(input, -1);
-            storageBuildings = getStorageBuildingsByObjectName(input, owner);
-            for (StorageBuilding storageBuilding : storageBuildings) {
-                if (storageBuilding.getResourceAmount(input) > 0)
-                    storageBuilding.changeResourcesAmount(input, -1);
-            }
         }
-        storageBuildings = getStorageBuildingsByObjectName(output, owner);
         owner.changeResourceAmount(output, rate);
-        for (StorageBuilding storageBuilding : storageBuildings) {
-            int freeSpace = storageBuilding.getFreeSpace();
-            if (freeSpace >= rate) {
-                storageBuilding.changeResourcesAmount(output, rate);
-                break;
-            } else if (freeSpace > 1) {
-                storageBuilding.changeResourcesAmount(output, freeSpace);
-                rate -= freeSpace;
-            }
-        }
-    }
-
-    private ArrayList<StorageBuilding> getStorageBuildingsByObjectName(String input, Empire owner) {
-        if (StorageBuildingsDictionary.STOCKPILE.getObjects().contains(input))
-            return owner.getAllStockPiles();
-        else if (StorageBuildingsDictionary.ARMOURY.getObjects().contains(input))
-            return owner.getAllArmouries();
-        else
-            return owner.getAllGranaries();
     }
 
     private void checkEndGame() {
