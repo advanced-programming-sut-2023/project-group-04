@@ -101,4 +101,8 @@ public class MapCell {
                 soldiers.add((Soldier) person);
         return soldiers;
     }
+
+    public void removeBuilding() {
+        this.building = null;
+    }
 }

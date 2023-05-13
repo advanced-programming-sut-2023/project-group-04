@@ -20,7 +20,7 @@ public class Game {
     private ArrayList<Person> selectedUnit;
     private final ArrayList<Person> toMovePeople;
     private final ArrayList<Soldier> attackingSoldiers;
-    private boolean activeMarket;
+    private final ArrayList<Trade> allTrades;
 
     public Game(ArrayList<Empire> allEmpires, String mapName) {
         currentGame = this;
@@ -29,6 +29,7 @@ public class Game {
         this.toMovePeople = new ArrayList<>();
         this.attackingSoldiers = new ArrayList<>();
         initializeMap(mapName);
+        allTrades = new ArrayList<>();
     }
 
     public void initializeMap(String mapName) {
@@ -167,11 +168,22 @@ public class Game {
         return map.length;
     }
 
-    public boolean isActiveMarket() {
-        return activeMarket;
+    public void addTrade(Trade trade) {
+        this.allTrades.add(trade);
+    }
+    public ArrayList<Trade> getAllTrades() {
+        return allTrades;
     }
 
-    public void activeMarket() {
-        this.activeMarket = true;
+    public Trade getTradeById(int id) {
+        for (Trade trade : allTrades) {
+            if (trade.getId() == id)
+                return trade;
+        }
+        return null;
+    }
+
+    public void removeTrade(Trade trade) {
+        this.allTrades.remove(trade);
     }
 }

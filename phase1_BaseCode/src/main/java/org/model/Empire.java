@@ -25,7 +25,7 @@ public class Empire {
     private final ArrayList<StorageBuilding> allArmouries;
     private final HashMap<String, Integer> weaponAndArmour;
 
-    private ArrayList<Trade> allTrades;
+    private final ArrayList<Trade> allTrades;
     private Building headquarter;
 
     public Empire(Player owner) {
@@ -122,6 +122,20 @@ public class Empire {
         return this.food.get(foodName);
     }
 
+    public void changeEmpireResource(String resource, int amount) {
+        if (resource.equals("gold")) {
+            resources.computeIfPresent("gold", (key, val) -> val + amount);
+            return;
+        }
+        if (StorageBuildingsDictionary.STOCKPILE.getObjects().contains(resource)) {
+            resources.computeIfPresent(resource, (key, val) -> val + amount);
+        } else if (StorageBuildingsDictionary.ARMOURY.getObjects().contains(resource)) {
+            weaponAndArmour.computeIfPresent(resource, (key, val) -> val + amount);
+        } else if (StorageBuildingsDictionary.GRANARY.getObjects().contains(resource)) {
+            food.computeIfPresent(resource, (key, val) -> val + amount);
+        }
+    }
+
     public void changeResourceAmount(String resource, int amount) {
         ArrayList<StorageBuilding> storages = new ArrayList<>();
         if (resource.equals("gold")) {
@@ -140,8 +154,8 @@ public class Empire {
         }
         if (amount > 0) {
             increaseResourceFromStorageBuilding(storages, resource, amount);
-        }else {
-            decreaseResourceFromStorageBuilding(storages, resource, -1*amount);
+        } else {
+            decreaseResourceFromStorageBuilding(storages, resource, -1 * amount);
         }
     }
 
