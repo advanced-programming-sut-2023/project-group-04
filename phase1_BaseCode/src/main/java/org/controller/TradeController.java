@@ -21,17 +21,16 @@ public class TradeController {
             return TradeMessages.WRONG_NAME_PRODUCT;
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         Trade trade = new Trade(resourceName, amount, price, senderMessage, Game.getCurrentGame().getCurrentEmpire());
-        if (empire.getAvailableResource(resourceName) < amount)
-            return TradeMessages.LACK_OF_PRODUCT;
+        if (empire.getAvailableResource(resourceName) < amount) return TradeMessages.LACK_OF_PRODUCT;
         empire.changeResourceAmount(resourceName, -1 * price);
         Game.getCurrentGame().getCurrentEmpire().getAllTrades().add(trade);
-//        Trade.getAllTrades().add(trade);
+        Game.getCurrentGame().addTrade(trade);
         return TradeMessages.SET_TRADE;
     }
 
     public String showTradeList() {
         StringBuilder list = new StringBuilder("LIST OF TRADE :");
-        for (Trade trade : Trade.getAllTrades()) {
+        for (Trade trade : Game.getCurrentGame().getAllTrades()) {
             list.append("\nResource name : ").append(trade.getResourceName());
             list.append("   Amount : ").append(trade.getResourceAmount());
             list.append("   Price : ").append(trade.getPrice());
@@ -46,15 +45,13 @@ public class TradeController {
             return TradeMessages.EMPTY_FIELD;
         receiverMessage = removeQuotation(matcher.group("message"));
         int id = Integer.parseInt(matcher.group("id"));
-        Trade trade = Trade.getTradeById(id);
-        if (trade == null)
-            return TradeMessages.WRONG_ID;
+        Trade trade = Game.getCurrentGame().getTradeById(id);
+        if (trade == null) return TradeMessages.WRONG_ID;
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
-        if (trade.getPrice() > empire.getAvailableResource("gold"))
-            return TradeMessages.LACK_OF_MONEY;
+        if (trade.getPrice() > empire.getAvailableResource("gold")) return TradeMessages.LACK_OF_MONEY;
         empire.changeResourceAmount("gold", trade.getPrice());
         trade.setReceiverMessage(receiverMessage);
-        trade.removeTrade();
+        Game.getCurrentGame().removeTrade(trade);
         return TradeMessages.ACCEPT_TRADE;
     }
 

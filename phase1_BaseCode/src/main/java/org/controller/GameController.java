@@ -5,7 +5,6 @@ import org.model.Game;
 import org.model.MapCell;
 import org.model.Player;
 import org.model.buildings.*;
-import org.model.map.Map;
 import org.model.person.*;
 import org.view.CommandsEnum.GameMessages;
 
@@ -173,8 +172,6 @@ public class GameController {
         if (building.getBuildingDictionary().equals(BuildingsDictionary.SMALL_STONE_GATEHOUSE) ||
                 building.getBuildingDictionary().equals(BuildingsDictionary.LARGE_STONE_GATEHOUSE))
             Game.getCurrentGame().getCurrentEmpire().activateTaxRate();
-        if (building.getBuildingDictionary().equals(BuildingsDictionary.MARKET))
-            Game.getCurrentGame().activeMarket();
     }
 
     private boolean buyBuilding(Empire empire, HashMap<String, Integer> prices) {
@@ -314,7 +311,7 @@ public class GameController {
         if (unit == null || unit.size() == 0) return GameMessages.EMPTY_UNIT_SELECT;
         MapCell destination = Game.getCurrentGame().getMapCellByAddress(x, y);
         MapCell origin = Game.getCurrentGame().getSelectedUnit().get(0).getMapCell();
-        if (routing(origin, destination) == null) return GameMessages.NO_WAY;
+        if (routing(origin, destination, false) == null) return GameMessages.NO_WAY;
         String[] invalidTextures = {"OIL", "PLAIN", "LOW_WATER", "RIVER", "SMALL_POND", "LARGE_POND", "SEA"};
         for (String invalidTexture : invalidTextures)
             if (destination.getGroundTexture().contains("ROCK") || destination.getGroundTexture().equals(invalidTexture))
@@ -338,7 +335,7 @@ public class GameController {
         if (unit == null || unit.size() == 0) return GameMessages.EMPTY_UNIT_SELECT;
         MapCell destination1 = Game.getCurrentGame().getMapCellByAddress(x1, y1);
         MapCell origin = Game.getCurrentGame().getSelectedUnit().get(0).getMapCell();
-        if (routing(origin, destination1) == null) return GameMessages.NO_WAY;
+        if (routing(origin, destination1, false) == null) return GameMessages.NO_WAY;
         MapCell destination2 = Game.getCurrentGame().getMapCellByAddress(x2, y2);
         for (Person person : unit) {
             if (person instanceof Soldier) ((Soldier) person).setAim(null);
@@ -415,7 +412,7 @@ public class GameController {
             if (!(person instanceof Soldier)) return GameMessages.NOT_SOLDIER;
         MapCell aimMapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
         MapCell origin = Game.getCurrentGame().getSelectedUnit().get(0).getMapCell();
-        if (routing(origin, aimMapCell) == null) return GameMessages.NO_WAY;
+        if (routing(origin, aimMapCell, false) == null) return GameMessages.NO_WAY;
         Building aimBuilding = aimMapCell.getBuilding();
         boolean enemy = false;
         for (Person person : aimMapCell.getPeople()) {
@@ -478,8 +475,10 @@ public class GameController {
         if (unit == null || unit.size() == 0) return GameMessages.EMPTY_UNIT_SELECT;
         for (Person person : unit)
             if (!(person instanceof Tunneler)) return GameMessages.NOT_TUNNELER;
-        MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
-        ((Tunneler) unit.get(0)).setAimTunnel(mapCell);
+        MapCell destination = Game.getCurrentGame().getMapCellByAddress(x, y);
+        MapCell origin = ((Tunneler) unit.get(0)).getMapCell();
+        if (routing(origin, destination, true) == null) return GameMessages.NO_WAY;
+        ((Tunneler) unit.get(0)).setAimTunnel(destination);
         return GameMessages.SET_TUNNEL_SUCCESSFUL;
     }
 
@@ -524,11 +523,46 @@ public class GameController {
         fights();
         longRangeFights();
         attackBuildings();
+        tunnel();
         updateRates();
         updateThingsWithRate();
         buildingOperations();
         fillEngineerOil();
         checkEndGame();
+    }
+
+    private void tunnel() {
+        for (Empire empire : Game.getCurrentGame().getAllEmpires())
+            for (Person person : empire.getPopulation())
+                if (person instanceof Tunneler) {
+                    Tunneler tunneler = (Tunneler) person;
+                    MapCell destination = tunneler.getAimTunnel();
+                    if (destination != null) {
+                        ArrayList<MapCell> path = routing(tunneler.getMapCell(), destination, true);
+                        for (int i = 0; i < path.size(); i++) {
+                            if (i == 15) {
+                                kill(tunneler);
+                                break;
+                            }
+                            Building building = path.get(i).getBuilding();
+                            if (building != null) {
+                                if (!building.getBuildingOwner().equals(empire)){
+                                    destroyBuilding(building);
+                                    kill(tunneler);
+                                }
+                            }
+                        }
+                    }
+                }
+    }
+
+    private void destroyBuilding(Building building) {
+        if (building instanceof StorageBuilding) {
+            StorageBuilding storageBuilding = (StorageBuilding) building;
+            for (String resource : storageBuilding.getContent().keySet())
+                building.getBuildingOwner().changeEmpireResource(resource,storageBuilding.getResourceAmount(resource));
+        }
+        building.getMapCell().removeBuilding();
     }
 
     private void fillEngineerOil() {
@@ -571,10 +605,10 @@ public class GameController {
         int size = Game.getCurrentGame().getMapSize();
         for (int i = Math.min(x - range, 0); i <= Math.max(x + range, size); i++) {
             for (int j = Math.min(y - range, 0); j < Math.max(y + range, size); j++) {
-                int distance = (int) Math.sqrt(i*i+j*j);
+                int distance = (int) Math.sqrt(i * i + j * j);
                 if (distance <= range) {
-                    MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x,y);
-                    if (mapCell.getPeople() != null){
+                    MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
+                    if (mapCell.getPeople() != null) {
                         for (Person person : mapCell.getPeople()) {
                             if (!person.getPersonOwner().equals(empire)) {
                                 int defensivePower = person instanceof Soldier ? ((Soldier) person).getDefensivePower() : 0;
@@ -596,7 +630,7 @@ public class GameController {
     private void moveAndPatrolTroops() {
         for (Person person : Game.getCurrentGame().getToMovePeople()) {
             if (person.getCurrentDestination() != null) {
-                ArrayList<MapCell> path = routing(person.getMapCell(), person.getCurrentDestination());
+                ArrayList<MapCell> path = routing(person.getMapCell(), person.getCurrentDestination(), false);
                 if (path == null) continue;
                 int moveTileNumber = Math.min(person.getSpeed(), path.size() - 1);
                 MapCell goal = path.get(moveTileNumber);
@@ -751,7 +785,7 @@ public class GameController {
 
     }
 
-    private boolean BFS(MapCell origin, MapCell destination, HashMap<MapCell, MapCell> predecessor) {
+    private boolean BFS(MapCell origin, MapCell destination, HashMap<MapCell, MapCell> predecessor, boolean isTunneler) {
         LinkedList<MapCell> queue = new LinkedList<MapCell>();
         ArrayList<MapCell> visited = new ArrayList<>();
         visited.add(origin);
@@ -767,7 +801,7 @@ public class GameController {
                     Game.getCurrentGame().getMapCellByAddress(x, y - 1)
             };
             for (MapCell nextNode : neighbors) {
-                if (!visited.contains(nextNode) && checkNode(x, y, nextNode)) {
+                if (!visited.contains(nextNode) && checkNode(x, y, nextNode, isTunneler)) {
                     visited.add(nextNode);
                     predecessor.put(nextNode, currentNode);
                     queue.add(nextNode);
@@ -778,23 +812,29 @@ public class GameController {
         return false;
     }
 
-    private boolean checkNode(int x, int y, MapCell nextNode) {
+    private boolean checkNode(int x, int y, MapCell nextNode, boolean isTunneler) {
         Building nextBuilding = nextNode.getBuilding();
-        if (nextNode.getBuilding() != null) {
+        if (nextNode.getBuilding() != null && !isTunneler) {
             BuildingsDictionary nextBuildingDictionary = nextBuilding.getBuildingDictionary();
             if ((nextBuildingDictionary != BuildingsDictionary.SMALL_STONE_GATEHOUSE &&
                     nextBuildingDictionary != BuildingsDictionary.LARGE_STONE_GATEHOUSE) ||
                     (((StructuralBuilding) nextNode.getBuilding()).isUpside() && (nextNode.getX() != x)) ||
                     (!((StructuralBuilding) nextNode.getBuilding()).isUpside() && (nextNode.getX() != y)))
                 return false;
-        } else if (nextNode.getGroundTexture().contains("ROCK") || nextNode.getGroundTexture().equals("SEA"))
+        }
+        if (nextNode.getGroundTexture().contains("ROCK") || nextNode.getGroundTexture().equals("SEA"))
             return false;
+        if (isTunneler) {
+            return !nextNode.getBuilding().getBuildingDictionary().equals(BuildingsDictionary.LOOKOUT_TOWER) &&
+                    !nextNode.getBuilding().getBuildingDictionary().equals(BuildingsDictionary.PERIMETER_TOWER) &&
+                    !(nextNode.getBuilding().getBuildingDictionary().equals(BuildingsDictionary.PITCH_DITCH));
+        }
         return true;
     }
 
-    private ArrayList<MapCell> routing(MapCell origin, MapCell destination) {
+    private ArrayList<MapCell> routing(MapCell origin, MapCell destination, boolean isTunneler) {
         HashMap<MapCell, MapCell> predecessor = new HashMap<>();
-        if (!BFS(origin, destination, predecessor)) return null;
+        if (!BFS(origin, destination, predecessor, isTunneler)) return null;
         ArrayList<MapCell> path = new ArrayList<>();
         MapCell crawl = destination;
         while (!crawl.equals(origin)) {

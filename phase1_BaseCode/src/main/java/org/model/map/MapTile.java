@@ -18,6 +18,7 @@ public class MapTile {
         this.building = null;
         this.soldier = null;
         this.headQuarter = false;
+        this.soldiersNumber = 0;
     }
 
     public String getTexture() {
