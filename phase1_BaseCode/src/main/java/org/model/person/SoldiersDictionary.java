@@ -1,6 +1,8 @@
 package org.model.person;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.HashMap;
 
 public enum SoldiersDictionary {
     ARCHER("archer", 12, "bow", "", 250, 125, 80, 16, 5),
@@ -14,7 +16,7 @@ public enum SoldiersDictionary {
     LADDERMAN("ladderman", 5, "", "", 210, 0, 60, 16, 0),
     ENGINEER("engineer", 30, "", "", 220, 0, 60, 12, 0),
     BLACKMONKS("blackmonks", 10, "staff", "", 270, 150, 100, 8, 0),
-    ARABIANBOWS("arabianbow", 75, "bow", "", 270, 125, 80, 16, 5),
+    ARABIANBOWS("arabianbows", 75, "bow", "", 270, 125, 80, 16, 5),
     SLAVE("slave", 5, "torch", "", 200, 100, 20, 16, 0),
     SLINGER("slinger", 12, "sling", "", 250, 125, 60, 16, 2),
     ASSASSIN("assassin", 60, "scimitar", "", 300, 150, 100, 12, 0),

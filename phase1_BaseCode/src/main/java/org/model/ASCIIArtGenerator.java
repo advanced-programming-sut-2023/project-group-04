@@ -52,8 +52,20 @@ public class ASCIIArtGenerator {
 
         for (int y = 0; y < textHeight; y++) {
             StringBuilder sb = new StringBuilder();
-            for (int x = 0; x < imageWidth; x++)
-                sb.append(image.getRGB(x, y) == Color.WHITE.getRGB() ? artSymbol : " ");
+            for (int x = 0; x < imageWidth; x++) {
+                if (y < textHeight - 3 && x < imageWidth - 1 && y > 0) {
+                    if (5 * y == x - 1)
+                        sb.append("@");
+                    else if (5 * (y - 5) == x - 1)
+                        sb.append("@");
+                    else if (5 * (y + 5) == x - 1)
+                        sb.append("@");
+                    else if (y == (int) ((-1 * textHeight * x) + ((imageWidth) * (textHeight))) / imageWidth)
+                        sb.append("#");
+                    else
+                        sb.append(image.getRGB(x, y) == Color.WHITE.getRGB() ? artSymbol : " ");
+                }
+            }
             if (sb.toString().trim().isEmpty())
                 continue;
             System.out.println(sb);

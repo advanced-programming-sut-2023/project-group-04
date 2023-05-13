@@ -7,7 +7,6 @@ import org.model.map.Map;
 
 import java.io.FileWriter;
 import java.io.Reader;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -55,7 +54,7 @@ public class Player {
     public static void recoveryPlayers() {
         try {
             Gson gson = new Gson();
-            Reader reader = Files.newBufferedReader(Paths.get("PLAYERS.json"));
+            Reader reader = Files.newBufferedReader(Paths.get("D:\\code\\APproject\\project-group-04\\phase1_BaseCode\\PLAYERS.json"));
             ArrayList<Player> allPlayers = new ArrayList<>();
                     JsonArray jsonArray = gson.fromJson(reader, JsonArray.class);
             if (jsonArray != null)

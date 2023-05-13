@@ -3,7 +3,6 @@ package org.model.buildings;
 import org.model.Empire;
 import org.model.MapCell;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class StorageBuilding extends Building {
@@ -29,7 +28,7 @@ public class StorageBuilding extends Building {
     }
 
     public void changeResourcesAmount(String resource, int amount) {
-        this.resources.put(resource,this.resources.get(resource) + amount);
+        this.resources.put(resource, this.resources.get(resource) + amount);
         this.freeSpace -= amount;
     }
 
