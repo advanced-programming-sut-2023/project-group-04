@@ -3,10 +3,8 @@ package org.controller;
 import org.model.Empire;
 import org.model.Game;
 import org.model.ResourcesDictionary;
-import org.model.buildings.StorageBuilding;
 import org.view.CommandsEnum.ShopMessages;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class ShopController {
@@ -29,8 +27,6 @@ public class ShopController {
         int price = ResourcesDictionary.getDictionaryByName(itemsName).getPrice() * itemsAmount;
         currentEmpire.changeResourceAmount(itemsName, itemsAmount);
         currentEmpire.changeResourceAmount("gold", -1 * price);
-        ArrayList<StorageBuilding> storageBuildings = currentEmpire.getStorageBuildingsByObjectName(itemsName);
-        currentEmpire.increaseResourceFromStorageBuilding(storageBuildings, itemsName, itemsAmount);
         return ShopMessages.BUY_SUCCESSFULLY;
     }
 
@@ -39,10 +35,7 @@ public class ShopController {
         int itemsAmount = Integer.parseInt(matcher.group("itemsAmount"));
         Empire currentEmpire = Game.getCurrentGame().getCurrentEmpire();
         int price = ResourcesDictionary.getDictionaryByName(itemsName).getPrice() * itemsAmount;
-        ArrayList<StorageBuilding> storageBuildings = currentEmpire.getStorageBuildingsByObjectName(itemsName);
         currentEmpire.changeResourceAmount(itemsName, -1 * itemsAmount);
-        currentEmpire.changeResourceAmount("gold", price);
-        currentEmpire.decreaseResourceFromStorageBuilding(storageBuildings, itemsName, itemsAmount);
         return ShopMessages.SELL_SUCCESSFULLY;
     }
 
@@ -69,7 +62,7 @@ public class ShopController {
         Empire currentEmpire = Game.getCurrentGame().getCurrentEmpire();
         if (ResourcesDictionary.getDictionaryByName(itemsName) == null)
             return ShopMessages.WRONG_NAME_PRODUCT;
-        if (currentEmpire.getResources().get(itemsName) < itemsAmount)
+        if (currentEmpire.getAvailableResource(itemsName) < itemsAmount)
             return ShopMessages.LACK_OF_PRODUCT;
         return ShopMessages.CERTAINTY;
     }

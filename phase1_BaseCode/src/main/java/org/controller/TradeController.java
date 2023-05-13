@@ -19,9 +19,13 @@ public class TradeController {
         int price = Integer.parseInt(matcher.group("price"));
         if (ResourcesDictionary.getDictionaryByName(resourceName) == null)
             return TradeMessages.WRONG_NAME_PRODUCT;
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
         Trade trade = new Trade(resourceName, amount, price, senderMessage, Game.getCurrentGame().getCurrentEmpire());
+        if (empire.getAvailableResource(resourceName) < amount)
+            return TradeMessages.LACK_OF_PRODUCT;
+        empire.changeResourceAmount(resourceName, -1 * price);
         Game.getCurrentGame().getCurrentEmpire().getAllTrades().add(trade);
-        Trade.getAllTrades().add(trade);
+//        Trade.getAllTrades().add(trade);
         return TradeMessages.SET_TRADE;
     }
 
@@ -45,6 +49,10 @@ public class TradeController {
         Trade trade = Trade.getTradeById(id);
         if (trade == null)
             return TradeMessages.WRONG_ID;
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
+        if (trade.getPrice() > empire.getAvailableResource("gold"))
+            return TradeMessages.LACK_OF_MONEY;
+        empire.changeResourceAmount("gold", trade.getPrice());
         trade.setReceiverMessage(receiverMessage);
         trade.removeTrade();
         return TradeMessages.ACCEPT_TRADE;
