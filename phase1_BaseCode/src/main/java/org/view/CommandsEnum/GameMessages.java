@@ -58,7 +58,9 @@ public enum GameMessages {
     NO_ENEMY("No enemy or building in target tile!"),
     INCORRECT_OUTPUT("This building can't produce selected good!"),
     SET_OUTPUT_SUCCESSFUL("Selected object set successful!"),
-    TAX_NOT_ACTIVE("You can't change tax rate yet!");
+    TAX_NOT_ACTIVE("You can't change tax rate yet!"),
+    ENTER_SHOP_MENU("Entered shop menu successfully!"),
+    NO_WAY("there isn't any way to selected entered destination!");
 
     private final String message;
 

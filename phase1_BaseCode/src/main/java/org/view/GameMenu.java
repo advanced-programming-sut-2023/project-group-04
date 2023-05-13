@@ -43,9 +43,11 @@ public class GameMenu {
             } else if ((matcher = GameCommands.getMatcher(input, GameCommands.DROP_BUILDING)) != null) {
                 System.out.println(Menu.getGameController().dropBuilding(matcher).getMessage());
             } else if ((matcher = GameCommands.getMatcher(input, GameCommands.SELECT_BUILDING)) != null) {
-                System.out.println(Menu.getGameController().selectBuilding(matcher).getMessage());
-            } else if ((matcher = GameCommands.getMatcher(input, GameCommands.REPAIR)) != null) {
-                System.out.println(Menu.getGameController().repair(matcher).getMessage());
+                GameMessages output = Menu.getGameController().selectBuilding(matcher);
+                System.out.println(output.getMessage());
+                if (output.equals(GameMessages.ENTER_SHOP_MENU)) new ShopMenu().run();
+            } else if (GameCommands.getMatcher(input, GameCommands.REPAIR) != null) {
+                System.out.println(Menu.getGameController().repair().getMessage());
             } else if ((matcher = GameCommands.getMatcher(input, GameCommands.CREATE_UNIT)) != null) {
                 System.out.println(Menu.getGameController().createUnit(matcher).getMessage());
             } else if ((matcher = GameCommands.getMatcher(input, GameCommands.SELECT_UNIT)) != null) {

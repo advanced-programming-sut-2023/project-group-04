@@ -62,7 +62,7 @@ public class GameController {
 
     public GameMessages changeTaxRate(Matcher matcher) {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
-        int taxRate = Integer.parseInt(matcher.group("taxRate"));
+        int taxRate = Integer.parseInt(removeQuotation(matcher.group("taxRate")));
         if (empire.getTaxRate() == -100) return GameMessages.TAX_NOT_ACTIVE;
         if (taxRate < -3 || taxRate > 8)
             return GameMessages.INVALID_TAX_RATE;
@@ -76,7 +76,7 @@ public class GameController {
     }
 
     public GameMessages changeFearRate(Matcher matcher) {
-        int fearRate = Integer.parseInt(matcher.group("fearRate"));
+        int fearRate = Integer.parseInt(removeQuotation(matcher.group("fearRate")));
         if (fearRate < -5 || fearRate > 5)
             return GameMessages.INVALID_FEAR_RATE;
         Game.getCurrentGame().getCurrentEmpire().setFearRate(fearRate);
@@ -90,10 +90,10 @@ public class GameController {
 
     public GameMessages dropBuilding(Matcher matcher) {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
-        int x = Integer.parseInt(matcher.group("x")) - 1;
-        int y = Integer.parseInt(matcher.group("y")) - 1;
-        String buildingName = matcher.group("type");
-        boolean upDirection = matcher.group("direction").equals("up");
+        int x = Integer.parseInt(removeQuotation(matcher.group("x"))) - 1;
+        int y = Integer.parseInt(removeQuotation(matcher.group("y"))) - 1;
+        String buildingName = removeQuotation(matcher.group("type"));
+        boolean upDirection = removeQuotation(matcher.group("direction")).equals("up");
         if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
         MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
         if (mapCell.getBuilding() != null) return GameMessages.EXISTENCE_BUILDING;
@@ -105,7 +105,7 @@ public class GameController {
     }
 
     private boolean checkGroundTexture(MapCell mapCell, String buildingName) {
-        String texture = mapCell.getGroundTexture();
+        String texture = removeQuotation(mapCell.getGroundTexture());
         String[] invalidTextures = {"OIL", "PLAIN", "LOW_WATER", "RIVER", "SMALL_POND", "LARGE_POND", "SEA"};
         for (String invalidTexture : invalidTextures)
             if (texture.equals(invalidTexture)) return false;
@@ -199,18 +199,20 @@ public class GameController {
     }
 
     public GameMessages selectBuilding(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("x")) - 1;
-        int y = Integer.parseInt(matcher.group("y")) - 1;
+        int x = Integer.parseInt(removeQuotation(matcher.group("x"))) - 1;
+        int y = Integer.parseInt(removeQuotation(matcher.group("y"))) - 1;
         if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
         Building building = Game.getCurrentGame().getMapCellByAddress(x, y).getBuilding();
         if (building == null) return GameMessages.BUILDING_NOT_EXIST;
         if (!building.getBuildingOwner().equals(Game.getCurrentGame().getCurrentEmpire()))
             return GameMessages.NOT_OWNING_THE_BUILDING;
+        if (building.getBuildingDictionary().equals(BuildingsDictionary.MARKET))
+            return GameMessages.ENTER_SHOP_MENU;
         Game.getCurrentGame().setSelectedBuilding(building);
         return GameMessages.SET_SUCCESSFUL;
     }
 
-    public GameMessages repair(Matcher matcher) {
+    public GameMessages repair() {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         Building selectedBuilding = Game.getCurrentGame().getSelectedBuilding();
         if (!selectedBuilding.getType().equals(BuildingType.CASTLE))
@@ -229,8 +231,8 @@ public class GameController {
 
     public GameMessages createUnit(Matcher matcher) {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
-        String unitType = matcher.group("type");
-        int count = Integer.parseInt(matcher.group("count"));
+        String unitType = removeQuotation(matcher.group("type"));
+        int count = Integer.parseInt(removeQuotation(matcher.group("count")));
         Building currentBuilding = Game.getCurrentGame().getSelectedBuilding();
         MapCell mapCell = currentBuilding.getMapCell();
         int buildingPosX = mapCell.getX();
@@ -323,9 +325,10 @@ public class GameController {
     }
 
     public GameMessages selectUnit(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("x")) - 1;
-        int y = Integer.parseInt(matcher.group("y")) - 1;
+        int x = Integer.parseInt(removeQuotation(matcher.group("x"))) - 1;
+        int y = Integer.parseInt(removeQuotation(matcher.group("y"))) - 1;
         String type = matcher.group("type");
+        if (type != null) type = removeQuotation(type);
         if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
         if (type != null && !type.equals("engineer") && !type.equals("tunneler") &&
                 !SoldiersDictionary.getAllSoldierTypes().contains(type)) return GameMessages.INVALID_UNIT_TYPE;
@@ -342,12 +345,14 @@ public class GameController {
     }
 
     public GameMessages moveUnit(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("x")) - 1;
-        int y = Integer.parseInt(matcher.group("y")) - 1;
+        int x = Integer.parseInt(removeQuotation(matcher.group("x"))) - 1;
+        int y = Integer.parseInt(removeQuotation(matcher.group("y"))) - 1;
         if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
         ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
         if (unit == null || unit.size() == 0) return GameMessages.EMPTY_UNIT_SELECT;
         MapCell destination = Game.getCurrentGame().getMapCellByAddress(x, y);
+        MapCell origin = Game.getCurrentGame().getSelectedUnit().get(0).getMapCell();
+        if (routing(origin, destination) == null) return GameMessages.NO_WAY;
         String[] invalidTextures = {"OIL", "PLAIN", "LOW_WATER", "RIVER", "SMALL_POND", "LARGE_POND", "SEA"};
         for (String invalidTexture : invalidTextures)
             if (destination.getGroundTexture().contains("ROCK") || destination.getGroundTexture().equals(invalidTexture))
@@ -362,14 +367,16 @@ public class GameController {
     }
 
     public GameMessages patrolUnit(Matcher matcher) {
-        int x1 = Integer.parseInt(matcher.group("x1")) - 1;
-        int y1 = Integer.parseInt(matcher.group("y1")) - 1;
-        int x2 = Integer.parseInt(matcher.group("x1")) - 1;
-        int y2 = Integer.parseInt(matcher.group("y2")) - 1;
+        int x1 = Integer.parseInt(removeQuotation(matcher.group("x1"))) - 1;
+        int y1 = Integer.parseInt(removeQuotation(matcher.group("y1"))) - 1;
+        int x2 = Integer.parseInt(removeQuotation(matcher.group("x1"))) - 1;
+        int y2 = Integer.parseInt(removeQuotation(matcher.group("y2"))) - 1;
         if (!checkCoordinates(x1, y1) || !checkCoordinates(x2, y2)) return GameMessages.INVALID_POSITION;
         ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
         if (unit == null || unit.size() == 0) return GameMessages.EMPTY_UNIT_SELECT;
         MapCell destination1 = Game.getCurrentGame().getMapCellByAddress(x1, y1);
+        MapCell origin = Game.getCurrentGame().getSelectedUnit().get(0).getMapCell();
+        if (routing(origin, destination1) == null) return GameMessages.NO_WAY;
         MapCell destination2 = Game.getCurrentGame().getMapCellByAddress(x2, y2);
         for (Person person : unit) {
             if (person instanceof Soldier) ((Soldier) person).setAim(null);
@@ -381,7 +388,7 @@ public class GameController {
     }
 
     public GameMessages setUnitMode(Matcher matcher) {
-        String mode = matcher.group("mode");
+        String mode = removeQuotation(matcher.group("mode"));
         ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
         if (unit == null || unit.size() == 0) return GameMessages.EMPTY_UNIT_SELECT;
         for (Person person : unit)
@@ -406,8 +413,8 @@ public class GameController {
     }
 
     public GameMessages airAttack(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("x")) - 1;
-        int y = Integer.parseInt(matcher.group("y")) - 1;
+        int x = Integer.parseInt(removeQuotation(matcher.group("x"))) - 1;
+        int y = Integer.parseInt(removeQuotation(matcher.group("y"))) - 1;
         if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
         ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
         if (unit == null || unit.size() == 0) return GameMessages.EMPTY_UNIT_SELECT;
@@ -437,14 +444,16 @@ public class GameController {
 
     public GameMessages Attack(Matcher matcher) {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
-        int x = Integer.parseInt(matcher.group("x")) - 1;
-        int y = Integer.parseInt(matcher.group("y")) - 1;
+        int x = Integer.parseInt(removeQuotation(matcher.group("x"))) - 1;
+        int y = Integer.parseInt(removeQuotation(matcher.group("y"))) - 1;
         if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
         ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
         if (unit == null || unit.size() == 0) return GameMessages.EMPTY_UNIT_SELECT;
         for (Person person : unit)
             if (!(person instanceof Soldier)) return GameMessages.NOT_SOLDIER;
         MapCell aimMapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
+        MapCell origin = Game.getCurrentGame().getSelectedUnit().get(0).getMapCell();
+        if (routing(origin, aimMapCell) == null) return GameMessages.NO_WAY;
         Building aimBuilding = aimMapCell.getBuilding();
         boolean enemy = false;
         for (Person person : aimMapCell.getPeople()) {
@@ -470,7 +479,7 @@ public class GameController {
             if (!(person instanceof Engineer)) return GameMessages.NOT_ENGINEER;
         int x = unit.get(0).getMapCell().getX();
         int y = unit.get(0).getMapCell().getY();
-        String direction = matcher.group("direction");
+        String direction = removeQuotation(matcher.group("direction"));
         switch (direction) {
             case "u":
                 y--;
@@ -500,8 +509,8 @@ public class GameController {
     }
 
     public GameMessages digTunnel(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("x")) - 1;
-        int y = Integer.parseInt(matcher.group("y")) - 1;
+        int x = Integer.parseInt(removeQuotation(matcher.group("x"))) - 1;
+        int y = Integer.parseInt(removeQuotation(matcher.group("y"))) - 1;
         if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
         ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
         if (unit == null || unit.size() == 0) return GameMessages.EMPTY_UNIT_SELECT;
@@ -536,7 +545,7 @@ public class GameController {
     public GameMessages setOutput(Matcher matcher) {
         if (matcher.group("output") == null)
             return GameMessages.EMPTY_FIELD;
-        String output = matcher.group("output").replaceAll("\"", "");
+        String output = removeQuotation(matcher.group("output"));
         Building building = Game.getCurrentGame().getSelectedBuilding();
         if (!(building instanceof ProductiveBuilding))
             return GameMessages.INCORRECT_BUILDING_TYPE;
@@ -556,7 +565,20 @@ public class GameController {
         updateRates();
         updateThingsWithRate();
         buildingOperations();
+        fillEngineerOil();
         checkEndGame();
+    }
+
+    private void fillEngineerOil() {
+        for (Empire empire : Game.getCurrentGame().getAllEmpires()) {
+            for (Person person : empire.getPopulation()) {
+                if (person instanceof Engineer) {
+                    Engineer engineer = (Engineer) person;
+                    if (!engineer.hasOil())
+                        engineer.setOil(true);//todo : fill engineer
+                }
+            }
+        }
     }
 
     private void longRangeFights() {
@@ -857,7 +879,7 @@ public class GameController {
         String mapName = matcher.group("mapName").replaceAll("\"", "");
         if (Player.getCurrentPlayer().getMapByName(mapName) == null)
             return GameMessages.MAP_NOT_EXIST;
-        String allUsers = matcher.group("allUsers");
+        String allUsers = removeQuotation(matcher.group("allUsers"));
         String[] players;
         if (allUsers.contains("/")) players = allUsers.split("/");
         else players = new String[]{allUsers};
@@ -885,5 +907,9 @@ public class GameController {
             empires.add(new Empire(Player.getPlayerByUsername(playerUsername)));
         }
         return empires;
+    }
+
+    private String removeQuotation(String buffer) {
+        return buffer.replaceAll("\"", "");
     }
 }
