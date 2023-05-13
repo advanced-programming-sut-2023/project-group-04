@@ -5,6 +5,7 @@ import org.model.Game;
 import org.model.MapCell;
 import org.model.Player;
 import org.model.buildings.*;
+import org.model.map.Map;
 import org.model.person.*;
 import org.view.CommandsEnum.GameMessages;
 
@@ -608,10 +609,10 @@ public class GameController {
         int size = Game.getCurrentGame().getMapSize();
         for (int i = Math.min(x - range, 0); i <= Math.max(x + range, size); i++) {
             for (int j = Math.min(y - range, 0); j < Math.max(y + range, size); j++) {
-                int distance = (int) Math.sqrt(i * i + j * j);
+                int distance = (int) Math.sqrt(i*i+j*j);
                 if (distance <= range) {
-                    MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
-                    if (mapCell.getPeople() != null) {
+                    MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x,y);
+                    if (mapCell.getPeople() != null){
                         for (Person person : mapCell.getPeople()) {
                             if (!person.getPersonOwner().equals(empire)) {
                                 int defensivePower = person instanceof Soldier ? ((Soldier) person).getDefensivePower() : 0;
@@ -781,26 +782,33 @@ public class GameController {
             if (owner.getResourceAmount(input) < 1)
                 return;
             owner.changeResourceAmount(input, -1);
-            storageBuildings = owner.getStorageBuildingsByObjectName(input);
-            owner.decreaseResourceFromStorageBuilding(storageBuildings, input, 1);
-//            for (StorageBuilding storageBuilding : storageBuildings) {
-//                if (storageBuilding.getResourceAmount(input) > 0)
-//                    storageBuilding.changeResourcesAmount(input, -1);
-//            }
+            storageBuildings = getStorageBuildingsByObjectName(input, owner);
+            for (StorageBuilding storageBuilding : storageBuildings) {
+                if (storageBuilding.getResourceAmount(input) > 0)
+                    storageBuilding.changeResourcesAmount(input, -1);
+            }
         }
-        storageBuildings = owner.getStorageBuildingsByObjectName(output);
+        storageBuildings = getStorageBuildingsByObjectName(output, owner);
         owner.changeResourceAmount(output, rate);
-        owner.increaseResourceFromStorageBuilding(storageBuildings, output, rate);
-//        for (StorageBuilding storageBuilding : storageBuildings) {
-//            int freeSpace = storageBuilding.getFreeSpace();
-//            if (freeSpace >= rate) {
-//                storageBuilding.changeResourcesAmount(output, rate);
-//                break;
-//            } else if (freeSpace > 1) {
-//                storageBuilding.changeResourcesAmount(output, freeSpace);
-//                rate -= freeSpace;
-//            }
-//        }
+        for (StorageBuilding storageBuilding : storageBuildings) {
+            int freeSpace = storageBuilding.getFreeSpace();
+            if (freeSpace >= rate) {
+                storageBuilding.changeResourcesAmount(output, rate);
+                break;
+            } else if (freeSpace > 1) {
+                storageBuilding.changeResourcesAmount(output, freeSpace);
+                rate -= freeSpace;
+            }
+        }
+    }
+
+    private ArrayList<StorageBuilding> getStorageBuildingsByObjectName(String input, Empire owner) {
+        if (StorageBuildingsDictionary.STOCKPILE.getObjects().contains(input))
+            return owner.getAllStockPiles();
+        else if (StorageBuildingsDictionary.ARMOURY.getObjects().contains(input))
+            return owner.getAllArmouries();
+        else
+            return owner.getAllGranaries();
     }
 
     private void checkEndGame() {

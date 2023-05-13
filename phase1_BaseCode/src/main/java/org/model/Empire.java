@@ -15,12 +15,16 @@ public class Empire {
     private int fearRate;
     private final ArrayList<Person> population = new ArrayList<>();
     private final HashMap<String, Integer> popularity;
-    private final HashMap<String, Integer> resources;
-    private final HashMap<String, Integer> weaponAndArmour;
-    private final HashMap<String, Integer> food;
+
     private final ArrayList<StorageBuilding> allStockPiles;
+    private final HashMap<String, Integer> resources;
+
     private final ArrayList<StorageBuilding> allGranaries;
+    private final HashMap<String, Integer> food;
+
     private final ArrayList<StorageBuilding> allArmouries;
+    private final HashMap<String, Integer> weaponAndArmour;
+
     private ArrayList<Trade> allTrades;
     private Building headquarter;
 
@@ -118,14 +122,52 @@ public class Empire {
         return this.food.get(foodName);
     }
 
-    public void changeFoodAmount(String foodName, int amount) {
-        this.food.put(foodName, food.get(foodName) + amount);
-    }
-
     public void changeResourceAmount(String resource, int amount) {
-        this.resources.put(resource, resources.get(resource) + amount);
+        ArrayList<StorageBuilding> storages = new ArrayList<>();
+        if (StorageBuildingsDictionary.STOCKPILE.getObjects().contains(resource)) {
+            resources.computeIfPresent(resource, (key, val) -> val + amount);
+            storages = allStockPiles;
+        } else if (StorageBuildingsDictionary.ARMOURY.getObjects().contains(resource)) {
+            weaponAndArmour.computeIfPresent(resource, (key, val) -> val + amount);
+            storages = allArmouries;
+        } else if (StorageBuildingsDictionary.GRANARY.getObjects().contains(resource)) {
+            food.computeIfPresent(resource, (key, val) -> val + amount);
+            storages = allGranaries;
+        }
+        if (amount > 0) {
+            increaseResourceFromStorageBuilding(storages, resource, amount);
+        }else {
+            decreaseResourceFromStorageBuilding(storages, resource, -1*amount);
+        }
     }
 
+    private void increaseResourceFromStorageBuilding(ArrayList<StorageBuilding> storageBuildings,
+                                                     String itemsName, int itemsAmount) {
+        for (StorageBuilding storageBuilding : storageBuildings) {
+            int freeSpace = storageBuilding.getFreeSpace();
+            if (freeSpace >= itemsAmount) {
+                storageBuilding.changeResourcesAmount(itemsName, itemsAmount);
+                break;
+            } else if (freeSpace > 1) {
+                storageBuilding.changeResourcesAmount(itemsName, freeSpace);
+                itemsAmount -= freeSpace;
+            }
+        }
+    }
+
+    private void decreaseResourceFromStorageBuilding(ArrayList<StorageBuilding> storageBuildings,
+                                                     String itemsName, int itemsAmount) {
+        for (StorageBuilding storageBuilding : storageBuildings) {
+            int availableAmount = storageBuilding.getResourceAmount(itemsName);
+            if (availableAmount >= itemsAmount) {
+                storageBuilding.changeResourcesAmount(itemsName, -1 * itemsAmount);
+                break;
+            } else if (availableAmount > 0) {
+                storageBuilding.changeResourcesAmount(itemsName, availableAmount);
+                itemsAmount -= availableAmount;
+            }
+        }
+    }
     public void activateTaxRate() {
         this.taxRate = 0;
     }
@@ -182,10 +224,6 @@ public class Empire {
         return weaponAndArmour.get(weaponOrArmour);
     }
 
-    public void changeWeaponAndArmourAmount(String type, int count) {
-        weaponAndArmour.computeIfPresent(type, (key, val) -> val + count);
-    }
-
     public void changePopularity(String type, int number) {
         popularity.put(type, popularity.get(type) + number);
     }
@@ -194,43 +232,8 @@ public class Empire {
         this.headquarter = headquarter;
     }
 
-    public ArrayList<StorageBuilding> getStorageBuildingsByObjectName(String input) {
-        if (StorageBuildingsDictionary.STOCKPILE.getObjects().contains(input))
-            return allStockPiles;
-        else if (StorageBuildingsDictionary.ARMOURY.getObjects().contains(input))
-            return allArmouries;
-        else
-            return allGranaries;
-
-    }
-
-    public void increaseResourceFromStorageBuilding(ArrayList<StorageBuilding> storageBuildings, String itemsName, int itemsAmount) {
-        for (StorageBuilding storageBuilding : storageBuildings) {
-            int freeSpace = storageBuilding.getFreeSpace();
-            if (freeSpace >= itemsAmount) {
-                storageBuilding.changeResourcesAmount(itemsName, itemsAmount);
-                break;
-            } else if (freeSpace > 1) {
-                storageBuilding.changeResourcesAmount(itemsName, freeSpace);
-                itemsAmount -= freeSpace;
-            }
-        }
-    }
-
-    public void decreaseResourceFromStorageBuilding(ArrayList<StorageBuilding> storageBuildings, String itemsName, int itemsAmount) {
-        for (StorageBuilding storageBuilding : storageBuildings) {
-            int availableAmount = storageBuilding.getResourceAmount(itemsName);
-            if (availableAmount >= itemsAmount) {
-                storageBuilding.changeResourcesAmount(itemsName, -1 * itemsAmount);
-                break;
-            } else if (availableAmount > 0) {
-                storageBuilding.changeResourcesAmount(itemsName, availableAmount);
-                itemsAmount -= availableAmount;
-            }
-        }
-    }
-
     public Building getHeadquarter() {
         return headquarter;
     }
+
 }
