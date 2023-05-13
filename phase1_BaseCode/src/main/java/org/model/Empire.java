@@ -21,9 +21,9 @@ public class Empire {
     private final ArrayList<StorageBuilding> allGranaries;
     private final ArrayList<StorageBuilding> allArmouries;
     private ArrayList<Trade> allTrades;
-    private final Building headquarter;
+    private Building headquarter;
 
-    public Empire(Player owner, Building headquarter) {
+    public Empire(Player owner) {
         this.owner = owner;
         this.fearRate = 0;
         this.taxRate = -100;
@@ -40,7 +40,6 @@ public class Empire {
         allGranaries = new ArrayList<>();
         allArmouries = new ArrayList<>();
         allTrades = new ArrayList<>();
-        this.headquarter = headquarter;
     }
 
     private void initializeWeaponAndArmor() {
@@ -188,6 +187,10 @@ public class Empire {
 
     public void changePopularity(String type, int number) {
         popularity.put(type, popularity.get(type) + number);
+    }
+
+    public void setHeadquarter(Building headquarter) {
+        this.headquarter = headquarter;
     }
 
     public Building getHeadquarter() {

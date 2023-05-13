@@ -19,7 +19,6 @@ public class MapCell {
     private boolean tunnel;
     private boolean oil;
 
-
     public MapCell(int x, int y, String groundTexture, String tree) {
         this.xAxis = x;
         this.yAxis = y;

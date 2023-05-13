@@ -42,9 +42,10 @@ public class Game {
                 if (tile.getOwnerColor() != null) {
                     Empire empire = allEmpires.get(Map.getCurrentMap().getAllColors().indexOf(tile.getOwnerColor()));
                     Building building = null;
-                    if (tile.isHeadQuarter())
+                    if (tile.isHeadQuarter()) {
                         building = new Building(empire, BuildingsDictionary.HEAD_QUARTER, mapCell);
-                    else if (tile.getBuilding() != null)
+                        empire.setHeadquarter(building);
+                    } else if (tile.getBuilding() != null)
                         building = createBuilding(empire, i, j, tile.getBuilding());
                     mapCell.setBuilding(building);
                     if (tile.getSoldier() != null)

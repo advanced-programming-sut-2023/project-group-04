@@ -426,6 +426,7 @@ public class GameController {
             if (soldier.getSoldiersDictionary().getFireRange() > distance) {
                 inRange = true;
                 soldier.setAim(Game.getCurrentGame().getMapCellByAddress(x, y));
+                Game.getCurrentGame().addAttackingSoldier(soldier);
             }
         }
         if (!inRange) return GameMessages.AIM_OUT_OF_RANGE;
@@ -453,8 +454,9 @@ public class GameController {
         if ((aimBuilding == null || aimBuilding.getBuildingOwner().equals(empire)) && !enemy)
             return GameMessages.NO_ENEMY;
         for (Person person : unit) {
-            person.setCurrentDestination(null);
+            person.setCurrentDestination(aimMapCell);
             ((Soldier) person).setAim(aimMapCell);
+            Game.getCurrentGame().addAttackingSoldier((Soldier) person);
         }
         return GameMessages.SUCCESSFUL_ATTACK;
     }
@@ -509,6 +511,7 @@ public class GameController {
     }
 
     public GameMessages engineerBuild(Matcher matcher) {
+
         //TODO : KIR TO IN METHOD
         return null;
     }
@@ -546,10 +549,62 @@ public class GameController {
     public void nextTurn() {
         moveAndPatrolTroops();
         fights();
+        longRangeFights();
+        attackBuildings();
         updateRates();
         updateThingsWithRate();
         buildingOperations();
         checkEndGame();
+    }
+
+    private void longRangeFights() {
+        for (int i = 0; i < Game.getCurrentGame().getMapSize(); i++) {
+            for (MapCell mapCell : Game.getCurrentGame().getMap()[i]) {
+                if (mapCell.getSoldiers() != null) {
+                    for (Soldier soldier : mapCell.getSoldiers()) {
+                        SoldiersDictionary dictionary = soldier.getSoldiersDictionary();
+                        if (dictionary.equals(SoldiersDictionary.ARCHER) ||
+                                dictionary.equals(SoldiersDictionary.CROSSBOWMAN) ||
+                                dictionary.equals(SoldiersDictionary.ARABIANBOWS) ||
+                                dictionary.equals(SoldiersDictionary.HORSE_ARCHER)) {
+                            fightInRange(soldier);
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    private void fightInRange(Soldier soldier) {
+        Empire empire = soldier.getPersonOwner();
+        SoldiersDictionary dictionary = soldier.getSoldiersDictionary();
+        int range = dictionary.getFireRange();
+        int x = soldier.getMapCell().getX();
+        int y = soldier.getMapCell().getY();
+        int size = Game.getCurrentGame().getMapSize();
+        for (int i = Math.min(x - range, 0); i <= Math.max(x + range, size); i++) {
+            for (int j = Math.min(y - range, 0); j < Math.max(y + range, size); j++) {
+                int distance = (int) Math.sqrt(i*i+j*j);
+                if (distance <= range) {
+                    MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x,y);
+                    if (mapCell.getPeople() != null){
+                        for (Person person : mapCell.getPeople()) {
+                            if (!person.getPersonOwner().equals(empire)) {
+                                int defensivePower = person instanceof Soldier ? ((Soldier) person).getDefensivePower() : 0;
+                                person.damagePerson(soldier.getOffensivePower() - defensivePower);
+                                kill(person);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void attackBuildings() {
+
+
     }
 
     private void moveAndPatrolTroops() {
@@ -736,7 +791,6 @@ public class GameController {
     }
 
     private void checkEndGame() {
-
 
     }
 
