@@ -1,5 +1,6 @@
 package org.view;
 
+import org.view.CommandsEnum.GameMessages;
 import org.view.CommandsEnum.MainMenuCommands;
 
 import java.util.regex.Matcher;
@@ -7,6 +8,7 @@ import java.util.regex.Matcher;
 public class MainMenu {
     public MainMenu() {
     }
+
     public void run() throws Exception {
         String input;
         Matcher matcher;
@@ -18,9 +20,11 @@ public class MainMenu {
             } else if ((MainMenuCommands.getMatcher(input, MainMenuCommands.ENTER_PROFILE_MENU)) != null) {
                 System.out.println("you successfully entered \"profile menu!\"");
                 new ProfileMenu().run();
-            } else if ((MainMenuCommands.getMatcher(input, MainMenuCommands.START_GAME)) != null) {
-                System.out.println("the game has started!");
-                new GameMenu().run();
+            } else if ((matcher = MainMenuCommands.getMatcher(input, MainMenuCommands.START_GAME)) != null) {
+                GameMessages messages = Menu.getGameController().startGame(matcher);
+                System.out.println(messages.getMessage());
+                if (messages.equals(GameMessages.GAME_STARTED))
+                    new GameMenu().run();
             } else if (MainMenuCommands.getMatcher(input, MainMenuCommands.ENTER_ENVIRONMENT_MENU) != null) {
                 System.out.println("you successfully entered \"environment menu\"");
                 new EnvironmentMenu().run();

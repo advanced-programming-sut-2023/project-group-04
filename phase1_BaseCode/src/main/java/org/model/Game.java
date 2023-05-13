@@ -24,11 +24,11 @@ public class Game {
 
     public Game(ArrayList<Empire> allEmpires, String mapName) {
         currentGame = this;
-        initializeMap(mapName);
         this.allEmpires = allEmpires;
         currentEmpire = allEmpires.get(0);
         this.toMovePeople = new ArrayList<>();
         this.attackingSoldiers = new ArrayList<>();
+        initializeMap(mapName);
     }
 
     public void initializeMap(String mapName) {
@@ -40,7 +40,7 @@ public class Game {
                 MapTile tile = mapTemplate.getMapTile(i, j);
                 MapCell mapCell = map[i][j] = new MapCell(i, j, tile.getTexture(), tile.getTree());
                 if (tile.getOwnerColor() != null) {
-                    Empire empire = allEmpires.get(Map.getCurrentMap().getAllColors().indexOf(tile.getOwnerColor()));
+                    Empire empire = allEmpires.get(mapTemplate.getAllColors().indexOf(tile.getOwnerColor()));
                     Building building = null;
                     if (tile.isHeadQuarter()) {
                         building = new Building(empire, BuildingsDictionary.HEAD_QUARTER, mapCell);

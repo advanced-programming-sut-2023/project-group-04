@@ -3,8 +3,10 @@ package org.controller;
 import org.model.Empire;
 import org.model.Game;
 import org.model.ResourcesDictionary;
+import org.model.buildings.StorageBuilding;
 import org.view.CommandsEnum.ShopMessages;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class ShopController {
@@ -25,8 +27,10 @@ public class ShopController {
         int itemsAmount = Integer.parseInt(matcher.group("itemsAmount"));
         Empire currentEmpire = Game.getCurrentGame().getCurrentEmpire();
         int price = ResourcesDictionary.getDictionaryByName(itemsName).getPrice() * itemsAmount;
-        currentEmpire.getResources().computeIfPresent(itemsName, (key, val) -> val + itemsAmount);
-        currentEmpire.getResources().computeIfPresent("gold", (key, val) -> val - price);
+        currentEmpire.changeResourceAmount(itemsName, itemsAmount);
+        currentEmpire.changeResourceAmount("gold", -1 * price);
+        ArrayList<StorageBuilding> storageBuildings = currentEmpire.getStorageBuildingsByObjectName(itemsName);
+        currentEmpire.increaseResourceFromStorageBuilding(storageBuildings, itemsName, itemsAmount);
         return ShopMessages.BUY_SUCCESSFULLY;
     }
 
@@ -35,8 +39,10 @@ public class ShopController {
         int itemsAmount = Integer.parseInt(matcher.group("itemsAmount"));
         Empire currentEmpire = Game.getCurrentGame().getCurrentEmpire();
         int price = ResourcesDictionary.getDictionaryByName(itemsName).getPrice() * itemsAmount;
-        currentEmpire.getResources().computeIfPresent(itemsName, (key, val) -> val - itemsAmount);
-        currentEmpire.getResources().computeIfPresent("gold", (key, val) -> val + price);
+        ArrayList<StorageBuilding> storageBuildings = currentEmpire.getStorageBuildingsByObjectName(itemsName);
+        currentEmpire.changeResourceAmount(itemsName, -1 * itemsAmount);
+        currentEmpire.changeResourceAmount("gold", price);
+        currentEmpire.decreaseResourceFromStorageBuilding(storageBuildings, itemsName, itemsAmount);
         return ShopMessages.SELL_SUCCESSFULLY;
     }
 

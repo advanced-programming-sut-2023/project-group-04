@@ -2,6 +2,7 @@ package org.model;
 
 import org.model.buildings.Building;
 import org.model.buildings.StorageBuilding;
+import org.model.buildings.StorageBuildingsDictionary;
 import org.model.person.Person;
 
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class Empire {
     }
 
     private void initializeResource() {
-        String[] resources = {"wheat", "flour", "hops", "ale", "stone", "iron", "wood", "pitch"};
+        String[] resources = {"wheat", "flour", "hops", "ale", "stone", "iron", "wood", "pitch", "gold"};
         for (String resource : resources) this.resources.put(resource, 0);
     }
 
@@ -191,6 +192,42 @@ public class Empire {
 
     public void setHeadquarter(Building headquarter) {
         this.headquarter = headquarter;
+    }
+
+    public ArrayList<StorageBuilding> getStorageBuildingsByObjectName(String input) {
+        if (StorageBuildingsDictionary.STOCKPILE.getObjects().contains(input))
+            return allStockPiles;
+        else if (StorageBuildingsDictionary.ARMOURY.getObjects().contains(input))
+            return allArmouries;
+        else
+            return allGranaries;
+
+    }
+
+    public void increaseResourceFromStorageBuilding(ArrayList<StorageBuilding> storageBuildings, String itemsName, int itemsAmount) {
+        for (StorageBuilding storageBuilding : storageBuildings) {
+            int freeSpace = storageBuilding.getFreeSpace();
+            if (freeSpace >= itemsAmount) {
+                storageBuilding.changeResourcesAmount(itemsName, itemsAmount);
+                break;
+            } else if (freeSpace > 1) {
+                storageBuilding.changeResourcesAmount(itemsName, freeSpace);
+                itemsAmount -= freeSpace;
+            }
+        }
+    }
+
+    public void decreaseResourceFromStorageBuilding(ArrayList<StorageBuilding> storageBuildings, String itemsName, int itemsAmount) {
+        for (StorageBuilding storageBuilding : storageBuildings) {
+            int availableAmount = storageBuilding.getResourceAmount(itemsName);
+            if (availableAmount >= itemsAmount) {
+                storageBuilding.changeResourcesAmount(itemsName, -1 * itemsAmount);
+                break;
+            } else if (availableAmount > 0) {
+                storageBuilding.changeResourcesAmount(itemsName, availableAmount);
+                itemsAmount -= availableAmount;
+            }
+        }
     }
 
     public Building getHeadquarter() {

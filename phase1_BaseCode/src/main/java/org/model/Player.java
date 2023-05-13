@@ -56,11 +56,10 @@ public class Player {
             Gson gson = new Gson();
             Reader reader = Files.newBufferedReader(Paths.get("D:\\code\\APproject\\project-group-04\\phase1_BaseCode\\PLAYERS.json"));
             ArrayList<Player> allPlayers = new ArrayList<>();
-                    JsonArray jsonArray = gson.fromJson(reader, JsonArray.class);
-            if (jsonArray != null)
-            {
+            JsonArray jsonArray = gson.fromJson(reader, JsonArray.class);
+            if (jsonArray != null) {
                 for (JsonElement jsonElement : jsonArray) {
-                    allPlayers.add(gson.fromJson(jsonElement,Player.class));
+                    allPlayers.add(gson.fromJson(jsonElement, Player.class));
                 }
                 Player.allPlayers = allPlayers;
             }
@@ -74,11 +73,10 @@ public class Player {
         Gson gson = new Gson();
         String data = gson.toJson(Player.getAllPlayers());
         try {
-            FileWriter output = new FileWriter("PLAYERS.json");
+            FileWriter output = new FileWriter("D:\\code\\APproject\\project-group-04\\phase1_BaseCode\\PLAYERS.json");
             output.write(data);
             output.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.getStackTrace();
         }
     }
@@ -171,11 +169,12 @@ public class Player {
     }
 
     public Map getMapByName(String name) {
-        for (Map map1 : maps)
-            if (map1.getMapName().equals(name))
-                return map1;
+        for (Map map : maps)
+            if (map.getMapName().equals(name))
+                return map;
         return null;
     }
+
     public ArrayList<Map> getAllMaps() {
         return this.maps;
     }
@@ -192,7 +191,7 @@ public class Player {
         return numberOfAttempts;
     }
 
-    public static void resetNumberOfAttempts(){
+    public static void resetNumberOfAttempts() {
         numberOfAttempts = 0;
     }
 
