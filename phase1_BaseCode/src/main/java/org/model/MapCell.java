@@ -4,7 +4,6 @@ import org.model.Machine.Machine;
 import org.model.buildings.Building;
 import org.model.person.Person;
 import org.model.person.Soldier;
-import org.model.buildings.Building;
 
 import java.util.ArrayList;
 
@@ -25,7 +24,7 @@ public class MapCell {
         this.groundTexture = groundTexture;
         this.tree = tree;
         this.building = null;
-        this.people = null;
+        this.people = new ArrayList<>();
         this.machine = null;
         this.tunnel = false;
         this.oil = false;

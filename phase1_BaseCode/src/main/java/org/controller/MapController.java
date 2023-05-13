@@ -26,7 +26,7 @@ public class MapController {
         for (int i = 0; i < 29; i++) { // 7*3 + 8
             for (int j = 0; j < 29; j++) {
                 if (j % 4 == 0 && j != 0)
-                    y++;
+                    x++;
                 if (i % 4 == 0) {
                     mapData += "-";
                 } else if (j % 4 == 0) {
@@ -38,12 +38,12 @@ public class MapController {
                     mapData += ANSI_RESET;
                 }
                 if (j == 28)
-                    y = yPos;
+                    x = xPos;
             }
             mapData += "\n";
             if (i % 4 == 0 && i != 0) {
-                xPos++;
-                x = xPos;
+                yPos++;
+                y = yPos;
             }
         }
         return mapData;
@@ -76,43 +76,43 @@ public class MapController {
             return "\033[44m"; // blue
         else if (groundTexture.equals("PLAIN"))
             return "\033[45m"; // purple
-        return null;
+        return "\033[43m";
     }
 
     public String changeMapView(Matcher matcher) {
         int x = getXPos(matcher);
-        int y = getYpos(matcher);
+        int y = getYPos(matcher);
         return showMap(x, y);
-    }
-
-    private int getYpos(Matcher matcher) {
-        int y = 0;
-        if (matcher.group("right") != null) {
-            if (matcher.group("rightNumber") != null)
-                y += Integer.parseInt(matcher.group("rightNumber"));
-            else y += 1;
-        }
-        if (matcher.group("left") != null) {
-            if (matcher.group("leftNumber") != null)
-                y -= Integer.parseInt(matcher.group("leftNumber"));
-            else y -= 1;
-        }
-        return y;
     }
 
     private int getXPos(Matcher matcher) {
         int x = 0;
-        if (matcher.group("down") != null) {
-            if (matcher.group("downNumber") != null)
-                x += Integer.parseInt(matcher.group("downNumber"));
+        if (matcher.group("right") != null) {
+            if (matcher.group("rightNumber") != null)
+                x += Integer.parseInt(matcher.group("rightNumber"));
             else x += 1;
         }
-        if (matcher.group("up") != null) {
-            if (matcher.group("upNumber") != null)
-                x -= Integer.parseInt(matcher.group("upNumber"));
+        if (matcher.group("left") != null) {
+            if (matcher.group("leftNumber") != null)
+                x -= Integer.parseInt(matcher.group("leftNumber"));
             else x -= 1;
         }
         return x;
+    }
+
+    private int getYPos(Matcher matcher) {
+        int y = 0;
+        if (matcher.group("down") != null) {
+            if (matcher.group("downNumber") != null)
+                y += Integer.parseInt(matcher.group("downNumber"));
+            else y += 1;
+        }
+        if (matcher.group("up") != null) {
+            if (matcher.group("upNumber") != null)
+                y -= Integer.parseInt(matcher.group("upNumber"));
+            else y -= 1;
+        }
+        return y;
     }
 
     public String showMapDetail(Matcher matcher) {

@@ -46,9 +46,10 @@ public class Game {
                     if (tile.isHeadQuarter()) {
                         building = new Building(empire, BuildingsDictionary.HEAD_QUARTER, mapCell);
                         empire.setHeadquarter(building);
-                    } else if (tile.getBuilding() != null)
+                    } else if (tile.getBuilding() != null) {
                         building = createBuilding(empire, i, j, tile.getBuilding());
-                    mapCell.setBuilding(building);
+                        mapCell.setBuilding(building);
+                    }
                     if (tile.getSoldier() != null)
                         for (int k = 0; k < tile.getSoldiersNumber(); k++)
                             mapCell.addPeople(new Soldier(empire,
@@ -171,6 +172,7 @@ public class Game {
     public void addTrade(Trade trade) {
         this.allTrades.add(trade);
     }
+
     public ArrayList<Trade> getAllTrades() {
         return allTrades;
     }

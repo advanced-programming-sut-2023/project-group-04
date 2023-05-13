@@ -69,6 +69,7 @@ public class Empire {
     private void initializeResource() {
         String[] resources = {"wheat", "flour", "hops", "ale", "stone", "iron", "wood", "pitch", "gold"};
         for (String resource : resources) this.resources.put(resource, 0);
+        this.resources.put("gold", 500);
     }
 
     private void initializeFood() {

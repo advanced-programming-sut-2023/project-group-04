@@ -137,6 +137,7 @@ public enum ProductiveBuildingsDictionary {
 
     private ProductiveBuildingsDictionary(BuildingsDictionary buildingsDictionary, int rate, String inputResource,
                                           ArrayList<String> outputResource, ArrayList<String> acceptableTexture) {
+        this.buildingDictionary = buildingsDictionary;
         this.rate = rate;
         this.inputResource = inputResource;
         this.outputResource = outputResource;

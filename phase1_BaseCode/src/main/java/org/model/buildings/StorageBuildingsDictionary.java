@@ -42,6 +42,7 @@ public enum StorageBuildingsDictionary {
 
 
     private StorageBuildingsDictionary(BuildingsDictionary buildingsDictionary, int capacity, ArrayList<String> objects) {
+        this.buildingDictionary = buildingsDictionary;
         this.capacity = capacity;
         this.objects = objects;
     }

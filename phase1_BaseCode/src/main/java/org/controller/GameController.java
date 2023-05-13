@@ -89,15 +89,19 @@ public class GameController {
 
     public GameMessages dropBuilding(Matcher matcher) {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
+        if (matcher.group("x") == null || matcher.group("y") == null || matcher.group("type") == null)
+            return GameMessages.EMPTY_FIELD;
         int x = Integer.parseInt(removeQuotation(matcher.group("x"))) - 1;
         int y = Integer.parseInt(removeQuotation(matcher.group("y"))) - 1;
         String buildingName = removeQuotation(matcher.group("type"));
-        boolean upDirection = removeQuotation(matcher.group("direction")).equals("up");
+        boolean upDirection = false;
+        if (matcher.group("direction") != null)
+            upDirection = removeQuotation(matcher.group("direction")).equals("up");
         if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
         MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
         if (mapCell.getBuilding() != null) return GameMessages.EXISTENCE_BUILDING;
         if (BuildingsDictionary.getDictionaryByName(buildingName) == null) return GameMessages.INCORRECT_BUILDING_TYPE;
-        if (checkGroundTexture(mapCell, buildingName)) return GameMessages.INVALID_TEXTURE_TREE;
+        if (!checkGroundTexture(mapCell, buildingName)) return GameMessages.INVALID_TEXTURE_TREE;
         if (buildingName.equals("draw bridge") && !checkDrawBridge(x, y, upDirection))
             return GameMessages.INVALID_DRAWBRIDGE_POSITION;
         return createBuilding(empire, x, y, buildingName, upDirection);
@@ -108,9 +112,13 @@ public class GameController {
         String[] invalidTextures = {"OIL", "PLAIN", "LOW_WATER", "RIVER", "SMALL_POND", "LARGE_POND", "SEA"};
         for (String invalidTexture : invalidTextures)
             if (texture.equals(invalidTexture)) return false;
-        if (texture.contains("ROCK") || !mapCell.getTree().equals("LITTLE_CHERRY")) return false;
+        if (texture.contains("ROCK") || (mapCell.getTree() != null && !mapCell.getTree().equals("LITTLE_CHERRY")))
+            return false;
         ProductiveBuildingsDictionary dictionary = ProductiveBuildingsDictionary.getDictionaryByName(buildingName);
-        return dictionary == null || dictionary.getAcceptableTexture().contains(texture);
+        if (dictionary == null) return true;
+        else if (dictionary.getAcceptableTexture() == null) return true;
+        else if (dictionary.getAcceptableTexture().contains(texture)) return true;
+        else return false;
     }
 
     private boolean checkDrawBridge(int x, int y, boolean upDirection) {
@@ -164,14 +172,31 @@ public class GameController {
         }
         if (!buyBuilding(empire, prices)) return GameMessages.NOT_ENOUGH_RESOURCE;
         Game.getCurrentGame().getMapCellByAddress(x, y).setBuilding(building);
+
         initBuildings(building);
         return GameMessages.SUCCESSFUL_DROP;
     }
 
     private void initBuildings(Building building) {
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
         if (building.getBuildingDictionary().equals(BuildingsDictionary.SMALL_STONE_GATEHOUSE) ||
                 building.getBuildingDictionary().equals(BuildingsDictionary.LARGE_STONE_GATEHOUSE))
-            Game.getCurrentGame().getCurrentEmpire().activateTaxRate();
+            empire.activateTaxRate();
+        if (building.getBuildingDictionary().equals(BuildingsDictionary.STOCKPILE)) {
+            empire.addStockPile((StorageBuilding) building);
+            if (empire.getAllStockPiles().size() == 1) {
+                empire.changeResourceAmount("wood", 60);
+                empire.changeResourceAmount("stone", 50);
+            }
+        }
+        if (building.getBuildingDictionary().equals(BuildingsDictionary.GRANARY)) {
+            empire.addGranary((StorageBuilding) building);
+            if (empire.getAllGranaries().size() == 1)
+                empire.changeResourceAmount("bread", 50);
+        }
+        if (building.getBuildingDictionary().equals(BuildingsDictionary.ARMOURY)) {
+            empire.addArmoury((StorageBuilding) building);
+        }
     }
 
     private boolean buyBuilding(Empire empire, HashMap<String, Integer> prices) {
@@ -546,7 +571,7 @@ public class GameController {
                             }
                             Building building = path.get(i).getBuilding();
                             if (building != null) {
-                                if (!building.getBuildingOwner().equals(empire)){
+                                if (!building.getBuildingOwner().equals(empire)) {
                                     destroyBuilding(building);
                                     kill(tunneler);
                                 }
@@ -560,7 +585,7 @@ public class GameController {
         if (building instanceof StorageBuilding) {
             StorageBuilding storageBuilding = (StorageBuilding) building;
             for (String resource : storageBuilding.getContent().keySet())
-                building.getBuildingOwner().changeEmpireResource(resource,storageBuilding.getResourceAmount(resource));
+                building.getBuildingOwner().changeEmpireResource(resource, storageBuilding.getResourceAmount(resource));
         }
         building.getMapCell().removeBuilding();
     }

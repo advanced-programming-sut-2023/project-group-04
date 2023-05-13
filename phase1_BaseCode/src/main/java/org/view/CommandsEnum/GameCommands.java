@@ -14,11 +14,11 @@ public enum GameCommands {
     CHANGE_FEAR_RATE("^\\s*fear\\s+rate(?=.*-r\\s+(?<fearRate>[\\d]*))(\\s*(-r\\s+([\\d]*)))\\s*$"),
     SHOW_FEAR_RATE("^\\s*fear\\s+rate\\s+show\\s*$"),
     DROP_BUILDING("^\\s*drop\\s+building(?=.*-type\\s+(?<type>\"[^\"]*\"|[^\\s\"]*))(?=.*-x\\s+(?<x>[\\d]*))" +
-            "(?=.*-y\\s+(?<y>[\\d]*))(?=.*-d\\s+(?<direction>up|right))(\\s*(-type\\s+(\"[^\"]*\"|[^\\s\"]*)|" +
-            "-x\\s+([\\d]*)|-y\\s+([\\d]*)|-d\\s+(up|right))){4}\\s*$"),
+            "(?=.*-y\\s+(?<y>[\\d]*))(?=.*-d\\s+(?<direction>up|right))?(\\s*(-type\\s+(\"[^\"]*\"|[^\\s\"]*)|" +
+            "-x\\s+([\\d]*)|-y\\s+([\\d]*)|-d\\s+(up|right))?){4}\\s*$"),
     SELECT_BUILDING("^\\s*select\\s+building(?=.*-x\\s+(?<x>[\\d]*))" +
             "(?=.*-y\\s+(?<y>[\\d]*))(\\s*(-x\\s+([\\d]*)|-y\\s+([\\d]*))){2}\\s*$"),
-    CREATE_UNIT("^\\s*create\\s+unit(?=.*-type\\s+(?<type>\"[^\"]*\"|[^\\s\"]*))(?=.*-c\\s+(?<x>[\\d]*))" +
+    CREATE_UNIT("^\\s*create\\s+unit(?=.*-type\\s+(?<type>\"[^\"]*\"|[^\\s\"]*))(?=.*-c\\s+(?<count>[\\d]*))" +
             "(\\s*(-type\\s+(\"[^\"]*\"|[^\\s\"]*)|-c\\s+([\\d]*))){2}\\s*$"),
     REPAIR("^\\s*repair\\s*$"),
     SELECT_UNIT("^\\s*select\\s+unit(?=.*-x\\s+(?<x>[\\d]*))" +
@@ -45,6 +45,7 @@ public enum GameCommands {
             "(\\s*(-q\\s+(\"[^\"]*\"|[^\\s\"]*))){1}\\s*$"),
     DISBAND_UNIT("^\\s*disband\\s+unit\\s*$"),
     SHOW_MAP("\\s*show\\s+map\\s+-x\\s+(?<xAsis>\\d+)\\s+-y\\s+(?<yAsis>\\d+)\\s*"),
+    NEXT_TURN("\\s*next\\s+turn\\s+"),
 
     BACK("\\s*back\\s*");
 

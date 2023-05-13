@@ -68,6 +68,8 @@ public class GameMenu {
                 System.out.println(Menu.getGameController().digTunnel(matcher).getMessage());
             } else if (GameCommands.getMatcher(input, GameCommands.DISBAND_UNIT) != null) {
                 System.out.println(Menu.getGameController().disbandUnit().getMessage());
+            } else if (GameCommands.getMatcher(input, GameCommands.NEXT_TURN) != null) {
+                Menu.getGameController().nextTurn();
             } else if ((matcher = GameCommands.getMatcher(input, GameCommands.SET_OUTPUT)) != null) {
                 System.out.println(Menu.getGameController().setOutput(matcher).getMessage());
             } else System.out.println("Invalid command!");
