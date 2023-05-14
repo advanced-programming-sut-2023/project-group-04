@@ -1,5 +1,6 @@
 package org.model;
 
+import org.model.Machine.Machine;
 import org.model.buildings.*;
 import org.model.map.Map;
 import org.model.map.MapTile;
@@ -21,6 +22,7 @@ public class Game {
     private final ArrayList<Person> toMovePeople;
     private final ArrayList<Soldier> attackingSoldiers;
     private final ArrayList<Trade> allTrades;
+    private final ArrayList<Machine> toMoveOrAttackMachine;
 
     public Game(ArrayList<Empire> allEmpires, String mapName) {
         currentGame = this;
@@ -28,6 +30,7 @@ public class Game {
         currentEmpire = allEmpires.get(0);
         this.toMovePeople = new ArrayList<>();
         this.attackingSoldiers = new ArrayList<>();
+        toMoveOrAttackMachine = new ArrayList<>();
         initializeMap(mapName);
         allTrades = new ArrayList<>();
     }
@@ -191,5 +194,13 @@ public class Game {
 
     public void removeTrade(Trade trade) {
         this.allTrades.remove(trade);
+    }
+
+    public ArrayList<Machine> getToMoveOrAttackMachine() {
+        return toMoveOrAttackMachine;
+    }
+
+    public void addMoveOrAttackMachine(Machine machine) {
+        this.toMoveOrAttackMachine.add(machine);
     }
 }

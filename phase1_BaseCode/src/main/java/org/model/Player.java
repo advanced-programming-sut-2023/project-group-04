@@ -86,7 +86,7 @@ public class Player {
         Gson gson = new Gson();
         String data = gson.toJson(this);
         try {
-            FileWriter output = new FileWriter("D:\\code\\APproject\\project-group-04\\phase1_BaseCode\\STAY_LOGIN.json");
+            FileWriter output = new FileWriter("STAY_LOGIN.json");
             output.write(data);
             output.close();
         } catch (Exception e) {
