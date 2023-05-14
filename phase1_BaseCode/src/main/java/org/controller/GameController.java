@@ -595,6 +595,8 @@ public class GameController {
         return GameMessages.SUCCESSFUL_CREATE_EQUIPMENT;
     }
 
+
+
     public void nextTurn() {
         moveAndPatrolTroops();
         fights();
