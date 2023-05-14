@@ -79,6 +79,12 @@ public class GameMenu {
                 new TradeMenu().run();
             } else if ((matcher = GameCommands.getMatcher(input, GameCommands.BUILD_EQUIPMENT)) != null) {
                 System.out.println(Menu.getGameController().buildEquipment(matcher).getMessage());
+            } else if ((matcher = GameCommands.getMatcher(input, GameCommands.MOVE_EQUIPMENT)) != null) {
+                System.out.println(Menu.getGameController().moveEquipment(matcher).getMessage());
+            } else if ((matcher = GameCommands.getMatcher(input, GameCommands.EQUIPMENT_ATTACK)) != null) {
+                System.out.println(Menu.getGameController().attackEquipment(matcher).getMessage());
+            } else if (GameCommands.getMatcher(input, GameCommands.SEND_ENGINEER) != null) {
+                System.out.println(Menu.getGameController().sendEngineerToMachine().getMessage());
             } else System.out.println("Invalid command!");
         }
     }

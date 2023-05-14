@@ -596,7 +596,6 @@ public class GameController {
     }
 
 
-
     public void nextTurn() {
         moveAndPatrolTroops();
         fights();
@@ -970,4 +969,25 @@ public class GameController {
         return buffer.replaceAll("\"", "");
     }
 
+    public GameMessages sendEngineerToMachine() {
+        ArrayList<Person> selectedUnit = Game.getCurrentGame().getSelectedUnit();
+        if (selectedUnit == null || selectedUnit.size() == 0) return GameMessages.NO_SELECTED_UNIT;
+        for (Person person : selectedUnit) {
+            if (!(person instanceof Engineer))
+                return GameMessages.NOT_ENGINEER;
+        }
+        MapCell cell = selectedUnit.get(0).getMapCell();
+        Machine machine = cell.getMachine();
+        if (machine == null) return GameMessages.NO_MACHINE;
+        if (machine.getEngineers().size() == machine.getMachinesDictionary().getNumberOfEngineer())
+            return GameMessages.MACHINE_IS_FULL;
+        for (int i = 0; i <= selectedUnit.size(); i++) {
+            if (machine.getEngineers().size() == machine.getMachinesDictionary().getNumberOfEngineer())
+                break;
+            machine.getEngineers().add((Engineer) selectedUnit.get(i));
+            cell.removePeople(selectedUnit.get(i));
+            i--;
+        }
+        return GameMessages.SENT_ENGINEER_SUCCESSFULLY;
+    }
 }
