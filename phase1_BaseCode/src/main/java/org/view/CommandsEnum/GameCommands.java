@@ -47,6 +47,10 @@ public enum GameCommands {
     SHOW_MAP("\\s*show\\s+map\\s+-x\\s+(?<xAsis>\\d+)\\s+-y\\s+(?<yAsis>\\d+)\\s*"),
     NEXT_TURN("\\s*next\\s+turn\\s+"),
     ENTER_TRADE_MENU("\\s*enter\\s+trade\\s+menu\\s*"),
+    MOVE_EQUIPMENT("\\s*move\\s+equipment\\s+(?=.*-x1\\s+(?<x1>[\\d]*))(?=.*-y1\\s+(?<y1>[\\d]*))" +
+            "(?=.*-x2\\s+(?<x2>[\\d]*))(?=.*-y2\\s+(?<y2>[\\d]*))(\\s*(-x1\\s+([\\d]*)|-y1\\s+([\\d]*)|" +
+            "-x2\\s+([\\d]*)|-y2\\s+([\\d]*))){4}\\s*"),
+
 
     BACK("\\s*back\\s*");
 

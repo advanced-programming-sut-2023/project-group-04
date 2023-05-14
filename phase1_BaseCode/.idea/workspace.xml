@@ -4,20 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="update soldiers name...">
-      <change afterPath="$PROJECT_DIR$/STAY_LOGIN.json" afterDir="false" />
+    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="stay login added!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Machine/Machine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/Machine/Machine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Machine/MachinesDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/Machine/MachinesDictionary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Machine/BatteringRams.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Machine/FireBalista.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/GameCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/GameCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/GameMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/GameMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/LoginMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/MainMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -247,7 +239,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684026015201</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="stay login added!">
+      <created>1684093414073</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1684093414073</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -278,7 +277,8 @@
     <MESSAGE value="change resource amount debuged!!" />
     <MESSAGE value="all project updated!!!" />
     <MESSAGE value="update soldiers name..." />
-    <option name="LAST_COMMIT_MESSAGE" value="update soldiers name..." />
+    <MESSAGE value="stay login added!" />
+    <option name="LAST_COMMIT_MESSAGE" value="stay login added!" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/phase1_BaseCode$RegistrationTest_emailFormat.ic" NAME="RegistrationTest.emailFormat Coverage Results" MODIFIED="1683501851709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
