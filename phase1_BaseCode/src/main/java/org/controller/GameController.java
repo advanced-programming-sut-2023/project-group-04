@@ -850,11 +850,15 @@ public class GameController {
             MapCell currentNode = queue.remove();
             int x = currentNode.getX();
             int y = currentNode.getY();
-            MapCell[] neighbors = new MapCell[]{
-                    Game.getCurrentGame().getMapCellByAddress(x + 1, y),
-                    Game.getCurrentGame().getMapCellByAddress(x - 1, y),
-                    Game.getCurrentGame().getMapCellByAddress(x, y + 1),
-                    Game.getCurrentGame().getMapCellByAddress(x, y - 1)
+            ArrayList<MapCell> neighbors = new ArrayList<MapCell>() {
+                {
+                    int lowerBound = 0;
+                    int upperBound = Game.getCurrentGame().getMapSize();
+                    if (x != upperBound) add(Game.getCurrentGame().getMapCellByAddress(x + 1, y));
+                    if (x != lowerBound) add(Game.getCurrentGame().getMapCellByAddress(x - 1, y));
+                    if (y != upperBound) add(Game.getCurrentGame().getMapCellByAddress(x, y + 1));
+                    if (y != lowerBound) add(Game.getCurrentGame().getMapCellByAddress(x, y - 1));
+                }
             };
             for (MapCell nextNode : neighbors) {
                 if (!visited.contains(nextNode) && checkNode(x, y, nextNode, isTunneler)) {
