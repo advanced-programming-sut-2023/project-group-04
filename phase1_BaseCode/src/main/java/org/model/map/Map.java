@@ -1,7 +1,5 @@
 package org.model.map;
 
-import org.model.person.Soldier;
-
 import java.util.ArrayList;
 
 public class Map {

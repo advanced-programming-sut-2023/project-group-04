@@ -24,7 +24,7 @@ public enum StorageBuildingsDictionary {
             add("flour");
             add("ale");
             add("wheat");
-            add("hop");
+            add("hops");
         }
     }),
     GRANARY(BuildingsDictionary.GRANARY, 200, new ArrayList<>() {

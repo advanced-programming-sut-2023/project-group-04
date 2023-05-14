@@ -72,7 +72,10 @@ public class GameMenu {
                 Menu.getGameController().nextTurn();
             } else if ((matcher = GameCommands.getMatcher(input, GameCommands.SET_OUTPUT)) != null) {
                 System.out.println(Menu.getGameController().setOutput(matcher).getMessage());
-            } else System.out.println("Invalid command!");
+            } else if (input.matches("show resources")) {
+                System.out.println(Menu.getGameController().showResources());
+            }
+            else System.out.println("Invalid command!");
         }
     }
 }

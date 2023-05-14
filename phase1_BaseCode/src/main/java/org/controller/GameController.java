@@ -15,6 +15,21 @@ import java.util.Random;
 import java.util.regex.Matcher;
 
 public class GameController {
+    public String showResources() {
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
+        String output = "";
+        for (String resource : empire.getResources().keySet()) {
+            output += resource + " : " + empire.getAvailableResource(resource) + "\n";
+        }
+        for (String resource : empire.getFood().keySet()) {
+            output += resource + " : " + empire.getAvailableResource(resource) + "\n";
+        }
+        for (String resource : empire.getWeaponAndArmour().keySet()) {
+            output += resource + " : " + empire.getAvailableResource(resource) + "\n";
+        }
+        return output;
+    }
+
     //TODO : CREATE GAME MESSAGES AND REPLACE RETURN TYPE OF SOME FUNCTIONS;
     public String showPopularityFactors() {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
@@ -235,6 +250,7 @@ public class GameController {
             requirementMaterial.put(key, (int) (prices.get(key) * requirementPercentage));
         if (!buyBuilding(empire, requirementMaterial)) return GameMessages.NOT_ENOUGH_RESOURCE;
         selectedBuilding.repair();
+        Game.getCurrentGame().setSelectedBuilding(null);
         return GameMessages.SUCCESSFUL_REPAIR;
     }
 
@@ -243,6 +259,8 @@ public class GameController {
         String unitType = removeQuotation(matcher.group("type"));
         int count = Integer.parseInt(removeQuotation(matcher.group("count")));
         Building currentBuilding = Game.getCurrentGame().getSelectedBuilding();
+        if (currentBuilding == null)
+            return GameMessages.NO_SELECTED_BUILDING;
         MapCell mapCell = currentBuilding.getMapCell();
         int buildingPosX = mapCell.getX();
         int buildingPosY = mapCell.getY();
@@ -251,16 +269,20 @@ public class GameController {
             return GameMessages.INVALID_SOLDIER_TYPE;
         if (count <= 0) return GameMessages.INVALID_TROOP_COUNT;
         if (unitType.equals("engineer")) {
-            if (count * Engineer.getRequiredGold() < empire.getAvailableResource("gold"))
+            if (count * Engineer.getRequiredGold() > empire.getAvailableResource("gold"))
                 return GameMessages.NOT_ENOUGH_GOLD;
             if (!removeFreePeople(empire, count)) return GameMessages.NOT_ENOUGH_POPULATION;
             mapCell.addPeople(new Engineer(empire, mapCell));
+            empire.changeEmpireResource("gold", -1 * SoldiersDictionary.ENGINEER.getGold());
+            Game.getCurrentGame().setSelectedBuilding(null);
             return GameMessages.SUCCESSFUL_CREATE_UNIT;
         } else if (unitType.equals("tunneler")) {
-            if (count * Tunneler.getRequiredGold() < empire.getAvailableResource("gold"))
+            if (count * Tunneler.getRequiredGold() > empire.getAvailableResource("gold"))
                 return GameMessages.NOT_ENOUGH_GOLD;
             if (!removeFreePeople(empire, count)) return GameMessages.NOT_ENOUGH_POPULATION;
             mapCell.addPeople(new Tunneler(empire, mapCell));
+            empire.changeEmpireResource("gold", -1 * SoldiersDictionary.TUNNELER.getGold());
+            Game.getCurrentGame().setSelectedBuilding(null);
             return GameMessages.SUCCESSFUL_CREATE_UNIT;
         }
         return addSoldier(empire, unitType, count, buildingPosX, buildingPosY);
@@ -287,9 +309,9 @@ public class GameController {
         String weapon = soldierDictionary.getWeapon();
         String armour = soldierDictionary.getShield();
         int gold = soldierDictionary.getGold();
-        if (count * gold < empire.getResourceAmount("gold")) return GameMessages.NOT_ENOUGH_GOLD;
-        if ((!weapon.isEmpty() && count < empire.getWeaponAndArmourAmount(weapon)) ||
-                (!armour.isEmpty() && count < empire.getWeaponAndArmourAmount(armour)))
+        if (count * gold > empire.getResourceAmount("gold")) return GameMessages.NOT_ENOUGH_GOLD;
+        if ((!weapon.isEmpty() && count > empire.getWeaponAndArmourAmount(weapon)) ||
+                (!armour.isEmpty() && count > empire.getWeaponAndArmourAmount(armour)))
             return GameMessages.NOT_ENOUGH_WEAPON;
         if (!removeFreePeople(empire, count)) return GameMessages.NOT_ENOUGH_POPULATION;
         buySoldierRequirement(empire, gold, weapon, armour, count);
@@ -299,13 +321,14 @@ public class GameController {
                 mapCell.addPeople(new Assassins(empire, mapCell));
             else mapCell.addPeople(new Soldier(empire, soldierDictionary, mapCell));
         }
+        Game.getCurrentGame().setSelectedBuilding(null);
         return GameMessages.SUCCESSFUL_CREATE_UNIT;
     }
 
     private void buySoldierRequirement(Empire empire, int gold, String weapon, String armour, int count) {
-        empire.changeResourceAmount("gold", count * gold);
-        empire.changeResourceAmount(weapon, count);
-        empire.changeResourceAmount(armour, count);
+        empire.changeResourceAmount("gold", -1 * count * gold);
+        empire.changeResourceAmount(weapon, -1 * count);
+        empire.changeResourceAmount(armour, -1 * count);
     }
 
     public GameMessages selectUnit(Matcher matcher) {
@@ -347,6 +370,7 @@ public class GameController {
             person.setNextDestination(null);
             Game.getCurrentGame().addMoveAblePerson(person);
         }
+        Game.getCurrentGame().selectUnit(null);
         return GameMessages.SUCCESSFUL_TROOP_MOVE;
     }
 
@@ -368,6 +392,7 @@ public class GameController {
             person.setNextDestination(Game.getCurrentGame().getMapCellByAddress(x2, y2));
             Game.getCurrentGame().addMoveAblePerson(person);
         }
+        Game.getCurrentGame().selectUnit(null);
         return GameMessages.SUCCESSFUL_PATROL_UNIT;
     }
 
@@ -393,6 +418,7 @@ public class GameController {
                 return GameMessages.INVALID_MOVE_NAME;
         }
         for (Person person : unit) person.setMode(modeNum);
+        Game.getCurrentGame().selectUnit(null);
         return GameMessages.SUCCESSFUL_SET_MODE;
     }
 
@@ -423,6 +449,7 @@ public class GameController {
             }
         }
         if (!inRange) return GameMessages.AIM_OUT_OF_RANGE;
+        Game.getCurrentGame().selectUnit(null);
         return GameMessages.SUCCESSFUL_ATTACK;
     }
 
@@ -453,6 +480,7 @@ public class GameController {
             ((Soldier) person).setAim(aimMapCell);
             Game.getCurrentGame().addAttackingSoldier((Soldier) person);
         }
+        Game.getCurrentGame().selectUnit(null);
         return GameMessages.SUCCESSFUL_ATTACK;
     }
 
@@ -486,6 +514,7 @@ public class GameController {
             if (engineer.hasOil()) {
                 engineer.setOil(false);
                 mapCell.setOilCondition(true);
+                Game.getCurrentGame().selectUnit(null);
                 return GameMessages.SUCCESSFUL_POUR;
             }
         }
@@ -504,6 +533,7 @@ public class GameController {
         MapCell origin = ((Tunneler) unit.get(0)).getMapCell();
         if (routing(origin, destination, true) == null) return GameMessages.NO_WAY;
         ((Tunneler) unit.get(0)).setAimTunnel(destination);
+        Game.getCurrentGame().selectUnit(null);
         return GameMessages.SET_TUNNEL_SUCCESSFUL;
     }
 
@@ -525,6 +555,7 @@ public class GameController {
             mapCell.addPeople(newPerson);
             empire.addPerson(newPerson);
         }
+        Game.getCurrentGame().selectUnit(null);
         return GameMessages.SUCCESSFUL_DISBAND;
     }
 
@@ -540,6 +571,7 @@ public class GameController {
         if (!productiveBuilding.getDictionary().getOutputResource().contains(output))
             return GameMessages.INCORRECT_OUTPUT;
         productiveBuilding.setOutputResource(output);
+        Game.getCurrentGame().setSelectedBuilding(null);
         return GameMessages.SET_OUTPUT_SUCCESSFUL;
     }
 

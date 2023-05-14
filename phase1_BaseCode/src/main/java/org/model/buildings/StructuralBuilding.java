@@ -3,8 +3,6 @@ package org.model.buildings;
 import org.model.Empire;
 import org.model.MapCell;
 
-import java.util.ArrayList;
-
 public class StructuralBuilding extends Building {
 
     private final StructuralBuildingsDictionary structuralBuildingsDictionary;

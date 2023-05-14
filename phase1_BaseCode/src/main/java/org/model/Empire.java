@@ -48,14 +48,14 @@ public class Empire {
     }
 
     private void initializeWeaponAndArmor() {
-        this.weaponAndArmour.put("bow", 0);
-        this.weaponAndArmour.put("crossbow", 0);
-        this.weaponAndArmour.put("spear", 0);
-        this.weaponAndArmour.put("pike", 0);
-        this.weaponAndArmour.put("mace", 0);
-        this.weaponAndArmour.put("sword", 0);
-        this.weaponAndArmour.put("leather armour", 0);
-        this.weaponAndArmour.put("metal armour", 0);
+        this.weaponAndArmour.put("bow", 20);
+        this.weaponAndArmour.put("crossbow", 20);
+        this.weaponAndArmour.put("spear", 20);
+        this.weaponAndArmour.put("pike", 20);
+        this.weaponAndArmour.put("mace", 20);
+        this.weaponAndArmour.put("sword", 20);
+        this.weaponAndArmour.put("leather armour", 20);
+        this.weaponAndArmour.put("metal armour", 20);
     }
 
     private void initializePopularity() {
@@ -68,13 +68,14 @@ public class Empire {
 
     private void initializeResource() {
         String[] resources = {"wheat", "flour", "hops", "ale", "stone", "iron", "wood", "pitch", "gold"};
-        for (String resource : resources) this.resources.put(resource, 0);
-        this.resources.put("gold", 500);
+        for (String resource : resources) this.resources.put(resource, 40);
+        this.resources.put("gold", 5000);
+        // TODO: 5/14/2023 change amount of gold
     }
 
     private void initializeFood() {
-        this.food.put("meet", 0);
-        this.food.put("apples", 0);
+        this.food.put("meat", 0);
+        this.food.put("apple", 0);
         this.food.put("cheese", 0);
         this.food.put("bread", 0);
     }
@@ -121,6 +122,10 @@ public class Empire {
 
     public int getFoodAmount(String foodName) {
         return this.food.get(foodName);
+    }
+
+    public HashMap<String, Integer> getWeaponAndArmour() {
+        return weaponAndArmour;
     }
 
     public void changeEmpireResource(String resource, int amount) {

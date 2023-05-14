@@ -46,6 +46,10 @@ public class Game {
                     if (tile.isHeadQuarter()) {
                         building = new Building(empire, BuildingsDictionary.HEAD_QUARTER, mapCell);
                         empire.setHeadquarter(building);
+                        for (int k = 0; k < 15; k++) {
+                            Person person = new Person(empire,mapCell);
+                            empire.addPerson(person);
+                        }
                     } else if (tile.getBuilding() != null) {
                         building = createBuilding(empire, i, j, tile.getBuilding());
                         mapCell.setBuilding(building);

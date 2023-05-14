@@ -1,7 +1,5 @@
 package org.model;
 
-import java.util.ArrayList;
-
 public class Trade {
     public static int lastId = 100;
     private final Empire tradeOwner;

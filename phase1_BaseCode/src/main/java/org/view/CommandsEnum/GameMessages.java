@@ -60,7 +60,8 @@ public enum GameMessages {
     SET_OUTPUT_SUCCESSFUL("Selected object set successful!"),
     TAX_NOT_ACTIVE("You can't change tax rate yet!"),
     ENTER_SHOP_MENU("Entered shop menu successfully!"),
-    NO_WAY("there isn't any way to selected entered destination!");
+    NO_WAY("there isn't any way to selected entered destination!"),
+    NO_SELECTED_BUILDING("You didn't select any building");
 
     private final String message;
 
