@@ -595,8 +595,7 @@ public class GameController {
             for (Person person : empire.getPopulation()) {
                 if (person instanceof Engineer) {
                     Engineer engineer = (Engineer) person;
-                    if (!engineer.hasOil())
-                        engineer.setOil(true);//todo : fill engineer
+                    if (!engineer.hasOil()) engineer.setOil(true);//todo : fill engineer
                 }
             }
         }

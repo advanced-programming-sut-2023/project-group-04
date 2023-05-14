@@ -6,29 +6,29 @@ public enum TrainerBuildingsDictionary {
     BARRACKS(BuildingsDictionary.BARRACKS, new ArrayList<>() {
         {
             add("archer");
-            add("crossbowman");
+            add("crossbow man");
             add("spearman");
-            add("pikeman");
-            add("maceman");
+            add("pike man");
+            add("mace man");
             add("swordsman");
             add("knight");
         }
     }),
     MERCENARY_POST(BuildingsDictionary.MERCENARY_POST, new ArrayList<>() {
         {
-            add("arabianbow");
+            add("arabian bow");
             add("slave");
             add("slinger");
             add("assassin");
-            add("horse_archer");
-            add("arabian_swordsman");
-            add("fire_thrower");
+            add("horse archer");
+            add("arabian swordsman");
+            add("fire thrower");
         }
     }),
     ENGINEER_GUILD(BuildingsDictionary.ENGINEER_GUILD, new ArrayList<>() {
         {
             add("engineer");
-            add("ladderman");
+            add("ladder man");
         }
     }),
     TUNNELER_GUILD(BuildingsDictionary.TUNNELER_GUILD, new ArrayList<>() {
@@ -37,8 +37,8 @@ public enum TrainerBuildingsDictionary {
         }
     });
 
-    private BuildingsDictionary buildingDictionary;
-    private ArrayList<String> availableSoldiers;
+    private final BuildingsDictionary buildingDictionary;
+    private final ArrayList<String> availableSoldiers;
 
     TrainerBuildingsDictionary(BuildingsDictionary buildingDictionary, ArrayList<String> availableSoldiers) {
         this.buildingDictionary = buildingDictionary;
