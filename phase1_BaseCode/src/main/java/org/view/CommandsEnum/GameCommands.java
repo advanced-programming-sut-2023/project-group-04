@@ -29,8 +29,8 @@ public enum GameCommands {
             "(\\s*(-x\\s+([\\d]*)|-y\\s+([\\d]*))){2}\\s*$"),
     PATROL_UNIT("^\\s*patrol\\s+unit(?=.*-x1\\s+(?<x1>[\\d]*))(?=.*-x2\\s+(?<x2>[\\d]*))(?=.*-y1\\s+(?<y1>[\\d]*))" +
             "(?=.*-y2\\s+(?<y2>[\\d]*))(\\s*(-x1\\s+([\\d]*)|-x2\\s+([\\d]*)|-y1\\s+([\\d]*)|-y2\\s+([\\d]*))){4}\\s*$"),
-    SET_UNIT_CONDITION("^\\s*set(?=.*-s\\s+(?<state>standing|defensive|offensive))(?=.*-x\\s+(?<x>[\\d]*))" +
-            "(?=.*-y\\s+(?<y>[\\d]*))(\\s*(-s\\s+standing|defensive|offensive|-x\\s+([\\d]*)|-y\\s+([\\d]*))){3}\\s*$"),
+    SET_UNIT_CONDITION("^\\s*set(?=.*-s\\s+(?<state>(standing|defensive|offensive)))" +
+            "(\\s*(-s\\s+(standing|defensive|offensive))){1}\\s*$"),
     ATTACK_ENEMY("^\\s*attack(?=.*-x\\s+(?<x>[\\d]*))(?=.*-y\\s+(?<y>[\\d]*))" +
             "(\\s*(-x\\s+([\\d]*)|-y\\s+([\\d]*))){2}\\s*$"),
     AIR_ATTACK("^\\s*air\\s+attack(?=.*-x\\s+(?<x>[\\d]*))(?=.*-y\\s+(?<y>[\\d]*))" +

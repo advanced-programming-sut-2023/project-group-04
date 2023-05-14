@@ -398,7 +398,7 @@ public class GameController {
     }
 
     public GameMessages setUnitMode(Matcher matcher) {
-        String mode = removeQuotation(matcher.group("mode"));
+        String mode = removeQuotation(matcher.group("state"));
         ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
         if (unit == null || unit.size() == 0) return GameMessages.EMPTY_UNIT_SELECT;
         for (Person person : unit)

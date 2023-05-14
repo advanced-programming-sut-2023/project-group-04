@@ -22,8 +22,7 @@ public class LoginMenu {
                 System.out.println(result);
                 if (result.contains(SignUpMessages.INCORRECT_PASSWORD.getMessage())) Menu.getLoginController().delay();
                 else if (result.equals(SignUpMessages.LOGIN_SUCCESSFUL.getMessage())) new MainMenu().run();
-            }
-            else if ((matcher = SignUpCommands.getMatcher(input, SignUpCommands.FORGET_PASSWORD)) != null) {
+            } else if ((matcher = SignUpCommands.getMatcher(input, SignUpCommands.FORGET_PASSWORD)) != null) {
                 String username = matcher.group("username");
                 forgetPassword(username);
             } else {
@@ -33,7 +32,6 @@ public class LoginMenu {
     }
 
     private void forgetPassword(String username) {
-        //TODO: handle random password
         String output = Menu.getLoginController().getSecurityQuestion(username);
         System.out.println(output);
         if (!output.equals(SignUpMessages.USER_NOT_FOUND.getMessage())) {
@@ -56,8 +54,7 @@ public class LoginMenu {
                         } else if (SignUpCommands.getMatcher(newPassword, SignUpCommands.BACK) != null) {
                             System.out.println("You are in login menu now!");
                             return;
-                        }
-                        else System.out.println("Invalid command");
+                        } else System.out.println("Invalid command");
                     }
                 }
             }
