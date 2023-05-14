@@ -597,6 +597,7 @@ public class GameController {
     }
 
     public GameMessages moveEquipment(Matcher matcher) {
+        //taghir
         int originX = Integer.parseInt(removeQuotation(matcher.group("x1"))) - 1;
         int originY = Integer.parseInt(removeQuotation(matcher.group("y1"))) - 1;
         int destinationX = Integer.parseInt(removeQuotation(matcher.group("x2"))) - 1;
