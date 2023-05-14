@@ -11,6 +11,8 @@ public class Machine {
     private MapCell mapCell;
     private ArrayList<Engineer> engineers;
     private MachinesDictionary machinesDictionary;
+    private MapCell destination;
+    private MapCell aim;
 
     public Machine(MachinesDictionary machinesDictionary, Empire ownerMachine, MapCell mapCell) {
         this.machinesDictionary = machinesDictionary;
@@ -49,5 +51,21 @@ public class Machine {
 
     public void setMachinesDictionary(MachinesDictionary machinesDictionary) {
         this.machinesDictionary = machinesDictionary;
+    }
+
+    public MapCell getDestination() {
+        return destination;
+    }
+
+    public void setDestination(MapCell destination) {
+        this.destination = destination;
+    }
+
+    public MapCell getAim() {
+        return aim;
+    }
+
+    public void setAim(MapCell aim) {
+        this.aim = aim;
     }
 }

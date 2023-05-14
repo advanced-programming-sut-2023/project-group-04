@@ -1,5 +1,6 @@
 package org.controller;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import org.model.Empire;
 import org.model.Game;
 import org.model.Machine.Machine;
@@ -595,19 +596,66 @@ public class GameController {
         return GameMessages.SUCCESSFUL_CREATE_EQUIPMENT;
     }
 
+    public GameMessages moveEquipment(Matcher matcher) {
+        int originX = Integer.parseInt(removeQuotation(matcher.group("x1"))) - 1;
+        int originY = Integer.parseInt(removeQuotation(matcher.group("y1"))) - 1;
+        int destinationX = Integer.parseInt(removeQuotation(matcher.group("x2"))) - 1;
+        int destinationY = Integer.parseInt(removeQuotation(matcher.group("y2"))) - 1;
+        if (!checkCoordinates(originX, originY) || !checkCoordinates(destinationX, destinationY))
+            return GameMessages.INVALID_POSITION;
+        MapCell origin = Game.getCurrentGame().getMapCellByAddress(originX, originY);
+        MapCell destination = Game.getCurrentGame().getMapCellByAddress(destinationX, destinationY);
+        Machine selectedMachine = origin.getMachine();
+        if (selectedMachine == null) return GameMessages.EQUIPMENT_NOT_EXIST;
+        if (routing(origin, destination, false) == null) return GameMessages.NO_WAY;
+        String[] invalidTextures = {"OIL", "PLAIN", "LOW_WATER", "RIVER", "SMALL_POND", "LARGE_POND", "SEA"};
+        for (String invalidTexture : invalidTextures)
+            if (destination.getGroundTexture().contains("ROCK") || destination.getGroundTexture().equals(invalidTexture))
+                return GameMessages.INVALID_MOVE;
+        selectedMachine.setAim(null);
+        selectedMachine.setDestination(destination);
+        if (!Game.getCurrentGame().getToMoveOrAttackMachine().contains(selectedMachine))
+            Game.getCurrentGame().addMoveOrAttackMachine(selectedMachine);
+        return GameMessages.SUCCESSFUL_EQUIPMENT_MOVE;
+    }
 
+    public GameMessages attackEquipment(Matcher matcher) {
+        int originX = Integer.parseInt(removeQuotation(matcher.group("x1"))) - 1;
+        int originY = Integer.parseInt(removeQuotation(matcher.group("y1"))) - 1;
+        int destinationX = Integer.parseInt(removeQuotation(matcher.group("x2"))) - 1;
+        int destinationY = Integer.parseInt(removeQuotation(matcher.group("y2"))) - 1;
+        if (!checkCoordinates(originX, originY) || !checkCoordinates(destinationX, destinationY))
+            return GameMessages.INVALID_POSITION;
+        MapCell origin = Game.getCurrentGame().getMapCellByAddress(originX, originY);
+        MapCell destination = Game.getCurrentGame().getMapCellByAddress(destinationX, destinationY);
+        Machine selectedMachine = origin.getMachine();
+        if (selectedMachine == null) return GameMessages.EQUIPMENT_NOT_EXIST;
+        if (routing(origin, destination, false) == null) return GameMessages.NO_WAY;
+        String[] invalidTextures = {"OIL", "PLAIN", "LOW_WATER", "RIVER", "SMALL_POND", "LARGE_POND", "SEA"};
+        for (String invalidTexture : invalidTextures)
+            if (destination.getGroundTexture().contains("ROCK") || destination.getGroundTexture().equals(invalidTexture))
+                return GameMessages.INVALID_MOVE;
+        selectedMachine.setDestination(null);
+        selectedMachine.setAim(destination);
+        if (!Game.getCurrentGame().getToMoveOrAttackMachine().contains(selectedMachine))
+            Game.getCurrentGame().addMoveOrAttackMachine(selectedMachine);
+        return GameMessages.SUCCESSFUL_EQUIPMENT_MOVE;
+    }
 
     public void nextTurn() {
-        moveAndPatrolTroops();
-        fights();
-        longRangeFights();
-        attackBuildings();
-        tunnel();
-        updateRates();
-        updateThingsWithRate();
-        buildingOperations();
-        fillEngineerOil();
-        checkEndGame();
+        Game.getCurrentGame().nextEmpire();
+        if (Game.getCurrentGame().getAllEmpires().indexOf(Game.getCurrentGame().getCurrentEmpire()) == 0) {
+            moveAndPatrolTroops();
+            fights();
+            longRangeFights();
+            attackBuildings();
+            tunnel();
+            updateRates();
+            updateThingsWithRate();
+            buildingOperations();
+            fillEngineerOil();
+            checkEndGame();
+        }
     }
 
     private void tunnel() {
