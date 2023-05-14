@@ -66,6 +66,10 @@ public enum GameMessages {
     NO_SELECTED_UNIT("You didn't select any unit!"),
     MACHINE_EXIST("An equipment already exist in this position!"),
     SUCCESSFUL_CREATE_EQUIPMENT("Equipment created successfully!"),
+    NO_MACHINE("No machine is available in this cell!"),
+    MACHINE_IS_FULL("Machine is full of engineer"),
+    SENT_ENGINEER_SUCCESSFULLY("Sent Engineer successfully"),
+    SUCCESSFUL_CREATE_EQUIPMENT("Equipment created successfully!"),
     EQUIPMENT_NOT_EXIST("there isn't any equipment is selected tile!"),
     SUCCESSFUL_EQUIPMENT_MOVE("equipment move set successful!");
 
