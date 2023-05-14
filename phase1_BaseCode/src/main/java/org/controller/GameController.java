@@ -1,6 +1,5 @@
 package org.controller;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import org.model.Empire;
 import org.model.Game;
 import org.model.Machine.Machine;
@@ -608,6 +607,8 @@ public class GameController {
         MapCell destination = Game.getCurrentGame().getMapCellByAddress(destinationX, destinationY);
         Machine selectedMachine = origin.getMachine();
         if (selectedMachine == null) return GameMessages.EQUIPMENT_NOT_EXIST;
+        if (selectedMachine.getEngineers().size() < selectedMachine.getMachinesDictionary().getNumberOfEngineer())
+            return GameMessages.NOT_ENOUGH_ENGINEER;
         if (routing(origin, destination, false) == null) return GameMessages.NO_WAY;
         String[] invalidTextures = {"OIL", "PLAIN", "LOW_WATER", "RIVER", "SMALL_POND", "LARGE_POND", "SEA"};
         for (String invalidTexture : invalidTextures)
@@ -631,6 +632,8 @@ public class GameController {
         MapCell destination = Game.getCurrentGame().getMapCellByAddress(destinationX, destinationY);
         Machine selectedMachine = origin.getMachine();
         if (selectedMachine == null) return GameMessages.EQUIPMENT_NOT_EXIST;
+        if (selectedMachine.getEngineers().size() < selectedMachine.getMachinesDictionary().getNumberOfEngineer())
+            return GameMessages.NOT_ENOUGH_ENGINEER;
         if (routing(origin, destination, false) == null) return GameMessages.NO_WAY;
         String[] invalidTextures = {"OIL", "PLAIN", "LOW_WATER", "RIVER", "SMALL_POND", "LARGE_POND", "SEA"};
         for (String invalidTexture : invalidTextures)
@@ -755,15 +758,16 @@ public class GameController {
     }
 
     private void moveAndPatrolTroops() {
-        for (Person person : Game.getCurrentGame().getToMovePeople()) {
+        for (int i = 0 ;i < Game.getCurrentGame().getToMovePeople().size(); i++) {
+            Person person = Game.getCurrentGame().getToMovePeople().get(i);
             if (person.getCurrentDestination() != null) {
                 ArrayList<MapCell> path = routing(person.getMapCell(), person.getCurrentDestination(), false);
                 if (path == null) continue;
                 int moveTileNumber = Math.min(person.getSpeed(), path.size() - 1);
                 MapCell goal = path.get(moveTileNumber);
-                for (int i = 0; i < moveTileNumber; i++) {
-                    if (path.get(i).getBuilding() instanceof TrapBuilding) {
-                        TrapBuilding building = (TrapBuilding) path.get(i).getBuilding();
+                for (int j = 0; j < moveTileNumber; j++) {
+                    if (path.get(j).getBuilding() instanceof TrapBuilding) {
+                        TrapBuilding building = (TrapBuilding) path.get(j).getBuilding();
                         person.damagePerson(building.getDamage());
                         kill(person);
                     }
@@ -776,6 +780,7 @@ public class GameController {
                     else {
                         person.setCurrentDestination(null);
                         Game.getCurrentGame().removeMovedPerson(person);
+                        i--;
                     }
                 }
             }
@@ -801,12 +806,18 @@ public class GameController {
                         for (Person person : mapCell.getPeople()) {
                             if (person instanceof Soldier) {
                                 Soldier soldier = (Soldier) person;
-                                int index = new Random().nextInt(otherEmpiresSoldiers.size());
+                                int index = 0;
+                                if (otherEmpiresSoldiers.size() != 0) {
+                                    index = new Random().nextInt(otherEmpiresSoldiers.size());
+                                }
                                 if (person.getPersonOwner().equals(empire)) thisEmpireSoldiers.add(soldier);
                                 else otherEmpiresSoldiers.add(index, soldier);
                             }
                         }
                         for (int j = 0; j < thisEmpireSoldiers.size(); j++) {
+                            if (otherEmpiresSoldiers.size() == j) {
+                                break;
+                            }
                             int damage = thisEmpireSoldiers.get(j).getDefensivePower() -
                                     otherEmpiresSoldiers.get(j).getDefensivePower();
                             otherEmpiresSoldiers.get(j).damagePerson(damage);
@@ -1017,6 +1028,28 @@ public class GameController {
 
     private String removeQuotation(String buffer) {
         return buffer.replaceAll("\"", "");
+    }
+
+    public GameMessages sendEngineerToMachine() {
+        ArrayList<Person> selectedUnit = Game.getCurrentGame().getSelectedUnit();
+        if (selectedUnit == null || selectedUnit.size() == 0) return GameMessages.NO_SELECTED_UNIT;
+        for (Person person : selectedUnit) {
+            if (!(person instanceof Engineer))
+                return GameMessages.NOT_ENGINEER;
+        }
+        MapCell cell = selectedUnit.get(0).getMapCell();
+        Machine machine = cell.getMachine();
+        if (machine == null) return GameMessages.NO_MACHINE;
+        if (machine.getEngineers().size() == machine.getMachinesDictionary().getNumberOfEngineer())
+            return GameMessages.MACHINE_IS_FULL;
+        for (int i = 0; i <= selectedUnit.size(); i++) {
+            if (machine.getEngineers().size() == machine.getMachinesDictionary().getNumberOfEngineer())
+                break;
+            machine.getEngineers().add((Engineer) selectedUnit.get(i));
+            cell.removePeople(selectedUnit.get(i));
+            i--;
+        }
+        return GameMessages.SENT_ENGINEER_SUCCESSFULLY;
     }
 
 }

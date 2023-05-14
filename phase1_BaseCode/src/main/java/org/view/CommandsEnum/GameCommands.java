@@ -25,7 +25,7 @@ public enum GameCommands {
             "(?=.*-y\\s+(?<y>[\\d]*))" +
             "(?=.*-type\\s+(?<type>\"[^\"]*\"|[^\\s\"]*))?" +
             "(\\s*(-x\\s+([\\d]*)|-y\\s+([\\d]*)|(-type\\s+(\"[^\"]*\"|[^\\s]*))?)){2,3}\\s*$"),
-    MOVE_UNIT("^\\s*move\\s+unit\\s+to(?=.*-x\\s+(?<x>[\\d]*))(?=.*-y\\s+(?<y>[\\d]*))" +
+    MOVE_UNIT("^\\s*move\\s+unit(?=.*-x\\s+(?<x>[\\d]*))(?=.*-y\\s+(?<y>[\\d]*))" +
             "(\\s*(-x\\s+([\\d]*)|-y\\s+([\\d]*))){2}\\s*$"),
     PATROL_UNIT("^\\s*patrol\\s+unit(?=.*-x1\\s+(?<x1>[\\d]*))(?=.*-x2\\s+(?<x2>[\\d]*))(?=.*-y1\\s+(?<y1>[\\d]*))" +
             "(?=.*-y2\\s+(?<y2>[\\d]*))(\\s*(-x1\\s+([\\d]*)|-x2\\s+([\\d]*)|-y1\\s+([\\d]*)|-y2\\s+([\\d]*))){4}\\s*$"),
@@ -45,7 +45,7 @@ public enum GameCommands {
             "(\\s*(-q\\s+(\"[^\"]*\"|[^\\s\"]*))){1}\\s*$"),
     DISBAND_UNIT("^\\s*disband\\s+unit\\s*$"),
     SHOW_MAP("\\s*show\\s+map\\s+-x\\s+(?<xAsis>\\d+)\\s+-y\\s+(?<yAsis>\\d+)\\s*"),
-    NEXT_TURN("\\s*next\\s+turn\\s+"),
+    NEXT_TURN("\\s*next\\s+turn\\s*"),
     ENTER_TRADE_MENU("\\s*enter\\s+trade\\s+menu\\s*"),
     MOVE_EQUIPMENT("\\s*move\\s+equipment\\s+(?=.*-x1\\s+(?<x1>[\\d]*))(?=.*-y1\\s+(?<y1>[\\d]*))" +
             "(?=.*-x2\\s+(?<x2>[\\d]*))(?=.*-y2\\s+(?<y2>[\\d]*))" +

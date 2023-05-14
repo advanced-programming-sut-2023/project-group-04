@@ -116,8 +116,8 @@ public class MapController {
     }
 
     public String showMapDetail(Matcher matcher) {
-        int xAsis = Integer.parseInt(matcher.group("xAsis"));
-        int yAsis = Integer.parseInt(matcher.group("yAsis"));
+        int xAsis = Integer.parseInt(matcher.group("xAsis")) - 1;
+        int yAsis = Integer.parseInt(matcher.group("yAsis")) - 1;
         Game currentGame = Game.getCurrentGame();
         MapCell[][] map = currentGame.getMap();
         if (xAsis >= map.length || yAsis >= map.length)
@@ -139,9 +139,10 @@ public class MapController {
             if (enemiesSoldiers.get(key) != 0) {
                 mapDetails += key + ": {" + enemiesSoldiers.get(key) + "}\n";
             }
-        } if (building != null)
+        }
+        if (building != null)
             mapDetails += "<<Building>>:\n" + building.getName() + ": owner: " + building.getBuildingOwner()
-            + " ,building hp: {" + building.getCurrentHp() + "}";
+                    + " ,building hp: {" + building.getCurrentHp() + "}";
         return mapDetails;
     }
 

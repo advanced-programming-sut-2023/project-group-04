@@ -10,6 +10,7 @@ public class Soldier extends Person {
 
     public Soldier(Empire personOwner, SoldiersDictionary soldiersDictionary, MapCell mapCell) {
         super(personOwner, soldiersDictionary.getHp(), mapCell, soldiersDictionary.getSpeed());
+        this.soldiersDictionary = soldiersDictionary;
     }
 
     public SoldiersDictionary getSoldiersDictionary() {
@@ -17,7 +18,7 @@ public class Soldier extends Person {
     }
 
     public String getSoldierType() {
-         return soldiersDictionary.getName();
+        return soldiersDictionary.getName();
     }
 
     public int getOffensivePower() {

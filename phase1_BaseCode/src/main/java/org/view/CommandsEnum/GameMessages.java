@@ -69,7 +69,7 @@ public enum GameMessages {
     NO_MACHINE("No machine is available in this cell!"),
     MACHINE_IS_FULL("Machine is full of engineer"),
     SENT_ENGINEER_SUCCESSFULLY("Sent Engineer successfully"),
-    SUCCESSFUL_CREATE_EQUIPMENT("Equipment created successfully!"),
+    NOT_ENOUGH_ENGINEER("Machine need more engineers!"),
     EQUIPMENT_NOT_EXIST("there isn't any equipment is selected tile!"),
     SUCCESSFUL_EQUIPMENT_MOVE("equipment move set successful!");
 
