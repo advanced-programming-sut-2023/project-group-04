@@ -26,7 +26,6 @@ public class Player {
     private String slogan;
     private int score;
     private final ArrayList<Map> maps;
-
     private static int numberOfAttempts = 0;
 
     public Player(String username, String password, String nickname, String email, String slogan) {
@@ -77,6 +76,42 @@ public class Player {
         try {
             FileWriter output = new FileWriter("D:\\code\\APproject\\project-group-04\\phase1_BaseCode\\PLAYERS.json");
             output.write(data);
+            output.close();
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
+
+    public void setStayLogin() {
+        Gson gson = new Gson();
+        String data = gson.toJson(this);
+        try {
+            FileWriter output = new FileWriter("D:\\code\\APproject\\project-group-04\\phase1_BaseCode\\STAY_LOGIN.json");
+            output.write(data);
+            output.close();
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
+
+    public static Player getStayLogin() {
+        Player player = null;
+        try {
+            Gson gson = new Gson();
+            Reader reader = Files.newBufferedReader(Paths.get("D:\\code\\APproject\\project-group-04\\" +
+                    "phase1_BaseCode\\STAY_LOGIN.json"));
+            player = gson.fromJson(reader, Player.class);
+            reader.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return player;
+    }
+
+    public static void removeStayLogin() {
+        try {
+            FileWriter output = new FileWriter("D:\\code\\APproject\\project-group-04\\phase1_BaseCode\\STAY_LOGIN.json");
+            output.write("");
             output.close();
         } catch (Exception e) {
             e.getStackTrace();

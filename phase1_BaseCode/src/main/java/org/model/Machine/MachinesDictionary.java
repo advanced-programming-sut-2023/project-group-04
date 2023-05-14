@@ -1,5 +1,7 @@
 package org.model.Machine;
 
+import org.model.buildings.TrapBuildingsDictionary;
+
 public enum MachinesDictionary {
     PORTABLE_SHIELDS("portable_shields", 4, 0, 1000, 0, 1, 5),
     BATTERING_RAMS("battering_rams", 1, 400, 1500, 1, 4, 150),
@@ -10,12 +12,12 @@ public enum MachinesDictionary {
 
 
     private final String machineName;
-    private int speed;
-    private int offensivePower;
-    private int hp;
-    private int fireRange;
-    private int numberOfEngineer;
-    private int gold;
+    private final int speed;
+    private final int offensivePower;
+    private final int hp;
+    private final int fireRange;
+    private final int numberOfEngineer;
+    private final int gold;
 
 
     MachinesDictionary(String machineName, int speed, int offensivePower, int hp, int fireRange, int numberOfEngineer, int gold) {
@@ -26,6 +28,14 @@ public enum MachinesDictionary {
         this.fireRange = fireRange;
         this.numberOfEngineer = numberOfEngineer;
         this.gold = gold;
+    }
+
+    public String getMachineName() {
+        return machineName;
+    }
+
+    public int getGold() {
+        return gold;
     }
 
     public int getSpeed() {
@@ -46,5 +56,13 @@ public enum MachinesDictionary {
 
     public int getNumberOfEngineer() {
         return numberOfEngineer;
+    }
+
+    public static MachinesDictionary getDictionaryByName(String buildingName) {
+        for (MachinesDictionary machinesDictionary : MachinesDictionary.values()) {
+            if (machinesDictionary.machineName.equals(buildingName))
+                return machinesDictionary;
+        }
+        return null;
     }
 }

@@ -209,7 +209,9 @@ public class LoginController {
         }
         // TODO: 4/19/2023  //Stay logged in not handled!!
         if (generateCaptcha().equals(CAPTCHA_CORRECT)) Player.resetNumberOfAttempts();
-        Player.setCurrentPlayer(Player.getPlayerByUsername(username));
+        Player player = Player.getPlayerByUsername(username);
+        Player.setCurrentPlayer(player);
+        if (status != null) player.setStayLogin();
         return LOGIN_SUCCESSFUL.getMessage();
     }
 
@@ -262,5 +264,19 @@ public class LoginController {
         if (Player.getCurrentPlayer().isPasswordCorrect(password))
             return "password confirmed!";
         return "confirmation failed!\nplease enter password correctly!: ";
+    }
+
+    public void clearStayLogin() {
+        Player.removeStayLogin();
+    }
+
+    public boolean runProgram() {
+        Player.recoveryPlayers();
+        Player player = Player.getStayLogin();
+        if (player != null) {
+            Player.setCurrentPlayer(player);
+            return true;
+        }
+        return false;
     }
 }

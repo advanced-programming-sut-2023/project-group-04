@@ -61,7 +61,11 @@ public enum GameMessages {
     TAX_NOT_ACTIVE("You can't change tax rate yet!"),
     ENTER_SHOP_MENU("Entered shop menu successfully!"),
     NO_WAY("there isn't any way to selected entered destination!"),
-    NO_SELECTED_BUILDING("You didn't select any building");
+    NO_SELECTED_BUILDING("You didn't select any building"),
+    INVALID_EQUIPMENT_NAME("Entered equipment name is invalid!"),
+    NO_SELECTED_UNIT("You didn't select any unit!"),
+    MACHINE_EXIST("An equipment already exist in this position!"),
+    SUCCESSFUL_CREATE_EQUIPMENT("Equipment created successfully!");
 
     private final String message;
 

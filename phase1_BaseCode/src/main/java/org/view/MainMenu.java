@@ -15,6 +15,7 @@ public class MainMenu {
         while (true) {
             input = Menu.getScanner().nextLine();
             if (MainMenuCommands.getMatcher(input, MainMenuCommands.LOGOUT) != null) {
+                Menu.getLoginController().clearStayLogin();
                 System.out.println("user logged out successfully!");
                 return;
             } else if ((MainMenuCommands.getMatcher(input, MainMenuCommands.ENTER_PROFILE_MENU)) != null) {
@@ -23,8 +24,7 @@ public class MainMenu {
             } else if ((matcher = MainMenuCommands.getMatcher(input, MainMenuCommands.START_GAME)) != null) {
                 GameMessages messages = Menu.getGameController().startGame(matcher);
                 System.out.println(messages.getMessage());
-                if (messages.equals(GameMessages.GAME_STARTED))
-                    new GameMenu().run();
+                if (messages.equals(GameMessages.GAME_STARTED)) new GameMenu().run();
             } else if (MainMenuCommands.getMatcher(input, MainMenuCommands.ENTER_ENVIRONMENT_MENU) != null) {
                 System.out.println("you successfully entered \"environment menu\"");
                 new EnvironmentMenu().run();

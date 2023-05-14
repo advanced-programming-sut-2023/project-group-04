@@ -77,6 +77,8 @@ public class GameMenu {
             } else if ((GameCommands.getMatcher(input, GameCommands.ENTER_TRADE_MENU)) != null) {
                 System.out.println("Entered trade menu successfully!");
                 new TradeMenu().run();
+            } else if ((matcher = GameCommands.getMatcher(input, GameCommands.BUILD_EQUIPMENT)) != null) {
+                System.out.println(Menu.getGameController().buildEquipment(matcher).getMessage());
             } else System.out.println("Invalid command!");
         }
     }

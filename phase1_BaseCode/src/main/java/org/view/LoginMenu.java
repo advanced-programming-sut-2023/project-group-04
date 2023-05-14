@@ -8,9 +8,11 @@ import java.util.regex.Matcher;
 public class LoginMenu {
 
     public void run() throws Exception {
+        boolean loginStatus = Menu.getLoginController().runProgram();
         String result;
         Matcher matcher;
         while (true) {
+            if (loginStatus) new MainMenu().run();
             String input = Menu.getScanner().nextLine();
             if (SignUpCommands.getMatcher(input, SignUpCommands.I_DONT_HAVE_ACCOUNT) != null) {
                 System.out.println("now you can create a new account!");

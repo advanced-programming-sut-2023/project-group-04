@@ -2,6 +2,8 @@ package org.controller;
 
 import org.model.Empire;
 import org.model.Game;
+import org.model.Machine.Machine;
+import org.model.Machine.MachinesDictionary;
 import org.model.MapCell;
 import org.model.Player;
 import org.model.buildings.*;
@@ -259,8 +261,7 @@ public class GameController {
         String unitType = removeQuotation(matcher.group("type"));
         int count = Integer.parseInt(removeQuotation(matcher.group("count")));
         Building currentBuilding = Game.getCurrentGame().getSelectedBuilding();
-        if (currentBuilding == null)
-            return GameMessages.NO_SELECTED_BUILDING;
+        if (currentBuilding == null) return GameMessages.NO_SELECTED_BUILDING;
         MapCell mapCell = currentBuilding.getMapCell();
         int buildingPosX = mapCell.getX();
         int buildingPosY = mapCell.getY();
@@ -539,7 +540,6 @@ public class GameController {
 
     public GameMessages engineerBuild(Matcher matcher) {
 
-        //TODO : KIR TO IN METHOD
         return null;
     }
 
@@ -573,6 +573,26 @@ public class GameController {
         productiveBuilding.setOutputResource(output);
         Game.getCurrentGame().setSelectedBuilding(null);
         return GameMessages.SET_OUTPUT_SUCCESSFUL;
+    }
+
+    public GameMessages buildEquipment(Matcher matcher) {
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
+        int x = Integer.parseInt(removeQuotation(matcher.group("x"))) - 1;
+        int y = Integer.parseInt(removeQuotation(matcher.group("y"))) - 1;
+        if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
+        MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
+        String equipmentName = removeQuotation(matcher.group("equipmentName"));
+        if (Game.getCurrentGame().getSelectedUnit() == null) return GameMessages.NO_SELECTED_UNIT;
+        for (Person person : Game.getCurrentGame().getSelectedUnit())
+            if (!(person instanceof Engineer)) return GameMessages.NOT_ENGINEER;
+        MachinesDictionary machinesDictionary = MachinesDictionary.getDictionaryByName(equipmentName);
+        if (machinesDictionary == null) return GameMessages.INVALID_EQUIPMENT_NAME;
+        if (machinesDictionary.getGold() > empire.getAvailableResource("gold")) return GameMessages.NOT_ENOUGH_GOLD;
+        if (mapCell.getMachine() != null) return GameMessages.MACHINE_EXIST;
+        mapCell.setMachine(new Machine(machinesDictionary, empire, mapCell));
+        empire.changeEmpireResource("gold", -1 * machinesDictionary.getGold());
+        Game.getCurrentGame().selectUnit(null);
+        return GameMessages.SUCCESSFUL_CREATE_EQUIPMENT;
     }
 
     public void nextTurn() {
@@ -947,4 +967,5 @@ public class GameController {
     private String removeQuotation(String buffer) {
         return buffer.replaceAll("\"", "");
     }
+
 }
