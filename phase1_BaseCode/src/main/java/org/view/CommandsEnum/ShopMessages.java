@@ -7,8 +7,8 @@ public enum ShopMessages {
     WRONG_NAME_PRODUCT("Don't have any product with this name!"),
     LACK_OF_MONEY("You don't have enough gold!"),
     LACK_OF_PRODUCT("You don't have enough of the desired product!"),
-    CANCEL("Canceled!");
-
+    CANCEL("Canceled!"),
+    LACK_OF_FREE_SPACE("You don't have enough free space!");
 
 
     private final String message;

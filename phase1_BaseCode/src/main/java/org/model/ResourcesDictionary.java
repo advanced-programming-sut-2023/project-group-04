@@ -7,7 +7,7 @@ public enum ResourcesDictionary {
     WOOD("wood",20),
     STONE("stone",70),
     IRON("iron",220),
-    HOP("hop",70),
+    HOP("hops",70),
     ALE("ale",100),
     WHEAT("wheat",110),
     FLOUR("flour",160),

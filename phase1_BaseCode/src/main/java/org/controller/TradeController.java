@@ -20,8 +20,8 @@ public class TradeController {
         if (ResourcesDictionary.getDictionaryByName(resourceName) == null)
             return TradeMessages.WRONG_NAME_PRODUCT;
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
-        Trade trade = new Trade(resourceName, amount, price, senderMessage, Game.getCurrentGame().getCurrentEmpire());
         if (empire.getAvailableResource(resourceName) < amount) return TradeMessages.LACK_OF_PRODUCT;
+        Trade trade = new Trade(resourceName, amount, price, senderMessage, Game.getCurrentGame().getCurrentEmpire());
         empire.changeResourceAmount(resourceName, -1 * price);
         Game.getCurrentGame().getCurrentEmpire().getAllTrades().add(trade);
         Game.getCurrentGame().addTrade(trade);
@@ -59,13 +59,14 @@ public class TradeController {
         Empire currentEmpire = Game.getCurrentGame().getCurrentEmpire();
         if (currentEmpire == null)
             return "Your don't have any new trade request";
-        StringBuilder string = new StringBuilder();
+        StringBuilder string = new StringBuilder("Your Trade List : \n");
         for (Trade trade : currentEmpire.getAllTrades()) {
             string.append("Resource Name : ").append(trade.getResourceName());
             string.append("     Sender Message : ").append(trade.getSenderMessage());
             string.append("     Receiver Message : ").append(trade.getReceiverMessage());
-            string.append("     Owner's Nickname : ").append(trade.getTradeOwner().getOwner().getNickname()).append("\n");
+            string.append("     Owner's Nickname : ").append(trade.getTradeOwner().getOwner().getNickname()).append("\n\n");
         }
+        currentEmpire.getAllTrades().clear();
         return string.toString();
     }
 

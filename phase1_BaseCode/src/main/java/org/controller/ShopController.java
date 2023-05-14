@@ -10,12 +10,13 @@ import java.util.regex.Matcher;
 public class ShopController {
     public String showList() {
         Empire currentEmpire = Game.getCurrentGame().getCurrentEmpire();
-        String list = "YOUR RESOURCES:\n";
+        String list = "YOUR RESOURCES:";
         for (ResourcesDictionary resourcesDictionary : ResourcesDictionary.values()) {
-            list += "resource name : " + resourcesDictionary.getName();
-            list += "\namount : " + currentEmpire.getResources().get(resourcesDictionary.getName());
+            list += "\nresource name : " + resourcesDictionary.getName();
+            list += "\namount : " + currentEmpire.getAvailableResource(resourcesDictionary.getName());
             list += "\nbuy price : " + resourcesDictionary.getPrice();
-            list += "\nsell price : " + resourcesDictionary.getPrice() / 2;
+            list += "\nsell price : " + (resourcesDictionary.getPrice() / 3) * 2;
+            list += "\n------------------";
         }
         return list;
     }
@@ -50,6 +51,9 @@ public class ShopController {
         Empire currentEmpire = Game.getCurrentGame().getCurrentEmpire();
         if (ResourcesDictionary.getDictionaryByName(itemsName) == null)
             return ShopMessages.WRONG_NAME_PRODUCT;
+        int freeSpace = currentEmpire.getFreeSpaceByResourceName(itemsName);
+        if (freeSpace < itemsAmount)
+            return ShopMessages.LACK_OF_FREE_SPACE;
         int price = ResourcesDictionary.getDictionaryByName(itemsName).getPrice() * itemsAmount;
         if (price > currentEmpire.getResources().get("gold"))
             return ShopMessages.LACK_OF_MONEY;

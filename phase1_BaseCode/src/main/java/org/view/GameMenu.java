@@ -74,8 +74,10 @@ public class GameMenu {
                 System.out.println(Menu.getGameController().setOutput(matcher).getMessage());
             } else if (input.matches("show resources")) {
                 System.out.println(Menu.getGameController().showResources());
-            }
-            else System.out.println("Invalid command!");
+            } else if ((GameCommands.getMatcher(input, GameCommands.ENTER_TRADE_MENU)) != null) {
+                System.out.println("Entered trade menu successfully!");
+                new TradeMenu().run();
+            } else System.out.println("Invalid command!");
         }
     }
 }

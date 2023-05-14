@@ -22,23 +22,24 @@ public class ShopMenu {
                 if (shopMessages.equals(ShopMessages.CERTAINTY)) {
                     input = Menu.getScanner().nextLine();
                     if (input.matches("yes"))
-                        System.out.println(Menu.getShopController().buyThing(matcher));
+                        System.out.println(Menu.getShopController().buyThing(matcher).getMessage());
                     else
                         System.out.println(ShopMessages.CANCEL.getMessage());
                 }
-            }
-            else if ((matcher = ShopCommands.getMatcher(input, ShopCommands.SELL_ITEM)) != null) {
+            } else if ((matcher = ShopCommands.getMatcher(input, ShopCommands.SELL_ITEM)) != null) {
                 ShopMessages shopMessages = Menu.getShopController().checkForSell(matcher);
                 System.out.println(shopMessages.getMessage());
                 if (shopMessages.equals(ShopMessages.CERTAINTY)) {
                     input = Menu.getScanner().nextLine();
                     if (input.matches("yes"))
-                        System.out.println(Menu.getShopController().sellThing(matcher));
+                        System.out.println(Menu.getShopController().sellThing(matcher).getMessage());
                     else
                         System.out.println(ShopMessages.CANCEL.getMessage());
                 }
-            }
-            else
+            } else if (ShopCommands.getMatcher(input, ShopCommands.BACK) != null) {
+                System.out.println("Back to game menu successfully!");
+                return;
+            } else
                 System.out.println("Invalid command");
         }
 

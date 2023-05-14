@@ -46,6 +46,7 @@ public enum GameCommands {
     DISBAND_UNIT("^\\s*disband\\s+unit\\s*$"),
     SHOW_MAP("\\s*show\\s+map\\s+-x\\s+(?<xAsis>\\d+)\\s+-y\\s+(?<yAsis>\\d+)\\s*"),
     NEXT_TURN("\\s*next\\s+turn\\s+"),
+    ENTER_TRADE_MENU("\\s*enter\\s+trade\\s+menu\\s*"),
 
     BACK("\\s*back\\s*");
 

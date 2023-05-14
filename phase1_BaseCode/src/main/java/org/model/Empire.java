@@ -149,14 +149,17 @@ public class Empire {
             return;
         }
         if (StorageBuildingsDictionary.STOCKPILE.getObjects().contains(resource)) {
-            resources.computeIfPresent(resource, (key, val) -> val + amount);
             storages = allStockPiles;
+            int quantity = Math.min(getFreeSpace(storages), amount);
+            resources.computeIfPresent(resource, (key, val) -> val + quantity);
         } else if (StorageBuildingsDictionary.ARMOURY.getObjects().contains(resource)) {
-            weaponAndArmour.computeIfPresent(resource, (key, val) -> val + amount);
             storages = allArmouries;
+            int quantity = Math.min(getFreeSpace(storages), amount);
+            weaponAndArmour.computeIfPresent(resource, (key, val) -> val + quantity);
         } else if (StorageBuildingsDictionary.GRANARY.getObjects().contains(resource)) {
-            food.computeIfPresent(resource, (key, val) -> val + amount);
             storages = allGranaries;
+            int quantity = Math.min(getFreeSpace(storages), amount);
+            food.computeIfPresent(resource, (key, val) -> val + quantity);
         }
         if (amount > 0) {
             increaseResourceFromStorageBuilding(storages, resource, amount);
@@ -268,8 +271,27 @@ public class Empire {
         this.headquarter = headquarter;
     }
 
+    public int getFreeSpace(ArrayList<StorageBuilding> storageBuildings) {
+        int freeSpace = 0;
+        for (StorageBuilding storageBuilding : storageBuildings) {
+            freeSpace += storageBuilding.getFreeSpace();
+        }
+        return freeSpace;
+    }
+
     public Building getHeadquarter() {
         return headquarter;
+    }
+
+    public int getFreeSpaceByResourceName(String resource) {
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
+        if (StorageBuildingsDictionary.STOCKPILE.getObjects().contains(resource))
+            return getFreeSpace(empire.getAllStockPiles());
+        else if (StorageBuildingsDictionary.ARMOURY.getObjects().contains(resource))
+            return getFreeSpace(empire.getAllArmouries());
+        else if (StorageBuildingsDictionary.GRANARY.getObjects().contains(resource))
+            return getFreeSpace(empire.getAllGranaries());
+        return -1;
     }
 
 }
