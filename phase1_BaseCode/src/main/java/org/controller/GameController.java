@@ -589,10 +589,7 @@ public class GameController {
 
     public GameMessages buildEquipment(Matcher matcher) {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
-        int x = Integer.parseInt(removeQuotation(matcher.group("x"))) - 1;
-        int y = Integer.parseInt(removeQuotation(matcher.group("y"))) - 1;
-        if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
-        MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
+        MapCell mapCell = Game.getCurrentGame().getSelectedUnit().get(0).getMapCell();
         String equipmentName = removeQuotation(matcher.group("equipmentName"));
         if (Game.getCurrentGame().getSelectedUnit() == null) return GameMessages.NO_SELECTED_UNIT;
         for (Person person : Game.getCurrentGame().getSelectedUnit())
@@ -706,12 +703,12 @@ public class GameController {
                         if (person.getPersonOwner().equals(machine.getOwnerMachine()))
                             enemies.add(person);
                     for (Person person : enemies)
-                        person.damagePerson(-(damage/enemies.size()));
+                        person.damagePerson(-(damage / enemies.size()));
                     Machine aimMachine = machine.getAim().getMachine();
                     if (aimMachine != null && !aimMachine.getOwnerMachine().equals(owner))
                         aimMachine.damageMachine(damage);
                     Building aimBuilding = machine.getAim().getBuilding();
-                    if (aimMachine != null && aimBuilding.getBuildingOwner().equals(owner))
+                    if (aimBuilding != null && aimBuilding.getBuildingOwner().equals(owner))
                         aimBuilding.decreaseHp(damage);
                 }
             }
@@ -723,18 +720,16 @@ public class GameController {
             Machine machine = Game.getCurrentGame().getToMoveOrAttackMachine().get(i);
             if (machine.getDestination() != null) {
                 MachinesDictionary dictionary = machine.getMachinesDictionary();
-                if (!dictionary.equals(MachinesDictionary.CATAPULTS) && !dictionary.equals(MachinesDictionary.TREBUCHETS)
-                        && !dictionary.equals(MachinesDictionary.FIRE_BALLISTA)) {
-                    ArrayList<MapCell> path = routing(machine.getMapCell(), machine.getDestination(), false);
-                    if (path == null) continue;
-                    int moveTileNumber = Math.min(machine.getMachinesDictionary().getSpeed(), path.size() - 1);
-                    MapCell goal = path.get(moveTileNumber);
-                    if (goal.getMachine() != null) continue;
-                    goal.setMachine(machine);
-                    path.get(0).removeMachine();
-                    i--;
-                    if (machine.getMapCell().equals(goal)) Game.getCurrentGame().removeMovedMachine(machine);
-                }
+                ArrayList<MapCell> path = routing(machine.getMapCell(), machine.getDestination(), false);
+                if (path == null) continue;
+                int moveTileNumber = Math.min(machine.getMachinesDictionary().getSpeed(), path.size() - 1);
+                MapCell goal = path.get(moveTileNumber);
+                if (goal.getMachine() != null) continue;
+                goal.setMachine(machine);
+                path.get(0).removeMachine();
+                machine.changeMapCell(goal);
+                i--;
+                if (machine.getMapCell().equals(goal)) Game.getCurrentGame().removeMovedMachine(machine);
             }
         }
     }
