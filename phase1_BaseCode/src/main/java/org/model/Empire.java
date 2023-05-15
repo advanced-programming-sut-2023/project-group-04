@@ -15,18 +15,15 @@ public class Empire {
     private int fearRate;
     private final ArrayList<Person> population = new ArrayList<>();
     private final HashMap<String, Integer> popularity;
-
     private final ArrayList<StorageBuilding> allStockPiles;
     private final HashMap<String, Integer> resources;
-
     private final ArrayList<StorageBuilding> allGranaries;
     private final HashMap<String, Integer> food;
-
     private final ArrayList<StorageBuilding> allArmouries;
     private final HashMap<String, Integer> weaponAndArmour;
-
     private final ArrayList<Trade> allTrades;
     private Building headquarter;
+    private int freeSpace;
 
     public Empire(Player owner) {
         this.owner = owner;
@@ -294,4 +291,11 @@ public class Empire {
         return -1;
     }
 
+    public void changeFreeSpace(int space) {
+        this.freeSpace += freeSpace;
+    }
+
+    public int getFreeSpace() {
+        return freeSpace;
+    }
 }

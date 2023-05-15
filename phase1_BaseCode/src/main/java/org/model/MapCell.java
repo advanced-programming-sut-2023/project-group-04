@@ -104,4 +104,8 @@ public class MapCell {
     public void removeBuilding() {
         this.building = null;
     }
+
+    public void removeMachine() {
+        this.machine = null;
+    }
 }

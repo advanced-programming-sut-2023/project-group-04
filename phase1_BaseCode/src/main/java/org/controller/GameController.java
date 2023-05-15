@@ -192,7 +192,6 @@ public class GameController {
         }
         if (!buyBuilding(empire, prices)) return GameMessages.NOT_ENOUGH_RESOURCE;
         Game.getCurrentGame().getMapCellByAddress(x, y).setBuilding(building);
-
         initBuildings(building);
         return GameMessages.SUCCESSFUL_DROP;
     }
@@ -216,6 +215,10 @@ public class GameController {
         }
         if (building.getBuildingDictionary().equals(BuildingsDictionary.ARMOURY)) {
             empire.addArmoury((StorageBuilding) building);
+        }
+        if (building instanceof StructuralBuilding) {
+            int space = ((StructuralBuilding) building).getFreeSpace();
+            Game.getCurrentGame().getCurrentEmpire().changeFreeSpace(space);
         }
     }
 
@@ -476,7 +479,7 @@ public class GameController {
             return GameMessages.NO_ENEMY;
         MapCell origin = unit.get(0).getMapCell();
         if (aimBuilding != null && !aimBuilding.getBuildingOwner().equals(empire))
-           aimMapCell = getBuildingAttackPos(origin, aimMapCell);
+            aimMapCell = getBuildingAttackPos(origin, aimMapCell);
         for (Person person : unit) {
             person.setCurrentDestination(aimMapCell);
             Game.getCurrentGame().addMoveAblePerson(person);
@@ -552,11 +555,6 @@ public class GameController {
         return GameMessages.SET_TUNNEL_SUCCESSFUL;
     }
 
-    public GameMessages engineerBuild(Matcher matcher) {
-        //todo
-        return null;
-    }
-
     public GameMessages disbandUnit() {
         ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
         if (unit == null || unit.size() == 0) return GameMessages.EMPTY_UNIT_SELECT;
@@ -589,7 +587,6 @@ public class GameController {
         return GameMessages.SET_OUTPUT_SUCCESSFUL;
     }
 
-    //todo : complete equipment functions
     public GameMessages buildEquipment(Matcher matcher) {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         int x = Integer.parseInt(removeQuotation(matcher.group("x"))) - 1;
@@ -623,6 +620,8 @@ public class GameController {
         if (selectedMachine == null) return GameMessages.EQUIPMENT_NOT_EXIST;
         if (selectedMachine.getEngineers().size() < selectedMachine.getMachinesDictionary().getNumberOfEngineer())
             return GameMessages.NOT_ENOUGH_ENGINEER;
+        if (selectedMachine.getMachinesDictionary().equals(MachinesDictionary.TREBUCHETS))
+            return GameMessages.CANT_MOVE;
         if (routing(origin, destination, false) == null) return GameMessages.NO_WAY;
         String[] invalidTextures = {"OIL", "PLAIN", "LOW_WATER", "RIVER", "SMALL_POND", "LARGE_POND", "SEA"};
         for (String invalidTexture : invalidTextures)
@@ -651,16 +650,21 @@ public class GameController {
         MachinesDictionary dictionary = selectedMachine.getMachinesDictionary();
         boolean longRangeMachine = dictionary.equals(MachinesDictionary.CATAPULTS) ||
                 dictionary.equals(MachinesDictionary.TREBUCHETS) || dictionary.equals(MachinesDictionary.FIRE_BALLISTA);
-        if ((routing(origin, destination, false) == null) && !longRangeMachine) return GameMessages.NO_WAY;
-        String[] invalidTextures = {"OIL", "PLAIN", "LOW_WATER", "RIVER", "SMALL_POND", "LARGE_POND", "SEA"};
-        for (String invalidTexture : invalidTextures)
-            if (destination.getGroundTexture().contains("ROCK") || destination.getGroundTexture().equals(invalidTexture))
-                return GameMessages.INVALID_MOVE;
-        selectedMachine.setDestination(null);
-        selectedMachine.setAim(destination);
+        if (!longRangeMachine) {
+            if (routing(origin, destination, false) == null) return GameMessages.NO_WAY;
+            String[] invalidTextures = {"OIL", "PLAIN", "LOW_WATER", "RIVER", "SMALL_POND", "LARGE_POND", "SEA"};
+            for (String invalidTexture : invalidTextures)
+                if (destination.getGroundTexture().contains("ROCK") || destination.getGroundTexture().equals(invalidTexture))
+                    return GameMessages.INVALID_MOVE;
+            selectedMachine.setDestination(null);
+            selectedMachine.setAim(destination);
+        } else {
+            selectedMachine.setDestination(null);
+            selectedMachine.setAim(destination);
+        }
         if (!Game.getCurrentGame().getToMoveOrAttackMachine().contains(selectedMachine))
             Game.getCurrentGame().addMoveOrAttackMachine(selectedMachine);
-        return GameMessages.SUCCESSFUL_EQUIPMENT_MOVE;
+        return GameMessages.SUCCESSFUL_EQUIPMENT_ATTACK;
     }
 
     public String nextTurn() {
@@ -668,11 +672,14 @@ public class GameController {
         if (Game.getCurrentGame().getAllEmpires().indexOf(Game.getCurrentGame().getCurrentEmpire()) == 0) {
             moveAndPatrolTroops();
             moveBySoldiersMode();
+            equipmentMove();
+            equipmentAttack();
             fights();
             longRangeFights();
             tunnel();
             updateRates();
             updateThingsWithRate();
+            addFreePeople();
             buildingOperations();
             fillEngineerOil();
             removeLostEmpire();
@@ -683,6 +690,69 @@ public class GameController {
             }
         }
         return "player " + Game.getCurrentGame().getCurrentEmpire().getOwner().getNickname() + " is playing!";
+    }
+
+    private void equipmentAttack() {
+        for (int i = 0; i < Game.getCurrentGame().getToMoveOrAttackMachine().size(); i++) {
+            Machine machine = Game.getCurrentGame().getToMoveOrAttackMachine().get(i);
+            if (machine.getAim() != null) {
+                MachinesDictionary dictionary = machine.getMachinesDictionary();
+                if (dictionary.equals(MachinesDictionary.CATAPULTS) || dictionary.equals(MachinesDictionary.TREBUCHETS)
+                        || dictionary.equals(MachinesDictionary.FIRE_BALLISTA)) {
+                    int damage = machine.getMachinesDictionary().getOffensivePower();
+                    Empire owner = machine.getOwnerMachine();
+                    ArrayList<Person> enemies = new ArrayList<>();
+                    for (Person person : machine.getAim().getPeople())
+                        if (person.getPersonOwner().equals(machine.getOwnerMachine()))
+                            enemies.add(person);
+                    for (Person person : enemies)
+                        person.damagePerson(-(damage/enemies.size()));
+                    Machine aimMachine = machine.getAim().getMachine();
+                    if (aimMachine != null && !aimMachine.getOwnerMachine().equals(owner))
+                        aimMachine.damageMachine(damage);
+                    Building aimBuilding = machine.getAim().getBuilding();
+                    if (aimMachine != null && aimBuilding.getBuildingOwner().equals(owner))
+                        aimBuilding.decreaseHp(damage);
+                }
+            }
+        }
+    }
+
+    private void equipmentMove() {
+        for (int i = 0; i < Game.getCurrentGame().getToMoveOrAttackMachine().size(); i++) {
+            Machine machine = Game.getCurrentGame().getToMoveOrAttackMachine().get(i);
+            if (machine.getDestination() != null) {
+                MachinesDictionary dictionary = machine.getMachinesDictionary();
+                if (!dictionary.equals(MachinesDictionary.CATAPULTS) && !dictionary.equals(MachinesDictionary.TREBUCHETS)
+                        && !dictionary.equals(MachinesDictionary.FIRE_BALLISTA)) {
+                    ArrayList<MapCell> path = routing(machine.getMapCell(), machine.getDestination(), false);
+                    if (path == null) continue;
+                    int moveTileNumber = Math.min(machine.getMachinesDictionary().getSpeed(), path.size() - 1);
+                    MapCell goal = path.get(moveTileNumber);
+                    if (goal.getMachine() != null) continue;
+                    goal.setMachine(machine);
+                    path.get(0).removeMachine();
+                    i--;
+                    if (machine.getMapCell().equals(goal)) Game.getCurrentGame().removeMovedMachine(machine);
+                }
+            }
+        }
+    }
+
+    private void addFreePeople() {
+        for (Empire empire : Game.getCurrentGame().getAllEmpires()) {
+            int population = 0;
+            for (String popFactor : empire.getPopularity().keySet())
+                population += empire.getPopularity().get(popFactor);
+            if (population >= 10 && empire.getFreeSpace() > 0) {
+                int people = Math.min(empire.getFreeSpace(), 20);
+                MapCell headquarterPos = empire.getHeadquarter().getMapCell();
+                MapCell camp = Game.getCurrentGame().getMapCellByAddress(headquarterPos.getX(), headquarterPos.getY() + 1);
+                for (int i = 0; i < people; i++) {
+                    camp.addPeople(new Person(empire, camp));
+                }
+            }
+        }
     }
 
     private void moveBySoldiersMode() {
@@ -731,6 +801,16 @@ public class GameController {
         for (int i = 0; i < Game.getCurrentGame().getAllEmpires().size(); i++) {
             Empire empire = Game.getCurrentGame().getAllEmpires().get(i);
             if (empire.getHeadquarter().getHp() <= 0) {
+                for (int j = 0; j < Game.getCurrentGame().getMapSize(); j++) {
+                    for (int k = 0; k < Game.getCurrentGame().getMapSize(); k++) {
+                        MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(j, k);
+                        if (mapCell.getBuilding().getBuildingOwner().equals(empire)) mapCell.removeBuilding();
+                        if (mapCell.getMachine().getOwnerMachine().equals(empire)) mapCell.removeMachine();
+                        for (Person person : mapCell.getPeople()) {
+                            if (person.getPersonOwner().equals(empire)) mapCell.removePeople(person);
+                        }
+                    }
+                }
                 Game.getCurrentGame().removeEmpire(empire);
                 i--;
             }
@@ -842,7 +922,7 @@ public class GameController {
                 if (i == x && j == y) continue;
                 MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(i, j);
                 Building building = mapCell.getBuilding();
-                if (building != null && building.getBuildingOwner()!= soldier.getPersonOwner()) {
+                if (building != null && building.getBuildingOwner() != soldier.getPersonOwner()) {
                     building.decreaseHp(soldier.getOffensivePower());
                     return true;
                 }
@@ -1137,5 +1217,4 @@ public class GameController {
         }
         return GameMessages.SENT_ENGINEER_SUCCESSFULLY;
     }
-
 }

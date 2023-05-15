@@ -73,7 +73,9 @@ public enum GameMessages {
     EQUIPMENT_NOT_EXIST("There isn't any equipment is selected tile!"),
     SUCCESSFUL_EQUIPMENT_MOVE("Equipment move set successful!"),
     SOLDIER_OR_MACHINE_EXIST("There is a group of people or a machine exist in this place!"),
-    NEAR_BUILDING("Entered position is so close to another building!");
+    NEAR_BUILDING("Entered position is so close to another building!"),
+    CANT_MOVE("This equipment is unable to move!"),
+    SUCCESSFUL_EQUIPMENT_ATTACK("Equipment attack set successfully!");
 
     private final String message;
 

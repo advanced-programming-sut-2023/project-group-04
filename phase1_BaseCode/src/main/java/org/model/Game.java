@@ -211,8 +211,12 @@ public class Game {
         this.toMoveOrAttackMachine.add(machine);
     }
 
-    public void removeEmpire (Empire empire) {
+    public void removeEmpire(Empire empire) {
         this.allEmpires.remove(empire);
+    }
+
+    public void removeMovedMachine(Machine machine) {
+        this.toMoveOrAttackMachine.remove(machine);
     }
 
 }

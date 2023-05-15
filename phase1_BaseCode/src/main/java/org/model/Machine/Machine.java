@@ -13,12 +13,14 @@ public class Machine {
     private MachinesDictionary machinesDictionary;
     private MapCell destination;
     private MapCell aim;
+    private int hp;
 
     public Machine(MachinesDictionary machinesDictionary, Empire ownerMachine, MapCell mapCell) {
         this.machinesDictionary = machinesDictionary;
         this.ownerMachine = ownerMachine;
         this.mapCell = mapCell;
         this.engineers = new ArrayList<>();
+        this.hp = machinesDictionary.getHp();
     }
 
     public Empire getOwnerMachine() {
@@ -67,5 +69,13 @@ public class Machine {
 
     public void setAim(MapCell aim) {
         this.aim = aim;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void damageMachine(int damage) {
+        this.hp -= damage;
     }
 }
