@@ -78,4 +78,8 @@ public class Machine {
     public void damageMachine(int damage) {
         this.hp -= damage;
     }
+
+    public void changeMapCell(MapCell mapCell) {
+        this.mapCell = mapCell;
+    }
 }
