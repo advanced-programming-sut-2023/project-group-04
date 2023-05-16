@@ -1,5 +1,15 @@
 package org.model.map;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import org.model.Player;
+
+import java.io.FileWriter;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Map {
@@ -11,8 +21,10 @@ public class Map {
     private static Map currentMap;
     private final String mapName;
     private final MapTile[][] map;
+    private static ArrayList<Map> allMaps = new ArrayList<>();
 
     public Map(String mapName, int mapSize) {
+        allMaps.add(this);
         currentMap = this;
         this.mapName = mapName;
         this.map = new MapTile[mapSize][mapSize];
@@ -70,4 +82,48 @@ public class Map {
         return false;
     }
 
+    public static Map getMapByName(String name) {
+        for (Map map : allMaps)
+            if (map.getMapName().equals(name))
+                return map;
+        return null;
+    }
+
+    public static ArrayList<Map> getAllMaps() {
+        return allMaps;
+    }
+
+    public static void setAllMaps(ArrayList<Map> allMaps) {
+        Map.allMaps = allMaps;
+    }
+
+    public static void recoveryMaps() {
+        try {
+            Gson gson = new Gson();
+            Reader reader = Files.newBufferedReader(Path.of("MAPS.json"));
+            ArrayList<Map> allMaps = new ArrayList<>();
+            JsonArray jsonArray = gson.fromJson(reader, JsonArray.class);
+            if (jsonArray != null) {
+                for (JsonElement jsonElement : jsonArray) {
+                    allMaps.add(gson.fromJson(jsonElement, Map.class));
+                }
+                Map.allMaps = allMaps;
+            }
+            reader.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void saveMaps() {
+        Gson gson = new Gson();
+        String data = gson.toJson(Map.getAllMaps());
+        try {
+            FileWriter output = new FileWriter(Path.of("MAPS.json").toFile());
+            output.write(data);
+            output.close();
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
 }

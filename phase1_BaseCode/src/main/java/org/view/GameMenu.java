@@ -69,7 +69,7 @@ public class GameMenu {
             } else if (GameCommands.getMatcher(input, GameCommands.DISBAND_UNIT) != null) {
                 System.out.println(Menu.getGameController().disbandUnit().getMessage());
             } else if (GameCommands.getMatcher(input, GameCommands.NEXT_TURN) != null) {
-                Menu.getGameController().nextTurn();
+                System.out.println(Menu.getGameController().nextTurn());
             } else if ((matcher = GameCommands.getMatcher(input, GameCommands.SET_OUTPUT)) != null) {
                 System.out.println(Menu.getGameController().setOutput(matcher).getMessage());
             } else if (input.matches("show resources")) {

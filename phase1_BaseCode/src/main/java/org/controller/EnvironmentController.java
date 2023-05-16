@@ -15,15 +15,14 @@ public class EnvironmentController {
         String mapName = matcher.group("mapName");
         int size = Integer.parseInt(matcher.group("size"));
         if (size != 200 && size != 400) return MapMenuMessages.INVALID_SIZE;
-        if (Player.getCurrentPlayer().getMapByName(mapName) != null) return MapMenuMessages.MAP_EXIST;
-        Map map = new Map(mapName, size);
-        Player.getCurrentPlayer().addMap(map);
+        if (Map.getMapByName(mapName) != null) return MapMenuMessages.MAP_EXIST;
+        new Map(mapName, size);
         return MapMenuMessages.MAP_CREATION_SUCCESSFUL;
     }
 
     public MapMenuMessages customExistingMap(Matcher matcher) {
          String mapName = matcher.group("mapName");
-        Map map = Player.getCurrentPlayer().getMapByName(mapName);
+        Map map = Map.getMapByName(mapName);
         if (map == null) return MapMenuMessages.MAP_NOT_EXIST;
         Map.setCurrentMap(map);
         return MapMenuMessages.MAP_SELECT_SUCCESSFUL;
@@ -188,6 +187,6 @@ public class EnvironmentController {
     }
 
     public void save() {
-        Player.savePlayers();
+        Map.saveMaps();
     }
 }

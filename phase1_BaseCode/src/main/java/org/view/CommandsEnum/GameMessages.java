@@ -70,8 +70,10 @@ public enum GameMessages {
     MACHINE_IS_FULL("Machine is full of engineer"),
     SENT_ENGINEER_SUCCESSFULLY("Sent Engineer successfully"),
     NOT_ENOUGH_ENGINEER("Machine need more engineers!"),
-    EQUIPMENT_NOT_EXIST("there isn't any equipment is selected tile!"),
-    SUCCESSFUL_EQUIPMENT_MOVE("equipment move set successful!");
+    EQUIPMENT_NOT_EXIST("There isn't any equipment is selected tile!"),
+    SUCCESSFUL_EQUIPMENT_MOVE("Equipment move set successful!"),
+    SOLDIER_OR_MACHINE_EXIST("There is a group of people or a machine exist in this place!"),
+    NEAR_BUILDING("Entered position is so close to another building!");
 
     private final String message;
 

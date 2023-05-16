@@ -10,7 +10,6 @@ public enum MainMenuCommands {
     ENTER_SHOP_MENU("\\s*enter\\s+shop\\s+menu\\s*"),
     START_GAME("\\s*start\\s+game(?=.*-n\\s+(?<mapName>\\\"[^\\\"]*\\\"|[^\\s\\\"]*))(?=.*-users\\s+" +
             "\\{(?<allUsers>[^\\s\\\"]+)})(\\s+((-n\\s+(\\\"[^\\\"]*\\\"|[^\\s\\\"]*))|(-users\\s+\\{\\S+}))){2}\\s*")
-    //TODO fix start game regex keyhaaaaaaan!
     ;
     private final String regex;
 

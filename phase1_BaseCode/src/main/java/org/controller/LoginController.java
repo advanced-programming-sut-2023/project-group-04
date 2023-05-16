@@ -2,6 +2,7 @@ package org.controller;
 
 import org.model.ASCIIArtGenerator;
 import org.model.Player;
+import org.model.map.Map;
 import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
 import org.passay.PasswordGenerator;
@@ -271,6 +272,7 @@ public class LoginController {
     }
 
     public boolean runProgram() {
+        Map.recoveryMaps();
         Player.recoveryPlayers();
         Player player = Player.getStayLogin();
         if (player != null) {

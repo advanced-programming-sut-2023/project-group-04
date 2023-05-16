@@ -8,7 +8,6 @@ public enum MachinesDictionary {
     TREBUCHETS("trebuchets", 0, 250, 1000, 50, 3, 150),
     FIRE_BALLISTA("fire_ballista", 7, 250, 1000, 30, 2, 150);
 
-
     private final String machineName;
     private final int speed;
     private final int offensivePower;

@@ -1,5 +1,8 @@
 package org.model;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import org.model.Machine.Machine;
 import org.model.buildings.*;
 import org.model.map.Map;
@@ -8,6 +11,10 @@ import org.model.person.Person;
 import org.model.person.Soldier;
 import org.model.person.SoldiersDictionary;
 
+import java.io.FileWriter;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Game {
@@ -36,7 +43,7 @@ public class Game {
     }
 
     public void initializeMap(String mapName) {
-        Map mapTemplate = Player.getCurrentPlayer().getMapByName(mapName);
+        Map mapTemplate = Map.getMapByName(mapName);
         int mapSize = mapTemplate.getMapSize();
         this.map = new MapCell[mapSize][mapSize];
         for (int i = 0; i < mapSize; i++) {
@@ -203,4 +210,9 @@ public class Game {
     public void addMoveOrAttackMachine(Machine machine) {
         this.toMoveOrAttackMachine.add(machine);
     }
+
+    public void removeEmpire (Empire empire) {
+        this.allEmpires.remove(empire);
+    }
+
 }

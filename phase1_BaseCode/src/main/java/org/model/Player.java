@@ -25,7 +25,6 @@ public class Player {
     private String securityAnswer;
     private String slogan;
     private int score;
-    private final ArrayList<Map> maps;
     private static int numberOfAttempts = 0;
 
     public Player(String username, String password, String nickname, String email, String slogan) {
@@ -35,7 +34,6 @@ public class Player {
         Email = email;
         this.slogan = slogan;
         this.score = 0;
-        this.maps = new ArrayList<>();
     }
 
     public static void setCurrentPlayer(Player player) {
@@ -55,7 +53,7 @@ public class Player {
     public static void recoveryPlayers() {
         try {
             Gson gson = new Gson();
-            Reader reader = Files.newBufferedReader(Paths.get("D:\\code\\APproject\\project-group-04\\phase1_BaseCode\\PLAYERS.json"));
+            Reader reader = Files.newBufferedReader(Paths.get("PLAYERS.json"));
             ArrayList<Player> allPlayers = new ArrayList<>();
             JsonArray jsonArray = gson.fromJson(reader, JsonArray.class);
             if (jsonArray != null) {
@@ -74,7 +72,7 @@ public class Player {
         Gson gson = new Gson();
         String data = gson.toJson(Player.getAllPlayers());
         try {
-            FileWriter output = new FileWriter("D:\\code\\APproject\\project-group-04\\phase1_BaseCode\\PLAYERS.json");
+            FileWriter output = new FileWriter("PLAYERS.json");
             output.write(data);
             output.close();
         } catch (Exception e) {
@@ -98,8 +96,7 @@ public class Player {
         Player player = null;
         try {
             Gson gson = new Gson();
-            Reader reader = Files.newBufferedReader(Paths.get("D:\\code\\APproject\\project-group-04\\" +
-                    "phase1_BaseCode\\STAY_LOGIN.json"));
+            Reader reader = Files.newBufferedReader(Paths.get("STAY_LOGIN.json"));
             player = gson.fromJson(reader, Player.class);
             reader.close();
         } catch (Exception ex) {
@@ -110,7 +107,7 @@ public class Player {
 
     public static void removeStayLogin() {
         try {
-            FileWriter output = new FileWriter("D:\\code\\APproject\\project-group-04\\phase1_BaseCode\\STAY_LOGIN.json");
+            FileWriter output = new FileWriter("STAY_LOGIN.json");
             output.write("");
             output.close();
         } catch (Exception e) {
@@ -190,8 +187,8 @@ public class Player {
         this.slogan = slogan;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void addScore(int score) {
+        this.score += score;
     }
 
     public static Player getPlayerByUsername(String username) {
@@ -203,21 +200,6 @@ public class Player {
 
     public static Player getCurrentPlayer() {
         return currentPlayer;
-    }
-
-    public Map getMapByName(String name) {
-        for (Map map : maps)
-            if (map.getMapName().equals(name))
-                return map;
-        return null;
-    }
-
-    public ArrayList<Map> getAllMaps() {
-        return this.maps;
-    }
-
-    public void addMap(Map map) {
-        this.maps.add(map);
     }
 
     public void increaseNumberOfAttempts() {

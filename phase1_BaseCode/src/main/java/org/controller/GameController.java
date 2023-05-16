@@ -7,6 +7,7 @@ import org.model.Machine.MachinesDictionary;
 import org.model.MapCell;
 import org.model.Player;
 import org.model.buildings.*;
+import org.model.map.Map;
 import org.model.person.*;
 import org.view.CommandsEnum.GameMessages;
 
@@ -19,28 +20,27 @@ import java.util.regex.Matcher;
 public class GameController {
     public String showResources() {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (String resource : empire.getResources().keySet()) {
-            output += resource + " : " + empire.getAvailableResource(resource) + "\n";
+            output.append(resource).append(" : ").append(empire.getAvailableResource(resource)).append("\n");
         }
         for (String resource : empire.getFood().keySet()) {
-            output += resource + " : " + empire.getAvailableResource(resource) + "\n";
+            output.append(resource).append(" : ").append(empire.getAvailableResource(resource)).append("\n");
         }
         for (String resource : empire.getWeaponAndArmour().keySet()) {
-            output += resource + " : " + empire.getAvailableResource(resource) + "\n";
+            output.append(resource).append(" : ").append(empire.getAvailableResource(resource)).append("\n");
         }
-        return output;
+        return output.toString();
     }
 
-    //TODO : CREATE GAME MESSAGES AND REPLACE RETURN TYPE OF SOME FUNCTIONS;
     public String showPopularityFactors() {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         HashMap<String, Integer> popularityFactors = empire.getPopularity();
-        String popularity = "<<popularity factors>>\n";
+        StringBuilder popularity = new StringBuilder("<<popularity factors>>\n");
         for (String key : popularityFactors.keySet()) {
-            popularity += key + " :" + popularityFactors.get(key) + "\n";
+            popularity.append(key).append(" :").append(popularityFactors.get(key)).append("\n");
         }
-        return popularity;
+        return popularity.toString();
     }
 
     public String showPopularity() {
@@ -56,11 +56,11 @@ public class GameController {
     public String showFoodList() {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         HashMap<String, Integer> foodList = empire.getFood();
-        String foods = "<<food list>> :\n";
+        StringBuilder foods = new StringBuilder("<<food list>> :\n");
         for (String key : foodList.keySet()) {
-            foods += key + ": " + foodList.get(key) + "\n";
+            foods.append(key).append(": ").append(foodList.get(key)).append("\n");
         }
-        return foods;
+        return foods.toString();
     }
 
     public GameMessages changeFoodRate(Matcher matcher) {
@@ -119,6 +119,10 @@ public class GameController {
         if (mapCell.getBuilding() != null) return GameMessages.EXISTENCE_BUILDING;
         if (BuildingsDictionary.getDictionaryByName(buildingName) == null) return GameMessages.INCORRECT_BUILDING_TYPE;
         if (!checkGroundTexture(mapCell, buildingName)) return GameMessages.INVALID_TEXTURE_TREE;
+        if (mapCell.getPeople().size() != 0 || mapCell.getMachine() != null)
+            return GameMessages.SOLDIER_OR_MACHINE_EXIST;
+        if (y != 0 && Game.getCurrentGame().getMapCellByAddress(x, y - 1).getBuilding() != null)
+            return GameMessages.NEAR_BUILDING;
         if (buildingName.equals("draw bridge") && !checkDrawBridge(x, y, upDirection))
             return GameMessages.INVALID_DRAWBRIDGE_POSITION;
         return createBuilding(empire, x, y, buildingName, upDirection);
@@ -134,8 +138,7 @@ public class GameController {
         ProductiveBuildingsDictionary dictionary = ProductiveBuildingsDictionary.getDictionaryByName(buildingName);
         if (dictionary == null) return true;
         else if (dictionary.getAcceptableTexture() == null) return true;
-        else if (dictionary.getAcceptableTexture().contains(texture)) return true;
-        else return false;
+        else return dictionary.getAcceptableTexture().contains(texture);
     }
 
     private boolean checkDrawBridge(int x, int y, boolean upDirection) {
@@ -263,8 +266,7 @@ public class GameController {
         Building currentBuilding = Game.getCurrentGame().getSelectedBuilding();
         if (currentBuilding == null) return GameMessages.NO_SELECTED_BUILDING;
         MapCell mapCell = currentBuilding.getMapCell();
-        int buildingPosX = mapCell.getX();
-        int buildingPosY = mapCell.getY();
+        MapCell unitCell = Game.getCurrentGame().getMapCellByAddress(mapCell.getX(), mapCell.getY() + 1);
         if (!(currentBuilding instanceof TrainerBuilding)) return GameMessages.INVALID_BUILDING_FOR_CREATE;
         if (!((TrainerBuilding) currentBuilding).getAvailableSoldiers().contains(unitType))
             return GameMessages.INVALID_SOLDIER_TYPE;
@@ -273,7 +275,7 @@ public class GameController {
             if (count * Engineer.getRequiredGold() > empire.getAvailableResource("gold"))
                 return GameMessages.NOT_ENOUGH_GOLD;
             if (!removeFreePeople(empire, count)) return GameMessages.NOT_ENOUGH_POPULATION;
-            mapCell.addPeople(new Engineer(empire, mapCell));
+            unitCell.addPeople(new Engineer(empire, unitCell));
             empire.changeEmpireResource("gold", -1 * SoldiersDictionary.ENGINEER.getGold());
             Game.getCurrentGame().setSelectedBuilding(null);
             return GameMessages.SUCCESSFUL_CREATE_UNIT;
@@ -281,12 +283,12 @@ public class GameController {
             if (count * Tunneler.getRequiredGold() > empire.getAvailableResource("gold"))
                 return GameMessages.NOT_ENOUGH_GOLD;
             if (!removeFreePeople(empire, count)) return GameMessages.NOT_ENOUGH_POPULATION;
-            mapCell.addPeople(new Tunneler(empire, mapCell));
+            unitCell.addPeople(new Tunneler(empire, unitCell));
             empire.changeEmpireResource("gold", -1 * SoldiersDictionary.TUNNELER.getGold());
             Game.getCurrentGame().setSelectedBuilding(null);
             return GameMessages.SUCCESSFUL_CREATE_UNIT;
         }
-        return addSoldier(empire, unitType, count, buildingPosX, buildingPosY);
+        return addSoldier(empire, unitType, count, unitCell);
     }
 
     private boolean removeFreePeople(Empire empire, int count) {
@@ -305,7 +307,7 @@ public class GameController {
         return true;
     }
 
-    private GameMessages addSoldier(Empire empire, String soldierType, int count, int x, int y) {
+    private GameMessages addSoldier(Empire empire, String soldierType, int count, MapCell unitCell) {
         SoldiersDictionary soldierDictionary = SoldiersDictionary.getSoldierDictionaryByName(soldierType);
         String weapon = soldierDictionary.getWeapon();
         String armour = soldierDictionary.getShield();
@@ -317,10 +319,9 @@ public class GameController {
         if (!removeFreePeople(empire, count)) return GameMessages.NOT_ENOUGH_POPULATION;
         buySoldierRequirement(empire, gold, weapon, armour, count);
         for (int i = 0; i < count; i++) {
-            MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
             if (soldierDictionary.equals(SoldiersDictionary.ASSASSIN))
-                mapCell.addPeople(new Assassins(empire, mapCell));
-            else mapCell.addPeople(new Soldier(empire, soldierDictionary, mapCell));
+                unitCell.addPeople(new Assassins(empire, unitCell));
+            else unitCell.addPeople(new Soldier(empire, soldierDictionary, unitCell));
         }
         Game.getCurrentGame().setSelectedBuilding(null);
         return GameMessages.SUCCESSFUL_CREATE_UNIT;
@@ -430,10 +431,10 @@ public class GameController {
         ArrayList<Person> unit = Game.getCurrentGame().getSelectedUnit();
         if (unit == null || unit.size() == 0) return GameMessages.EMPTY_UNIT_SELECT;
         for (Person person : unit)
-            if (person instanceof Engineer || person instanceof Tunneler)
+            if (!(person instanceof Soldier))
                 return GameMessages.NOT_SOLDIER;
         for (Person person : unit) {
-            SoldiersDictionary dictionary = ((Soldier) unit.get(0)).getSoldiersDictionary();
+            SoldiersDictionary dictionary = ((Soldier) person).getSoldiersDictionary();
             if (!dictionary.equals(SoldiersDictionary.ARCHER) && !dictionary.equals(SoldiersDictionary.CROSSBOWMAN) &&
                     !dictionary.equals(SoldiersDictionary.ARABIANBOWS) && !dictionary.equals(SoldiersDictionary.HORSE_ARCHER))
                 return GameMessages.FEW_RANGE;
@@ -446,7 +447,6 @@ public class GameController {
             if (soldier.getSoldiersDictionary().getFireRange() > distance) {
                 inRange = true;
                 soldier.setAim(Game.getCurrentGame().getMapCellByAddress(x, y));
-                Game.getCurrentGame().addAttackingSoldier(soldier);
             }
         }
         if (!inRange) return GameMessages.AIM_OUT_OF_RANGE;
@@ -464,8 +464,6 @@ public class GameController {
         for (Person person : unit)
             if (!(person instanceof Soldier)) return GameMessages.NOT_SOLDIER;
         MapCell aimMapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
-        MapCell origin = Game.getCurrentGame().getSelectedUnit().get(0).getMapCell();
-        if (routing(origin, aimMapCell, false) == null) return GameMessages.NO_WAY;
         Building aimBuilding = aimMapCell.getBuilding();
         boolean enemy = false;
         for (Person person : aimMapCell.getPeople()) {
@@ -476,13 +474,29 @@ public class GameController {
         }
         if ((aimBuilding == null || aimBuilding.getBuildingOwner().equals(empire)) && !enemy)
             return GameMessages.NO_ENEMY;
+        MapCell origin = unit.get(0).getMapCell();
+        if (aimBuilding != null && !aimBuilding.getBuildingOwner().equals(empire))
+           aimMapCell = getBuildingAttackPos(origin, aimMapCell);
         for (Person person : unit) {
             person.setCurrentDestination(aimMapCell);
-            ((Soldier) person).setAim(aimMapCell);
-            Game.getCurrentGame().addAttackingSoldier((Soldier) person);
+            Game.getCurrentGame().addMoveAblePerson(person);
         }
         Game.getCurrentGame().selectUnit(null);
         return GameMessages.SUCCESSFUL_ATTACK;
+    }
+
+    private MapCell getBuildingAttackPos(MapCell origin, MapCell buildingMapCell) {
+        int x = buildingMapCell.getX();
+        int y = buildingMapCell.getY();
+        int size = Game.getCurrentGame().getMapSize();
+        for (int i = Math.max(0, x - 1); i < Math.min(size, x + 1); i++) {
+            for (int j = Math.max(0, y - 1); j < Math.min(size, y + 1); j++) {
+                if (i == x && j == y) continue;
+                MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(i, j);
+                if (routing(origin, mapCell, false) != null) return mapCell;
+            }
+        }
+        return null;
     }
 
     public GameMessages pourOil(Matcher matcher) {
@@ -539,7 +553,7 @@ public class GameController {
     }
 
     public GameMessages engineerBuild(Matcher matcher) {
-
+        //todo
         return null;
     }
 
@@ -575,6 +589,7 @@ public class GameController {
         return GameMessages.SET_OUTPUT_SUCCESSFUL;
     }
 
+    //todo : complete equipment functions
     public GameMessages buildEquipment(Matcher matcher) {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         int x = Integer.parseInt(removeQuotation(matcher.group("x"))) - 1;
@@ -596,7 +611,6 @@ public class GameController {
     }
 
     public GameMessages moveEquipment(Matcher matcher) {
-        //taghir
         int originX = Integer.parseInt(removeQuotation(matcher.group("x1"))) - 1;
         int originY = Integer.parseInt(removeQuotation(matcher.group("y1"))) - 1;
         int destinationX = Integer.parseInt(removeQuotation(matcher.group("x2"))) - 1;
@@ -621,7 +635,7 @@ public class GameController {
         return GameMessages.SUCCESSFUL_EQUIPMENT_MOVE;
     }
 
-    public GameMessages attackEquipment(Matcher matcher) {
+    public GameMessages attackEquipment(Matcher matcher) {//TODO:complete
         int originX = Integer.parseInt(removeQuotation(matcher.group("x1"))) - 1;
         int originY = Integer.parseInt(removeQuotation(matcher.group("y1"))) - 1;
         int destinationX = Integer.parseInt(removeQuotation(matcher.group("x2"))) - 1;
@@ -634,7 +648,10 @@ public class GameController {
         if (selectedMachine == null) return GameMessages.EQUIPMENT_NOT_EXIST;
         if (selectedMachine.getEngineers().size() < selectedMachine.getMachinesDictionary().getNumberOfEngineer())
             return GameMessages.NOT_ENOUGH_ENGINEER;
-        if (routing(origin, destination, false) == null) return GameMessages.NO_WAY;
+        MachinesDictionary dictionary = selectedMachine.getMachinesDictionary();
+        boolean longRangeMachine = dictionary.equals(MachinesDictionary.CATAPULTS) ||
+                dictionary.equals(MachinesDictionary.TREBUCHETS) || dictionary.equals(MachinesDictionary.FIRE_BALLISTA);
+        if ((routing(origin, destination, false) == null) && !longRangeMachine) return GameMessages.NO_WAY;
         String[] invalidTextures = {"OIL", "PLAIN", "LOW_WATER", "RIVER", "SMALL_POND", "LARGE_POND", "SEA"};
         for (String invalidTexture : invalidTextures)
             if (destination.getGroundTexture().contains("ROCK") || destination.getGroundTexture().equals(invalidTexture))
@@ -646,19 +663,77 @@ public class GameController {
         return GameMessages.SUCCESSFUL_EQUIPMENT_MOVE;
     }
 
-    public void nextTurn() {
+    public String nextTurn() {
         Game.getCurrentGame().nextEmpire();
         if (Game.getCurrentGame().getAllEmpires().indexOf(Game.getCurrentGame().getCurrentEmpire()) == 0) {
             moveAndPatrolTroops();
+            moveBySoldiersMode();
             fights();
             longRangeFights();
-            attackBuildings();
             tunnel();
             updateRates();
             updateThingsWithRate();
             buildingOperations();
             fillEngineerOil();
-            checkEndGame();
+            removeLostEmpire();
+            if (Game.getCurrentGame().getAllEmpires().size() == 1) {
+                Empire winner = Game.getCurrentGame().getAllEmpires().get(0);
+                winner.getOwner().addScore(winner.getResourceAmount("gold"));
+                return "winner : " + winner.getOwner().getNickname();
+            }
+        }
+        return "player " + Game.getCurrentGame().getCurrentEmpire().getOwner().getNickname() + " is playing!";
+    }
+
+    private void moveBySoldiersMode() {
+        for (Empire empire : Game.getCurrentGame().getAllEmpires())
+            for (Person person : empire.getPopulation()) {
+                MapCell position = person.getMapCell();
+                if (person instanceof Soldier && !enemy(person.getPersonOwner(), position)) {
+                    SoldiersDictionary dictionary = ((Soldier) person).getSoldiersDictionary();
+                    if (!dictionary.equals(SoldiersDictionary.ARCHER) &&
+                            !dictionary.equals(SoldiersDictionary.CROSSBOWMAN) &&
+                            !dictionary.equals(SoldiersDictionary.ARABIANBOWS) &&
+                            !dictionary.equals(SoldiersDictionary.HORSE_ARCHER)) {
+                        int x = position.getX();
+                        int y = position.getY();
+                        int size = Game.getCurrentGame().getMapSize();
+                        int moveRange = 0;
+                        if (person.getMode() == 1) moveRange = 2;
+                        else if (person.getMode() == 2) moveRange = 4;
+                        for (int range = 0; range <= moveRange; range++)
+                            for (int i = Math.max(0, x - range); i < Math.min(size, x + range); i++)
+                                for (int j = Math.max(0, y - range); j < Math.min(size, y + range); j++) {
+                                    MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(i, j);
+                                    if (mapCell.getSoldiers().size() != 0 && enemy(empire, mapCell) &&
+                                            routing(position, mapCell, false) != null)
+                                        moveSoldier((Soldier) person, position, mapCell);
+                                }
+                    }
+                }
+            }
+    }
+
+    private void moveSoldier(Soldier person, MapCell origin, MapCell destination) {
+        destination.addPeople(person);
+        person.changePosition(destination);
+        origin.removePeople(person);
+    }
+
+    private boolean enemy(Empire empire, MapCell mapCell) {
+        for (Person person : mapCell.getPeople())
+            if (!person.getPersonOwner().equals(empire))
+                return true;
+        return false;
+    }
+
+    private void removeLostEmpire() {
+        for (int i = 0; i < Game.getCurrentGame().getAllEmpires().size(); i++) {
+            Empire empire = Game.getCurrentGame().getAllEmpires().get(i);
+            if (empire.getHeadquarter().getHp() <= 0) {
+                Game.getCurrentGame().removeEmpire(empire);
+                i--;
+            }
         }
     }
 
@@ -717,7 +792,12 @@ public class GameController {
                                 dictionary.equals(SoldiersDictionary.CROSSBOWMAN) ||
                                 dictionary.equals(SoldiersDictionary.ARABIANBOWS) ||
                                 dictionary.equals(SoldiersDictionary.HORSE_ARCHER)) {
-                            fightInRange(soldier);
+                            if (soldier.getAim() != null)
+                                for (Person person : mapCell.getPeople())
+                                    if (!person.getPersonOwner().equals(Game.getCurrentGame().getCurrentEmpire())) {
+                                        int defensivePower = person instanceof Soldier ? ((Soldier) person).getDefensivePower() : 0;
+                                        person.damagePerson(soldier.getOffensivePower() - defensivePower);
+                                    } else fightInRange(soldier);
                         }
                     }
                 }
@@ -729,36 +809,50 @@ public class GameController {
     private void fightInRange(Soldier soldier) {
         Empire empire = soldier.getPersonOwner();
         SoldiersDictionary dictionary = soldier.getSoldiersDictionary();
-        int range = dictionary.getFireRange();
+        int fireRange = dictionary.getFireRange();
         int x = soldier.getMapCell().getX();
         int y = soldier.getMapCell().getY();
         int size = Game.getCurrentGame().getMapSize();
-        for (int i = Math.min(x - range, 0); i <= Math.max(x + range, size); i++) {
-            for (int j = Math.min(y - range, 0); j < Math.max(y + range, size); j++) {
-                int distance = (int) Math.sqrt(i * i + j * j);
-                if (distance <= range) {
-                    MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
-                    if (mapCell.getPeople() != null) {
-                        for (Person person : mapCell.getPeople()) {
-                            if (!person.getPersonOwner().equals(empire)) {
-                                int defensivePower = person instanceof Soldier ? ((Soldier) person).getDefensivePower() : 0;
-                                person.damagePerson(soldier.getOffensivePower() - defensivePower);
-                                kill(person);
+        for (int range = 0; range <= fireRange; range++)
+            for (int i = Math.max(x - range, 0); i <= Math.min(x + range, size); i++) {
+                for (int j = Math.max(y - range, 0); j < Math.min(y + range, size); j++) {
+                    int distance = (int) Math.sqrt(i * i + j * j);
+                    if (distance <= range) {
+                        MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
+                        if (mapCell.getPeople() != null) {
+                            for (Person person : mapCell.getPeople()) {
+                                if (!person.getPersonOwner().equals(empire)) {
+                                    int defensivePower = person instanceof Soldier ? ((Soldier) person).getDefensivePower() : 0;
+                                    person.damagePerson(soldier.getOffensivePower() - defensivePower);
+                                    return;
+                                }
                             }
                         }
                     }
                 }
             }
-        }
     }
 
-    private void attackBuildings() {
-
-
+    private boolean attackBuilding(Soldier soldier) {
+        int x = soldier.getMapCell().getX();
+        int y = soldier.getMapCell().getY();
+        int size = Game.getCurrentGame().getMapSize();
+        for (int i = Math.max(0, x - 1); i < Math.min(size, x + 1); i++) {
+            for (int j = Math.max(0, y - 1); j < Math.min(size, y + 1); j++) {
+                if (i == x && j == y) continue;
+                MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(i, j);
+                Building building = mapCell.getBuilding();
+                if (building != null && building.getBuildingOwner()!= soldier.getPersonOwner()) {
+                    building.decreaseHp(soldier.getOffensivePower());
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void moveAndPatrolTroops() {
-        for (int i = 0 ;i < Game.getCurrentGame().getToMovePeople().size(); i++) {
+        for (int i = 0; i < Game.getCurrentGame().getToMovePeople().size(); i++) {
             Person person = Game.getCurrentGame().getToMovePeople().get(i);
             if (person.getCurrentDestination() != null) {
                 ArrayList<MapCell> path = routing(person.getMapCell(), person.getCurrentDestination(), false);
@@ -769,31 +863,31 @@ public class GameController {
                     if (path.get(j).getBuilding() instanceof TrapBuilding) {
                         TrapBuilding building = (TrapBuilding) path.get(j).getBuilding();
                         person.damagePerson(building.getDamage());
-                        kill(person);
                     }
                 }
                 goal.addPeople(person);
                 person.changePosition(goal);
                 path.get(0).removePeople(person);
+                i--;
                 if (person.getMapCell().equals(goal)) {
                     if (person.getNextDestination() != null) person.swapDestinations();
                     else {
                         person.setCurrentDestination(null);
                         Game.getCurrentGame().removeMovedPerson(person);
-                        i--;
                     }
                 }
             }
         }
     }
 
-    private void kill(Person person) {
+    private boolean kill(Person person) {
         if (person.getHp() < 0) {
             person.getMapCell().removePeople(person);
-            Game.getCurrentGame().removeMovedPerson(person);
             if (person instanceof Soldier) Game.getCurrentGame().removeAttackingSoldier((Soldier) person);
             person.getPersonOwner().removePerson(person);
+            return true;
         }
+        return false;
     }
 
     private void fights() {
@@ -807,21 +901,19 @@ public class GameController {
                             if (person instanceof Soldier) {
                                 Soldier soldier = (Soldier) person;
                                 int index = 0;
-                                if (otherEmpiresSoldiers.size() != 0) {
+                                if (otherEmpiresSoldiers.size() != 0)
                                     index = new Random().nextInt(otherEmpiresSoldiers.size());
-                                }
                                 if (person.getPersonOwner().equals(empire)) thisEmpireSoldiers.add(soldier);
                                 else otherEmpiresSoldiers.add(index, soldier);
                             }
                         }
                         for (int j = 0; j < thisEmpireSoldiers.size(); j++) {
-                            if (otherEmpiresSoldiers.size() == j) {
-                                break;
-                            }
-                            int damage = thisEmpireSoldiers.get(j).getDefensivePower() -
-                                    otherEmpiresSoldiers.get(j).getDefensivePower();
-                            otherEmpiresSoldiers.get(j).damagePerson(damage);
-                            kill(otherEmpiresSoldiers.get(j));
+                            int enemyIndex = j;
+                            Soldier soldier = thisEmpireSoldiers.get(j);
+                            if (attackBuilding(soldier)) continue;
+                            if (otherEmpiresSoldiers.size() <= j) enemyIndex = j - otherEmpiresSoldiers.size();
+                            Soldier enemy = otherEmpiresSoldiers.get(enemyIndex);
+                            enemy.damagePerson(soldier.getOffensivePower() - enemy.getDefensivePower());
                         }
                     }
                 }
@@ -919,12 +1011,8 @@ public class GameController {
         owner.changeResourceAmount(output, rate);
     }
 
-    private void checkEndGame() {
-
-    }
-
     private boolean BFS(MapCell origin, MapCell destination, HashMap<MapCell, MapCell> predecessor, boolean isTunneler) {
-        LinkedList<MapCell> queue = new LinkedList<MapCell>();
+        LinkedList<MapCell> queue = new LinkedList<>();
         ArrayList<MapCell> visited = new ArrayList<>();
         visited.add(origin);
         queue.add(origin);
@@ -932,7 +1020,7 @@ public class GameController {
             MapCell currentNode = queue.remove();
             int x = currentNode.getX();
             int y = currentNode.getY();
-            ArrayList<MapCell> neighbors = new ArrayList<MapCell>() {
+            ArrayList<MapCell> neighbors = new ArrayList<>() {
                 {
                     int lowerBound = 0;
                     int upperBound = Game.getCurrentGame().getMapSize();
@@ -956,7 +1044,7 @@ public class GameController {
 
     private boolean checkNode(int x, int y, MapCell nextNode, boolean isTunneler) {
         Building nextBuilding = nextNode.getBuilding();
-        if (nextNode.getBuilding() != null && !isTunneler) {
+        if (nextBuilding != null && !isTunneler) {
             BuildingsDictionary nextBuildingDictionary = nextBuilding.getBuildingDictionary();
             if ((nextBuildingDictionary != BuildingsDictionary.SMALL_STONE_GATEHOUSE &&
                     nextBuildingDictionary != BuildingsDictionary.LARGE_STONE_GATEHOUSE) ||
@@ -994,7 +1082,7 @@ public class GameController {
 
     public GameMessages startGame(Matcher matcher) {
         String mapName = matcher.group("mapName").replaceAll("\"", "");
-        if (Player.getCurrentPlayer().getMapByName(mapName) == null)
+        if (Map.getMapByName(mapName) == null)
             return GameMessages.MAP_NOT_EXIST;
         String allUsers = removeQuotation(matcher.group("allUsers"));
         String[] players;
@@ -1003,7 +1091,7 @@ public class GameController {
         if (!validPlayers(players))
             return GameMessages.USER_NOT_EXIST;
         ArrayList<Empire> allEmpires = setEmpireForPlayers(players);
-        int colorNumbers = Player.getCurrentPlayer().getMapByName(mapName).getAllColors().size();
+        int colorNumbers = Map.getMapByName(mapName).getAllColors().size();
         if (colorNumbers != allEmpires.size())
             return GameMessages.NOT_ENOUGH_HEAD_QUARTER;
         new Game(allEmpires, mapName);
@@ -1033,10 +1121,8 @@ public class GameController {
     public GameMessages sendEngineerToMachine() {
         ArrayList<Person> selectedUnit = Game.getCurrentGame().getSelectedUnit();
         if (selectedUnit == null || selectedUnit.size() == 0) return GameMessages.NO_SELECTED_UNIT;
-        for (Person person : selectedUnit) {
-            if (!(person instanceof Engineer))
-                return GameMessages.NOT_ENGINEER;
-        }
+        for (Person person : selectedUnit)
+            if (!(person instanceof Engineer)) return GameMessages.NOT_ENGINEER;
         MapCell cell = selectedUnit.get(0).getMapCell();
         Machine machine = cell.getMachine();
         if (machine == null) return GameMessages.NO_MACHINE;
