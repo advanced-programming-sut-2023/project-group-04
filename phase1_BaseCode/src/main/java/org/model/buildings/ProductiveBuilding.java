@@ -32,7 +32,7 @@ public class ProductiveBuilding extends Building {
     }
 
     public String getOutputResource() {
-        return productiveBuildingDictionary.getInputResource();
+        return outputResource;
     }
 
     public ArrayList<String> getGroundTexture() {

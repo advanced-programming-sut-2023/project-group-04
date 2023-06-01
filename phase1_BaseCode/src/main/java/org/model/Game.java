@@ -50,14 +50,22 @@ public class Game {
             for (int j = 0; j < mapSize; j++) {
                 MapTile tile = mapTemplate.getMapTile(i, j);
                 MapCell mapCell = map[i][j] = new MapCell(i, j, tile.getTexture(), tile.getTree());
+//                if (j > 1 && map[i][j-1].getBuilding() != null) {
+//                    if (map[i][j-1].getBuilding().getBuildingDictionary().equals(BuildingsDictionary.HEAD_QUARTER)) {
+//                        Empire empire = map[i][j - 1].getBuilding().getBuildingOwner();
+//
+//                    }
+//                }
                 if (tile.getOwnerColor() != null) {
                     Empire empire = allEmpires.get(mapTemplate.getAllColors().indexOf(tile.getOwnerColor()));
                     Building building = null;
                     if (tile.isHeadQuarter()) {
                         building = new Building(empire, BuildingsDictionary.HEAD_QUARTER, mapCell);
                         empire.setHeadquarter(building);
+                        mapCell.setBuilding(building);
                         for (int k = 0; k < 15; k++) {
-                            Person person = new Person(empire,mapCell);
+                            Person person = new Person(empire, mapCell);
+                            mapCell.addPeople(person);
                             empire.addPerson(person);
                         }
                     } else if (tile.getBuilding() != null) {

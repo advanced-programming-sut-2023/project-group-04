@@ -4,10 +4,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum MapCommands {
-    CHANGE_VIEW("\\s*change\\s+map\\s+view\\s+(?=.*(?<up>up) (?<upNumber>\\d*))?" +
-            "(?=.*(?<down>down) (?<downNumber>\\d*))?(?=.*(?<right>right) (?<rightNumber>\\d*))?" +
-            "(?=.*(?<left>left) (?<leftNumber>\\d*))?(\\s+(up (\\d*))|(down (\\d*))|" +
-            "(right (\\d*))|(left (\\d*))?){0,4}\\s*/"),
+
+
+    CHANGE_VIEW("\\s*change\\s+map\\s+view\\s+(?:(?<up>(up\\s*)(?<upNumber>\\d+)?(\\s*))?()|(?<down>(down\\s*)" +
+            "(?<downNumber>\\d+)?(\\s*))?()|" +
+            "(?<right>(right\\s*)(?<rightNumber>\\d+)?(\\s*))?()|(?<left>(left\\s*)(?<leftNumber>\\d+)?(\\s*))?()){1,}"),
     SHOW_DETAILS("\\s*show\\s+details\\s+-x\\s+(?<xAsis>\\d+)\\s+-y\\s+(?<yAsis>\\d+)\\s*"),
     BACK("\\s*back\\s*"),
     ;

@@ -13,7 +13,7 @@ public class Empire {
     private int foodRate;
     private int taxRate;
     private int fearRate;
-    private final ArrayList<Person> population = new ArrayList<>();
+    private final ArrayList<Person> population;
     private final HashMap<String, Integer> popularity;
     private final ArrayList<StorageBuilding> allStockPiles;
     private final HashMap<String, Integer> resources;
@@ -28,9 +28,10 @@ public class Empire {
     public Empire(Player owner) {
         this.owner = owner;
         this.fearRate = 0;
-        this.taxRate = -100;
+        this.taxRate = 0;
         this.foodRate = 0;
         this.popularity = new HashMap<>();
+        this.population = new ArrayList<>();
         initializePopularity();
         this.resources = new HashMap<>();
         initializeResource();
@@ -67,7 +68,6 @@ public class Empire {
         String[] resources = {"wheat", "flour", "hops", "ale", "stone", "iron", "wood", "pitch", "gold"};
         for (String resource : resources) this.resources.put(resource, 40);
         this.resources.put("gold", 5000);
-        // TODO: 5/14/2023 change amount of gold
     }
 
     private void initializeFood() {
@@ -246,10 +246,6 @@ public class Empire {
 
     public void removePerson(Person person) {
         this.population.remove(person);
-    }
-
-    public void removePerson(int index) {
-        this.population.remove(index);
     }
 
     public ArrayList<Person> getPopulation() {

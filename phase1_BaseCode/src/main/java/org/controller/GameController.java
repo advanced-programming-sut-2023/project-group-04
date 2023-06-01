@@ -44,9 +44,9 @@ public class GameController {
     }
 
     public String showPopularity() {
-        int popularitySum = 0;
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         HashMap<String, Integer> popularityFactors = empire.getPopularity();
+        int popularitySum = 0;
         for (String key : popularityFactors.keySet()) {
             popularitySum += popularityFactors.get(key);
         }
@@ -564,8 +564,11 @@ public class GameController {
             empire.removePerson(person);
             mapCell.removePeople(person);
             Person newPerson = new Person(empire, mapCell);
-            mapCell.addPeople(newPerson);
+            MapCell headquarterPos = empire.getHeadquarter().getMapCell();
+            MapCell camp = Game.getCurrentGame().getMapCellByAddress(headquarterPos.getX(), headquarterPos.getY() + 1);
+            camp.addPeople(newPerson);
             empire.addPerson(newPerson);
+
         }
         Game.getCurrentGame().selectUnit(null);
         return GameMessages.SUCCESSFUL_DISBAND;
@@ -743,9 +746,8 @@ public class GameController {
                 int people = Math.min(empire.getFreeSpace(), 20);
                 MapCell headquarterPos = empire.getHeadquarter().getMapCell();
                 MapCell camp = Game.getCurrentGame().getMapCellByAddress(headquarterPos.getX(), headquarterPos.getY() + 1);
-                for (int i = 0; i < people; i++) {
-                    camp.addPeople(new Person(empire, camp));
-                }
+                for (int i = 0; i < people; i++) camp.addPeople(new Person(empire, camp));
+                empire.changeFreeSpace(-1 * people);
             }
         }
     }
@@ -943,12 +945,13 @@ public class GameController {
                 goal.addPeople(person);
                 person.changePosition(goal);
                 path.get(0).removePeople(person);
-                i--;
-                if (person.getMapCell().equals(goal)) {
+//                i--;
+                if (person.getMapCell().equals(person.getCurrentDestination())) {
                     if (person.getNextDestination() != null) person.swapDestinations();
                     else {
                         person.setCurrentDestination(null);
                         Game.getCurrentGame().removeMovedPerson(person);
+                        i--;
                     }
                 }
             }
@@ -982,9 +985,9 @@ public class GameController {
                                 else otherEmpiresSoldiers.add(index, soldier);
                             }
                         }
-                        for (int j = 0; j < thisEmpireSoldiers.size(); j++) {
+                        for (int j = 0; j < otherEmpiresSoldiers.size(); j++) {
                             int enemyIndex = j;
-                            Soldier soldier = thisEmpireSoldiers.get(j);
+                            Soldier soldier = otherEmpiresSoldiers.get(j);
                             if (attackBuilding(soldier)) continue;
                             if (otherEmpiresSoldiers.size() <= j) enemyIndex = j - otherEmpiresSoldiers.size();
                             Soldier enemy = otherEmpiresSoldiers.get(enemyIndex);
@@ -1078,7 +1081,6 @@ public class GameController {
     }
 
     private void buildingProduction(String input, String output, int rate, Empire owner) {
-        ArrayList<StorageBuilding> storageBuildings;
         if (input != null) {
             if (owner.getAvailableResource(input) < 1) return;
             owner.changeResourceAmount(input, -1);
@@ -1098,7 +1100,7 @@ public class GameController {
             ArrayList<MapCell> neighbors = new ArrayList<>() {
                 {
                     int lowerBound = 0;
-                    int upperBound = Game.getCurrentGame().getMapSize();
+                    int upperBound = Game.getCurrentGame().getMapSize() - 1;
                     if (x != upperBound) add(Game.getCurrentGame().getMapCellByAddress(x + 1, y));
                     if (x != lowerBound) add(Game.getCurrentGame().getMapCellByAddress(x - 1, y));
                     if (y != upperBound) add(Game.getCurrentGame().getMapCellByAddress(x, y + 1));

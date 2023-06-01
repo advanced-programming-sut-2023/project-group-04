@@ -15,7 +15,7 @@ public class MapController {
     public String showMap(int xPos, int yPos) {
         Game currentGame = Game.getCurrentGame();
         MapCell[][] map = currentGame.getMap();
-        if (xPos > map.length - 8 || yPos > map.length - 8)
+        if (xPos < 0 || yPos < 0 ||xPos > map.length - 8 || yPos > map.length - 8)
             return GameMessages.INVALID_POSITION.getMessage();
         currentGame.setMapFirstX(xPos);
         currentGame.setMapFirstY(yPos);
@@ -86,7 +86,7 @@ public class MapController {
     }
 
     private int getXPos(Matcher matcher) {
-        int x = 0;
+        int x = Game.getCurrentGame().getMapFirstX();
         if (matcher.group("right") != null) {
             if (matcher.group("rightNumber") != null)
                 x += Integer.parseInt(matcher.group("rightNumber"));
@@ -101,7 +101,7 @@ public class MapController {
     }
 
     private int getYPos(Matcher matcher) {
-        int y = 0;
+        int y = Game.getCurrentGame().getMapFirstY();
         if (matcher.group("down") != null) {
             if (matcher.group("downNumber") != null)
                 y += Integer.parseInt(matcher.group("downNumber"));
@@ -141,7 +141,7 @@ public class MapController {
             }
         }
         if (building != null)
-            mapDetails += "<<Building>>:\n" + building.getName() + ": owner: " + building.getBuildingOwner()
+            mapDetails += "<<Building>>:\n" + building.getName() + ": owner: " + building.getBuildingOwner().getOwner().getNickname()
                     + " ,building hp: {" + building.getCurrentHp() + "}";
         return mapDetails;
     }
@@ -171,23 +171,23 @@ public class MapController {
     private HashMap<String, Integer> getAllSoldiersType() {
         HashMap<String, Integer> soldiers = new HashMap<>();
         soldiers.put("archer", 0);
-        soldiers.put("crossbowman", 0);
+        soldiers.put("crossbow man", 0);
         soldiers.put("spearman", 0);
-        soldiers.put("pikeman", 0);
-        soldiers.put("maceman", 0);
+        soldiers.put("pike man", 0);
+        soldiers.put("mace man", 0);
         soldiers.put("swordsman", 0);
         soldiers.put("knight", 0);
         soldiers.put("tunneler", 0);
-        soldiers.put("ladderman", 0);
+        soldiers.put("ladder man", 0);
         soldiers.put("engineer", 0);
         soldiers.put("blackmonks", 0);
-        soldiers.put("arabianbows", 0);
+        soldiers.put("arabian bow", 0);
         soldiers.put("slave", 0);
         soldiers.put("slinger", 0);
         soldiers.put("assassin", 0);
-        soldiers.put("horse_archer", 0);
-        soldiers.put("arabian_swordsman", 0);
-        soldiers.put("fire_thrower", 0);
+        soldiers.put("horse archer", 0);
+        soldiers.put("arabian swordsman", 0);
+        soldiers.put("fire thrower", 0);
         return soldiers;
     }
 }
