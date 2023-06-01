@@ -4,22 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="completing game!">
-      <change beforePath="$PROJECT_DIR$/../.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_1_2023_5_55_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_1_2023_5_55_PM__Changes_.xml" afterDir="false" />
+    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="completed phase one game!">
+      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MAPS.json" beforeDir="false" afterPath="$PROJECT_DIR$/MAPS.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PLAYERS.json" beforeDir="false" afterPath="$PROJECT_DIR$/PLAYERS.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/STAY_LOGIN.json" beforeDir="false" afterPath="$PROJECT_DIR$/STAY_LOGIN.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/MapController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/MapController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Empire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/Empire.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/buildings/ProductiveBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/buildings/ProductiveBuilding.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/MapCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/MapCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +19,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="module-info" />
       </list>
     </option>
   </component>
@@ -47,6 +37,9 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/MapCommands.java" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -59,26 +52,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/IdeaProjects/project-group-04/phase1_BaseCode&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TODO_SCOPE": "All Places",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "E:/IdeaProjects/project-group-04/phase1_BaseCode/src/main/java/org",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.keymap"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "directory",
+      "module"
     ]
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\IdeaProjects\project-group-04\phase1_BaseCode\src\main\java\org" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.Main" />
@@ -117,6 +115,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1683198305540</updated>
+      <workItem from="1685599343516" duration="2782000" />
     </task>
     <task id="LOCAL-00001" summary="game controller update">
       <created>1683454838020</created>
@@ -314,8 +313,18 @@
       <option name="project" value="LOCAL" />
       <updated>1684101844939</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="completed phase one game!">
+      <created>1685596983401</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1685596983401</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -347,7 +356,8 @@
     <MESSAGE value="update soldiers name..." />
     <MESSAGE value="stay login added!" />
     <MESSAGE value="completing game!" />
-    <option name="LAST_COMMIT_MESSAGE" value="completing game!" />
+    <MESSAGE value="completed phase one game!" />
+    <option name="LAST_COMMIT_MESSAGE" value="completed phase one game!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -387,7 +397,7 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/phase1_BaseCode$RegistrationTest_emailFormat.ic" NAME="RegistrationTest.emailFormat Coverage Results" MODIFIED="1683501851709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/phase1_BaseCode$RegistrationTest.ic" NAME="RegistrationTest Coverage Results" MODIFIED="1684832849667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/phase1_BaseCode$RegistrationTest_emailFormat.ic" NAME="RegistrationTest.emailFormat Coverage Results" MODIFIED="1683501851709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
