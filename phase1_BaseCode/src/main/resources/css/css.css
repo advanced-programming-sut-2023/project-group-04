@@ -1,0 +1,13 @@
+.control-bar {
+    -fx-background-image: url("../img/controlBar/menu.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 1540px 250px;
+    -fx-min-height: 250px;
+    -fx-translate-y: 625;
+}
+
+.test {
+    -fx-min-height: 800px;
+    -fx-min-width: 1540px;
+    -fx-background-color: rgba(186, 231, 250, 0.34);
+}

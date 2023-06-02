@@ -6,9 +6,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<Pane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="FXML.GameMenu"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+            fx:controller="org.view.gameView.GameMenu"
+            stylesheets="@../css/css.css">
+    <VBox styleClass="test">
+        <VBox fx:id="game"/>
+        <VBox styleClass="control-bar" fx:id="controlBar"/>
+    </VBox>
+</Pane>
