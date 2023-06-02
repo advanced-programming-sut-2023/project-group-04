@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="920.0" prefWidth="1760.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.view.SignUpMenu">
+   <children>
+      <ImageView fitHeight="920.0" fitWidth="1760.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image requestedHeight="920" requestedWidth="1760" url="@../images/signupMenuBackground.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7f7f7" height="829.0" layoutX="129.0" layoutY="55.0" opacity="0.73" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" width="737.0" />
+      <TextField layoutX="377.0" layoutY="90.0" prefHeight="50.0" prefWidth="224.0" promptText="username">
+         <font>
+            <Font size="23.0" />
+         </font></TextField>
+      <PasswordField layoutX="377.0" layoutY="170.0" prefHeight="50.0" prefWidth="226.0" promptText="password">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </PasswordField>
+      <TextField layoutX="377.0" layoutY="250.0" prefHeight="50.0" prefWidth="224.0" promptText="nickname">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="377.0" layoutY="330.0" prefHeight="50.0" prefWidth="224.0" promptText="email">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="377.0" layoutY="170.0" prefHeight="50.0" prefWidth="224.0" promptText="showPassword" visible="false">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </TextField>
+      <CheckBox layoutX="196.0" layoutY="407.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="206.0" text="Slogan" textFill="RED">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </CheckBox>
+      <TextField layoutX="377.0" layoutY="410.0" prefHeight="50.0" prefWidth="224.0" promptText="slogan">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>

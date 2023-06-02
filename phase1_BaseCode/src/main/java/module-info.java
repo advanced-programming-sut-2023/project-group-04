@@ -4,6 +4,9 @@ module phase1.BaseCode {
     requires javafx.fxml;
     requires org.json;
     requires json.simple;
+    requires com.google.gson;
+    requires passay;
+    requires java.desktop;
 
 
     opens org.view to javafx.fxml;

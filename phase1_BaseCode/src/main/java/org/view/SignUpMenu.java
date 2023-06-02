@@ -1,11 +1,16 @@
 package org.view;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import org.view.CommandsEnum.SignUpCommands;
 import org.view.CommandsEnum.SignUpMessages;
 
 import java.util.regex.Matcher;
 
-public class SignUpMenu {
+public class SignUpMenu extends Application {
 
     public void run() throws Exception {
         Matcher matcher;
@@ -82,5 +87,13 @@ public class SignUpMenu {
             else if (input.equals("NO")) return false;
             else System.out.println("Invalid command!");
         }
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        AnchorPane anchorPane = FXMLLoader.load(SignUpMenu.class.getResource("/fxml/signupMenu.fxml"));
+        Scene scene = new Scene(anchorPane);
+        stage.setScene(scene);
+        stage.show();
     }
 }

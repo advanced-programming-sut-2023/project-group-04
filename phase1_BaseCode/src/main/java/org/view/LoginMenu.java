@@ -1,11 +1,16 @@
 package org.view;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import org.view.CommandsEnum.SignUpCommands;
 import org.view.CommandsEnum.SignUpMessages;
 
 import java.util.regex.Matcher;
 
-public class LoginMenu {
+public class LoginMenu extends Application {
 
     public void run() throws Exception {
         boolean loginStatus = Menu.getLoginController().runProgram();
@@ -59,5 +64,13 @@ public class LoginMenu {
                 }
             }
         }
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        AnchorPane anchorPane = FXMLLoader.load(LoginMenu.class.getResource("/fxml/loginMenu.fxml"));
+        Scene scene = new Scene(anchorPane);
+        stage.setScene(scene);
+        stage.show();
     }
 }
