@@ -30,3 +30,7 @@ Button:hover {
     -fx-text-fill: purple;
     box-shadow: 0 12px 16px 0 rgb(145, 13, 145), 0 17px 50px 0 rgb(141, 8, 141);
 }
+
+ChoiceBox {
+    -fx-background-color: black;
+}

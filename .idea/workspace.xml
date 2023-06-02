@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="update for rebase">
-      <change afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/css/loginMenuStyle.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/loginMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/signupMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="loginMenu.fxml &amp; signupMenu.fxml added!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/LoginMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/SignUpMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/SignUpMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/css/loginMenuStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/css/loginMenuStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/signupMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/signupMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682973681030</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="loginMenu.fxml &amp; signupMenu.fxml added!">
+      <created>1685713085856</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1685713085856</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,7 +190,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add some regexes to GameCommands" />
     <MESSAGE value="complete GameCommands" />
-    <option name="LAST_COMMIT_MESSAGE" value="complete GameCommands" />
+    <MESSAGE value="loginMenu.fxml &amp; signupMenu.fxml added!" />
+    <option name="LAST_COMMIT_MESSAGE" value="loginMenu.fxml &amp; signupMenu.fxml added!" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
