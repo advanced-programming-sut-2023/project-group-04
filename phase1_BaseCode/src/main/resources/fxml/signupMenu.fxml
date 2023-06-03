@@ -57,8 +57,8 @@
                 <Font size="23.0" />
             </font>
         </TextField>
-        <CheckBox fx:id="randomSlogan" disable="true" layoutX="376.0" layoutY="468.0" mnemonicParsing="false" text="Random" />
-        <Button fx:id="submit" layoutX="427.0" layoutY="490.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="103.0" text="Submit">
+        <CheckBox fx:id="randomSlogan" disable="true" layoutX="376.0" layoutY="468.0" mnemonicParsing="false" text="Random" onMouseClicked="#getRandomSlogan" />
+        <Button fx:id="submit" layoutX="427.0" layoutY="490.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="103.0" text="Submit" onMouseClicked="#submitUser">
             <font>
                 <Font size="23.0" />
             </font>
@@ -72,12 +72,12 @@
                 </FXCollections>
             </items>
         </ChoiceBox>
-        <TextField fx:id="securityAnswer" editable="false" layoutX="371.0" layoutY="580.0" prefHeight="50.0" prefWidth="224.0" promptText="security answer" visible="false">
+        <TextField fx:id="securityAnswer" layoutX="371.0" layoutY="580.0" prefHeight="50.0" prefWidth="224.0" promptText="security answer" visible="false">
             <font>
                 <Font size="23.0" />
             </font>
         </TextField>
-        <Button fx:id="submitAnswer" layoutX="427.0" layoutY="642.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="103.0" text="Submit Answer" visible="false" />
+        <Button fx:id="submitAnswer" layoutX="427.0" layoutY="642.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="103.0" text="Submit Answer" visible="false" onMouseClicked="#generateCaptcha1" />
         <ImageView fx:id="captchaImage" fitHeight="60.0" fitWidth="160.0" layoutX="405.0" layoutY="695.0" pickOnBounds="true" preserveRatio="true" visible="false">
             <image>
                 <Image requestedHeight="60" requestedWidth="160" url="@../images/blank.jpg" />

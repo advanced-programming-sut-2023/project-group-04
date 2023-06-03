@@ -1,8 +1,10 @@
 package org.controller;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import org.model.ASCIIArtGenerator;
@@ -19,9 +21,8 @@ import org.view.SignUpMenu;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.regex.Matcher;
-import javafx.scene.image.ImageView;
 
-import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 
 
 import static org.view.CommandsEnum.SignUpMessages.*;
@@ -41,12 +42,23 @@ public class LoginController {
     public CheckBox chooseSlogan;
     public TextField slogan;
     public CheckBox randomSlogan;
+    public TextField nickname;
+    public ChoiceBox securityQuestion;
+    public TextField securityAnswer;
+    public Button submitAnswer;
+    public ImageView captchaImage;
+    public TextField captcha;
+    public Button submitCaptcha;
+    public ImageView change;
 
     @FXML
     public void initialize() {
         username.textProperty().addListener((observable, oldText, newText) -> {
             if (!isUsernameFormatCorrect(newText)) {
                 usernameError.setText(SignUpMessages.INCORRECT_USERNAME_FORMAT.getMessage());
+                username.setStyle("-fx-border-color: red");
+            } else if (Player.getPlayerByUsername(newText) != null) {
+                usernameError.setText(SignUpMessages.USER_EXIST.getMessage());
                 username.setStyle("-fx-border-color: red");
             } else {
                 usernameError.setText("");
@@ -60,8 +72,7 @@ public class LoginController {
                 passwordError.setText(signUpMessages.getMessage());
                 password.setStyle("-fx-border-color: red");
                 showPassword.setStyle("-fx-border-color: red");
-            }
-            else {
+            } else {
                 passwordError.setText("");
                 password.setStyle("-fx-border-color: purple");
                 showPassword.setStyle("-fx-border-color: purple");
@@ -72,11 +83,16 @@ public class LoginController {
             if (signUpMessages.equals(SignUpMessages.WITHOUT_ERROR)) {
                 emailError.setText("");
                 email.setStyle("-fx-border-color: purple");
-            }
-            else {
+            } else {
                 emailError.setText(signUpMessages.getMessage());
                 email.setStyle("-fx-border-color: red");
             }
+        }));
+        securityAnswer.textProperty().addListener(((observableValue, s, t1) -> {
+            if (t1.length() > 0) {
+                submitAnswer.setVisible(true);
+            }
+            else submitAnswer.setVisible(false);
         }));
     }
 
@@ -351,8 +367,7 @@ public class LoginController {
                 passwordError.setText(signUpMessages.getMessage());
                 password.setStyle("-fx-border-color: red");
                 showPassword.setStyle("-fx-border-color: red");
-            }
-            else {
+            } else {
                 passwordError.setText("");
                 password.setStyle("-fx-border-color: purple");
                 showPassword.setStyle("-fx-border-color: purple");
@@ -371,8 +386,7 @@ public class LoginController {
         if (randomPassword.isSelected()) {
             String password = generateRandomPassword();
             this.password.setText(password);
-        }
-        else {
+        } else {
             this.password.setText("");
         }
     }
@@ -381,6 +395,63 @@ public class LoginController {
         if (chooseSlogan.isSelected()) {
             slogan.setDisable(false);
             randomSlogan.setDisable(false);
+        } else {
+            slogan.setDisable(true);
+            slogan.setText("");
+            randomSlogan.setDisable(true);
+            randomSlogan.setSelected(false);
         }
+    }
+
+    public void getRandomSlogan(MouseEvent mouseEvent) {
+        String slogan = giveRandomSlogan();
+        if (randomSlogan.isSelected()) {
+            this.slogan.setText(slogan);
+        } else {
+            this.slogan.setText("");
+        }
+    }
+
+    public void submitUser(MouseEvent mouseEvent) {
+        String username = this.username.getText();
+        String password = this.password.getText();
+        String nickname = this.nickname.getText();
+        String email = this.email.getText();
+        String slogan = this.slogan.getText();
+        if (username != null && password != null && nickname != null && email != null
+                && isUsernameFormatCorrect(username) && Player.getPlayerByUsername(username) == null
+                && checkPassword(password).equals(PASSWORD_STRONG) && checkEmailErrors(email).equals(WITHOUT_ERROR)) {
+            register(username, password, nickname, slogan, email);
+        }
+    }
+
+    private void register(String username, String password, String nickname, String slogan, String email) {
+        securityQuestion.setVisible(true);
+        final String[] question = {""};
+        securityQuestion.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                question[0] = securityQuestion.getValue().toString();
+                securityAnswer.setVisible(true);
+            }
+        });
+    }
+
+    public void generateCaptcha1(MouseEvent mouseEvent) {
+        int fileNumber = getFileNumber();
+        captchaImage.setImage(new Image(LoginController.class.getResource("/images/captcha/" + fileNumber + ".png").toExternalForm()));
+        captchaImage.setVisible(true);
+        captcha.setVisible(true);
+        submitCaptcha.setVisible(true);
+        change.setVisible(true);
+    }
+
+    private int getFileNumber() {
+        int[] fileNumbers = {1181, 1381, 1491, 1722, 1959, 2163, 2177, 2723, 2785, 3541, 3847, 3855, 3876, 3967, 4185,
+                            4310, 4487, 4578, 4602, 4681, 4924, 5326, 5463, 5771, 5849, 6426, 6553, 6601, 6733, 6960,
+                            7415, 7609, 7755, 7825, 7905, 8003, 8010, 8368, 8455, 8506, 8555, 8583, 8692, 8776, 8972,
+                            8996, 9061, 9386, 9582, 9633};
+        int random = (int)(Math.random()*(50));
+        return fileNumbers[random];
     }
 }

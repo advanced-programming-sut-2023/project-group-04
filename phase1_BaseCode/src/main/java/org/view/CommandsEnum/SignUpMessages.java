@@ -27,7 +27,7 @@ public enum SignUpMessages {
     WITHOUT_ERROR("Password haven't any error!"),
     PASSWORD_INCORRECT_FORMAT("Password format is incorrect!"),
     USER_NOT_FOUND("User not found!"),
-    ;
+    USER_EXIST("A user with this username already exists!");
 
     private final String message;
 
