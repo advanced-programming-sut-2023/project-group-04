@@ -1,12 +1,25 @@
 package org.view;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import org.view.CommandsEnum.GameMessages;
 import org.view.CommandsEnum.MainMenuCommands;
 
 import java.util.regex.Matcher;
 
-public class MainMenu {
+public class MainMenu extends Application {
     public MainMenu() {
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        AnchorPane anchorPane = FXMLLoader.load(MainMenu.class.getResource("/fxml/mainMenu.fxml"));
+        Scene scene = new Scene(anchorPane);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void run() throws Exception {
