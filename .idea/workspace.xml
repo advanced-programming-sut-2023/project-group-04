@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="login fxml and signup fxml updated!">
-      <change afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/css/mainMenuStyle.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/mainMenu.fxml" afterDir="false" />
+    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="MainMenu style added!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/signupMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/signupMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,34 +56,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "AbolfazlSheikhha",
-    "last_opened_file_path": "E:/IdeaProjects/project-group-04/phase1_BaseCode",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;AbolfazlSheikhha&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/IdeaProjects/project-group-04/phase1_BaseCode&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "PostgreSQL"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;PostgreSQL&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\yousef\Documents\GitHub\project-group-04\phase1_BaseCode\src\main\java\org\view\CommandsEnum" />
       <recent name="D:\code\JAVA language\apProject\project-group-04" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainMenu">
+  <component name="RunManager" selected="Application.SignUpMenu">
     <configuration name="LoginMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.view.LoginMenu" />
       <module name="phase1" />
@@ -125,9 +125,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainMenu" />
         <item itemvalue="Application.SignUpMenu" />
         <item itemvalue="Application.LoginMenu" />
+        <item itemvalue="Application.MainMenu" />
       </list>
     </recent_temporary>
   </component>
@@ -143,6 +143,7 @@
       <workItem from="1681934274355" duration="23000" />
       <workItem from="1682920646113" duration="1194000" />
       <workItem from="1682965005844" duration="4535000" />
+      <workItem from="1685783287894" duration="5439000" />
     </task>
     <task id="LOCAL-00001" summary="complete GameCommands">
       <created>1682973681030</created>
@@ -165,7 +166,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685742876956</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="MainMenu style added!">
+      <created>1685751549497</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1685751549497</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,7 +222,8 @@
     <MESSAGE value="complete GameCommands" />
     <MESSAGE value="loginMenu.fxml &amp; signupMenu.fxml added!" />
     <MESSAGE value="login fxml and signup fxml updated!" />
-    <option name="LAST_COMMIT_MESSAGE" value="login fxml and signup fxml updated!" />
+    <MESSAGE value="MainMenu style added!" />
+    <option name="LAST_COMMIT_MESSAGE" value="MainMenu style added!" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

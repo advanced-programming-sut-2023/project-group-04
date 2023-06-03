@@ -11,4 +11,6 @@ module phase1.BaseCode {
 
     opens org.view to javafx.fxml;
     exports org.view;
+    opens org.controller to javafx.fxml;
+    exports org.controller;
 }

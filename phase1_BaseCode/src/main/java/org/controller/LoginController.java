@@ -1,5 +1,10 @@
 package org.controller;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import org.model.ASCIIArtGenerator;
 import org.model.Player;
 import org.model.map.Map;
@@ -14,10 +19,66 @@ import org.view.SignUpMenu;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.regex.Matcher;
+import javafx.scene.image.ImageView;
+
+import javafx.scene.control.TextField;
+
 
 import static org.view.CommandsEnum.SignUpMessages.*;
 
 public class LoginController {
+
+    public TextField username;
+    public PasswordField password;
+    public TextField showPassword;
+    public Text usernameError;
+    public Text passwordError;
+    public ImageView showPasswordIcon;
+    public ImageView hidePassword;
+    public TextField email;
+    public Text emailError;
+    public CheckBox randomPassword;
+    public CheckBox chooseSlogan;
+    public TextField slogan;
+    public CheckBox randomSlogan;
+
+    @FXML
+    public void initialize() {
+        username.textProperty().addListener((observable, oldText, newText) -> {
+            if (!isUsernameFormatCorrect(newText)) {
+                usernameError.setText(SignUpMessages.INCORRECT_USERNAME_FORMAT.getMessage());
+                username.setStyle("-fx-border-color: red");
+            } else {
+                usernameError.setText("");
+                username.setStyle("-fx-border-color: purple");
+            }
+        });
+        password.textProperty().addListener(((observableValue, oldText, newText) -> {
+            SignUpMessages signUpMessages = checkPassword(newText);
+            showPassword.setText(newText);
+            if (!signUpMessages.equals(SignUpMessages.PASSWORD_STRONG)) {
+                passwordError.setText(signUpMessages.getMessage());
+                password.setStyle("-fx-border-color: red");
+                showPassword.setStyle("-fx-border-color: red");
+            }
+            else {
+                passwordError.setText("");
+                password.setStyle("-fx-border-color: purple");
+                showPassword.setStyle("-fx-border-color: purple");
+            }
+        }));
+        email.textProperty().addListener(((observableValue, oldText, newText) -> {
+            SignUpMessages signUpMessages = checkEmailErrors(newText);
+            if (signUpMessages.equals(SignUpMessages.WITHOUT_ERROR)) {
+                emailError.setText("");
+                email.setStyle("-fx-border-color: purple");
+            }
+            else {
+                emailError.setText(signUpMessages.getMessage());
+                email.setStyle("-fx-border-color: red");
+            }
+        }));
+    }
 
     public String SignUp(Matcher matcher, String input) {
         String username = matcher.group("username").replaceAll("\"", "");
@@ -92,13 +153,9 @@ public class LoginController {
         if (slogan == "" && input.contains("-s")) return EMPTY_SLOGAN;
         if (username == null || password == null || email == null || nickname == null) return EMPTY_FIELD;
         else if (!isUsernameFormatCorrect(username)) return INCORRECT_USERNAME_FORMAT;
-        else if (checkPassword(password, passwordConfirmation).equals(PASSWORD_STRONG)) {
+        else if (checkPassword(password).equals(PASSWORD_STRONG)) {
         } else
-            return checkPassword(password, passwordConfirmation);
-        if (checkEmailExistence(email))
-            return EXISTENCE_EMAIL;
-        else if (!email.matches("[a-zA-Z0-9_.]+@[a-zA-Z0-9_.]+\\.[a-zA-Z0-9_.]+"))
-            return INCORRECT_EMAIL_FORMAT;
+            return checkPassword(password);
         return WITHOUT_ERROR;
     }
 
@@ -161,14 +218,16 @@ public class LoginController {
         return password;
     }
 
-    private boolean checkEmailExistence(String email) {
-        return Player.getPlayerByEmail(email) != null;
+    private SignUpMessages checkEmailErrors(String email) {
+        if (Player.getPlayerByEmail(email) != null)
+            return SignUpMessages.EXISTENCE_EMAIL;
+        else if (!email.matches("[a-zA-Z0-9_.]+@[a-zA-Z0-9_.]+\\.[a-zA-Z0-9_.]+"))
+            return SignUpMessages.INCORRECT_EMAIL_FORMAT;
+        return SignUpMessages.WITHOUT_ERROR;
     }
 
-    private SignUpMessages checkPassword(String password, String passwordConfirm) {
-        if (password.equals("random"))
-            return PASSWORD_STRONG;
-        else if (password.matches(".*\\s.*"))
+    private SignUpMessages checkPassword(String password) {
+        if (password.matches(".*\\s.*"))
             return PASSWORD_INCORRECT_FORMAT;
         else if (password.length() < 6)
             return PASSWORD_LENGTH_WEAK;
@@ -180,8 +239,6 @@ public class LoginController {
             return PASSWORD_NUMBER_WEAK;
         else if (!password.matches(".*[^a-zA-Z0-9].*"))
             return PASSWORD_SPECIFIC_CHAR_WEAK;
-        else if (!password.equals(passwordConfirm))
-            return PASSWORD_CONFIRM_DOES_NOT_MATCH;
         return PASSWORD_STRONG;
     }
 
@@ -233,7 +290,7 @@ public class LoginController {
     public SignUpMessages setNewPassword(Matcher matcher) {
         String password = matcher.group("password").replaceAll("\"", "");
         String passwordConfirm = matcher.group("passwordConfirm").replaceAll("\"", "");
-        SignUpMessages signUpMessage = checkPassword(password, passwordConfirm);
+        SignUpMessages signUpMessage = checkPassword(password);
         if (!signUpMessage.equals(SignUpMessages.PASSWORD_STRONG)) return signUpMessage;
         Player.getCurrentPlayer().setPassword(Player.getSHA256Hash(password));
         Player.savePlayers();
@@ -280,5 +337,50 @@ public class LoginController {
             return true;
         }
         return false;
+    }
+
+    public void showPassword(MouseEvent mouseEvent) {
+        showPassword.setVisible(true);
+        showPasswordIcon.setVisible(false);
+        hidePassword.setVisible(true);
+        password.setVisible(false);
+        showPassword.textProperty().addListener(((observableValue, oldText, newText) -> {
+            SignUpMessages signUpMessages = checkPassword(newText);
+            password.setText(newText);
+            if (!signUpMessages.equals(SignUpMessages.PASSWORD_STRONG)) {
+                passwordError.setText(signUpMessages.getMessage());
+                password.setStyle("-fx-border-color: red");
+                showPassword.setStyle("-fx-border-color: red");
+            }
+            else {
+                passwordError.setText("");
+                password.setStyle("-fx-border-color: purple");
+                showPassword.setStyle("-fx-border-color: purple");
+            }
+        }));
+    }
+
+    public void hidePassword(MouseEvent mouseEvent) {
+        showPassword.setVisible(false);
+        showPasswordIcon.setVisible(true);
+        hidePassword.setVisible(false);
+        password.setVisible(true);
+    }
+
+    public void setRandomPassword(MouseEvent mouseEvent) {
+        if (randomPassword.isSelected()) {
+            String password = generateRandomPassword();
+            this.password.setText(password);
+        }
+        else {
+            this.password.setText("");
+        }
+    }
+
+    public void chooseSlogan(MouseEvent mouseEvent) {
+        if (chooseSlogan.isSelected()) {
+            slogan.setDisable(false);
+            randomSlogan.setDisable(false);
+        }
     }
 }
