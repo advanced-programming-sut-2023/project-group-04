@@ -13,4 +13,6 @@ module phase1.BaseCode {
     exports org.view;
     opens org.controller to javafx.fxml;
     exports org.controller;
+    opens org.model to com.google.gson;
+    exports org.model;
 }

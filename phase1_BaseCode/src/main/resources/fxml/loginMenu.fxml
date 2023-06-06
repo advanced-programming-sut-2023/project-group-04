@@ -13,7 +13,7 @@
 <AnchorPane prefHeight="920.0" prefWidth="1760.0"
             xmlns="http://javafx.com/javafx/19"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.view.LoginMenu"
+            fx:controller="org.controller.LoginController"
             stylesheets="@../css/loginMenuStyle.css">
     <children>
         <ImageView fitHeight="920.0" fitWidth="1760.0" pickOnBounds="true" preserveRatio="true">
@@ -41,7 +41,7 @@
                 <Font size="35.0"/>
             </font>
         </Text>
-        <Hyperlink layoutX="490.0" layoutY="474.0" text="Don't have account? Signup now">
+        <Hyperlink layoutX="490.0" layoutY="474.0" text="Don't have account? Signup now" onMouseClicked="#runSignupMenu">
             <font>
                 <Font size="24.0"/>
             </font>

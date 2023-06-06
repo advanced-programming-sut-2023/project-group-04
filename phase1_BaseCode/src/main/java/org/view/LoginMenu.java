@@ -11,6 +11,7 @@ import org.view.CommandsEnum.SignUpMessages;
 import java.util.regex.Matcher;
 
 public class LoginMenu extends Application {
+    public static Stage stage;
 
     public void run() throws Exception {
         boolean loginStatus = Menu.getLoginController().runProgram();
@@ -68,6 +69,7 @@ public class LoginMenu extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        LoginMenu.stage = stage;
         AnchorPane anchorPane = FXMLLoader.load(LoginMenu.class.getResource("/fxml/loginMenu.fxml"));
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);

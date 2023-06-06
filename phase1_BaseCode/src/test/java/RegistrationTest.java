@@ -1,4 +1,4 @@
-import org.controller.LoginController;
+import org.controller.SignupController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ public class RegistrationTest {
         Player.recoveryPlayers();
     }
 
-    LoginController loginController = new LoginController();
+    SignupController loginController = new SignupController();
 
     @Test
     public void emptySloganCheck() {

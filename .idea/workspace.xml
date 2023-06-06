@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="some logic added!">
+    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="SignUpMenu updated!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/CommandsEnum/SignUpMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/CommandsEnum/SignUpMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/LoginMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/loginMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/loginMenu.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/signupMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/signupMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +85,7 @@
       <recent name="D:\code\JAVA language\apProject\project-group-04" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SignUpMenu">
+  <component name="RunManager" selected="Application.LoginMenu">
     <configuration name="LoginMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.view.LoginMenu" />
       <module name="phase1" />
@@ -125,8 +127,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SignUpMenu" />
         <item itemvalue="Application.LoginMenu" />
+        <item itemvalue="Application.SignUpMenu" />
         <item itemvalue="Application.MainMenu" />
       </list>
     </recent_temporary>
@@ -143,7 +145,9 @@
       <workItem from="1681934274355" duration="23000" />
       <workItem from="1682920646113" duration="1194000" />
       <workItem from="1682965005844" duration="4535000" />
-      <workItem from="1685783287894" duration="11428000" />
+      <workItem from="1685783287894" duration="11714000" />
+      <workItem from="1685883457126" duration="692000" />
+      <workItem from="1686021451870" duration="4881000" />
     </task>
     <task id="LOCAL-00001" summary="complete GameCommands">
       <created>1682973681030</created>
@@ -180,7 +184,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685799512513</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="SignUpMenu updated!">
+      <created>1685817233683</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1685817233683</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,7 +242,8 @@
     <MESSAGE value="login fxml and signup fxml updated!" />
     <MESSAGE value="MainMenu style added!" />
     <MESSAGE value="some logic added!" />
-    <option name="LAST_COMMIT_MESSAGE" value="some logic added!" />
+    <MESSAGE value="SignUpMenu updated!" />
+    <option name="LAST_COMMIT_MESSAGE" value="SignUpMenu updated!" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
