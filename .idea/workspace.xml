@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="SignUpMenu updated!">
+    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="someLogicAdded!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/CommandsEnum/SignUpMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/CommandsEnum/SignUpMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/LoginMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PLAYERS.json" beforeDir="false" afterPath="$PROJECT_DIR$/PLAYERS.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/SignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/SignupController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/loginMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/loginMenu.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/signupMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/signupMenu.fxml" afterDir="false" />
     </list>
@@ -22,6 +21,7 @@
       <list>
         <option value="FxmlFile" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -147,7 +147,10 @@
       <workItem from="1682965005844" duration="4535000" />
       <workItem from="1685783287894" duration="11714000" />
       <workItem from="1685883457126" duration="692000" />
-      <workItem from="1686021451870" duration="4881000" />
+      <workItem from="1686021451870" duration="5918000" />
+      <workItem from="1686062193596" duration="22000" />
+      <workItem from="1686148578134" duration="30000" />
+      <workItem from="1687267600178" duration="2952000" />
     </task>
     <task id="LOCAL-00001" summary="complete GameCommands">
       <created>1682973681030</created>
@@ -191,7 +194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685817233683</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="someLogicAdded!">
+      <created>1686026732407</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1686026732407</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,7 +253,8 @@
     <MESSAGE value="MainMenu style added!" />
     <MESSAGE value="some logic added!" />
     <MESSAGE value="SignUpMenu updated!" />
-    <option name="LAST_COMMIT_MESSAGE" value="SignUpMenu updated!" />
+    <MESSAGE value="someLogicAdded!" />
+    <option name="LAST_COMMIT_MESSAGE" value="someLogicAdded!" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

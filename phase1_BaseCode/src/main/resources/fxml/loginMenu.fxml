@@ -10,58 +10,67 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="920.0" prefWidth="1760.0"
-            xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.controller.LoginController"
-            stylesheets="@../css/loginMenuStyle.css">
+<AnchorPane prefHeight="920.0" prefWidth="1760.0" stylesheets="@../css/loginMenuStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controller.LoginController">
     <children>
         <ImageView fitHeight="920.0" fitWidth="1760.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image requestedHeight="920" requestedWidth="1760" url="@../images/loginBacground.jpg"/>
+                <Image requestedHeight="920" requestedWidth="1760" url="@../images/loginBacground.jpg" />
             </image>
         </ImageView>
-        <TextField layoutX="490.0" layoutY="210.0" prefHeight="78.0" prefWidth="370.0" promptText="username">
+        <TextField fx:id="username" layoutX="604.0" layoutY="130.0" prefHeight="78.0" prefWidth="370.0" promptText="username">
             <font>
-                <Font size="35.0"/>
+                <Font size="35.0" />
             </font>
         </TextField>
-        <PasswordField layoutX="490.0" layoutY="353.0" prefHeight="78.0" prefWidth="370.0" promptText="password">
+        <PasswordField fx:id="passowrd" layoutX="604.0" layoutY="230.0" prefHeight="78.0" prefWidth="370.0" promptText="password">
             <font>
-                <Font size="35.0"/>
+                <Font size="35.0" />
             </font>
         </PasswordField>
-        <Text fill="WHITE" layoutX="325.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+        <Text fill="WHITE" layoutX="439.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
             <font>
-                <Font size="35.0"/>
+                <Font size="35.0" />
             </font>
         </Text>
-        <Text fill="WHITE" layoutX="325.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+        <Text fill="WHITE" layoutX="439.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
             <font>
-                <Font size="35.0"/>
+                <Font size="35.0" />
             </font>
         </Text>
-        <Hyperlink layoutX="490.0" layoutY="474.0" text="Don't have account? Signup now" onMouseClicked="#runSignupMenu">
+        <Hyperlink layoutX="604.0" layoutY="310.0" onMouseClicked="#runSignupMenu" text="Don't have account? Signup now">
             <font>
-                <Font size="24.0"/>
+                <Font size="24.0" />
             </font>
         </Hyperlink>
-        <Button layoutX="600.0" layoutY="531.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="135.0"
-                text="Login">
+        <Button fx:id="login" layoutX="714.0" layoutY="580.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="135.0" text="Login">
             <font>
-                <Font size="30.0"/>
+                <Font size="30.0" />
             </font>
         </Button>
-        <Button layoutX="535.0" layoutY="616.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="271.0"
-                text="Forget Password">
+        <Button fx:id="forgetPassword" layoutX="649.0" layoutY="680.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="271.0" text="Forget Password">
             <font>
-                <Font size="30.0"/>
+                <Font size="30.0" />
             </font>
         </Button>
-        <Text fill="#1257db" layoutX="500.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login Menu">
+        <Text fill="#1257db" layoutX="614.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login Menu">
             <font>
-                <Font size="67.0"/>
+                <Font size="67.0" />
             </font>
         </Text>
+      <ImageView fx:id="captcha" fitHeight="60.0" fitWidth="160.0" layoutX="700.0" layoutY="386.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image requestedHeight="60" requestedWidth="160" url="@../images/blank.jpg" />
+         </image>
+      </ImageView>
+      <TextField fx:id="captchaAnswer" layoutX="676.0" layoutY="470.0" prefHeight="78.0" prefWidth="200.0" promptText="captcha">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </TextField>
+      <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="643.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/change.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

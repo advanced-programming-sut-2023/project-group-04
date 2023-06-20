@@ -26,6 +26,8 @@ import java.util.regex.Matcher;
 import javafx.scene.image.ImageView;
 
 
+import javax.swing.*;
+
 import static org.view.CommandsEnum.SignUpMessages.*;
 
 public class SignupController {
@@ -53,6 +55,7 @@ public class SignupController {
     public ImageView change;
     public Text nicknameError;
     public Text captchaError;
+    public ChoiceBox famousSlogan;
 
     @FXML
     public void initialize() {
@@ -403,11 +406,14 @@ public class SignupController {
         if (chooseSlogan.isSelected()) {
             slogan.setDisable(false);
             randomSlogan.setDisable(false);
+            famousSlogan.setVisible(true);
+
         } else {
             slogan.setDisable(true);
             slogan.setText("");
             randomSlogan.setDisable(true);
             randomSlogan.setSelected(false);
+            famousSlogan.setVisible(false);
         }
     }
 
@@ -433,6 +439,8 @@ public class SignupController {
     }
 
     private void register(String username, String password, String nickname, String slogan, String email) {
+        JOptionPane.showMessageDialog(null,"your information accepted!"
+                , "Successful", JOptionPane.INFORMATION_MESSAGE);
         securityQuestion.setVisible(true);
         final String[] question = {""};
         securityQuestion.setOnAction(new EventHandler<ActionEvent>() {
@@ -442,7 +450,6 @@ public class SignupController {
                 securityAnswer.setVisible(true);
             }
         });
-
     }
 
     private boolean haveError(String username, String password, String nickname, String slogan, String email) {
@@ -542,5 +549,10 @@ public class SignupController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public void getFamousSlogan(ActionEvent actionEvent) {
+        String slogan = famousSlogan.getValue().toString();
+        this.slogan.setText(slogan);
     }
 }

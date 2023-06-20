@@ -72,6 +72,16 @@
                 </FXCollections>
             </items>
         </ChoiceBox>
+        <ChoiceBox fx:id="famousSlogan" layoutX="600.0" layoutY="430.0" prefWidth="150.0"
+                   value="choose from famous slogans" visible="false" onAction="#getFamousSlogan">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="I shall have my revenge, in this life or the next!" />
+                    <String fx:value="I will not lose I either win or learn!" />
+                    <String fx:value="If I lose, I will lose in such a way that you doubt that you will win!" />
+                </FXCollections>
+            </items>
+        </ChoiceBox>
         <TextField fx:id="securityAnswer" layoutX="371.0" layoutY="580.0" prefHeight="50.0" prefWidth="224.0" promptText="security answer" visible="false">
             <font>
                 <Font size="23.0" />
