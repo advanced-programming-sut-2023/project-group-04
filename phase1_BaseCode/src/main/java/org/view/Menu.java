@@ -6,7 +6,8 @@ import java.util.Scanner;
 
 public class Menu {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final SignupController loginController = new SignupController();
+    private static final SignupController signupController = new SignupController();
+    private static final LoginController loginController = new LoginController();
     private static final ProfileController profileController = new ProfileController();
     private static final EnvironmentController environmentController = new EnvironmentController();
     private static final MapController mapController = new MapController();
@@ -18,8 +19,8 @@ public class Menu {
         return scanner;
     }
 
-    public static SignupController getLoginController() {
-        return loginController;
+    public static SignupController getSignupController() {
+        return signupController;
     }
 
     public static ProfileController getProfileController() {
@@ -44,5 +45,9 @@ public class Menu {
 
     public static TradeController getTradeController() {
         return tradeController;
+    }
+
+    public static LoginController getLoginController() {
+        return loginController;
     }
 }

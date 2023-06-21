@@ -17,37 +17,37 @@
                 <Image requestedHeight="920" requestedWidth="1760" url="@../images/loginBacground.jpg" />
             </image>
         </ImageView>
-        <TextField fx:id="username" layoutX="604.0" layoutY="130.0" prefHeight="78.0" prefWidth="370.0" promptText="username">
+        <TextField fx:id="username" layoutX="604.0" layoutY="155.0" prefHeight="78.0" prefWidth="370.0" promptText="username">
             <font>
                 <Font size="35.0" />
             </font>
         </TextField>
-        <PasswordField fx:id="passowrd" layoutX="604.0" layoutY="230.0" prefHeight="78.0" prefWidth="370.0" promptText="password">
+        <PasswordField fx:id="password" layoutX="604.0" layoutY="280.0" prefHeight="78.0" prefWidth="370.0" promptText="password">
             <font>
                 <Font size="35.0" />
             </font>
         </PasswordField>
-        <Text fill="WHITE" layoutX="439.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+        <Text fill="WHITE" layoutX="439.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
             <font>
                 <Font size="35.0" />
             </font>
         </Text>
-        <Text fill="WHITE" layoutX="439.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+        <Text fill="WHITE" layoutX="439.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
             <font>
                 <Font size="35.0" />
             </font>
         </Text>
-        <Hyperlink layoutX="604.0" layoutY="310.0" onMouseClicked="#runSignupMenu" text="Don't have account? Signup now">
+        <Hyperlink layoutX="604.0" layoutY="675.0" onMouseClicked="#runSignupMenu" text="Don't have account? Signup now">
             <font>
                 <Font size="24.0" />
             </font>
         </Hyperlink>
-        <Button fx:id="login" layoutX="714.0" layoutY="580.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="135.0" text="Login">
+        <Button fx:id="login" layoutX="714.0" layoutY="610.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="135.0" text="Login" onMouseClicked="#signIn">
             <font>
                 <Font size="30.0" />
             </font>
         </Button>
-        <Button fx:id="forgetPassword" layoutX="649.0" layoutY="680.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="271.0" text="Forget Password">
+        <Button fx:id="forgetPassword" layoutX="649.0" layoutY="720.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="271.0" text="Forget Password">
             <font>
                 <Font size="30.0" />
             </font>
@@ -57,20 +57,30 @@
                 <Font size="67.0" />
             </font>
         </Text>
-      <ImageView fx:id="captcha" fitHeight="60.0" fitWidth="160.0" layoutX="700.0" layoutY="386.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="captcha" fitHeight="60.0" fitWidth="160.0" layoutX="700.0" layoutY="416.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image requestedHeight="60" requestedWidth="160" url="@../images/blank.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="captchaAnswer" layoutX="676.0" layoutY="470.0" prefHeight="78.0" prefWidth="200.0" promptText="captcha">
+      <TextField fx:id="captchaAnswer" layoutX="676.0" layoutY="500.0" prefHeight="78.0" prefWidth="200.0" promptText="captcha">
          <font>
             <Font size="35.0" />
          </font>
       </TextField>
-      <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="643.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="changeCpatcha" fitHeight="45.0" fitWidth="45.0" layoutX="643.0" layoutY="425.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#fillCaptcha">
          <image>
             <Image url="@../images/change.png" />
          </image>
       </ImageView>
+      <Text fx:id="passwordError" fill="RED" layoutX="616.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Text fx:id="usernameError" fill="RED" layoutX="616.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>

@@ -7,17 +7,13 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import org.model.ASCIIArtGenerator;
 import org.model.Player;
 import org.model.map.Map;
 import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
 import org.passay.PasswordGenerator;
-import org.view.CommandsEnum.SecurityQuestion;
 import org.view.CommandsEnum.SignUpMessages;
 import org.view.LoginMenu;
-import org.view.Menu;
-import org.view.SignUpMenu;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -107,118 +103,118 @@ public class SignupController {
         }));
     }
 
-    public String SignUp(Matcher matcher, String input) {
-        String username = matcher.group("username").replaceAll("\"", "");
-        String password = matcher.group("password");
-        String passwordConfirmation = matcher.group("passwordConfirm");
-        String email = matcher.group("email").replaceAll("\"", "").toLowerCase();
-        String nickname = matcher.group("nickname").replaceAll("\"", "");
-        String slogan = "";
-        if (matcher.group("slogan") != null)
-            slogan = matcher.group("slogan").replaceAll("\"", "");
-        if (checkSignUpErrors(username, password, passwordConfirmation, email, nickname, slogan, input) == WITHOUT_ERROR) {
-        } else {
-            return checkSignUpErrors(username, password, passwordConfirmation, email, nickname, slogan, input).getMessage();
-        }
-        if (Player.getPlayerByUsername(username) != null) {
-            String newUsername = suggestNewUsername(username);
-            if (new SignUpMenu().acceptSuggestedUsername(newUsername)) {
-                username = newUsername;
-            } else
-                return REGISTRATION_FAILED.getMessage();
-        }
-        if (password.equals("random")) {
-            password = generateRandomPassword();
-            if (slogan.equals("random")) {
-                slogan = giveRandomSlogan();
-                Player player = new Player(username, Player.getSHA256Hash(password), nickname, email, slogan);
-                Player.setCurrentPlayer(player);
-                return showSloganAndPassword(slogan, password);
-            } else {
-                Player player = new Player(username, Player.getSHA256Hash(password), nickname, email, slogan);
-                Player.setCurrentPlayer(player);
-                return "Your random password is: " + password;
-            }
-        } else {
-            if (slogan != null)
-                if (slogan.equals("random")) {
-                    slogan = giveRandomSlogan();
-                    Player player = new Player(username, Player.getSHA256Hash(password), nickname, email, slogan);
-                    Player.setCurrentPlayer(player);
-                    return "Your random slogan is \"" + slogan + "\"";
-                }
-        }
-        Player player = new Player(username, Player.getSHA256Hash(password), nickname, email, slogan);
-        Player.setCurrentPlayer(player);
-        return REGISTRATION_SUCCESSFUL.getMessage();
-    }
+//    public String SignUp(Matcher matcher, String input) {
+//        String username = matcher.group("username").replaceAll("\"", "");
+//        String password = matcher.group("password");
+//        String passwordConfirmation = matcher.group("passwordConfirm");
+//        String email = matcher.group("email").replaceAll("\"", "").toLowerCase();
+//        String nickname = matcher.group("nickname").replaceAll("\"", "");
+//        String slogan = "";
+//        if (matcher.group("slogan") != null)
+//            slogan = matcher.group("slogan").replaceAll("\"", "");
+//        if (checkSignUpErrors(username, password, passwordConfirmation, email, nickname, slogan, input) == WITHOUT_ERROR) {
+//        } else {
+//            return checkSignUpErrors(username, password, passwordConfirmation, email, nickname, slogan, input).getMessage();
+//        }
+//        if (Player.getPlayerByUsername(username) != null) {
+//            String newUsername = suggestNewUsername(username);
+//            if (new SignUpMenu().acceptSuggestedUsername(newUsername)) {
+//                username = newUsername;
+//            } else
+//                return REGISTRATION_FAILED.getMessage();
+//        }
+//        if (password.equals("random")) {
+//            password = generateRandomPassword();
+//            if (slogan.equals("random")) {
+//                slogan = giveRandomSlogan();
+//                Player player = new Player(username, Player.getSHA256Hash(password), nickname, email, slogan);
+//                Player.setCurrentPlayer(player);
+//                return showSloganAndPassword(slogan, password);
+//            } else {
+//                Player player = new Player(username, Player.getSHA256Hash(password), nickname, email, slogan);
+//                Player.setCurrentPlayer(player);
+//                return "Your random password is: " + password;
+//            }
+//        } else {
+//            if (slogan != null)
+//                if (slogan.equals("random")) {
+//                    slogan = giveRandomSlogan();
+//                    Player player = new Player(username, Player.getSHA256Hash(password), nickname, email, slogan);
+//                    Player.setCurrentPlayer(player);
+//                    return "Your random slogan is \"" + slogan + "\"";
+//                }
+//        }
+//        Player player = new Player(username, Player.getSHA256Hash(password), nickname, email, slogan);
+//        Player.setCurrentPlayer(player);
+//        return REGISTRATION_SUCCESSFUL.getMessage();
+//    }
 
-    private String giveSecurityQuestionWithNumber(Matcher matcher) {
-        switch (matcher.group("questionNumber")) {
-            case "1":
-                return SecurityQuestion.getQuestion(SecurityQuestion.PET);
-            case "2":
-                return SecurityQuestion.getQuestion(SecurityQuestion.TEACHER);
-            default:
-                return SecurityQuestion.getQuestion(SecurityQuestion.CAR);
-        }
-    }
+//    private String giveSecurityQuestionWithNumber(Matcher matcher) {
+//        switch (matcher.group("questionNumber")) {
+//            case "1":
+//                return SecurityQuestion.getQuestion(SecurityQuestion.PET);
+//            case "2":
+//                return SecurityQuestion.getQuestion(SecurityQuestion.TEACHER);
+//            default:
+//                return SecurityQuestion.getQuestion(SecurityQuestion.CAR);
+//        }
+//    }
 
-    private String showSloganAndPassword(String slogan, String password) {
+    /*private String showSloganAndPassword(String slogan, String password) {
         return "Your slogan is \"" + slogan + "\"\nYour random password is: " + password;
-    }
+    }*/
 
-    public String showSecurityQuestions() {
+    /*public String showSecurityQuestions() {
         return "Pick your security question:\n1. " + SecurityQuestion.getQuestion(SecurityQuestion.PET)
                 + "\n2. " + SecurityQuestion.getQuestion(SecurityQuestion.TEACHER)
                 + "\n3. " + SecurityQuestion.getQuestion(SecurityQuestion.CAR);
-    }
+    }*/
 
-    private SignUpMessages checkSignUpErrors(String username, String password,
-                                             String passwordConfirmation, String email,
-                                             String nickname, String slogan, String input) {
-        if (slogan == "" && input.contains("-s")) return EMPTY_SLOGAN;
-        if (username == null || password == null || email == null || nickname == null) return EMPTY_FIELD;
-        else if (!isUsernameFormatCorrect(username)) return INCORRECT_USERNAME_FORMAT;
-        else if (checkPassword(password).equals(PASSWORD_STRONG)) {
-        } else
-            return checkPassword(password);
-        return WITHOUT_ERROR;
-    }
+//    private SignUpMessages checkSignUpErrors(String username, String password,
+//                                             String passwordConfirmation, String email,
+//                                             String nickname, String slogan, String input) {
+//        if (slogan == "" && input.contains("-s")) return EMPTY_SLOGAN;
+//        if (username == null || password == null || email == null || nickname == null) return EMPTY_FIELD;
+//        else if (!isUsernameFormatCorrect(username)) return INCORRECT_USERNAME_FORMAT;
+//        else if (checkPassword(password).equals(PASSWORD_STRONG)) {
+//        } else
+//            return checkPassword(password);
+//        return WITHOUT_ERROR;
+//    }
 
-    public SignUpMessages generateCaptcha() throws Exception {
-        String input = null;
-        ASCIIArtGenerator asciiArtGenerator = new ASCIIArtGenerator();
-        int randomCaptchaNumber = (int) (Math.random() * (99999999 - 1000 + 1) + 1000);
-        asciiArtGenerator.printTextArt(String.valueOf(randomCaptchaNumber), ASCIIArtGenerator.ART_SIZE);
-        System.out.println("enter the Captcha code / if it is not readable type : <<change captcha>>");
-        input = Menu.getScanner().nextLine();
-        if (input.matches("\\s*change\\s+captcha\\s*"))
-            generateCaptcha();
-        else {
-            if (input.equals(String.valueOf(randomCaptchaNumber)))
-                return CAPTCHA_CORRECT;
-            else {
-                System.out.println("captcha code is wrong!");
-                generateCaptcha();
-            }
-        }
-        return CAPTCHA_CORRECT;
-    }
+//    public SignUpMessages generateCaptcha() throws Exception {
+//        String input = null;
+//        ASCIIArtGenerator asciiArtGenerator = new ASCIIArtGenerator();
+//        int randomCaptchaNumber = (int) (Math.random() * (99999999 - 1000 + 1) + 1000);
+//        asciiArtGenerator.printTextArt(String.valueOf(randomCaptchaNumber), ASCIIArtGenerator.ART_SIZE);
+//        System.out.println("enter the Captcha code / if it is not readable type : <<change captcha>>");
+//        input = Menu.getScanner().nextLine();
+//        if (input.matches("\\s*change\\s+captcha\\s*"))
+//            generateCaptcha();
+//        else {
+//            if (input.equals(String.valueOf(randomCaptchaNumber)))
+//                return CAPTCHA_CORRECT;
+//            else {
+//                System.out.println("captcha code is wrong!");
+//                generateCaptcha();
+//            }
+//        }
+//        return CAPTCHA_CORRECT;
+//    }
 
 
-    public SignUpMessages setSecurityQuestion(Matcher matcher) {
-        int questionNumber = Integer.parseInt(matcher.group("questionNumber"));
-        String answer = matcher.group("answer").replaceAll("\"", "");
-        String answerConfirm = matcher.group("answerConfirm").replaceAll("\"", "");
-        if (questionNumber > 3)
-            return INVALID_QUESTION_NUMBER;
-        else if (!answer.equals(answerConfirm))
-            return ANSWER_CONFIRM_DOES_NOT_MATCH;
-        else {
-            return SET_QUESTION_SUCCESSFUL;
-        }
-    }
+//    public SignUpMessages setSecurityQuestion(Matcher matcher) {
+//        int questionNumber = Integer.parseInt(matcher.group("questionNumber"));
+//        String answer = matcher.group("answer").replaceAll("\"", "");
+//        String answerConfirm = matcher.group("answerConfirm").replaceAll("\"", "");
+//        if (questionNumber > 3)
+//            return INVALID_QUESTION_NUMBER;
+//        else if (!answer.equals(answerConfirm))
+//            return ANSWER_CONFIRM_DOES_NOT_MATCH;
+//        else {
+//            return SET_QUESTION_SUCCESSFUL;
+//        }
+//    }
 
     private String giveRandomSlogan() {
         ArrayList<String> slogans = new ArrayList<>();
@@ -269,36 +265,19 @@ public class SignupController {
         return PASSWORD_STRONG;
     }
 
-    public String suggestNewUsername(String username) {
-        Random rand = new Random();
-        while (true) {
-            int randomNum = rand.nextInt(1000);
-            if (Player.getPlayerByUsername(username + randomNum) == null)
-                return username + randomNum;
-        }
-    }
+//    public String suggestNewUsername(String username) {
+//        Random rand = new Random();
+//        while (true) {
+//            int randomNum = rand.nextInt(1000);
+//            if (Player.getPlayerByUsername(username + randomNum) == null)
+//                return username + randomNum;
+//        }
+//    }
 
     private boolean isUsernameFormatCorrect(String username) {
         return username.matches("\\w+");
     }
 
-    public String signIn(Matcher matcher) throws Exception {
-        String username = matcher.group("username").replaceAll("\"", "");
-        String password = matcher.group("password");
-        String status = matcher.group("status");
-        if (Player.getPlayerByUsername(username) == null) return USER_DOES_NOT_EXIST.getMessage();
-        if (!Player.getPlayerByUsername(username).isPasswordCorrect(Player.getSHA256Hash(password))) {
-            Player.getPlayerByUsername(username).increaseNumberOfAttempts();
-            return INCORRECT_PASSWORD.getMessage() + "\nPlease try again after <<"
-                    + Player.getNumberOfAttempts() * 5 + ">> seconds!";
-        }
-        // TODO: 4/19/2023  //Stay logged in not handled!!
-        if (generateCaptcha().equals(CAPTCHA_CORRECT)) Player.resetNumberOfAttempts();
-        Player player = Player.getPlayerByUsername(username);
-        Player.setCurrentPlayer(player);
-        if (status != null) player.setStayLogin();
-        return LOGIN_SUCCESSFUL.getMessage();
-    }
 
     public String getSecurityQuestion(String username) {
         Player player = Player.getPlayerByUsername(username.replaceAll("\"", ""));
@@ -331,25 +310,25 @@ public class SignupController {
         }
     }
 
-    public SignUpMessages finishRegister(Matcher pickQuestionMatcher) throws Exception {
-        String securityQuestion,
-                securityAnswer = pickQuestionMatcher.group("answer").replaceAll("\"", "");
-        securityQuestion = giveSecurityQuestionWithNumber(pickQuestionMatcher);
-        if (generateCaptcha().equals(CAPTCHA_CORRECT)) {
-            Player player = Player.getCurrentPlayer();
-            player.setSecurityQuestion(securityQuestion);
-            player.setSecurityAnswer(securityAnswer);
-            Player.addPlayer(player);
-            Player.savePlayers();
-        }
-        return SignUpMessages.REGISTRATION_SUCCESSFUL;
-    }
+//    public SignUpMessages finishRegister(Matcher pickQuestionMatcher) throws Exception {
+//        String securityQuestion,
+//                securityAnswer = pickQuestionMatcher.group("answer").replaceAll("\"", "");
+//        securityQuestion = giveSecurityQuestionWithNumber(pickQuestionMatcher);
+//        if (generateCaptcha().equals(CAPTCHA_CORRECT)) {
+//            Player player = Player.getCurrentPlayer();
+//            player.setSecurityQuestion(securityQuestion);
+//            player.setSecurityAnswer(securityAnswer);
+//            Player.addPlayer(player);
+//            Player.savePlayers();
+//        }
+//        return SignUpMessages.REGISTRATION_SUCCESSFUL;
+//    }
 
-    public String checkRandomPassword(String password) {
-        if (Player.getCurrentPlayer().isPasswordCorrect(password))
-            return "password confirmed!";
-        return "confirmation failed!\nplease enter password correctly!: ";
-    }
+//    public String checkRandomPassword(String password) {
+//        if (Player.getCurrentPlayer().isPasswordCorrect(password))
+//            return "password confirmed!";
+//        return "confirmation failed!\nplease enter password correctly!: ";
+//    }
 
     public void clearStayLogin() {
         Player.removeStayLogin();
@@ -501,7 +480,7 @@ public class SignupController {
                 !password.isEmpty() && !nickname.isEmpty() && !email.isEmpty();
     }
 
-    public void generateCaptcha1(MouseEvent mouseEvent) {
+    public void generateCaptcha(MouseEvent mouseEvent) {
         if (slogan.getText().isEmpty())
             slogan.setText("");
         Player player = new Player(username.getText(), password.getText(), nickname.getText(), email.getText(), slogan.getText());
@@ -516,7 +495,7 @@ public class SignupController {
         change.setVisible(true);
     }
 
-    private int getFileNumber() {
+    public int getFileNumber() {
         int[] fileNumbers = {1181, 1381, 1491, 1722, 1959, 2163, 2177, 2723, 2785, 3541, 3847, 3855, 3876, 3967, 4185,
                 4310, 4487, 4578, 4602, 4681, 4924, 5326, 5463, 5771, 5849, 6426, 6553, 6601, 6733, 6960,
                 7415, 7609, 7755, 7825, 7905, 8003, 8010, 8368, 8455, 8506, 8555, 8583, 8692, 8776, 8972,
@@ -526,7 +505,7 @@ public class SignupController {
     }
 
     public void changeCaptcha(MouseEvent mouseEvent) {
-        generateCaptcha1(mouseEvent);
+        generateCaptcha(mouseEvent);
     }
 
     public void submitCaptcha(MouseEvent mouseEvent) throws Exception {
@@ -538,12 +517,12 @@ public class SignupController {
             Player.savePlayers();
             new LoginMenu().start(LoginMenu.stage);
         } else {
-            generateCaptcha1(mouseEvent);
+            generateCaptcha(mouseEvent);
             captcha.setStyle("-fx-border-color: red");
             captchaError.setText(SignUpMessages.CAPTCHA_IS_WRONG.getMessage());
         }
     }
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
+    public void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
