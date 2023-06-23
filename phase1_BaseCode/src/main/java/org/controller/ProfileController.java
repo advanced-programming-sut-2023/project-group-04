@@ -176,6 +176,7 @@ public class ProfileController {
     }
 
     private ProfileMessages checkEmail(Matcher matcher) {
+        Thread thread = new Thread();
         if (matcher.group("email") == null)
             return ProfileMessages.EMPTY_FIELD;
         String email = removeQuotation(matcher.group("email"));

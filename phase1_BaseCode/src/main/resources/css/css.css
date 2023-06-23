@@ -11,7 +11,7 @@
     -fx-min-width: 1540px;
     -fx-background-color: rgba(186, 231, 250, 0.34);
 }
-/*.gold {*/
-/*    -fx-font-size: 12;*/
-/*    -fx-font: ;*/
-/*}*/
+.meat {
+    -fx-background-image: url("../img/food/meat.jpg");
+    -fx-background-repeat: no-repeat;
+}
