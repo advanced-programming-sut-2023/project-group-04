@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="update...">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMenuController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMapView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_1_2023_5_55_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_1_2023_5_55_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/GameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/GameMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/css.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/css.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pom.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +34,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="yousefBranchPhase1" />
+        <entry key="$PROJECT_DIR$/.." value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -62,9 +63,9 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "TODO_SCOPE": "All Places",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "yousef's__branch",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "E:/IdeaProjects/project-group-04/phase1_BaseCode/src/main/resources/img/captcha",
+    "last_opened_file_path": "C:/Users/ASUS/IdeaProjects/aa-2",
     "list.type.of.created.stylesheet": "CSS",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
@@ -91,7 +92,7 @@
   <component name="RunManager" selected="Application.GameMenu">
     <configuration name="GameMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.view.gameView.GameMenu" />
-      <module name="phase1_BaseCode" />
+      <module name="phase1" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.view.gameView.*" />
@@ -127,8 +128,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.GameMenu" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.RegistrationTest" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.GameMenu" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -438,7 +441,7 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/phase1_BaseCode$RegistrationTest.ic" NAME="RegistrationTest Coverage Results" MODIFIED="1684832849667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/phase1_BaseCode$RegistrationTest_emailFormat.ic" NAME="RegistrationTest.emailFormat Coverage Results" MODIFIED="1683501851709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/phase1_BaseCode$RegistrationTest.ic" NAME="RegistrationTest Coverage Results" MODIFIED="1684832849667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

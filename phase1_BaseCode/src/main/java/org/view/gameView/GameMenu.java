@@ -29,6 +29,8 @@ public class GameMenu extends Application {
     public void start(Stage stage) throws Exception {
         pane = FXMLLoader.load(new URL(GameMenu.class.getResource("/FXML/GameMenu.fxml").toExternalForm()));
         Scene scene = new Scene(pane);
+        GameMapView gameMapView = new GameMapView();
+        pane.getChildren().add(gameMapView.getMapBox());
         stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
