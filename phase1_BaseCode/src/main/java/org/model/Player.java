@@ -24,6 +24,7 @@ public class Player {
     private String securityQuestion;
     private String securityAnswer;
     private String slogan;
+    private String avatarResource;
     private int score;
     private static int numberOfAttempts = 0;
 
@@ -34,6 +35,7 @@ public class Player {
         Email = email;
         this.slogan = slogan;
         this.score = 0;
+        this.avatarResource = null;
     }
 
     public static void setCurrentPlayer(Player player) {
@@ -227,5 +229,13 @@ public class Player {
             System.err.println("SHA-256 algorithm not available.");
             return null;
         }
+    }
+
+    public String getAvatarResource() {
+        return avatarResource;
+    }
+
+    public void setAvatarResource(String avatarResource) {
+        this.avatarResource = avatarResource;
     }
 }

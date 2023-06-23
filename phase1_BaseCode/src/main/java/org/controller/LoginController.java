@@ -10,6 +10,7 @@ import javafx.scene.text.Text;
 import org.model.Player;
 import org.view.CommandsEnum.SignUpMessages;
 import org.view.LoginMenu;
+import org.view.MainMenu;
 import org.view.Menu;
 import org.view.SignUpMenu;
 
@@ -38,6 +39,7 @@ public class LoginController {
     @FXML
     public void initialize() {
         fillCaptcha();
+        Menu.getSignupController().runProgram();
     }
 
 //    public String signIn(Matcher matcher) throws Exception {
@@ -68,7 +70,7 @@ public class LoginController {
         captcha.setImage(new Image(LoginMenu.class.getResource("/images/captcha/" + fileNumber + ".png").toExternalForm()));
     }
 
-    public void signIn(MouseEvent mouseEvent) {
+    public void signIn(MouseEvent mouseEvent) throws Exception {
         String username = this.username.getText();
         String password = this.password.getText();
         Player player = Player.getPlayerByUsername(username);
@@ -97,6 +99,7 @@ public class LoginController {
                     , "success", SignUpMessages.LOGIN_SUCCESSFUL.getMessage());
             login.setStyle("-fx-background-color: green");
             login.setStyle("-fx-text-fill: black");
+            new MainMenu().start(LoginMenu.stage);
         }
         // TODO: 6/21/2023 Stay loggedIn must be handled whit Usef
     }

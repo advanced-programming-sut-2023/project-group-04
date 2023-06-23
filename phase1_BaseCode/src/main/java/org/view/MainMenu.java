@@ -3,8 +3,10 @@ package org.view;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.model.Player;
 import org.view.CommandsEnum.GameMessages;
 import org.view.CommandsEnum.MainMenuCommands;
 
@@ -20,6 +22,16 @@ public class MainMenu extends Application {
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void logout(MouseEvent mouseEvent) throws Exception {
+        Menu.getSignupController().clearStayLogin();
+        Player.setCurrentPlayer(null);
+        new LoginMenu().start(LoginMenu.stage);
+    }
+
+    public void runProfileMenu(MouseEvent mouseEvent) throws Exception {
+        new ProfileMenu().start(LoginMenu.stage);
     }
 
 //    public void run() throws Exception {

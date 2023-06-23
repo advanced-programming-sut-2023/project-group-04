@@ -10,11 +10,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="920.0" prefWidth="1760.0" stylesheets="@../css/loginMenuStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controller.LoginController">
+<AnchorPane prefHeight="920.0" prefWidth="1560.0" stylesheets="@../css/loginMenuStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controller.LoginController">
     <children>
-        <ImageView fitHeight="920.0" fitWidth="1760.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="920.0" fitWidth="1560.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image requestedHeight="920" requestedWidth="1760" url="@../images/loginBacground.jpg" />
+                <Image requestedHeight="920" requestedWidth="1560" url="@../images/loginBacground.jpg" />
             </image>
         </ImageView>
         <TextField fx:id="username" layoutX="604.0" layoutY="155.0" prefHeight="78.0" prefWidth="370.0" promptText="username">

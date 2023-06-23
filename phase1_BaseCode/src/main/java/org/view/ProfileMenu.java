@@ -1,12 +1,16 @@
 package org.view;
 
-import org.view.CommandsEnum.ProfileCommands;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import org.view.CommandsEnum.ProfileMessages;
-import org.view.CommandsEnum.SignUpMessages;
 
-import java.util.regex.Matcher;
+public class ProfileMenu extends Application {
 
-public class ProfileMenu {
+    public static AnchorPane anchorPane;
+
 //    public void run() throws Exception {
 //        String input;
 //        Matcher matcher;
@@ -71,15 +75,24 @@ public class ProfileMenu {
 //        }
 //    }
 
-    private ProfileMessages isSuggestedUsernameAccepted(String username) {
-        String suggestedUsername = Menu.getProfileController().suggestNewUsername(username);
-        System.out.println("You can register with this username: \"" + suggestedUsername
-                + "\"\n" + "If you want it type <yes> else type <no>");
-        if (Menu.getScanner().nextLine().equalsIgnoreCase("yes")) {
-            Menu.getProfileController().setUsername(suggestedUsername);
-            return ProfileMessages.CHANGE_SUCCESSFULLY;
-        }
-        return ProfileMessages.CHANGING_USERNAME_FAILED;
+//    private ProfileMessages isSuggestedUsernameAccepted(String username) {
+//        String suggestedUsername = Menu.getProfileController().suggestNewUsername(username);
+//        System.out.println("You can register with this username: \"" + suggestedUsername
+//                + "\"\n" + "If you want it type <yes> else type <no>");
+//        if (Menu.getScanner().nextLine().equalsIgnoreCase("yes")) {
+//            Menu.getProfileController().setUsername(suggestedUsername, anchorPane, vBox, usernameError);
+//            return ProfileMessages.CHANGE_SUCCESSFULLY;
+//        }
+//        return ProfileMessages.CHANGING_USERNAME_FAILED;
+//    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        AnchorPane anchorPane = FXMLLoader.load(ProfileMenu.class.getResource("/fxml/profileMenu.fxml"));
+        ProfileMenu.anchorPane = anchorPane;
+        Scene scene = new Scene(anchorPane);
+        stage.setScene(scene);
+        stage.show();
     }
 
 //    private ProfileMessages isRandomPasswordAccepted() throws Exception {
