@@ -11,6 +11,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 
 
@@ -18,7 +19,6 @@ public class GameMenu extends Application {
 
     public VBox controlBar;
     public VBox game;
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -27,14 +27,28 @@ public class GameMenu extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        pane = FXMLLoader.load(new URL(GameMenu.class.getResource("/FXML/GameMenu.fxml").toExternalForm()));
+        pane = new Pane();
         Scene scene = new Scene(pane);
         GameMapView gameMapView = new GameMapView();
         pane.getChildren().add(gameMapView.getMapBox());
+        controlBarSetup();
         stage.setFullScreen(true);
+
         stage.setScene(scene);
         stage.show();
     }
 
+    private void controlBarSetup() throws IOException {
+        Pane controlBar = new Pane();
+        Image image = new Image(GameMenu.class.getResource("/img/controlBar/menu3.png").openStream());
+        BackgroundSize backgroundSize = new BackgroundSize(1540, 250, false, false, false, false);
+        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        Background background = new Background(backgroundImage);
+        controlBar.setBackground(background);
+        controlBar.setPrefSize(1540, 250);
+        controlBar.setTranslateY(620);
+        pane.getChildren().add(controlBar);
+    }
 
 }
