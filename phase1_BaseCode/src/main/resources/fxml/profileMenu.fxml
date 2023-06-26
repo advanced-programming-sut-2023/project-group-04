@@ -64,7 +64,7 @@
             <Font name="Berlin Sans FB" size="27.0" />
          </font>
       </Button>
-      <Button layoutX="712.0" layoutY="425.0" mnemonicParsing="false" text="Change Password">
+      <Button layoutX="712.0" layoutY="425.0" mnemonicParsing="false" text="Change Password" onMouseClicked="#changePassword">
          <font>
             <Font name="Berlin Sans FB" size="27.0" />
          </font>

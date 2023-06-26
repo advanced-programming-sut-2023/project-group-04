@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -19,6 +20,7 @@ import org.model.Player;
 import org.view.CommandsEnum.ProfileMessages;
 
 import javafx.scene.image.ImageView;
+import org.view.CommandsEnum.SignUpMessages;
 import org.view.Menu;
 import org.view.ProfileMenu;
 
@@ -69,9 +71,12 @@ public class ProfileController {
         }
     }
 
-    public void setPassword(String password) {
-        Player.getCurrentPlayer().setPassword(Player.getSHA256Hash(password));
+    public void setPassword(String password, AnchorPane anchorPane, Text oldPasswordError, Text newPasswordError, VBox vBox) {
+        Player.getCurrentPlayer().setPassword(password);
         Player.savePlayers();
+        anchorPane.getChildren().removeAll(vBox, oldPasswordError, newPasswordError);
+        Menu.getSignupController().
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Your password successfully changed!");
     }
 
     public ProfileMessages changeNickname(Matcher matcher) {
@@ -83,15 +88,15 @@ public class ProfileController {
         return ProfileMessages.CHANGE_SUCCESSFULLY;
     }
 
-    public ProfileMessages changePassword(Matcher matcher) {
-        if (matcher.group("newPassword") == null)
-            return ProfileMessages.EMPTY_FIELD;
-        String newPassword = removeQuotation(matcher.group("newPassword"));
-        ProfileMessages profileMessages = checkPassword(matcher);
-        if (profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY))
-            setPassword(newPassword);
-        return profileMessages;
-    }
+//    public ProfileMessages changePassword(Matcher matcher) {
+//        if (matcher.group("newPassword") == null)
+//            return ProfileMessages.EMPTY_FIELD;
+//        String newPassword = removeQuotation(matcher.group("newPassword"));
+//        ProfileMessages profileMessages = checkPassword(matcher);
+//        if (profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY))
+//            setPassword(newPassword, anchorPane, oldPasswordError, newPasswordError, vBox);
+//        return profileMessages;
+//    }
 
     public ProfileMessages changeEmail(Matcher matcher) {
         if (matcher.group("email") == null)
@@ -181,11 +186,11 @@ public class ProfileController {
         return username.matches("[a-zA-Z_0-9]+");
     }
 
-    private ProfileMessages checkPassword(Matcher matcher) {
-        if (matcher.group("oldPassword") == null || matcher.group("newPassword") == null)
+    private ProfileMessages checkPassword(Matcher password) {
+        if (password.group("oldPassword") == null || password.group("newPassword") == null)
             return ProfileMessages.EMPTY_FIELD;
-        String oldPassword = removeQuotation(matcher.group("oldPassword"));
-        String newPassword = removeQuotation(matcher.group("newPassword"));
+        String oldPassword = removeQuotation(password.group("oldPassword"));
+        String newPassword = removeQuotation(password.group("newPassword"));
         if (oldPassword.isEmpty() || newPassword.isEmpty())
             return ProfileMessages.EMPTY_FIELD;
         else if (!Player.getCurrentPlayer().isPasswordCorrect(oldPassword))
@@ -280,7 +285,7 @@ public class ProfileController {
         Text usernameError = new Text("");
         usernameError.setFill(Color.RED);
         usernameError.setX(750);
-        usernameError.setY(510);
+        usernameError.setY(535);
         username.setPromptText("new username");
         Button submit = new Button("Submit");
         submit.setStyle(ProfileController.class.getResource("/css/profileMenu.css").toString());
@@ -308,5 +313,62 @@ public class ProfileController {
                 setUsername(username.getText(), anchorPane, vBox, usernameError);
             }
         });
+    }
+
+    public void changePassword(MouseEvent mouseEvent) {
+        AnchorPane anchorPane = ProfileMenu.anchorPane;
+        PasswordField oldPassword = new PasswordField();
+        PasswordField newPassword = new PasswordField();
+        Text newPasswordError = new Text("");
+        newPasswordError.setFill(Color.RED);
+        newPasswordError.setX(700);
+        newPasswordError.setY(625);
+        Text oldPasswordError = new Text("");
+        oldPasswordError.setX(700);
+        oldPasswordError.setY(575);
+        oldPasswordError.setFill(Color.RED);
+        oldPassword.setPromptText("old password");
+        newPassword.setPromptText("new password");
+        Button submit = new Button("Submit");
+        submit.setStyle(ProfileController.class.getResource("/css/profileMenu.css").toString());
+        VBox vBox = new VBox(oldPassword, newPassword, submit);
+        vBox.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(32);
+        vBox.setPrefHeight(300);
+        vBox.setPrefWidth(350);
+        vBox.setLayoutX(700);
+        vBox.setLayoutY(450);
+        anchorPane.getChildren().addAll(vBox, oldPasswordError, newPasswordError);
+        newPassword.textProperty().addListener((observableValue, oldText, newText) -> {
+            SignUpMessages signUpMessages = Menu.getSignupController().checkPassword(newText);
+            if (!signUpMessages.equals(SignUpMessages.PASSWORD_STRONG)) {
+                newPassword.setStyle("-fx-border-color: red");
+                submit.setDisable(true);
+                newPasswordError.setText(signUpMessages.getMessage());
+            } else {
+                newPassword.setStyle("-fx-border-color: white");
+                submit.setDisable(false);
+                newPasswordError.setText("");
+            }
+        });
+        submit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (!isOldPasswordCorrect(oldPassword.getText())) {
+                    oldPasswordError.setText("password is incorrect!");
+                    oldPassword.setStyle("-fx-border-color: red");
+                    submit.setDisable(true);
+                } else {
+                    submit.setDisable(false);
+                    if (!newPassword.getText().isEmpty())
+                        setPassword(newPassword.getText(), anchorPane, oldPasswordError, newPasswordError, vBox);
+                }
+            }
+        });
+    }
+
+    private boolean isOldPasswordCorrect(String password) {
+        return Player.getCurrentPlayer().isPasswordCorrect(password);
     }
 }

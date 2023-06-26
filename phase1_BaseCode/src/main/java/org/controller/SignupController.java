@@ -249,8 +249,10 @@ public class SignupController {
         return SignUpMessages.WITHOUT_ERROR;
     }
 
-    private SignUpMessages checkPassword(String password) {
-        if (password.matches(".*\\s.*"))
+    public SignUpMessages checkPassword(String password) {
+        if (password.isEmpty())
+            return EMPTY_FIELD;
+        else if (password.matches(".*\\s.*"))
             return PASSWORD_INCORRECT_FORMAT;
         else if (password.length() < 6)
             return PASSWORD_LENGTH_WEAK;
