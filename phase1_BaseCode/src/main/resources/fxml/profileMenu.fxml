@@ -69,22 +69,22 @@
             <Font name="Berlin Sans FB" size="27.0" />
          </font>
       </Button>
-      <Button layoutX="732.0" layoutY="495.0" mnemonicParsing="false" text="Change Email">
+      <Button layoutX="732.0" layoutY="495.0" mnemonicParsing="false" text="Change Email" onMouseClicked="#setEmail">
          <font>
             <Font name="Berlin Sans FB" size="27.0" />
          </font>
       </Button>
-      <Button layoutX="706.0" layoutY="565.0" mnemonicParsing="false" text="Change Nickname">
+      <Button layoutX="706.0" layoutY="565.0" mnemonicParsing="false" text="Change Nickname" onMouseClicked="#changeNickname">
          <font>
             <Font name="Berlin Sans FB" size="27.0" />
          </font>
       </Button>
-      <Button layoutX="724.0" layoutY="635.0" mnemonicParsing="false" text="Change Slogan">
+      <Button layoutX="724.0" layoutY="635.0" mnemonicParsing="false" text="Change Slogan" onMouseClicked="#changeSlogan">
          <font>
             <Font name="Berlin Sans FB" size="27.0" />
          </font>
       </Button>
-      <Button layoutX="721.5" layoutY="705.0" mnemonicParsing="false" text="Change Avatar">
+      <Button layoutX="721.5" layoutY="705.0" mnemonicParsing="false" text="Change Avatar" onMouseClicked="#changeAvatar">
          <font>
             <Font name="Berlin Sans FB" size="27.0" />
          </font>

@@ -241,8 +241,10 @@ public class SignupController {
         return password;
     }
 
-    private SignUpMessages checkEmailErrors(String email) {
-        if (Player.getPlayerByEmail(email) != null)
+    public SignUpMessages checkEmailErrors(String email) {
+        if (email.isEmpty())
+            return SignUpMessages.EMPTY_FIELD;
+        else if (Player.getPlayerByEmail(email) != null)
             return SignUpMessages.EXISTENCE_EMAIL;
         else if (!email.matches("[a-zA-Z0-9_.]+@[a-zA-Z0-9_.]+\\.[a-zA-Z0-9_.]+"))
             return SignUpMessages.INCORRECT_EMAIL_FORMAT;

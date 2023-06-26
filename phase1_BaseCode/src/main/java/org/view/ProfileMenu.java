@@ -10,6 +10,7 @@ import org.view.CommandsEnum.ProfileMessages;
 public class ProfileMenu extends Application {
 
     public static AnchorPane anchorPane;
+    public static Stage stage;
 
 //    public void run() throws Exception {
 //        String input;
@@ -90,6 +91,7 @@ public class ProfileMenu extends Application {
     public void start(Stage stage) throws Exception {
         AnchorPane anchorPane = FXMLLoader.load(ProfileMenu.class.getResource("/fxml/profileMenu.fxml"));
         ProfileMenu.anchorPane = anchorPane;
+        ProfileMenu.stage = stage;
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
         stage.show();

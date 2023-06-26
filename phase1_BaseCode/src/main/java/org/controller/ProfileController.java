@@ -3,7 +3,9 @@ package org.controller;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -16,6 +18,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.model.Player;
 import org.view.CommandsEnum.ProfileMessages;
 
@@ -24,6 +27,7 @@ import org.view.CommandsEnum.SignUpMessages;
 import org.view.Menu;
 import org.view.ProfileMenu;
 
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Random;
@@ -98,7 +102,7 @@ public class ProfileController {
 //        return profileMessages;
 //    }
 
-    public ProfileMessages changeEmail(Matcher matcher) {
+    public ProfileMessages setEmail(Matcher matcher) {
         if (matcher.group("email") == null)
             return ProfileMessages.EMPTY_FIELD;
         String email = removeQuotation(matcher.group("email"));
@@ -110,25 +114,32 @@ public class ProfileController {
         return profileMessages;
     }
 
-    public ProfileMessages changeSlogan(Matcher matcher) {
-        if (matcher.group("slogan") == null)
-            return ProfileMessages.EMPTY_FIELD;
-        ProfileMessages profileMessages = checkSlogan(matcher);
-        String slogan = removeQuotation(matcher.group("slogan"));
-        if (profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY))
-            setSlogan(slogan);
-        return profileMessages;
-    }
+//    public ProfileMessages changeSlogan(Matcher matcher) {
+//        if (matcher.group("slogan") == null)
+//            return ProfileMessages.EMPTY_FIELD;
+//        ProfileMessages profileMessages = checkSlogan(matcher);
+//        String slogan = removeQuotation(matcher.group("slogan"));
+//        if (profileMessages.equals(ProfileMessages.CHANGE_SUCCESSFULLY))
+//            setSlogan(slogan, anchorPane, vBox);
+//        return profileMessages;
+//    }
 
-    public void setSlogan(String slogan) {
+    public void setSlogan(String slogan, AnchorPane anchorPane, VBox vBox) {
         Player.getCurrentPlayer().setSlogan(slogan);
         Player.savePlayers();
+        anchorPane.getChildren().remove(vBox);
+        Menu.getSignupController().showAlert(Alert.AlertType.INFORMATION
+        , "Success", "Your slogan successfully changed!");
+        initialize();
     }
 
-    public ProfileMessages removeSlogan() {
+    public void removeSlogan(AnchorPane anchorPane, VBox vBox) {
         Player.getCurrentPlayer().setSlogan("");
         Player.savePlayers();
-        return ProfileMessages.CHANGE_SUCCESSFULLY;
+        anchorPane.getChildren().remove(vBox);
+        Menu.getSignupController().showAlert(Alert.AlertType.INFORMATION
+        , "Success", "Your slogan successfully removed!");
+        initialize();
     }
 
     public int highScore() {
@@ -370,5 +381,138 @@ public class ProfileController {
 
     private boolean isOldPasswordCorrect(String password) {
         return Player.getCurrentPlayer().isPasswordCorrect(password);
+    }
+
+    public void setEmail(MouseEvent mouseEvent) {
+        AnchorPane anchorPane = ProfileMenu.anchorPane;
+        TextField email = new TextField();
+        Text emailError = new Text("");
+        emailError.setFill(Color.RED);
+        emailError.setX(750);
+        emailError.setY(535);
+        email.setPromptText("new Email");
+        Button submit = new Button("Submit");
+        submit.setStyle(ProfileController.class.getResource("/css/profileMenu.css").toString());
+        VBox vBox = new VBox(email, submit);
+        vBox.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(32);
+        vBox.setPrefHeight(150);
+        vBox.setPrefWidth(250);
+        vBox.setLayoutX(700);
+        vBox.setLayoutY(450);
+        anchorPane.getChildren().addAll(vBox, emailError);
+        email.textProperty().addListener((observableValue, oldText, newText) -> {
+            SignUpMessages signUpMessages = Menu.getSignupController().checkEmailErrors(newText);
+            if (!signUpMessages.equals(SignUpMessages.WITHOUT_ERROR)) {
+                submit.setDisable(true);
+                email.setStyle("-fx-border-color: red");
+                emailError.setText(signUpMessages.getMessage());
+            } else {
+                email.setStyle("-fx-border-color: white");
+                emailError.setText("");
+                submit.setDisable(false);
+            }
+        });
+        submit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (!email.getText().isEmpty())
+                    setEmail(email.getText(), anchorPane, vBox, emailError);
+            }
+        });
+    }
+
+    private void setEmail(String email, AnchorPane anchorPane, VBox vBox, Text emailError) {
+        Player.getCurrentPlayer().setEmail(email);
+        Player.savePlayers();
+        Menu.getSignupController().
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Email successfully changed!");
+        anchorPane.getChildren().removeAll(vBox, emailError);
+        initialize();
+    }
+
+    public void changeNickname(MouseEvent mouseEvent) {
+        AnchorPane anchorPane = ProfileMenu.anchorPane;
+        TextField nickname = new TextField();
+        nickname.setPromptText("new nickname");
+        Button submit = new Button("Submit");
+        submit.setStyle(ProfileController.class.getResource("/css/profileMenu.css").toString());
+        VBox vBox = new VBox(nickname, submit);
+        vBox.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(32);
+        vBox.setPrefHeight(150);
+        vBox.setPrefWidth(250);
+        vBox.setLayoutX(700);
+        vBox.setLayoutY(450);
+        anchorPane.getChildren().addAll(vBox);
+        nickname.textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.isEmpty())
+                nickname.setStyle("-fx-border-color: white");
+        });
+        submit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (!nickname.getText().isEmpty())
+                    setNickname(nickname.getText(), anchorPane, vBox);
+                else {
+                    nickname.setStyle("-fx-border-color: red");
+                }
+            }
+        });
+    }
+
+    private void setNickname(String nickname, AnchorPane anchorPane, VBox vBox) {
+        Player.getCurrentPlayer().setNickname(nickname);
+        Player.savePlayers();
+        Menu.getSignupController().
+                showAlert(Alert.AlertType.INFORMATION, "Success", "nickname successfully changed!");
+        anchorPane.getChildren().removeAll(vBox);
+        initialize();
+    }
+
+    public void changeSlogan(MouseEvent mouseEvent) {
+        AnchorPane anchorPane = ProfileMenu.anchorPane;
+        TextField slogan = new TextField();
+        slogan.setPromptText("new slogan");
+        Button delete = new Button("Delete Slogan");
+        delete.setStyle(ProfileController.class.getResource("/css/profileMenu.css").toString());
+        Button submit = new Button("Submit");
+        submit.setStyle(ProfileController.class.getResource("/css/profileMenu.css").toString());
+        VBox vBox = new VBox(slogan, delete, submit);
+        vBox.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(32);
+        vBox.setPrefHeight(150);
+        vBox.setPrefWidth(250);
+        vBox.setLayoutX(700);
+        vBox.setLayoutY(450);
+        anchorPane.getChildren().addAll(vBox);
+        slogan.textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.isEmpty())
+                slogan.setStyle("-fx-border-color: white");
+        });
+        submit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (!slogan.getText().isEmpty())
+                    setSlogan(slogan.getText(), anchorPane, vBox);
+                else {
+                    slogan.setStyle("-fx-border-color: red");
+                }
+            }
+        });
+        delete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                removeSlogan(anchorPane, vBox);
+            }
+        });
+    }
+
+    public void changeAvatar(MouseEvent mouseEvent) throws IOException {
+        AnchorPane anchorPane = FXMLLoader.load(ProfileController.class.getResource("/fxml/chooseAvatar.fxml"));
+        Scene scene = new Scene(anchorPane);
     }
 }
