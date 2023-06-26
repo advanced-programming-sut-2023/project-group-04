@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -22,9 +23,8 @@ public class ControlBar {
     public Group popularity = new Group();
     public Group report = new Group();
     public Group food = new Group();
-    public Group tax = new Group();
     public Group weapon = new Group();
-    public Group fear = new Group();
+    public Group fearAndTax = new Group();
     public Group stores = new Group();
     private boolean menuFlag = false;
 
@@ -35,7 +35,7 @@ public class ControlBar {
 
 
     public void showGoldAmount() {
-        goldAmount = new Text();
+        goldAmount = new Text("200");
 //        goldAmount.setFont(Font.font("src/main/resources/font/goldNumber.ttf"));
         goldAmount.setTranslateX(908);
         goldAmount.setTranslateY(802);
@@ -55,7 +55,7 @@ public class ControlBar {
 //                System.out.println("------------------");
                 if ((mouseX < 1010 && mouseX > 910) && (mouseY > 730 && mouseY < 860) && !menuFlag) {
                     addReport();
-                    pane.getChildren().removeAll(food, fear, tax, weapon, popularity, stores);
+                    pane.getChildren().removeAll(food, fearAndTax, weapon, popularity, stores);
                     menuFlag = true;
                 } else {
                     pane.getChildren().removeAll(popularity);
@@ -94,26 +94,27 @@ public class ControlBar {
         Text text = new Text(360, 750, "FOOD");
         text.resize(70, 30);
         text.setFont(Font.font(25));
-        Circle meat = new Circle(500,775, 25);
+        Circle meat = new Circle(500, 775, 25);
         meat.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/img/food/Meat.png").toExternalForm())));
-        Circle cheese = new Circle(600,775, 25);
+        Circle cheese = new Circle(600, 775, 25);
         cheese.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/img/food/cheese.png").toExternalForm())));
-        Circle apple = new Circle(700,775, 25);
+        Circle apple = new Circle(700, 775, 25);
         apple.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/img/food/apple.jpg").toExternalForm())));
-        Circle bread = new Circle(800,775, 17);
+        Circle bread = new Circle(800, 775, 17);
         bread.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/img/food/bread.jpg").toExternalForm())));
-        Slider slider = new Slider();
-        slider.setMin(-2);
-        slider.setMax(2);
-        slider.setMajorTickUnit(1);
-        slider.setTranslateX(520);
-        slider.setTranslateY(830);
-        slider.setBlockIncrement(1);
-        slider.setShowTickLabels(true);
-        slider.setPrefWidth(250);
-        slider.valueProperty().addListener((bar, oldval, newVal) ->
-                slider.setValue(Math.round(newVal.doubleValue())));
-        food.getChildren().addAll(meat, text, cheese, apple, bread,slider);
+        Slider foodSlider = new Slider();
+        foodSlider.setMin(-2);
+        foodSlider.setMax(2);
+        foodSlider.setMajorTickUnit(1);
+        foodSlider.setTranslateX(520);
+        foodSlider.setTranslateY(830);
+        foodSlider.setBlockIncrement(1);
+        foodSlider.setShowTickLabels(true);
+        foodSlider.setPrefWidth(250);
+        foodSlider.valueProperty().addListener((bar, oldVal, newVal) ->
+                foodSlider.setValue(Math.round(newVal.doubleValue())));
+        foodSlider.setBackground(Background.fill(Color.WHEAT));
+        food.getChildren().addAll(meat, text, cheese, apple, bread, foodSlider);
         pane.getChildren().addAll(food);
     }
 
@@ -122,88 +123,118 @@ public class ControlBar {
     }
 
     private void addFear() {
-
+        Text fearText = new Text(360, 745, "FEAR");
+        fearText.setFont(Font.font(20));
+        Slider fearSlider = new Slider();
+        fearSlider.setMin(-5);
+        fearSlider.setMax(5);
+        fearSlider.setMajorTickUnit(1);
+        fearSlider.setTranslateX(520);
+        fearSlider.setTranslateY(750);
+        fearSlider.setBlockIncrement(1);
+        fearSlider.setShowTickLabels(true);
+        fearSlider.setPrefWidth(250);
+        fearSlider.valueProperty().addListener((bar, oldVal, newVal) ->
+                fearSlider.setValue(Math.round(newVal.doubleValue())));
+        fearSlider.setBackground(Background.fill(Color.WHEAT));
+        fearAndTax.getChildren().addAll(fearSlider, fearText);
     }
 
     private void addTax() {
-
+        Text taxText = new Text(360, 825, "TAX");
+        taxText.setFont(Font.font(20));
+        Slider taxSlider = new Slider();
+        taxSlider.setMin(-3);
+        taxSlider.setMax(8);
+        taxSlider.setMajorTickUnit(1);
+        taxSlider.setTranslateX(520);
+        taxSlider.setTranslateY(830);
+        taxSlider.setBlockIncrement(1);
+        taxSlider.setShowTickLabels(true);
+        taxSlider.setPrefWidth(250);
+        taxSlider.valueProperty().addListener((bar, oldVal, newVal) ->
+                taxSlider.setValue(Math.round(newVal.doubleValue())));
+        taxSlider.setBackground(Background.fill(Color.WHEAT));
+        fearAndTax.getChildren().addAll(taxSlider, taxText);
+        pane.getChildren().add(fearAndTax);
     }
 
-    private void addWeapon() {
-
-    }
+//    private void addWeapon() {
+//
+//    }
 
 
     private void addReport() {
         Button popularity = new Button("Popularity");
-        popularity.setTranslateX(500);
-        popularity.setTranslateY(750);
+        popularity.setTranslateX(570);
+        popularity.setTranslateY(735);
         Button food = new Button("Food");
-        food.setTranslateX(500);
-        food.setTranslateY(790);
+        food.setTranslateX(570);
+        food.setTranslateY(770);
+        Button fearAndTax = new Button("Fear & Tax");
+        fearAndTax.setTranslateX(570);
+        fearAndTax.setTranslateY(805);
         Button stores = new Button("Stores");
-        stores.setTranslateX(500);
-        stores.setTranslateY(830);
-        Button fear = new Button("Fear");
-        fear.setTranslateX(700);
-        fear.setTranslateY(750);
-        Button tax = new Button("Tax");
-        tax.setTranslateX(700);
-        tax.setTranslateY(790);
-        Button weapon = new Button("Weapons");
-        weapon.setTranslateX(700);
-        weapon.setTranslateY(830);
-        report.getChildren().addAll(popularity, food, stores, fear, weapon, tax);
-        for (Node text : report.getChildren()) {
-            ((Button) text).setPrefSize(100, 20);
+        stores.setTranslateX(570);
+        stores.setTranslateY(840);
+//        Button tax = new Button("Tax");
+//        tax.setTranslateX(700);
+//        tax.setTranslateY(790);
+//        Button weapon = new Button("Weapons");
+//        weapon.setTranslateX(700);
+//        weapon.setTranslateY(830);
+        report.getChildren().addAll(popularity, food, fearAndTax, stores);
+        for (Node node : report.getChildren()) {
+            ((Button) node).setPrefSize(200, 20);
+            ((Button) node).setBackground(Background.fill(Color.LIGHTYELLOW));
         }
-        clickOnMenu(popularity, food, stores, fear, tax, weapon);
+        clickOnMenu(popularity, food, fearAndTax, stores);
         pane.getChildren().add(report);
     }
 
-    private void clickOnMenu(Button r1, Button r2, Button r3, Button r4, Button r5, Button r6) {
-        //                     pop         food      stores       fear       tax        weapon
+    private void clickOnMenu(Button r1, Button r2, Button r3, Button r4) {
         r1.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                pane.getChildren().removeAll(food, fear, tax, weapon, report, stores);
+                pane.getChildren().removeAll(food, fearAndTax, weapon, report, stores);
                 addPopularity();
             }
         });
         r2.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                pane.getChildren().removeAll(report, fear, tax, weapon, popularity, stores);
+                pane.getChildren().removeAll(report, fearAndTax, weapon, popularity, stores);
                 addFood();
             }
         });
         r3.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                pane.getChildren().removeAll(food, fear, tax, weapon, popularity, report);
-                addStores();
+                pane.getChildren().removeAll(food, report, weapon, popularity, stores);
+                addFear();
+                addTax();
             }
         });
         r4.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                pane.getChildren().removeAll(food, report, tax, weapon, popularity, stores);
-                addFear();
+                pane.getChildren().removeAll(food, fearAndTax, weapon, popularity, report);
+                addStores();
             }
         });
-        r5.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                pane.getChildren().removeAll(food, fear, weapon, popularity, report, stores);
-                addTax();
-            }
-        });
-        r6.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                pane.getChildren().removeAll(food, fear, tax, report, popularity, stores);
-                addWeapon();
-            }
-        });
+//        r5.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//                pane.getChildren().removeAll(food, fear, weapon, popularity, report, stores);
+//                addTax();
+//            }
+//        });
+//        r6.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//                pane.getChildren().removeAll(food, fearAndTax, report, popularity, stores);
+//                addWeapon();
+//            }
+//        });
     }
 }
