@@ -1,6 +1,8 @@
 package org.controller;
 
 
+import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,24 +20,28 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.model.Player;
 import org.view.CommandsEnum.ProfileMessages;
 
 import javafx.scene.image.ImageView;
 import org.view.CommandsEnum.SignUpMessages;
+import org.view.LoginMenu;
 import org.view.Menu;
 import org.view.ProfileMenu;
 
+import java.io.File;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 
 import static java.lang.Math.random;
 
-public class ProfileController {
+public class ProfileController extends Application {
     public Text username;
     public Text email;
     public Text slogan;
@@ -45,15 +51,21 @@ public class ProfileController {
     @FXML
     public void initialize() {
         Player player = Player.getCurrentPlayer();
-        username.setText(player.getUsername());
-        email.setText(player.getEmail());
-        if (player.getSlogan() == null || player.getSlogan().equals(""))
-            slogan.setText("slogan is empty");
-        else slogan.setText(player.getSlogan());
+        if (username != null)
+            username.setText(player.getUsername());
+        if (email != null)
+            email.setText(player.getEmail());
+        if (slogan != null) {
+            if (player.getSlogan() == null || player.getSlogan().equals(""))
+                slogan.setText("slogan is empty");
+            else slogan.setText(player.getSlogan());
+        }
         String avatarURL = player.getAvatarResource();
-        if (avatarURL != null)
-            avatar.setImage(new Image(avatarURL));
-        nickname.setText(player.getNickname());
+        if (avatar != null)
+            if (avatarURL != null)
+                avatar.setImage(new Image(avatarURL));
+        if (nickname != null)
+            nickname.setText(player.getNickname());
     }
 
 //    public ProfileMessages changeUsername(Matcher matcher) {
@@ -129,7 +141,7 @@ public class ProfileController {
         Player.savePlayers();
         anchorPane.getChildren().remove(vBox);
         Menu.getSignupController().showAlert(Alert.AlertType.INFORMATION
-        , "Success", "Your slogan successfully changed!");
+                , "Success", "Your slogan successfully changed!");
         initialize();
     }
 
@@ -138,7 +150,7 @@ public class ProfileController {
         Player.savePlayers();
         anchorPane.getChildren().remove(vBox);
         Menu.getSignupController().showAlert(Alert.AlertType.INFORMATION
-        , "Success", "Your slogan successfully removed!");
+                , "Success", "Your slogan successfully removed!");
         initialize();
     }
 
@@ -511,8 +523,47 @@ public class ProfileController {
         });
     }
 
-    public void changeAvatar(MouseEvent mouseEvent) throws IOException {
+    public void changeAvatar(MouseEvent mouseEvent) throws Exception {
+        start(LoginMenu.stage);
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
         AnchorPane anchorPane = FXMLLoader.load(ProfileController.class.getResource("/fxml/chooseAvatar.fxml"));
+        FileChooser fileChooser = new FileChooser();
+        Button chooseFile = new Button("Choose your photo");
+        chooseFile.setLayoutX(700);
+        chooseFile.setLayoutY(600);
+        chooseFile.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                File selectedFile = fileChooser.showOpenDialog(stage);
+                try {
+                    setAvatar(selectedFile);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        anchorPane.getChildren().add(chooseFile);
         Scene scene = new Scene(anchorPane);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void setAvatar(File selectedFile) throws Exception {
+        String url = selectedFile.getAbsolutePath();
+        Player player = Player.getCurrentPlayer();
+        player.setAvatarResource(url);
+        Player.savePlayers();
+        new ProfileMenu().start(LoginMenu.stage);
+    }
+
+    public void chooseAvatar(MouseEvent mouseEvent) throws Exception {
+        ImageView imageView = (ImageView) mouseEvent.getSource();
+        Player player = Player.getCurrentPlayer();
+        player.setAvatarResource(imageView.getImage().getUrl());
+        Player.savePlayers();
+        new ProfileMenu().start(LoginMenu.stage);
     }
 }
