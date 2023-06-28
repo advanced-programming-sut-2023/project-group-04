@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment=" profile updated!">
+    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="choose avatar added!">
+      <change afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/Scoreboard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/css/scoreboard.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PLAYERS.json" beforeDir="false" afterPath="$PROJECT_DIR$/PLAYERS.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/ProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/chooseAvatar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/chooseAvatar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/profileMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/profileMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,9 +21,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="Class" />
         <option value="CSS File" />
-        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -165,7 +169,8 @@
       <workItem from="1687267600178" duration="5039000" />
       <workItem from="1687361713968" duration="8803000" />
       <workItem from="1687542604221" duration="14337000" />
-      <workItem from="1687889890939" duration="977000" />
+      <workItem from="1687889890939" duration="1997000" />
+      <workItem from="1687950638490" duration="5357000" />
     </task>
     <task id="LOCAL-00001" summary="complete GameCommands">
       <created>1682973681030</created>
@@ -251,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687821933389</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="choose avatar added!">
+      <created>1687891119768</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1687891119768</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,7 +321,8 @@
     <MESSAGE value="ProfileMenu updated!" />
     <MESSAGE value="change password added!" />
     <MESSAGE value=" profile updated!" />
-    <option name="LAST_COMMIT_MESSAGE" value=" profile updated!" />
+    <MESSAGE value="choose avatar added!" />
+    <option name="LAST_COMMIT_MESSAGE" value="choose avatar added!" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

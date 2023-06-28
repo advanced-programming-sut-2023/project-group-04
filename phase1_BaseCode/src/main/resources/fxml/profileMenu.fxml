@@ -89,12 +89,12 @@
             <Font name="Berlin Sans FB" size="27.0" />
          </font>
       </Button>
-      <Button layoutX="744.0" layoutY="775.0" mnemonicParsing="false" text="Scoreboard">
+      <Button layoutX="744.0" layoutY="775.0" mnemonicParsing="false" text="Scoreboard" onMouseClicked="#showScoreboard">
          <font>
             <Font name="Berlin Sans FB" size="27.0" />
          </font>
       </Button>
-      <Button layoutX="782.0" layoutY="845.0" mnemonicParsing="false" text="Back">
+      <Button layoutX="782.0" layoutY="845.0" mnemonicParsing="false" text="Back" onMouseClicked="#back">
          <font>
             <Font name="Berlin Sans FB" size="27.0" />
          </font>

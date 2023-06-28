@@ -23,20 +23,16 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.model.Player;
+import org.view.*;
 import org.view.CommandsEnum.ProfileMessages;
 
 import javafx.scene.image.ImageView;
 import org.view.CommandsEnum.SignUpMessages;
-import org.view.LoginMenu;
-import org.view.Menu;
-import org.view.ProfileMenu;
 
 import java.io.File;
-import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 
 import static java.lang.Math.random;
@@ -565,5 +561,13 @@ public class ProfileController extends Application {
         player.setAvatarResource(imageView.getImage().getUrl());
         Player.savePlayers();
         new ProfileMenu().start(LoginMenu.stage);
+    }
+
+    public void showScoreboard(MouseEvent mouseEvent) throws Exception {
+        new Scoreboard().start(LoginMenu.stage);
+    }
+
+    public void back(MouseEvent mouseEvent) throws Exception {
+        new MainMenu().start(LoginMenu.stage);
     }
 }

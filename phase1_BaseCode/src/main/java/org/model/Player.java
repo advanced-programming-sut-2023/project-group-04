@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Player {
 
@@ -237,5 +238,14 @@ public class Player {
 
     public void setAvatarResource(String avatarResource) {
         this.avatarResource = avatarResource;
+    }
+
+    public static ArrayList<Player> getSortedPlayers() {
+        ArrayList<Player> players = allPlayers;
+        for (int i = 0; i < players.size() - 1; i++)
+            for (int j = i + 1; j < players.size(); j++)
+                if (players.get(i).getScore() < players.get(j).getScore())
+                    Collections.swap(players, i, j);
+        return players;
     }
 }
