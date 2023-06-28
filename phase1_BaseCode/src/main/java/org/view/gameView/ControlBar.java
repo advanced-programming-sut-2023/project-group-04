@@ -13,8 +13,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ControlBar {
     private Pane pane;
@@ -23,22 +27,42 @@ public class ControlBar {
     public Group popularity = new Group();
     public Group report = new Group();
     public Group food = new Group();
-    public Group weapon = new Group();
     public Group fearAndTax = new Group();
-    public Group stores = new Group();
-    private boolean menuFlag = false;
+    public Group BuildingCategory = new Group();
+    public Group imagePlace = new Group();
+    Rectangle tower;
+    Rectangle industry;
+    Rectangle farm;
+    Rectangle castle;
+    Rectangle foood;
+    Rectangle weapon;
+    Circle circle1;
+    Circle circle2;
+    Circle circle3;
+    Circle circle4;
+    Circle circle5;
+    Circle circle6;
+    private boolean menuFlag = false, category = true;
+    HashMap<String, Image> images = new HashMap<>();
+    private ArrayList<Image> currentGroup = new ArrayList<>();
 
     public ControlBar(Pane pane, Scene scene) {
         this.pane = pane;
         this.scene = scene;
+        BuildingCategory();
+        addReport();
+        addTax();
+        addFear();
+        addFood();
+        addPopularity();
+        BuildingMenu();
     }
 
 
     public void showGoldAmount() {
         goldAmount = new Text("200");
-//        goldAmount.setFont(Font.font("src/main/resources/font/goldNumber.ttf"));
-        goldAmount.setTranslateX(908);
-        goldAmount.setTranslateY(802);
+        goldAmount.setTranslateX(910);
+        goldAmount.setTranslateY(800);
         goldAmount.setRotate(8);
         goldAmount.setFill(Color.GREEN);
         pane.getChildren().add(goldAmount);
@@ -50,15 +74,17 @@ public class ControlBar {
             public void handle(MouseEvent event) {
                 double mouseX = event.getX();
                 double mouseY = event.getY();
-//                System.out.println(mouseX);
-//                System.out.println(mouseY);
-//                System.out.println("------------------");
-                if ((mouseX < 1010 && mouseX > 910) && (mouseY > 730 && mouseY < 860) && !menuFlag) {
-                    addReport();
-                    pane.getChildren().removeAll(food, fearAndTax, weapon, popularity, stores);
+                //System.out.println(mouseX + "    " + mouseY);
+                if ((mouseX < 1010 && mouseX > 895) && (mouseY > 740 && mouseY < 840) && !menuFlag) {
+                    pane.getChildren().add(report);
+                    pane.getChildren().removeAll(food, fearAndTax, BuildingCategory, popularity);
                     menuFlag = true;
+                    category = false;
                 } else {
-                    pane.getChildren().removeAll(popularity);
+                    pane.getChildren().removeAll(report, food, fearAndTax, popularity);
+                    if (!category) {
+                        category = true;
+                    }
                     menuFlag = false;
                 }
             }
@@ -87,7 +113,6 @@ public class ControlBar {
             if (node instanceof Text)
                 ((Text) node).setFont(Font.font(15));
         }
-        pane.getChildren().add(popularity);
     }
 
     private void addFood() {
@@ -115,11 +140,6 @@ public class ControlBar {
                 foodSlider.setValue(Math.round(newVal.doubleValue())));
         foodSlider.setBackground(Background.fill(Color.WHEAT));
         food.getChildren().addAll(meat, text, cheese, apple, bread, foodSlider);
-        pane.getChildren().addAll(food);
-    }
-
-    private void addStores() {
-
     }
 
     private void addFear() {
@@ -156,12 +176,7 @@ public class ControlBar {
                 taxSlider.setValue(Math.round(newVal.doubleValue())));
         taxSlider.setBackground(Background.fill(Color.WHEAT));
         fearAndTax.getChildren().addAll(taxSlider, taxText);
-        pane.getChildren().add(fearAndTax);
     }
-
-//    private void addWeapon() {
-//
-//    }
 
 
     private void addReport() {
@@ -174,67 +189,112 @@ public class ControlBar {
         Button fearAndTax = new Button("Fear & Tax");
         fearAndTax.setTranslateX(570);
         fearAndTax.setTranslateY(805);
-        Button stores = new Button("Stores");
-        stores.setTranslateX(570);
-        stores.setTranslateY(840);
-//        Button tax = new Button("Tax");
-//        tax.setTranslateX(700);
-//        tax.setTranslateY(790);
-//        Button weapon = new Button("Weapons");
-//        weapon.setTranslateX(700);
-//        weapon.setTranslateY(830);
-        report.getChildren().addAll(popularity, food, fearAndTax, stores);
+//        Button stores = new Button("Stores");
+//        stores.setTranslateX(570);
+//        stores.setTranslateY(840);
+        report.getChildren().addAll(popularity, food, fearAndTax);
         for (Node node : report.getChildren()) {
             ((Button) node).setPrefSize(200, 20);
             ((Button) node).setBackground(Background.fill(Color.LIGHTYELLOW));
         }
-        clickOnMenu(popularity, food, fearAndTax, stores);
-        pane.getChildren().add(report);
+        clickOnMenu(popularity, food, fearAndTax);
     }
 
-    private void clickOnMenu(Button r1, Button r2, Button r3, Button r4) {
+    private void BuildingCategory() {
+        tower = new Rectangle(360, 840, 30, 30);
+        industry = new Rectangle(400, 840, 30, 30);
+        farm = new Rectangle(520, 840, 30, 30);
+        castle = new Rectangle(480, 840, 30, 30);
+        foood = new Rectangle(440, 840, 30, 30);
+        weapon = new Rectangle(560, 840, 30, 30);
+        industry.setFill(new ImagePattern(new Image(ControlBar.class.getResource("/img/controlBar/hammer.jpg").toExternalForm())));
+        foood.setFill(new ImagePattern(new Image(ControlBar.class.getResource("/img/controlBar/apple.png").toExternalForm())));
+        castle.setFill(new ImagePattern(new Image(ControlBar.class.getResource("/img/controlBar/home.png").toExternalForm())));
+        tower.setFill(new ImagePattern(new Image(ControlBar.class.getResource("/img/controlBar/tower.png").toExternalForm())));
+        farm.setFill(new ImagePattern(new Image(ControlBar.class.getResource("/img/controlBar/wheati.png").toExternalForm())));
+        weapon.setFill(new ImagePattern(new Image(ControlBar.class.getResource("/img/controlBar/sheild.png").toExternalForm())));
+        BuildingCategory.getChildren().addAll(tower, industry, farm, castle, foood, weapon);
+    }
+
+    private void clickOnMenu(Button r1, Button r2, Button r3) {
         r1.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                pane.getChildren().removeAll(food, fearAndTax, weapon, report, stores);
-                addPopularity();
+                pane.getChildren().removeAll(food, fearAndTax, weapon, report, BuildingCategory);
+                pane.getChildren().add(popularity);
             }
         });
         r2.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                pane.getChildren().removeAll(report, fearAndTax, weapon, popularity, stores);
-                addFood();
+                pane.getChildren().removeAll(report, fearAndTax, weapon, popularity, BuildingCategory);
+                pane.getChildren().add(food);
             }
         });
         r3.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                pane.getChildren().removeAll(food, report, weapon, popularity, stores);
-                addFear();
-                addTax();
+                pane.getChildren().removeAll(food, report, weapon, popularity, BuildingCategory);
+                pane.getChildren().add(fearAndTax);
             }
         });
-        r4.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                pane.getChildren().removeAll(food, fearAndTax, weapon, popularity, report);
-                addStores();
+//        r4.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//                pane.getChildren().removeAll(food, fearAndTax, weapon, popularity, report, BuildingCategory);
+//                pane.getChildren().add(stores);
+//            }
+//        });
+    }
+
+    private void BuildingMenu() {
+        circle1 = new Circle(430, 745, 32);
+        circle2 = new Circle(510, 800, 32);
+        circle3 = new Circle(590, 745, 32);
+        circle4 = new Circle(670, 800, 32);
+        circle5 = new Circle(750, 745, 32);
+        circle6 = new Circle(830, 800, 32);
+        imagePlace.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
+    }
+
+    private ArrayList<Image> getCurrentGroup(int i) {
+        ArrayList<Image> imageGroup = new ArrayList<>();
+        switch (i) {
+            case 1: {
+
             }
-        });
-//        r5.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                pane.getChildren().removeAll(food, fear, weapon, popularity, report, stores);
-//                addTax();
-//            }
-//        });
-//        r6.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                pane.getChildren().removeAll(food, fearAndTax, report, popularity, stores);
-//                addWeapon();
-//            }
-//        });
+            case 2: {
+
+            }
+            case 3: {
+
+            }
+            case 4: {
+
+            }
+            case 5: {
+
+            }
+            case 6: {
+
+            }
+        }
+        return imageGroup;
+    }
+
+    private void addImage() {
+        images.put("armoury", new Image(ControlBar.class.getResource("/img/fullasset/storage/armoury.png").toExternalForm()));
+        images.put("armoury1", new Image(ControlBar.class.getResource("/img/fullasset/storage/armoury1.png").toExternalForm()));
+        images.put("granary", new Image(ControlBar.class.getResource("/img/fullasset/storage/granary.png").toExternalForm()));
+        images.put("granary1", new Image(ControlBar.class.getResource("/img/fullasset/storage/granary1.png").toExternalForm()));
+        images.put("stockpile", new Image(ControlBar.class.getResource("/img/fullasset/storage/stockpile.png").toExternalForm()));
+        images.put("lookout tower", new Image(ControlBar.class.getResource("/img/fullasset/towers/lookout tower.png").toExternalForm()));
+        images.put("defence turret", new Image(ControlBar.class.getResource("/img/fullasset/towers/defence turret.png").toExternalForm()));
+        images.put("perimeter", new Image(ControlBar.class.getResource("/img/fullasset/towers/perimeter.png").toExternalForm()));
+        images.put("round tower", new Image(ControlBar.class.getResource("/img/fullasset/towers/round tower.png").toExternalForm()));
+        images.put("square tower", new Image(ControlBar.class.getResource("/img/fullasset/towers/square tower.png").toExternalForm()));
+
+
+
     }
 }

@@ -26,12 +26,12 @@ public class GameMenu extends Application {
         pane = new Pane();
         Scene scene = new Scene(pane);
         ControlBar bar = new ControlBar(pane, scene);
-        bar.showGoldAmount();
         bar.reporterClick();
         controlBarSetup();
         stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
+        bar.showGoldAmount();
     }
 
     private void controlBarSetup() throws IOException {
