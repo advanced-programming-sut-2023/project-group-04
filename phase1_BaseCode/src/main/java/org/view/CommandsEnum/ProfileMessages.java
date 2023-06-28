@@ -1,8 +1,6 @@
 package org.view.CommandsEnum;
 
 public enum ProfileMessages {
-    //TODO : update the regex of changing functions
-
     EMPTY_SLOGAN("the slogan is empty!"),
     EMPTY_FIELD("A field is empty!"),
     INCORRECT_USERNAME_FORMAT("username format is incorrect!"),

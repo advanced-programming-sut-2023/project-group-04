@@ -16,10 +16,6 @@ import org.view.SignUpMenu;
 
 import javafx.scene.image.ImageView;
 
-import java.util.regex.Matcher;
-
-import static org.view.CommandsEnum.SignUpMessages.*;
-import static org.view.CommandsEnum.SignUpMessages.LOGIN_SUCCESSFUL;
 
 public class LoginController {
 
@@ -41,24 +37,6 @@ public class LoginController {
         fillCaptcha();
         Menu.getSignupController().runProgram();
     }
-
-//    public String signIn(Matcher matcher) throws Exception {
-//        String username = matcher.group("username").replaceAll("\"", "");
-//        String password = matcher.group("password");
-//        String status = matcher.group("status");
-//        if (Player.getPlayerByUsername(username) == null) return USER_DOES_NOT_EXIST.getMessage();
-//        if (!Player.getPlayerByUsername(username).isPasswordCorrect(Player.getSHA256Hash(password))) {
-//            Player.getPlayerByUsername(username).increaseNumberOfAttempts();
-//            return INCORRECT_PASSWORD.getMessage() + "\nPlease try again after <<"
-//                    + Player.getNumberOfAttempts() * 5 + ">> seconds!";
-//        }
-//        // TODO: 4/19/2023  //Stay logged in not handled!!
-//        if (generateCaptcha().equals(CAPTCHA_CORRECT)) Player.resetNumberOfAttempts();
-//        Player player = Player.getPlayerByUsername(username);
-//        Player.setCurrentPlayer(player);
-//        if (status != null) player.setStayLogin();
-//        return LOGIN_SUCCESSFUL.getMessage();
-//    }
 
 
     public ImageView getCaptcha() {
