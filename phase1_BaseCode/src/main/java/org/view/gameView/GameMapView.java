@@ -15,6 +15,7 @@ import java.util.HashMap;
 
 public class GameMapView {
     private HashMap<String, Image> trees;
+    private static GameMapView currentGameMapView = null;
     private ScrollPane mapBox;
     private Pane map;
     private Scale zoomScale;
@@ -22,8 +23,9 @@ public class GameMapView {
     private double mouseCursorPositionY;
 
     public GameMapView() throws IOException {
+        currentGameMapView = this;
         Tile.loadTiles();
-        loadTrees();
+        Tree.initTrees();
         int mapSize = 100;
         Tile.initializeAllTiles(mapSize);
         readyMap(mapSize);
@@ -58,41 +60,20 @@ public class GameMapView {
                     map.getChildren().add(new Tile(x, y, "GROUND"));
             }
         }
-        handleMouseCursorMove();
-        //TODO : okey this part and mouse move
-        ImageView tree = new ImageView();
-        tree.setImage(trees.get("COCONUT"));
-        tree.setFitWidth(80);
-        tree.setFitHeight(200);
-        tree.setTranslateX(200);
-        tree.setTranslateX(200);
-        map.getChildren().add(tree);
         map.getTransforms().add(zoomScale = new Scale());
-        ImageView building = new ImageView();
-        Image image = new Image(GameMenu.class.getResource("/img/Barracks.png").openStream());
-        building.setImage(image);
-        building.setFitWidth(120);
-        building.setFitHeight(120);
-        double height = building.getFitHeight();
-        building.setTranslateX(560);
-        building.setTranslateY(400);
-        building.setMouseTransparent(true);
-        map.getChildren().add(building);
+        handleMouseCursorMove();
+       Building building = new Building("fuckAP");
         map.setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 mouseCursorPositionX = mouseEvent.getX();
                 mouseCursorPositionY = mouseEvent.getY();
                 if (Tile.getHoveredTile() != null) {
-                    double x = Tile.getHoveredTile().getTranslateX() + Tile.getHoveredTile().getFitWidth() / 2 - building.getFitWidth() / 2;
-                    double y = Tile.getHoveredTile().getTranslateY() + 2 * Tile.getHoveredTile().getFitHeight() - 10 - building.getFitHeight();
-                    building.setTranslateX(x);
-                    building.setTranslateY(y);
+                    building.movingBuilding(Tile.getHoveredTile());
                 }
 
             }
         });
-        map.getTransforms().add(zoomScale = new Scale());
     }
 
     private void handleMouseCursorMove() {
@@ -119,7 +100,6 @@ public class GameMapView {
                     borderTile.setTranslateX(x);
                     borderTile.setTranslateY(y);
                     map.getChildren().add(borderTile);
-                    System.out.println(x + " : " + y);
                     if (i == size / 2 && rep == 1) break;
                 }
             }
@@ -141,23 +121,15 @@ public class GameMapView {
         map.setPrefSize(scale * 8000, scale * 2000);
     }
 
-
-    private void loadTrees() throws IOException {
-        String[] types = {"LITTLE_CHERRY", "LARGE_CHERRY", "OLIVE", "COCONUT", "DATE"};
-        trees = new HashMap<>() {
-            {
-                for (String type : types)
-                    put(type, new Image(GameMenu.class.getResource(
-                            "/img/trees/" + type + ".png").openStream()));
-            }
-        };
-    }
-
     public ScrollPane getMapBox() {
         return this.mapBox;
     }
 
     public Pane getMap() {
         return this.map;
+    }
+
+    public static GameMapView getCurrentGameMapView() {
+        return currentGameMapView;
     }
 }
