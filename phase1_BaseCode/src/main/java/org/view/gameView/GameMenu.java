@@ -2,20 +2,14 @@ package org.view.gameView;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
-import java.net.URL;
 
 
 public class GameMenu extends Application {
@@ -23,6 +17,7 @@ public class GameMenu extends Application {
     private GameMapView mapView;
 
     private String pressedKey;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -35,13 +30,17 @@ public class GameMenu extends Application {
         Scene scene = new Scene(pane);
         mapView = new GameMapView();
         pane.getChildren().add(mapView.getMapBox());
+        ControlBar bar = new ControlBar(pane, scene);
+        bar.reporterClick();
         controlBarSetup();
         stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
         pane.requestFocus();
+        bar.showGoldAmount();
         keyPressEvent();
     }
+
 
     private void keyPressEvent() {
         pane.setOnKeyPressed((new EventHandler<KeyEvent>() {

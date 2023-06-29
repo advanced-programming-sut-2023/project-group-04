@@ -43,24 +43,20 @@ public class GameController {
         return popularity.toString();
     }
 
-    public String showPopularity() {
+    public HashMap<String, Integer> showPopularity() {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         HashMap<String, Integer> popularityFactors = empire.getPopularity();
         int popularitySum = 0;
         for (String key : popularityFactors.keySet()) {
             popularitySum += popularityFactors.get(key);
         }
-        return "your popularity is: <<" + popularitySum + ">>";
+        popularityFactors.put("sum", popularitySum);
+        return popularityFactors;
     }
 
-    public String showFoodList() {
+    public HashMap<String, Integer> showFoodList() {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
-        HashMap<String, Integer> foodList = empire.getFood();
-        StringBuilder foods = new StringBuilder("<<food list>> :\n");
-        for (String key : foodList.keySet()) {
-            foods.append(key).append(": ").append(foodList.get(key)).append("\n");
-        }
-        return foods.toString();
+        return empire.getFood();
     }
 
     public GameMessages changeFoodRate(Matcher matcher) {

@@ -11,23 +11,24 @@ public class GameMenu {
         Matcher matcher;
         while (true) {
             input = Menu.getScanner().nextLine();
-            if (GameCommands.getMatcher(input, GameCommands.SHOW_POPULARITY) != null) {
-                System.out.println(Menu.getGameController().showPopularity());
-            } else if (GameCommands.getMatcher(input, GameCommands.SHOW_FOODlIST) != null) {
-                System.out.println(Menu.getGameController().showFoodList());
-            } else if ((matcher = GameCommands.getMatcher(input, GameCommands.CHANGE_FOOD_RATE)) != null) {
-                System.out.println(Menu.getGameController().changeFoodRate(matcher).getMessage());
-            } else if (GameCommands.getMatcher(input, GameCommands.SHOW_FOOD_RATE) != null) {
-                System.out.println(Menu.getGameController().showFoodRate());
-            } else if ((matcher = GameCommands.getMatcher(input, GameCommands.CHANGE_TAX_RATE)) != null) {
-                System.out.println(Menu.getGameController().changeTaxRate(matcher).getMessage());
-            } else if (GameCommands.getMatcher(input, GameCommands.SHOW_TAX_RATE) != null) {
-                System.out.println(Menu.getGameController().showTaxRate());
-            } else if ((matcher = GameCommands.getMatcher(input, GameCommands.CHANGE_FEAR_RATE)) != null) {
-                System.out.println(Menu.getGameController().changeFearRate(matcher).getMessage());
-            } else if (GameCommands.getMatcher(input, GameCommands.SHOW_FEAR_RATE) != null) {
-                System.out.println(Menu.getGameController().showFearRate());
-            } else if ((matcher = GameCommands.getMatcher(input, GameCommands.DROP_BUILDING)) != null) {
+//            if (GameCommands.getMatcher(input, GameCommands.SHOW_POPULARITY) != null) {
+//                System.out.println(Menu.getGameController().showPopularity());
+//            } else if (GameCommands.getMatcher(input, GameCommands.SHOW_FOODlIST) != null) {
+//                System.out.println(Menu.getGameController().showFoodList());
+//            if ((matcher = GameCommands.getMatcher(input, GameCommands.CHANGE_FOOD_RATE)) != null) {
+//                System.out.println(Menu.getGameController().changeFoodRate(matcher).getMessage());
+//            } else
+//            if (GameCommands.getMatcher(input, GameCommands.SHOW_FOOD_RATE) != null) {
+//                System.out.println(Menu.getGameController().showFoodRate());
+//            } else if ((matcher = GameCommands.getMatcher(input, GameCommands.CHANGE_TAX_RATE)) != null) {
+//                System.out.println(Menu.getGameController().changeTaxRate(matcher).getMessage());
+//            } else if (GameCommands.getMatcher(input, GameCommands.SHOW_TAX_RATE) != null) {
+//                System.out.println(Menu.getGameController().showTaxRate());
+//            } else if ((matcher = GameCommands.getMatcher(input, GameCommands.CHANGE_FEAR_RATE)) != null) {
+//                System.out.println(Menu.getGameController().changeFearRate(matcher).getMessage());
+//            } else if (GameCommands.getMatcher(input, GameCommands.SHOW_FEAR_RATE) != null) {
+//                System.out.println(Menu.getGameController().showFearRate());
+            if ((matcher = GameCommands.getMatcher(input, GameCommands.DROP_BUILDING)) != null) {
                 System.out.println(Menu.getGameController().dropBuilding(matcher).getMessage());
             } else if ((matcher = GameCommands.getMatcher(input, GameCommands.SELECT_BUILDING)) != null) {
                 GameMessages output = Menu.getGameController().selectBuilding(matcher);
