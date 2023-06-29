@@ -11,7 +11,7 @@
             fx:controller="org.view.gameView.GameMenu"
             stylesheets="@../css/css.css">
     <VBox styleClass="test">
-        <VBox fx:id="game"/>
+        <ScrollPane fx:id="mapBox"/>
         <VBox styleClass="control-bar" fx:id="controlBar"/>
     </VBox>
 </Pane>
