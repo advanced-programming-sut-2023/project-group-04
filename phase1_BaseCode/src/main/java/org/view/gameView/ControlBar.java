@@ -420,6 +420,72 @@ public class ControlBar {
                 }
             }
         });
+        circle4.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                switch (catNum) {
+                    case -1:
+                        clickedBuilding = null;
+                    case 1:
+                        clickedBuilding = "round tower";
+                    case 2:
+                        clickedBuilding = "pitch rig";
+                    case 3:
+                        clickedBuilding = "hops farmer";
+                    case 4:
+                        clickedBuilding = "stone wall";
+                    case 5:
+                        clickedBuilding = "mill";
+                    case 6:
+                        clickedBuilding = "fletcher";
+                }
+                System.out.println(clickedBuilding);
+            }
+        });
+        circle5.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                switch (catNum) {
+                    case -1:
+                        clickedBuilding = null;
+                    case 1:
+                        clickedBuilding = "square tower";
+                    case 2:
+                        clickedBuilding = "woodcutter";
+                    case 3:
+                        clickedBuilding = "hunter post";
+                    case 4:
+                        clickedBuilding = "small stone gatehouse";
+                    case 5:
+                        clickedBuilding = "stockpile";
+                    case 6:
+                        clickedBuilding = "poleturner";
+                }
+                System.out.println(clickedBuilding);
+            }
+        });
+        circle6.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                switch (catNum) {
+                    case -1:
+                        clickedBuilding = null;
+                    case 1:
+                        clickedBuilding = "perimeter";
+                    case 2:
+                        clickedBuilding = "mercenary post";
+                    case 3:
+                        clickedBuilding = "wheat";
+                    case 4:
+                        clickedBuilding = "tunneler guild";
+                    case 5:
+                        clickedBuilding = "water";
+                    case 6:
+                        clickedBuilding = "tanner";
+                }
+                System.out.println(clickedBuilding);
+            }
+        });
     }
 
     private void addImage() {
