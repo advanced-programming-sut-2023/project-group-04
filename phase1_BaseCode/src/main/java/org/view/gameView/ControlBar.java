@@ -420,134 +420,116 @@ public class ControlBar {
         circle1.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                switch (catNum) {
-                    case -1:
-                        clickedBuilding = null;
-                    case 1:
-                        clickedBuilding = "hovel";
-                    case 2:
-                        clickedBuilding = "quarry";
-                    case 3:
-                        clickedBuilding = "apple orchard";
-                    case 4:
-                        clickedBuilding = "barracks";
-                    case 5:
-                        clickedBuilding = "bakery";
-                    case 6:
-                        clickedBuilding = "armoury";
-                }
-                System.out.println(clickedBuilding);
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1)
+                    clickedBuilding = "hovel";
+                else if (catNum == 2)
+                    clickedBuilding = "quarry";
+                else if (catNum == 3)
+                    clickedBuilding = "apple orchard";
+                else if (catNum == 4)
+                    clickedBuilding = "barracks";
+                else if (catNum == 5)
+                    clickedBuilding = "bakery";
+                else if (catNum == 6)
+                    clickedBuilding = "armoury";
             }
         });
 
         circle2.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                switch (catNum) {
-                    case -1:
-                        clickedBuilding = null;
-                    case 1:
-                        clickedBuilding = "lookout tower";
-                    case 2:
-                        clickedBuilding = "iron mine";
-                    case 3:
-                        clickedBuilding = "diary farmer";
-                    case 4:
-                        clickedBuilding = "engineer guild";
-                    case 5:
-                        clickedBuilding = "brewer";
-                    case 6:
-                        clickedBuilding = "armourer";
-                }
-                System.out.println(clickedBuilding);
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1)
+                    clickedBuilding = "lookout tower";
+                else if (catNum == 2)
+                    clickedBuilding = "iron mine";
+                else if (catNum == 3)
+                    clickedBuilding = "diary farmer";
+                else if (catNum == 4)
+                    clickedBuilding = "engineer guild";
+                else if (catNum == 5)
+                    clickedBuilding = "brewer";
+                else if (catNum == 6)
+                    clickedBuilding = "armourer";
             }
         });
         circle3.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                switch (catNum) {
-                    case -1:
-                        clickedBuilding = null;
-                    case 1:
-                        clickedBuilding = "defence turret";
-                    case 2:
-                        clickedBuilding = "market";
-                    case 3:
-                        clickedBuilding = "granary";
-                    case 4:
-                        clickedBuilding = "low wall";
-                    case 5:
-                        clickedBuilding = "inn";
-                    case 6:
-                        clickedBuilding = "blacksmith";
-                }
-                System.out.println(clickedBuilding);
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1)
+                    clickedBuilding = "defence turret";
+                else if (catNum == 2)
+                    clickedBuilding = "market";
+                else if (catNum == 3)
+                    clickedBuilding = "granary";
+                else if (catNum == 4)
+                    clickedBuilding = "low wall";
+                else if (catNum == 5)
+                    clickedBuilding = "inn";
+                else if (catNum == 6)
+                    clickedBuilding = "blacksmith";
             }
         });
         circle4.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                switch (catNum) {
-                    case -1:
-                        clickedBuilding = null;
-                    case 1:
-                        clickedBuilding = "round tower";
-                    case 2:
-                        clickedBuilding = "pitch rig";
-                    case 3:
-                        clickedBuilding = "hops farmer";
-                    case 4:
-                        clickedBuilding = "stone wall";
-                    case 5:
-                        clickedBuilding = "mill";
-                    case 6:
-                        clickedBuilding = "fletcher";
-                }
-                System.out.println(clickedBuilding);
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1)
+                    clickedBuilding = "round tower";
+                else if (catNum == 2)
+                    clickedBuilding = "pitch rig";
+                else if (catNum == 3)
+                    clickedBuilding = "hops farmer";
+                else if (catNum == 4)
+                    clickedBuilding = "stone wall";
+                else if (catNum == 5)
+                    clickedBuilding = "mill";
+                else if (catNum == 6)
+                    clickedBuilding = "fletcher";
             }
         });
         circle5.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                switch (catNum) {
-                    case -1:
-                        clickedBuilding = null;
-                    case 1:
-                        clickedBuilding = "square tower";
-                    case 2:
-                        clickedBuilding = "woodcutter";
-                    case 3:
-                        clickedBuilding = "hunter post";
-                    case 4:
-                        clickedBuilding = "small stone gatehouse";
-                    case 5:
-                        clickedBuilding = "stockpile";
-                    case 6:
-                        clickedBuilding = "poleturner";
-                }
-                System.out.println(clickedBuilding);
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1)
+                    clickedBuilding = "square tower";
+                else if (catNum == 2)
+                    clickedBuilding = "woodcutter";
+                else if (catNum == 3)
+                    clickedBuilding = "hunter post";
+                else if (catNum == 4)
+                    clickedBuilding = "small stone gatehouse";
+                else if (catNum == 5)
+                    clickedBuilding = "stockpile";
+                else if (catNum == 6)
+                    clickedBuilding = "poleturner";
             }
         });
         circle6.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                switch (catNum) {
-                    case -1:
-                        clickedBuilding = null;
-                    case 1:
-                        clickedBuilding = "perimeter";
-                    case 2:
-                        clickedBuilding = "mercenary post";
-                    case 3:
-                        clickedBuilding = "wheat";
-                    case 4:
-                        clickedBuilding = "tunneler guild";
-                    case 5:
-                        clickedBuilding = "water";
-                    case 6:
-                        clickedBuilding = "tanner";
-                }
-                System.out.println(clickedBuilding);
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1)
+                    clickedBuilding = "perimeter";
+                else if (catNum == 2)
+                    clickedBuilding = "mercenary post";
+                else if (catNum == 3)
+                    clickedBuilding = "wheat";
+                else if (catNum == 4)
+                    clickedBuilding = "tunneler guild";
+                else if (catNum == 5)
+                    clickedBuilding = "water";
+                else if (catNum == 6)
+                    clickedBuilding = "tanner";
             }
         });
     }
