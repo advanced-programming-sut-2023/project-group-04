@@ -11,20 +11,7 @@ public class GameMenu {
         Matcher matcher;
         while (true) {
             input = Menu.getScanner().nextLine();
-            if ((matcher = GameCommands.getMatcher(input, GameCommands.SHOW_MAP)) != null) {
-                result = Menu.getMapController().showMap(Integer.parseInt(matcher.group("xAsis")) - 1,
-                        Integer.parseInt(matcher.group("yAsis")) - 1);
-                System.out.println(result);
-                if (!result.equals(GameMessages.INVALID_POSITION.getMessage())) {
-                    System.out.println("You successfully entered \"Map Menu\"");
-                    new MapMenu().run();
-                }
-            } else if (GameCommands.getMatcher(input, GameCommands.BACK) != null) {
-                System.out.println("You are in main menu now!");
-                return;
-            } else if (GameCommands.getMatcher(input, GameCommands.SHOW_POPULARITY_FACTORS) != null) {
-                System.out.println(Menu.getGameController().showPopularityFactors());
-            } else if (GameCommands.getMatcher(input, GameCommands.SHOW_POPULARITY) != null) {
+            if (GameCommands.getMatcher(input, GameCommands.SHOW_POPULARITY) != null) {
                 System.out.println(Menu.getGameController().showPopularity());
             } else if (GameCommands.getMatcher(input, GameCommands.SHOW_FOODlIST) != null) {
                 System.out.println(Menu.getGameController().showFoodList());

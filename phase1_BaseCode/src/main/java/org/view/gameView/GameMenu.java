@@ -1,10 +1,13 @@
 package org.view.gameView;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -17,8 +20,9 @@ import java.net.URL;
 
 public class GameMenu extends Application {
 
-    public VBox controlBar;
-    public VBox game;
+    private GameMapView mapView;
+
+    private String pressedKey;
     public static void main(String[] args) {
         launch(args);
     }
@@ -29,26 +33,47 @@ public class GameMenu extends Application {
     public void start(Stage stage) throws Exception {
         pane = new Pane();
         Scene scene = new Scene(pane);
-        GameMapView gameMapView = new GameMapView();
-        pane.getChildren().add(gameMapView.getMapBox());
+        mapView = new GameMapView();
+        pane.getChildren().add(mapView.getMapBox());
         controlBarSetup();
         stage.setFullScreen(true);
-
         stage.setScene(scene);
         stage.show();
+        pane.requestFocus();
+        keyPressEvent();
+    }
+
+    private void keyPressEvent() {
+        pane.setOnKeyPressed((new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                pressedKey = keyEvent.getText();
+                switch (pressedKey) {
+                    case "+" -> mapView.zoom(+1);
+                    case "-" -> mapView.zoom(-1);
+                }
+            }
+        }));
+
+        pane.setOnKeyReleased((new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                pressedKey = null;
+            }
+        }));
     }
 
     private void controlBarSetup() throws IOException {
-        Pane controlBar = new Pane();
+        ImageView controlBar = new ImageView();
         Image image = new Image(GameMenu.class.getResource("/img/controlBar/menu3.png").openStream());
-        BackgroundSize backgroundSize = new BackgroundSize(1540, 250, false, false, false, false);
-        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
-        Background background = new Background(backgroundImage);
-        controlBar.setBackground(background);
-        controlBar.setPrefSize(1540, 250);
+        controlBar.setImage(image);
+        controlBar.setFitWidth(1540);
+        controlBar.setFitHeight(250);
         controlBar.setTranslateY(620);
         pane.getChildren().add(controlBar);
     }
 
+    public String getPressedKey() {
+        return pressedKey;
+    }
 }
