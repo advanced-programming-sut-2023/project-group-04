@@ -17,7 +17,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ControlBar {
@@ -29,35 +28,24 @@ public class ControlBar {
     public Group food = new Group();
     public Group fearAndTax = new Group();
     public Group BuildingCategory = new Group();
-    public Group imagePlace = new Group();
-    Rectangle tower;
-    Rectangle industry;
-    Rectangle farm;
-    Rectangle castle;
-    Rectangle foood;
-    Rectangle weapon;
-    Circle circle1;
-    Circle circle2;
-    Circle circle3;
-    Circle circle4;
-    Circle circle5;
-    Circle circle6;
+    public Group imagePlaces = new Group();
+    Rectangle tower, industry, farm, castle, foood, weapon;
+    Circle circle1, circle2, circle3, circle4, circle5, circle6;
     private boolean menuFlag = false, category = true;
     HashMap<String, Image> images = new HashMap<>();
-    private ArrayList<Image> currentGroup = new ArrayList<>();
 
     public ControlBar(Pane pane, Scene scene) {
         this.pane = pane;
         this.scene = scene;
+        addImage();
+        BuildingMenu();
         BuildingCategory();
         addReport();
         addTax();
         addFear();
         addFood();
         addPopularity();
-        BuildingMenu();
     }
-
 
     public void showGoldAmount() {
         goldAmount = new Text("200");
@@ -83,6 +71,7 @@ public class ControlBar {
                 } else {
                     pane.getChildren().removeAll(report, food, fearAndTax, popularity);
                     if (!category) {
+                        pane.getChildren().add(BuildingCategory);
                         category = true;
                     }
                     menuFlag = false;
@@ -185,13 +174,10 @@ public class ControlBar {
         popularity.setTranslateY(735);
         Button food = new Button("Food");
         food.setTranslateX(570);
-        food.setTranslateY(770);
+        food.setTranslateY(780);
         Button fearAndTax = new Button("Fear & Tax");
         fearAndTax.setTranslateX(570);
-        fearAndTax.setTranslateY(805);
-//        Button stores = new Button("Stores");
-//        stores.setTranslateX(570);
-//        stores.setTranslateY(840);
+        fearAndTax.setTranslateY(825);
         report.getChildren().addAll(popularity, food, fearAndTax);
         for (Node node : report.getChildren()) {
             ((Button) node).setPrefSize(200, 20);
@@ -214,6 +200,95 @@ public class ControlBar {
         farm.setFill(new ImagePattern(new Image(ControlBar.class.getResource("/img/controlBar/wheati.png").toExternalForm())));
         weapon.setFill(new ImagePattern(new Image(ControlBar.class.getResource("/img/controlBar/sheild.png").toExternalForm())));
         BuildingCategory.getChildren().addAll(tower, industry, farm, castle, foood, weapon);
+        clickOnCategory(tower, industry, farm, castle, foood, weapon);
+    }
+
+    private void clickOnCategory(Rectangle tower, Rectangle industry, Rectangle farm, Rectangle castle, Rectangle foood,
+                                 Rectangle weapon) {
+        tower.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                circle1.setFill(new ImagePattern(images.get("hovel")));
+                circle2.setFill(new ImagePattern(images.get("lookout tower")));
+                circle3.setFill(new ImagePattern(images.get("defence turret")));
+                circle4.setFill(new ImagePattern(images.get("round tower")));
+                circle5.setFill(new ImagePattern(images.get("square tower")));
+                circle6.setFill(new ImagePattern(images.get("perimeter")));
+                if (pane.getChildren().contains(circle1))
+                    pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
+                pane.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
+            }
+        });
+        industry.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                circle1.setFill(new ImagePattern(images.get("quarry")));
+                circle2.setFill(new ImagePattern(images.get("iron mine")));
+                circle3.setFill(new ImagePattern(images.get("market")));
+                circle4.setFill(new ImagePattern(images.get("pitch rig")));
+                circle5.setFill(new ImagePattern(images.get("woodcutter")));
+                circle6.setFill(new ImagePattern(images.get("mercenary post")));
+                if (pane.getChildren().contains(circle1))
+                    pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
+                pane.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
+            }
+        });
+        farm.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                circle1.setFill(new ImagePattern(images.get("apple orchard")));
+                circle2.setFill(new ImagePattern(images.get("diary farmer")));
+                circle3.setFill(new ImagePattern(images.get("granary")));
+                circle4.setFill(new ImagePattern(images.get("hops farmer")));
+                circle5.setFill(new ImagePattern(images.get("hunter post")));
+                circle6.setFill(new ImagePattern(images.get("wheat")));
+                if (pane.getChildren().contains(circle1))
+                    pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
+                pane.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
+            }
+        });
+        castle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                circle1.setFill(new ImagePattern(images.get("barracks")));
+                circle2.setFill(new ImagePattern(images.get("engineer guild")));
+                circle3.setFill(new ImagePattern(images.get("low wall")));
+                circle4.setFill(new ImagePattern(images.get("stone wall")));
+                circle5.setFill(new ImagePattern(images.get("small stone gatehouse")));
+                circle6.setFill(new ImagePattern(images.get("tunneler guild")));
+                if (pane.getChildren().contains(circle1))
+                    pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
+                pane.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
+            }
+        });
+        foood.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                circle1.setFill(new ImagePattern(images.get("bakery")));
+                circle2.setFill(new ImagePattern(images.get("brewer")));
+                circle3.setFill(new ImagePattern(images.get("inn")));
+                circle4.setFill(new ImagePattern(images.get("mill")));
+                circle5.setFill(new ImagePattern(images.get("stockpile")));
+                circle6.setFill(new ImagePattern(images.get("water")));
+                if (pane.getChildren().contains(circle1))
+                    pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
+                pane.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
+            }
+        });
+        weapon.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                circle1.setFill(new ImagePattern(images.get("armoury")));
+                circle2.setFill(new ImagePattern(images.get("armourer")));
+                circle3.setFill(new ImagePattern(images.get("blacksmith")));
+                circle4.setFill(new ImagePattern(images.get("fletcher")));
+                circle5.setFill(new ImagePattern(images.get("poleturner")));
+                circle6.setFill(new ImagePattern(images.get("tanner")));
+                if (pane.getChildren().contains(circle1))
+                    pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
+                pane.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
+            }
+        });
     }
 
     private void clickOnMenu(Button r1, Button r2, Button r3) {
@@ -238,63 +313,57 @@ public class ControlBar {
                 pane.getChildren().add(fearAndTax);
             }
         });
-//        r4.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                pane.getChildren().removeAll(food, fearAndTax, weapon, popularity, report, BuildingCategory);
-//                pane.getChildren().add(stores);
-//            }
-//        });
     }
 
     private void BuildingMenu() {
-        circle1 = new Circle(430, 745, 32);
+        circle1 = new Circle(430, 750, 32);
         circle2 = new Circle(510, 800, 32);
-        circle3 = new Circle(590, 745, 32);
+        circle3 = new Circle(590, 750, 32);
         circle4 = new Circle(670, 800, 32);
-        circle5 = new Circle(750, 745, 32);
+        circle5 = new Circle(750, 750, 32);
         circle6 = new Circle(830, 800, 32);
-        imagePlace.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
-    }
-
-    private ArrayList<Image> getCurrentGroup(int i) {
-        ArrayList<Image> imageGroup = new ArrayList<>();
-        switch (i) {
-            case 1: {
-
-            }
-            case 2: {
-
-            }
-            case 3: {
-
-            }
-            case 4: {
-
-            }
-            case 5: {
-
-            }
-            case 6: {
-
-            }
-        }
-        return imageGroup;
+        imagePlaces.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
     }
 
     private void addImage() {
-        images.put("armoury", new Image(ControlBar.class.getResource("/img/fullasset/storage/armoury.png").toExternalForm()));
-        images.put("armoury1", new Image(ControlBar.class.getResource("/img/fullasset/storage/armoury1.png").toExternalForm()));
-        images.put("granary", new Image(ControlBar.class.getResource("/img/fullasset/storage/granary.png").toExternalForm()));
-        images.put("granary1", new Image(ControlBar.class.getResource("/img/fullasset/storage/granary1.png").toExternalForm()));
-        images.put("stockpile", new Image(ControlBar.class.getResource("/img/fullasset/storage/stockpile.png").toExternalForm()));
-        images.put("lookout tower", new Image(ControlBar.class.getResource("/img/fullasset/towers/lookout tower.png").toExternalForm()));
-        images.put("defence turret", new Image(ControlBar.class.getResource("/img/fullasset/towers/defence turret.png").toExternalForm()));
-        images.put("perimeter", new Image(ControlBar.class.getResource("/img/fullasset/towers/perimeter.png").toExternalForm()));
-        images.put("round tower", new Image(ControlBar.class.getResource("/img/fullasset/towers/round tower.png").toExternalForm()));
-        images.put("square tower", new Image(ControlBar.class.getResource("/img/fullasset/towers/square tower.png").toExternalForm()));
-
-
-
+        images.put("armoury", new Image(ControlBar.class.getResource("/img/buildings/weapon/armoury.png").toExternalForm()));
+        images.put("armoury1", new Image(ControlBar.class.getResource("/img/buildings/weapon/armoury1.png").toExternalForm()));
+        images.put("granary", new Image(ControlBar.class.getResource("/img/buildings/farm/granary.png").toExternalForm()));
+        images.put("granary1", new Image(ControlBar.class.getResource("/img/buildings/farm/granary1.png").toExternalForm()));
+        images.put("stockpile", new Image(ControlBar.class.getResource("/img/buildings/food/stockpile.png").toExternalForm()));
+        images.put("lookout tower", new Image(ControlBar.class.getResource("/img/buildings/towers/lookout tower.png").toExternalForm()));
+        images.put("defence turret", new Image(ControlBar.class.getResource("/img/buildings/towers/defence turret.png").toExternalForm()));
+        images.put("perimeter", new Image(ControlBar.class.getResource("/img/buildings/towers/perimeter.png").toExternalForm()));
+        images.put("hovel", new Image(ControlBar.class.getResource("/img/buildings/towers/hovel.png").toExternalForm()));
+        images.put("round tower", new Image(ControlBar.class.getResource("/img/buildings/towers/round tower.png").toExternalForm()));
+        images.put("square tower", new Image(ControlBar.class.getResource("/img/buildings/towers/square tower.png").toExternalForm()));
+        images.put("apple orchard", new Image(ControlBar.class.getResource("/img/buildings/farm/apple orchard.png").toExternalForm()));
+        images.put("diary farmer", new Image(ControlBar.class.getResource("/img/buildings/farm/diary farmer.png").toExternalForm()));
+        images.put("hunter post", new Image(ControlBar.class.getResource("/img/buildings/farm/hunter post.png").toExternalForm()));
+        images.put("hops farmer", new Image(ControlBar.class.getResource("/img/buildings/farm/hops farmer.png").toExternalForm()));
+        images.put("wheat", new Image(ControlBar.class.getResource("/img/buildings/farm/wheat.png").toExternalForm()));
+        images.put("bakery", new Image(ControlBar.class.getResource("/img/buildings/food/bakery.png").toExternalForm()));
+        images.put("brewer", new Image(ControlBar.class.getResource("/img/buildings/food/brewer.png").toExternalForm()));
+        images.put("inn", new Image(ControlBar.class.getResource("/img/buildings/food/inn.png").toExternalForm()));
+        images.put("mill", new Image(ControlBar.class.getResource("/img/buildings/food/mill.png").toExternalForm()));
+        //images.put("large stone gatehouse", new Image(ControlBar.class.getResource("/img/buildings/gatehouse/large gate.png").toExternalForm()));
+        images.put("small stone gatehouse", new Image(ControlBar.class.getResource("/img/buildings/castle/small stone gatehouse.png").toExternalForm()));
+        images.put("armourer", new Image(ControlBar.class.getResource("/img/buildings/weapon/armourer.png").toExternalForm()));
+        images.put("fletcher", new Image(ControlBar.class.getResource("/img/buildings/weapon/fletcher.png").toExternalForm()));
+        images.put("blacksmith", new Image(ControlBar.class.getResource("/img/buildings/weapon/blacksmith.png").toExternalForm()));
+        images.put("tanner", new Image(ControlBar.class.getResource("/img/buildings/weapon/tanner.png").toExternalForm()));
+        images.put("poleturner", new Image(ControlBar.class.getResource("/img/buildings/weapon/poleturner.png").toExternalForm()));
+        images.put("barracks", new Image(ControlBar.class.getResource("/img/buildings/castle/barracks.png").toExternalForm()));
+        images.put("engineer guild", new Image(ControlBar.class.getResource("/img/buildings/castle/engineer guild.png").toExternalForm()));
+        images.put("mercenary post", new Image(ControlBar.class.getResource("/img/buildings/castle/mercenary post.png").toExternalForm()));
+        images.put("tunneler guild", new Image(ControlBar.class.getResource("/img/buildings/castle/tunneler guild.png").toExternalForm()));
+        images.put("low wall", new Image(ControlBar.class.getResource("/img/buildings/castle/low wall.png").toExternalForm()));
+        images.put("stone wall", new Image(ControlBar.class.getResource("/img/buildings/castle/stone wall.png").toExternalForm()));
+        images.put("iron mine", new Image(ControlBar.class.getResource("/img/buildings/industry/iron mine.png").toExternalForm()));
+        images.put("market", new Image(ControlBar.class.getResource("/img/buildings/industry/Market.png").toExternalForm()));
+        images.put("quarry", new Image(ControlBar.class.getResource("/img/buildings/industry/quarry.png").toExternalForm()));
+        images.put("woodcutter", new Image(ControlBar.class.getResource("/img/buildings/industry/woodcutter.png").toExternalForm()));
+        images.put("pitch rig", new Image(ControlBar.class.getResource("/img/buildings/industry/pitch rig.png").toExternalForm()));
+        images.put("water", new Image(ControlBar.class.getResource("/img/buildings/food/water.png").toExternalForm()));
     }
 }

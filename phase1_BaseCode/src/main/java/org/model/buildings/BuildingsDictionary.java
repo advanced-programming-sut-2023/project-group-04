@@ -12,17 +12,17 @@ public enum BuildingsDictionary {
         {
             put("stone", 4);
         }
-    },1, 0, 0),
+    }, 1, 0, 0),
     CRENULATED_WALL("crenulated wall", BuildingType.CASTLE, 3500, new HashMap<>() {
         {
             put("stone", 6);
         }
-    },1, 0, 0),
+    }, 1, 0, 0),
     STAIRS("stairs", BuildingType.CASTLE, 2000, new HashMap<>() {
         {
             put("stone", 4);
         }
-    },1, 0, 0),
+    }, 1, 0, 0),
     HEAD_QUARTER("headquarter", BuildingType.CASTLE, 6000, new HashMap<>() {
     }, 1, 0, 0),
     SMALL_STONE_GATEHOUSE("small stone gatehouse", BuildingType.CASTLE, 2600, new HashMap<>() {
