@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="extra codes deleted!">
-      <change afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/shopMenu.fxml" afterDir="false" />
+    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="shop Appearance added!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/ShopMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/ShopMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/ShopController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/shopMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/shopMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +182,7 @@
       <workItem from="1687889890939" duration="1997000" />
       <workItem from="1687950638490" duration="5692000" />
       <workItem from="1687979828167" duration="3587000" />
-      <workItem from="1688126941354" duration="4358000" />
+      <workItem from="1688126941354" duration="5909000" />
     </task>
     <task id="LOCAL-00001" summary="complete GameCommands">
       <created>1682973681030</created>
@@ -289,7 +289,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687982453671</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="shop Appearance added!">
+      <created>1688137327783</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1688137327784</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -350,7 +357,8 @@
     <MESSAGE value="choose avatar added!" />
     <MESSAGE value="profileMenu completed!" />
     <MESSAGE value="extra codes deleted!" />
-    <option name="LAST_COMMIT_MESSAGE" value="extra codes deleted!" />
+    <MESSAGE value="shop Appearance added!" />
+    <option name="LAST_COMMIT_MESSAGE" value="shop Appearance added!" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

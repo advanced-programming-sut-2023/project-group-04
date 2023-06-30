@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="920.0" prefWidth="1560.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="920.0" prefWidth="1560.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controller.ShopController">
    <children>
       <ImageView fitHeight="920.0" fitWidth="1560.0" opacity="0.43" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -21,7 +21,7 @@
       </ImageView>
       <HBox fx:id="allItems" layoutX="550.0" layoutY="176.0" prefHeight="155.0" prefWidth="823.0" spacing="50.0">
          <children>
-            <ImageView fx:id="food" fitHeight="150.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="food" fitHeight="150.0" fitWidth="120.0" onMouseClicked="#openFoodShop" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/market/foods.png" />
                </image>
@@ -29,7 +29,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="rawMaterials" fitHeight="150.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="rawMaterials" fitHeight="150.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#openMaterialsShop">
                <image>
                   <Image url="@../images/market/rawMaterials.png" />
                </image>
@@ -37,7 +37,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="weapons" fitHeight="150.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="weapons" fitHeight="150.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#openWeaponsShop">
                <image>
                   <Image url="@../images/market/weapons.png" />
                </image>
@@ -47,7 +47,7 @@
             </ImageView>
          </children>
       </HBox>
-      <GridPane fx:id="foods" layoutX="-5.0" layoutY="4.0" prefHeight="893.0" prefWidth="1514.0" visible="false">
+      <GridPane fx:id="foodsGrid" layoutX="-5.0" layoutY="4.0" prefHeight="893.0" prefWidth="1514.0" visible="false">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -420,7 +420,7 @@
                   <Font name="Californian FB Italic" size="45.0" />
                </font>
             </Text>
-            <ImageView fx:id="backButton" fitHeight="60.0" fitWidth="60.0" layoutX="1040.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
+            <ImageView fx:id="backButton" fitHeight="60.0" fitWidth="60.0" layoutX="1040.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT" onMouseClicked="#back">
                <image>
                   <Image url="@../images/market/back.png" />
                </image>
@@ -635,7 +635,7 @@
                   <Font name="Californian FB Italic" size="45.0" />
                </font>
             </Text>
-            <ImageView fx:id="backButton1" fitHeight="60.0" fitWidth="60.0" layoutX="1040.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
+            <ImageView fx:id="backButton1" fitHeight="60.0" fitWidth="60.0" layoutX="1040.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT" onMouseClicked="#back">
                <image>
                   <Image url="@../images/market/back.png" />
                </image>
@@ -707,7 +707,7 @@
             </ImageView>
             <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="10.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../images/market/items/leather%20armor.png" />
+                  <Image url="@../images/market/items/leather armor.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="10.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="5">
@@ -727,7 +727,7 @@
             </ImageView>
             <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="10.0" layoutY="732.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="8">
                <image>
-                  <Image url="@../images/market/items/metal%20armor.png" />
+                  <Image url="@../images/market/items/metal armor.png" />
                </image>
             </ImageView>
             <Text fx:id="spearStock" fill="#210eb1" strokeType="OUTSIDE" strokeWidth="0.0" text="00" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
@@ -1018,7 +1018,7 @@
                   <Font name="Californian FB Italic" size="45.0" />
                </font>
             </Text>
-            <ImageView fx:id="backButton2" fitHeight="60.0" fitWidth="60.0" layoutX="1040.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
+            <ImageView fx:id="backButton2" fitHeight="60.0" fitWidth="60.0" layoutX="1040.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT" onMouseClicked="#back">
                <image>
                   <Image url="@../images/market/back.png" />
                </image>
@@ -1028,7 +1028,7 @@
             </ImageView>
          </children>
       </GridPane>
-      <ImageView fitHeight="100.0" fitWidth="70.0" layoutX="750.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="mainBack" fitHeight="100.0" fitWidth="70.0" layoutX="750.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/market/back.png" />
          </image>
