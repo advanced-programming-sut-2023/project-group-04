@@ -1,11 +1,16 @@
 package org.view;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import org.view.CommandsEnum.ShopCommands;
 import org.view.CommandsEnum.ShopMessages;
 
 import java.util.regex.Matcher;
 
-public class ShopMenu {
+public class ShopMenu extends Application {
     public void run() {
         String input;
         Matcher matcher;
@@ -43,5 +48,13 @@ public class ShopMenu {
                 System.out.println("Invalid command");
         }
 
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        AnchorPane anchorPane = FXMLLoader.load(ShopMenu.class.getResource("/fxml/shopMenu.fxml"));
+        Scene scene = new Scene(anchorPane);
+        stage.setScene(scene);
+        stage.show();
     }
 }
