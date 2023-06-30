@@ -9,14 +9,18 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import org.view.Menu;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public class ControlBar {
@@ -34,10 +38,10 @@ public class ControlBar {
     Rectangle tower, industry, farm, castle, foood, weapon;
     Circle circle1, circle2, circle3, circle4, circle5, circle6;
     private boolean menuFlag = false, category = true;
+    private int catNum = -1;
     public static HashMap<String, Image> buildingImages = new HashMap<>();
     public static Building clickedBuilding = null;
-    private int catNum = -1;
-    private static Text detailText;
+    public VBox detailBox;
 
     public ControlBar(Pane pane, Scene scene) {
         this.pane = pane;
@@ -54,14 +58,13 @@ public class ControlBar {
         addDetailBox();
     }
 
-    public void addDetailBox() {
-        detailText = new Text();
-        detailText.setFill(Color.BLACK);
-        VBox detailBox = new VBox(detailText);
+    private void addDetailBox() {
+        Text text = new Text("ufaduhka");
+        VBox detailBox = new VBox(text);
         detailBox.setViewOrder(0);
-        detailBox.setBackground(new Background(new BackgroundFill(Color.rgb(208, 173, 65, 0.8), null, null)));
-        detailBox.setPrefSize(135, 155);
-        detailBox.setTranslateY(708);
+        detailBox.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, null, null)));
+        detailBox.setPrefSize(200, 200);
+        detailBox.setTranslateY(510);
         pane.getChildren().add(detailBox);
     }
 
@@ -330,7 +333,7 @@ public class ControlBar {
             public void handle(MouseEvent event) {
                 pane.getChildren().removeAll(food, fearAndTax, weapon, report, BuildingCategory);
                 pane.getChildren().add(popularity);
-                //updatePopularity();
+                updatePopularity();
             }
         });
         r2.setOnMouseClicked(new EventHandler<MouseEvent>() {

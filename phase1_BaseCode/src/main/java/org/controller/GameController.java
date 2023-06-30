@@ -142,7 +142,7 @@ public class GameController {
         return false;
     }
 
-    private boolean createBuilding(Empire empire, int x, int y, String buildingName, boolean upDirection) {
+    private GameMessages createBuilding(Empire empire, int x, int y, String buildingName, boolean upDirection) {
         ProductiveBuildingsDictionary productiveBuildingDictionary;
         StorageBuildingsDictionary storageBuildingDictionary;
         StructuralBuildingsDictionary structuralBuildingDictionary;
@@ -175,10 +175,10 @@ public class GameController {
             prices = buildingDictionary.getPrices();
             building = new Building(empire, buildingDictionary, mapCell);
         }
-        if (!buyBuilding(empire, prices)) return false;
+        if (!buyBuilding(empire, prices)) return GameMessages.NOT_ENOUGH_RESOURCE;
         Game.getCurrentGame().getMapCellByAddress(x, y).setBuilding(building);
         initBuildings(building);
-        return true;
+        return GameMessages.SUCCESSFUL_DROP;
     }
 
     private void initBuildings(Building building) {
