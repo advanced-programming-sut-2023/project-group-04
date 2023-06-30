@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="920.0" prefWidth="1560.0" stylesheets="@../css/mainMenuStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.view.MainMenu">
+   <children>
+      <ImageView fitHeight="920.0" fitWidth="1560.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image requestedHeight="920" requestedWidth="1560" url="@../images/mainMenuBackground.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="615.0" layoutY="100.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="330.0" text="Start New Game">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Button>
+      <Button layoutX="615.0" layoutY="300.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="330.0" text="Profile" onMouseClicked="#runProfileMenu">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Button>
+      <Button layoutX="615.0" layoutY="500.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="330.0" text="Environment">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Button>
+      <Button layoutX="615.0" layoutY="700.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="330.0" text="Logout" onMouseClicked="#logout">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

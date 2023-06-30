@@ -1,13 +1,27 @@
 package org.controller;
 
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import org.model.Empire;
 import org.model.Game;
 import org.model.ResourcesDictionary;
 import org.view.CommandsEnum.ShopMessages;
 
+import javafx.scene.image.*;
+
+import java.awt.*;
 import java.util.regex.Matcher;
 
 public class ShopController {
+
+    public ImageView food;
+    public ImageView rawMaterials;
+    public ImageView weapons;
+    public ImageView mainBack;
+    public GridPane foodsGrid;
+    public GridPane rawMaterialsGrid;
+    public GridPane weaponsGrid;
+
     public String showList() {
         Empire currentEmpire = Game.getCurrentGame().getCurrentEmpire();
         String list = "YOUR RESOURCES:";
@@ -69,5 +83,39 @@ public class ShopController {
         if (currentEmpire.getAvailableResource(itemsName) < itemsAmount)
             return ShopMessages.LACK_OF_PRODUCT;
         return ShopMessages.CERTAINTY;
+    }
+
+    public void openFoodShop(MouseEvent mouseEvent) {
+        food.setVisible(false);
+        rawMaterials.setVisible(false);
+        weapons.setVisible(false);
+        mainBack.setVisible(false);
+        foodsGrid.setVisible(true);
+    }
+
+    public void openMaterialsShop(MouseEvent mouseEvent) {
+        food.setVisible(false);
+        rawMaterials.setVisible(false);
+        weapons.setVisible(false);
+        mainBack.setVisible(false);
+        rawMaterialsGrid.setVisible(true);
+    }
+
+    public void openWeaponsShop(MouseEvent mouseEvent) {
+        food.setVisible(false);
+        rawMaterials.setVisible(false);
+        weapons.setVisible(false);
+        mainBack.setVisible(false);
+        weaponsGrid.setVisible(true);
+    }
+
+    public void back(MouseEvent mouseEvent) {
+        foodsGrid.setVisible(false);
+        weaponsGrid.setVisible(false);
+        rawMaterialsGrid.setVisible(false);
+        food.setVisible(true);
+        rawMaterials.setVisible(true);
+        weapons.setVisible(true);
+        mainBack.setVisible(true);
     }
 }
