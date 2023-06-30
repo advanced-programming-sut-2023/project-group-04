@@ -59,8 +59,7 @@ public class GameController {
         return empire.getFood();
     }
 
-    public GameMessages changeFoodRate(Matcher matcher) {
-        int foodRate = Integer.parseInt(matcher.group("foodRate"));
+    public GameMessages changeFoodRate(int foodRate) {
         if (foodRate < -2 || foodRate > 2)
             return GameMessages.INVALID_FOOD_RATE;
         Game.getCurrentGame().getCurrentEmpire().setFoodRate(foodRate);
@@ -72,14 +71,9 @@ public class GameController {
         return "your food rate is : <<" + empire.getFoodRate() + ">>\n";
     }
 
-    public GameMessages changeTaxRate(Matcher matcher) {
+    public void changeTaxRate(int taxRate) {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
-        int taxRate = Integer.parseInt(removeQuotation(matcher.group("taxRate")));
-        if (empire.getTaxRate() == -100) return GameMessages.TAX_NOT_ACTIVE;
-        if (taxRate < -3 || taxRate > 8)
-            return GameMessages.INVALID_TAX_RATE;
         empire.setTaxRate(taxRate);
-        return GameMessages.CHANGE_TAX_RATE;
     }
 
     public String showTaxRate() {
@@ -87,12 +81,8 @@ public class GameController {
         return "your tax rate is : <<" + empire.getTaxRate() + ">>\n";
     }
 
-    public GameMessages changeFearRate(Matcher matcher) {
-        int fearRate = Integer.parseInt(removeQuotation(matcher.group("fearRate")));
-        if (fearRate < -5 || fearRate > 5)
-            return GameMessages.INVALID_FEAR_RATE;
+    public void changeFearRate(int fearRate) {
         Game.getCurrentGame().getCurrentEmpire().setFearRate(fearRate);
-        return GameMessages.CHANGE_FEAR_RATE;
     }
 
     public String showFearRate() {
@@ -100,7 +90,7 @@ public class GameController {
         return "your fear rate is : <<" + empire.getFearRate() + ">>\n";
     }
 
-    public GameMessages dropBuilding(int x, int y , String buildingName, boolean upDirection) {
+    public GameMessages dropBuilding(int x, int y, String buildingName, boolean upDirection) {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
 //        if (matcher.group("x") == null || matcher.group("y") == null || matcher.group("type") == null)
 //            return GameMessages.EMPTY_FIELD;
@@ -115,9 +105,12 @@ public class GameController {
         //todo: if possible check building or soldier or other in game time
         if (mapCell.getBuilding() != null) return GameMessages.EXISTENCE_BUILDING;
         if (!checkGroundTexture(mapCell, buildingName)) return GameMessages.INVALID_TEXTURE_TREE;
-        if (mapCell.getPeople().size() != 0 || mapCell.getMachine() != null) return GameMessages.SOLDIER_OR_MACHINE_EXIST;
-        if (y != 0 && Game.getCurrentGame().getMapCellByAddress(x, y - 1).getBuilding() != null) return GameMessages.NEAR_BUILDING;
-        if (buildingName.equals("draw bridge") && !checkDrawBridge(x, y, upDirection)) return GameMessages.INVALID_DRAWBRIDGE_POSITION;
+        if (mapCell.getPeople().size() != 0 || mapCell.getMachine() != null)
+            return GameMessages.SOLDIER_OR_MACHINE_EXIST;
+        if (y != 0 && Game.getCurrentGame().getMapCellByAddress(x, y - 1).getBuilding() != null)
+            return GameMessages.NEAR_BUILDING;
+        if (buildingName.equals("draw bridge") && !checkDrawBridge(x, y, upDirection))
+            return GameMessages.INVALID_DRAWBRIDGE_POSITION;
         return createBuilding(empire, x, y, buildingName, upDirection);
     }
 

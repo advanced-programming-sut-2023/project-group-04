@@ -1,5 +1,7 @@
 package org.view.gameView;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -18,6 +20,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import org.model.Empire;
+import org.model.Game;
 import org.view.Menu;
 
 import java.io.IOException;
@@ -33,7 +37,7 @@ public class ControlBar {
     public Group fearAndTax = new Group();
     public Group BuildingCategory = new Group();
     public Group imagePlaces = new Group();
-    public Slider fearSlider, taxSlider;
+    public Slider fearSlider, taxSlider, foodSlider;
     public Text meatText = new Text(), appleText = new Text(), breadText = new Text(), cheeseText = new Text();
     Rectangle tower, industry, farm, castle, foood, weapon;
     Circle circle1, circle2, circle3, circle4, circle5, circle6;
@@ -131,22 +135,22 @@ public class ControlBar {
         text.resize(70, 30);
         text.setFont(Font.font(25));
         Circle meat = new Circle(500, 775, 25);
-        meatText.setTranslateX(500);
-        meatText.setTranslateY(790);
+        meatText.setTranslateX(495);
+        meatText.setTranslateY(815);
         meat.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/img/food/Meat.png").toExternalForm())));
         Circle cheese = new Circle(600, 775, 25);
-        cheeseText.setTranslateX(600);
-        cheeseText.setTranslateY(790);
+        cheeseText.setTranslateX(595);
+        cheeseText.setTranslateY(815);
         cheese.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/img/food/cheese.png").toExternalForm())));
         Circle apple = new Circle(700, 775, 25);
-        appleText.setTranslateX(700);
-        appleText.setTranslateY(790);
+        appleText.setTranslateX(695);
+        appleText.setTranslateY(815);
         apple.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/img/food/apple.jpg").toExternalForm())));
         Circle bread = new Circle(800, 775, 17);
-        breadText.setTranslateX(800);
-        breadText.setTranslateY(790);
+        breadText.setTranslateX(795);
+        breadText.setTranslateY(815);
         bread.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/img/food/bread.jpg").toExternalForm())));
-        Slider foodSlider = new Slider();
+        foodSlider = new Slider();
         foodSlider.setMin(-2);
         foodSlider.setMax(2);
         foodSlider.setMajorTickUnit(1);
@@ -333,7 +337,7 @@ public class ControlBar {
             public void handle(MouseEvent event) {
                 pane.getChildren().removeAll(food, fearAndTax, weapon, report, BuildingCategory);
                 pane.getChildren().add(popularity);
-                updatePopularity();
+                //updatePopularity();
             }
         });
         r2.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -349,6 +353,7 @@ public class ControlBar {
             public void handle(MouseEvent event) {
                 pane.getChildren().removeAll(food, report, weapon, popularity, BuildingCategory);
                 pane.getChildren().add(fearAndTax);
+                //updateFearAndTax();
             }
         });
     }
@@ -445,13 +450,40 @@ public class ControlBar {
         }
     }
 
-        private void updateFood() {
-        // TODO: 6/29/2023 complete
-        // TODO: 6/29/2023 change rate with slide bar and get num by slider
+    private void updateFood() {
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
         HashMap<String, Integer> foodList = Menu.getGameController().showFoodList();
-
-
+        meatText.setText("" + foodList.get("meat"));
+        cheeseText.setText("" + foodList.get("cheese"));
+        breadText.setText("" + foodList.get("bread"));
+        appleText.setText("" + foodList.get("apple"));
+        foodSlider.setValue(empire.getFoodRate());
+        foodSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                empire.setFoodRate((Integer) number);
+            }
+        });
     }
+
+    private void updateFearAndTax() {
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
+        fearSlider.setValue(empire.getFearRate());
+        taxSlider.setValue(empire.getTaxRate());
+        fearSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                empire.setFearRate((Integer) number);
+            }
+        });
+        taxSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                empire.setTaxRate((Integer) number);
+            }
+        });
+    }
+
     private void getClickedBuilding() {
         circle1.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
