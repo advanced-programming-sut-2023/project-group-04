@@ -29,6 +29,8 @@ public class ControlBar {
     public Group fearAndTax = new Group();
     public Group BuildingCategory = new Group();
     public Group imagePlaces = new Group();
+    public Slider fearSlider, taxSlider;
+    public Text meatText = new Text(), appleText = new Text(), breadText = new Text(), cheeseText = new Text();
     Rectangle tower, industry, farm, castle, foood, weapon;
     Circle circle1, circle2, circle3, circle4, circle5, circle6;
     private boolean menuFlag = false, category = true;
@@ -111,14 +113,21 @@ public class ControlBar {
         text.resize(70, 30);
         text.setFont(Font.font(25));
         Circle meat = new Circle(500, 775, 25);
+        meatText.setTranslateX(500);
+        meatText.setTranslateY(790);
         meat.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/img/food/Meat.png").toExternalForm())));
         Circle cheese = new Circle(600, 775, 25);
+        cheeseText.setTranslateX(600);
+        cheeseText.setTranslateY(790);
         cheese.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/img/food/cheese.png").toExternalForm())));
         Circle apple = new Circle(700, 775, 25);
+        appleText.setTranslateX(700);
+        appleText.setTranslateY(790);
         apple.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/img/food/apple.jpg").toExternalForm())));
         Circle bread = new Circle(800, 775, 17);
+        breadText.setTranslateX(800);
+        breadText.setTranslateY(790);
         bread.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/img/food/bread.jpg").toExternalForm())));
-        // TODO: 6/29/2023 add text for amount
         Slider foodSlider = new Slider();
         foodSlider.setMin(-2);
         foodSlider.setMax(2);
@@ -131,13 +140,13 @@ public class ControlBar {
         foodSlider.valueProperty().addListener((bar, oldVal, newVal) ->
                 foodSlider.setValue(Math.round(newVal.doubleValue())));
         foodSlider.setBackground(Background.fill(Color.WHEAT));
-        food.getChildren().addAll(meat, text, cheese, apple, bread, foodSlider);
+        food.getChildren().addAll(meat, text, cheese, apple, bread, foodSlider, meatText, cheeseText, appleText, breadText);
     }
 
     private void addFear() {
         Text fearText = new Text(360, 745, "FEAR");
         fearText.setFont(Font.font(20));
-        Slider fearSlider = new Slider();
+        fearSlider = new Slider();
         fearSlider.setMin(-5);
         fearSlider.setMax(5);
         fearSlider.setMajorTickUnit(1);
@@ -155,7 +164,7 @@ public class ControlBar {
     private void addTax() {
         Text taxText = new Text(360, 825, "TAX");
         taxText.setFont(Font.font(20));
-        Slider taxSlider = new Slider();
+        taxSlider = new Slider();
         taxSlider.setMin(-3);
         taxSlider.setMax(8);
         taxSlider.setMajorTickUnit(1);
@@ -337,21 +346,73 @@ public class ControlBar {
     }
 
 //    private void updatePopularity() {
-//        // TODO: 6/29/2023  add face to popularity
 //        HashMap<String, Integer> popularityFactors = Menu.getGameController().showPopularity();
 //        Text text = ((Text) popularity.getChildren().get(0));
 //        Integer factorNum = popularityFactors.get("food");
 //        text.setText(text.getText() + "  " + factorNum);
-//        if (factorNum < 2 && factorNum > -2) {
-//            //((Circle) popularity.getChildren().get(6)).setFill();
-//        }
-//
-//
+//        if (factorNum <= 2 && factorNum >= -2)
+//            ((Circle) popularity.getChildren().get(6)).setFill(new ImagePattern(buildingImages.get("poker")));
+//        else if (factorNum < -2)
+//            ((Circle) popularity.getChildren().get(6)).setFill(new ImagePattern(buildingImages.get("sad")));
+//        else
+//            ((Circle) popularity.getChildren().get(6)).setFill(new ImagePattern(buildingImages.get("happy")));
+//        ///////////
+//        text = ((Text) popularity.getChildren().get(1));
+//        factorNum = popularityFactors.get("tax");
+//        text.setText(text.getText() + "  " + factorNum);
+//        if (factorNum <= 2 && factorNum >= -2)
+//            ((Circle) popularity.getChildren().get(7)).setFill(new ImagePattern(buildingImages.get("poker")));
+//        else if (factorNum < -2)
+//            ((Circle) popularity.getChildren().get(7)).setFill(new ImagePattern(buildingImages.get("sad")));
+//        else
+//            ((Circle) popularity.getChildren().get(7)).setFill(new ImagePattern(buildingImages.get("happy")));
+//        //////////////////
+//        text = ((Text) popularity.getChildren().get(2));
+//        factorNum = popularityFactors.get("fear");
+//        text.setText(text.getText() + "  " + factorNum);
+//        if (factorNum <= 2 && factorNum >= -2)
+//            ((Circle) popularity.getChildren().get(8)).setFill(new ImagePattern(buildingImages.get("poker")));
+//        else if (factorNum < -2)
+//            ((Circle) popularity.getChildren().get(8)).setFill(new ImagePattern(buildingImages.get("sad")));
+//        else
+//            ((Circle) popularity.getChildren().get(8)).setFill(new ImagePattern(buildingImages.get("happy")));
+//        //////////////////////
+//        text = ((Text) popularity.getChildren().get(3));
+//        factorNum = popularityFactors.get("ale");
+//        text.setText(text.getText() + "  " + factorNum);
+//        if (factorNum <= 2 && factorNum >= -2)
+//            ((Circle) popularity.getChildren().get(9)).setFill(new ImagePattern(buildingImages.get("poker")));
+//        else if (factorNum < -2)
+//            ((Circle) popularity.getChildren().get(9)).setFill(new ImagePattern(buildingImages.get("sad")));
+//        else
+//            ((Circle) popularity.getChildren().get(9)).setFill(new ImagePattern(buildingImages.get("happy")));
+//        //////////////////
+//        text = ((Text) popularity.getChildren().get(4));
+//        factorNum = popularityFactors.get("religion");
+//        text.setText(text.getText() + "  " + factorNum);
+//        if (factorNum <= 2 && factorNum >= -2)
+//            ((Circle) popularity.getChildren().get(10)).setFill(new ImagePattern(buildingImages.get("poker")));
+//        else if (factorNum < -2)
+//            ((Circle) popularity.getChildren().get(10)).setFill(new ImagePattern(buildingImages.get("sad")));
+//        else
+//            ((Circle) popularity.getChildren().get(10)).setFill(new ImagePattern(buildingImages.get("happy")));
+//        /////////////////
+//        text = ((Text) popularity.getChildren().get(5));
+//        factorNum = popularityFactors.get("sum");
+//        text.setText(text.getText() + "  " + factorNum);
+//        if (factorNum <= 5 && factorNum >= -5)
+//            ((Circle) popularity.getChildren().get(11)).setFill(new ImagePattern(buildingImages.get("poker")));
+//        else if (factorNum < -5)
+//            ((Circle) popularity.getChildren().get(11)).setFill(new ImagePattern(buildingImages.get("sad")));
+//        else
+//            ((Circle) popularity.getChildren().get(11)).setFill(new ImagePattern(buildingImages.get("happy")));
 //    }
 
 //    private void updateFood() {
 //        // TODO: 6/29/2023 complete
 //        // TODO: 6/29/2023 change rate with slide bar and get num by slider
+//        HashMap<String, Integer> foodList = Menu.getGameController().showFoodList();
+//
 //
 //    }
 
@@ -359,65 +420,116 @@ public class ControlBar {
         circle1.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                switch (catNum) {
-                    case -1:
-                        clickedBuilding = null;
-                    case 1:
-                        clickedBuilding = "hovel";
-                    case 2:
-                        clickedBuilding = "quarry";
-                    case 3:
-                        clickedBuilding = "apple orchard";
-                    case 4:
-                        clickedBuilding = "barracks";
-                    case 5:
-                        clickedBuilding = "bakery";
-                    case 6:
-                        clickedBuilding = "armoury";
-                }
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1)
+                    clickedBuilding = "hovel";
+                else if (catNum == 2)
+                    clickedBuilding = "quarry";
+                else if (catNum == 3)
+                    clickedBuilding = "apple orchard";
+                else if (catNum == 4)
+                    clickedBuilding = "barracks";
+                else if (catNum == 5)
+                    clickedBuilding = "bakery";
+                else if (catNum == 6)
+                    clickedBuilding = "armoury";
             }
         });
 
         circle2.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                switch (catNum) {
-                    case -1:
-                        clickedBuilding = null;
-                    case 1:
-                        clickedBuilding = "lookout tower";
-                    case 2:
-                        clickedBuilding = "iron mine";
-                    case 3:
-                        clickedBuilding = "diary farmer";
-                    case 4:
-                        clickedBuilding = "engineer guild";
-                    case 5:
-                        clickedBuilding = "brewer";
-                    case 6:
-                        clickedBuilding = "armourer";
-                }
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1)
+                    clickedBuilding = "lookout tower";
+                else if (catNum == 2)
+                    clickedBuilding = "iron mine";
+                else if (catNum == 3)
+                    clickedBuilding = "diary farmer";
+                else if (catNum == 4)
+                    clickedBuilding = "engineer guild";
+                else if (catNum == 5)
+                    clickedBuilding = "brewer";
+                else if (catNum == 6)
+                    clickedBuilding = "armourer";
             }
         });
         circle3.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                switch (catNum) {
-                    case -1:
-                        clickedBuilding = null;
-                    case 1:
-                        clickedBuilding = "defence turret";
-                    case 2:
-                        clickedBuilding = "market";
-                    case 3:
-                        clickedBuilding = "granary";
-                    case 4:
-                        clickedBuilding = "low wall";
-                    case 5:
-                        clickedBuilding = "inn";
-                    case 6:
-                        clickedBuilding = "blacksmith";
-                }
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1)
+                    clickedBuilding = "defence turret";
+                else if (catNum == 2)
+                    clickedBuilding = "market";
+                else if (catNum == 3)
+                    clickedBuilding = "granary";
+                else if (catNum == 4)
+                    clickedBuilding = "low wall";
+                else if (catNum == 5)
+                    clickedBuilding = "inn";
+                else if (catNum == 6)
+                    clickedBuilding = "blacksmith";
+            }
+        });
+        circle4.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1)
+                    clickedBuilding = "round tower";
+                else if (catNum == 2)
+                    clickedBuilding = "pitch rig";
+                else if (catNum == 3)
+                    clickedBuilding = "hops farmer";
+                else if (catNum == 4)
+                    clickedBuilding = "stone wall";
+                else if (catNum == 5)
+                    clickedBuilding = "mill";
+                else if (catNum == 6)
+                    clickedBuilding = "fletcher";
+            }
+        });
+        circle5.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1)
+                    clickedBuilding = "square tower";
+                else if (catNum == 2)
+                    clickedBuilding = "woodcutter";
+                else if (catNum == 3)
+                    clickedBuilding = "hunter post";
+                else if (catNum == 4)
+                    clickedBuilding = "small stone gatehouse";
+                else if (catNum == 5)
+                    clickedBuilding = "stockpile";
+                else if (catNum == 6)
+                    clickedBuilding = "poleturner";
+            }
+        });
+        circle6.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1)
+                    clickedBuilding = "perimeter";
+                else if (catNum == 2)
+                    clickedBuilding = "mercenary post";
+                else if (catNum == 3)
+                    clickedBuilding = "wheat";
+                else if (catNum == 4)
+                    clickedBuilding = "tunneler guild";
+                else if (catNum == 5)
+                    clickedBuilding = "water";
+                else if (catNum == 6)
+                    clickedBuilding = "tanner";
             }
         });
     }
@@ -461,6 +573,8 @@ public class ControlBar {
         buildingImages.put("woodcutter", new Image(ControlBar.class.getResource("/img/buildings/industry/woodcutter.png").toExternalForm()));
         buildingImages.put("pitch rig", new Image(ControlBar.class.getResource("/img/buildings/industry/pitch rig.png").toExternalForm()));
         buildingImages.put("water", new Image(ControlBar.class.getResource("/img/buildings/food/water.png").toExternalForm()));
-
+        buildingImages.put("happy", new Image(ControlBar.class.getResource("/img/imoji/happy.png").toExternalForm()));
+        buildingImages.put("sad", new Image(ControlBar.class.getResource("/img/imoji/sad.png").toExternalForm()));
+        buildingImages.put("poker", new Image(ControlBar.class.getResource("/img/imoji/poker.png").toExternalForm()));
     }
 }
