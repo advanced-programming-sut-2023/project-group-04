@@ -9,8 +9,9 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/GameMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/ControlBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/ControlBar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMapView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMapView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/Tile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -367,7 +368,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688070196983</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="completing drop building">
+      <created>1688126093720</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1688126093720</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -428,7 +436,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/controller/GameController.java</url>
-          <line>661</line>
+          <line>653</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>

@@ -100,25 +100,17 @@ public class GameController {
         return "your fear rate is : <<" + empire.getFearRate() + ">>\n";
     }
 
-    public GameMessages dropBuilding(int x, int y , String buildingName, boolean upDirection) {
+    public boolean dropBuilding(int x, int y , String buildingName, boolean upDirection) {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
-//        if (matcher.group("x") == null || matcher.group("y") == null || matcher.group("type") == null)
-//            return GameMessages.EMPTY_FIELD;
-//        int x = Integer.parseInt(removeQuotation(matcher.group("x"))) - 1;
-//        int y = Integer.parseInt(removeQuotation(matcher.group("y"))) - 1;
-//        String buildingName = removeQuotation(matcher.group("type"));
-//        boolean upDirection = false;
-//        if (matcher.group("direction") != null)
-//            upDirection = removeQuotation(matcher.group("direction")).equals("up");
-//        if (!checkCoordinates(x, y)) return GameMessages.INVALID_POSITION;
-        MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
-        //todo: if possible check building or soldier or other in game time
-        if (mapCell.getBuilding() != null) return GameMessages.EXISTENCE_BUILDING;
-        if (!checkGroundTexture(mapCell, buildingName)) return GameMessages.INVALID_TEXTURE_TREE;
-        if (mapCell.getPeople().size() != 0 || mapCell.getMachine() != null) return GameMessages.SOLDIER_OR_MACHINE_EXIST;
-        if (y != 0 && Game.getCurrentGame().getMapCellByAddress(x, y - 1).getBuilding() != null) return GameMessages.NEAR_BUILDING;
-        if (buildingName.equals("draw bridge") && !checkDrawBridge(x, y, upDirection)) return GameMessages.INVALID_DRAWBRIDGE_POSITION;
         return createBuilding(empire, x, y, buildingName, upDirection);
+    }
+
+    public boolean dropAble(int x, int y, String buildingName, boolean upDirection) {
+        MapCell mapCell = Game.getCurrentGame().getMapCellByAddress(x, y);
+        return mapCell.getBuilding() == null && checkGroundTexture(mapCell, buildingName) &&
+                mapCell.getPeople().size() == 0 && mapCell.getMachine() == null &&
+                (y == 0 || Game.getCurrentGame().getMapCellByAddress(x, y - 1).getBuilding() == null) &&
+                buildingName.equals("draw bridge") && !checkDrawBridge(x, y, upDirection);
     }
 
     private boolean checkGroundTexture(MapCell mapCell, String buildingName) {
@@ -150,7 +142,7 @@ public class GameController {
         return false;
     }
 
-    private GameMessages createBuilding(Empire empire, int x, int y, String buildingName, boolean upDirection) {
+    private boolean createBuilding(Empire empire, int x, int y, String buildingName, boolean upDirection) {
         ProductiveBuildingsDictionary productiveBuildingDictionary;
         StorageBuildingsDictionary storageBuildingDictionary;
         StructuralBuildingsDictionary structuralBuildingDictionary;
@@ -183,10 +175,10 @@ public class GameController {
             prices = buildingDictionary.getPrices();
             building = new Building(empire, buildingDictionary, mapCell);
         }
-        if (!buyBuilding(empire, prices)) return GameMessages.NOT_ENOUGH_RESOURCE;
+        if (!buyBuilding(empire, prices)) return false;
         Game.getCurrentGame().getMapCellByAddress(x, y).setBuilding(building);
         initBuildings(building);
-        return GameMessages.SUCCESSFUL_DROP;
+        return true;
     }
 
     private void initBuildings(Building building) {

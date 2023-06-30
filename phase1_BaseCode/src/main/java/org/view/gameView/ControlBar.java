@@ -9,9 +9,12 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -51,6 +54,17 @@ public class ControlBar {
         addFood();
         addPopularity();
         getClickedBuilding();
+        addDetailBox();
+    }
+
+    private void addDetailBox() {
+        Text text = new Text("ufaduhka");
+        VBox detailBox = new VBox(text);
+        detailBox.setViewOrder(0);
+        detailBox.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, null, null)));
+        detailBox.setPrefSize(200, 200);
+        detailBox.setTranslateY(510);
+        pane.getChildren().add(detailBox);
     }
 
     public void showGoldAmount() {

@@ -34,7 +34,6 @@ public class GameMapView {
         readyMapBox();
         mouseCursorPositionX = 0;
         mouseCursorPositionY = 0;
-        Building.initBuildings();
     }
 
     private void readyMapBox() {
@@ -61,22 +60,40 @@ public class GameMapView {
             }
         }
         map.getTransforms().add(zoomScale = new Scale());
-        handleMouseCursorMove();
-       Building building = new Building("barracks");
+        handleMouseCursorEvents();
+    }
+
+    private void handleMouseCursorEvents() {
         map.setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 mouseCursorPositionX = mouseEvent.getX();
                 mouseCursorPositionY = mouseEvent.getY();
-                if (Tile.getHoveredTile() != null) {
-                    building.movingBuilding(Tile.getHoveredTile());
-                }
 
+                if (Tile.getHoveredTile() != null && ControlBar.clickedBuilding != null) {
+//                    if (!Menu.getGameController().dropAble(Tile.getHoveredTile().getXCoordinate(),
+//                            Tile.getHoveredTile().getYCoordinate(), ControlBar.clickedBuilding.getType() ,true))
+//                        ControlBar.clickedBuilding.setShadow(Color.RED);
+//                        ControlBar.clickedBuilding.setFixAble(false);
+//                    else {
+                    ControlBar.clickedBuilding.setShadow(Color.GREEN);
+                    ControlBar.clickedBuilding.setFixAble(true);
+                    ControlBar.clickedBuilding.movingBuilding(Tile.getHoveredTile());
+//                    }
+                }
             }
         });
-    }
-
-    private void handleMouseCursorMove() {
+        map.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (ControlBar.clickedBuilding != null && ControlBar.clickedBuilding.isFixAble()) {
+//                    if (Menu.getGameController().dropBuilding(Tile.getHoveredTile().getXCoordinate(),
+//                            Tile.getHoveredTile().getYCoordinate(), ControlBar.clickedBuilding.getType(), true))
+                        ControlBar.clickedBuilding.fixBuilding();
+//                    else ControlBar.clickedBuilding = null;
+                }
+            }
+        });
     }
 
     private void loadBorder(int size) throws IOException {
@@ -89,7 +106,7 @@ public class GameMapView {
                     borderTile.setFitWidth(Tile.tileWidth);
                     borderTile.setFitHeight(Tile.tileHeight);
                     double x;
-                    double y ;
+                    double y;
                     if (rep == 0) {
                         x = i * Tile.tileWidth - (double) Tile.tileWidth / 2;
                         y = (double) (j * size / 2 * Tile.tileHeight) - (double) Tile.tileHeight / 2;

@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import org.controller.GameController;
 import org.view.CommandsEnum.GameMessages;
 import org.view.Menu;
 
@@ -15,15 +16,15 @@ import java.util.HashMap;
 
 public class Building extends ImageView {
 
-    private static HashMap<String, Image> buildings;
+    private static ArrayList<Building> buildings = new ArrayList<>();
     private int x;
     private int y;
     private String type;
     private boolean added;
-    private boolean fixed;
+    private boolean fixAble;
+
     public Building(String type) throws IOException {
         this.type = type;
-        if (ControlBar.buildingImages.get(type) == null) System.out.println("yes");
         this.setImage(ControlBar.buildingImages.get(type));
         double width = Tile.tileWidth - 10;
         double height = this.getImage().getHeight() / this.getImage().getWidth() * width;
@@ -31,6 +32,8 @@ public class Building extends ImageView {
         this.setFitHeight(height);
         this.setMouseTransparent(true);
         added = false;
+        fixAble = true;
+        buildings.add(this);
     }
 
     public void movingBuilding(Tile hoveredTile) {
@@ -47,8 +50,9 @@ public class Building extends ImageView {
     }
 
     public void fixBuilding() {
-        this.fixed = true;
         this.setMouseTransparent(false);
+        ControlBar.clickedBuilding = null;
+        this.setShadow(null);
         clickEvent();
     }
 
@@ -59,28 +63,21 @@ public class Building extends ImageView {
             public void handle(MouseEvent mouseEvent) {
 //                GameMessages message = Menu.getGameController().selectBuilding(
 //                        thisBuilding.getXCoordinate(), thisBuilding.getYCoordinate());
-                DropShadow borderGlow = new DropShadow();
-                borderGlow.setColor(Color.RED);
-                borderGlow.setOffsetX(0f);
-                borderGlow.setOffsetY(0f);
+
 //                if (message.equals(GameMessages.NOT_OWNING_THE_BUILDING))
-                    thisBuilding.setEffect(borderGlow);
+                thisBuilding.setShadow(Color.YELLOW);
 
             }
         });
     }
 
-    public static void initBuildings() throws IOException {
-        ArrayList<String> buildingsName = new ArrayList<>();
-        buildings = new HashMap<>() {
-            {
-                for (String buildingName : buildingsName)
-                    put(buildingName, new Image(Building.class.getResource(
-                            "/img/buildings/" + buildingName + ".png").openStream()));
-
-            }
-        };
-
+    public void setShadow(Color color) {
+        if (color == null) this.setEffect(null);
+        DropShadow borderGlow = new DropShadow();
+        borderGlow.setColor(color);
+        borderGlow.setOffsetX(0f);
+        borderGlow.setOffsetY(0f);
+        this.setEffect(borderGlow);
     }
 
     public void setCoordinates(int x, int y) {
@@ -96,4 +93,15 @@ public class Building extends ImageView {
         return y;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public boolean isFixAble() {
+        return fixAble;
+    }
+
+    public void setFixAble(boolean fixAble) {
+        this.fixAble = fixAble;
+    }
 }

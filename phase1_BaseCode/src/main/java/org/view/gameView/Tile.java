@@ -48,7 +48,8 @@ public class Tile extends ImageView {
             public void handle(MouseEvent event) {
                 hoveredTile = thisTile;
                 //System.out.println(Menu.getMapController().showMapDetail(hoveredTile.x, hoveredTile.y));
-                //TODO: shoe details completely
+                //TODO: show details completely
+
             }
         });
     }
