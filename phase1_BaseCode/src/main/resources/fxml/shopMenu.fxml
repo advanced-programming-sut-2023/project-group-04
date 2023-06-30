@@ -19,7 +19,7 @@
             <Image requestedHeight="920" requestedWidth="1560" url="@../images/shop.jpg" />
          </image>
       </ImageView>
-      <HBox fx:id="allItems" layoutX="550.0" layoutY="176.0" prefHeight="155.0" prefWidth="823.0" spacing="50.0">
+      <HBox fx:id="allItems" layoutX="460.0" layoutY="176.0" prefHeight="155.0" prefWidth="823.0" spacing="50.0">
          <children>
             <ImageView fx:id="food" fitHeight="150.0" fitWidth="120.0" onMouseClicked="#openFoodShop" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -29,7 +29,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="rawMaterials" fitHeight="150.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#openMaterialsShop">
+            <ImageView fx:id="rawMaterials" fitHeight="150.0" fitWidth="120.0" onMouseClicked="#openMaterialsShop" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/market/rawMaterials.png" />
                </image>
@@ -37,9 +37,17 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="weapons" fitHeight="150.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#openWeaponsShop">
+            <ImageView fx:id="weapons" fitHeight="150.0" fitWidth="120.0" onMouseClicked="#openWeaponsShop" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/market/weapons.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="trade" fitHeight="100.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#enterTradeMenu">
+               <image>
+                  <Image url="@../images/market/trade.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -420,7 +428,7 @@
                   <Font name="Californian FB Italic" size="45.0" />
                </font>
             </Text>
-            <ImageView fx:id="backButton" fitHeight="60.0" fitWidth="60.0" layoutX="1040.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT" onMouseClicked="#back">
+            <ImageView fx:id="backButton" fitHeight="60.0" fitWidth="60.0" layoutX="1040.0" layoutY="129.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
                <image>
                   <Image url="@../images/market/back.png" />
                </image>
@@ -635,7 +643,7 @@
                   <Font name="Californian FB Italic" size="45.0" />
                </font>
             </Text>
-            <ImageView fx:id="backButton1" fitHeight="60.0" fitWidth="60.0" layoutX="1040.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT" onMouseClicked="#back">
+            <ImageView fx:id="backButton1" fitHeight="60.0" fitWidth="60.0" layoutX="1040.0" layoutY="129.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
                <image>
                   <Image url="@../images/market/back.png" />
                </image>
@@ -1018,7 +1026,7 @@
                   <Font name="Californian FB Italic" size="45.0" />
                </font>
             </Text>
-            <ImageView fx:id="backButton2" fitHeight="60.0" fitWidth="60.0" layoutX="1040.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT" onMouseClicked="#back">
+            <ImageView fx:id="backButton2" fitHeight="60.0" fitWidth="60.0" layoutX="1040.0" layoutY="129.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
                <image>
                   <Image url="@../images/market/back.png" />
                </image>

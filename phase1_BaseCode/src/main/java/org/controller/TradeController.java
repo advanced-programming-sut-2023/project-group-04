@@ -1,14 +1,27 @@
 package org.controller;
 
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import org.model.Empire;
 import org.model.Game;
 import org.model.ResourcesDictionary;
 import org.model.Trade;
 import org.view.CommandsEnum.TradeMessages;
+import org.view.ShopMenu;
 
+import javafx.scene.image.*;
+import javafx.scene.control.Button;
 import java.util.regex.Matcher;
 
 public class TradeController {
+
+    public Button create;
+    public Button previous;
+    public ImageView mainBack;
+    public ImageView back1;
+    public GridPane playersList;
+
+
     public TradeMessages setTrade(Matcher matcher) {
         if (matcher.group("type") == null || matcher.group("amount") == null ||
                 matcher.group("price") == null || matcher.group("message") == null)
@@ -72,5 +85,17 @@ public class TradeController {
 
     private String removeQuotation(String buffer) {
         return buffer.replaceAll("\"", "");
+    }
+
+    public void enterShopMenu(MouseEvent mouseEvent) throws Exception {
+        new ShopMenu().start(ShopMenu.stage);
+    }
+
+    public void showPlayersList(MouseEvent mouseEvent) {
+        create.setVisible(false);
+        previous.setVisible(false);
+        mainBack.setVisible(false);
+        playersList.setVisible(true);
+        back1.setVisible(true);
     }
 }

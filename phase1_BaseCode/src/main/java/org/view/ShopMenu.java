@@ -11,6 +11,8 @@ import org.view.CommandsEnum.ShopMessages;
 import java.util.regex.Matcher;
 
 public class ShopMenu extends Application {
+    public static Stage stage;
+
     public void run() {
         String input;
         Matcher matcher;
@@ -52,6 +54,7 @@ public class ShopMenu extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        ShopMenu.stage = stage;
         AnchorPane anchorPane = FXMLLoader.load(ShopMenu.class.getResource("/fxml/shopMenu.fxml"));
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);

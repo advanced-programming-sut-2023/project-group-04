@@ -2,12 +2,16 @@ package org.controller;
 
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import org.model.Empire;
 import org.model.Game;
 import org.model.ResourcesDictionary;
 import org.view.CommandsEnum.ShopMessages;
 
 import javafx.scene.image.*;
+import org.view.LoginMenu;
+import org.view.ShopMenu;
+import org.view.TradeMenu;
 
 import java.awt.*;
 import java.util.regex.Matcher;
@@ -21,6 +25,7 @@ public class ShopController {
     public GridPane foodsGrid;
     public GridPane rawMaterialsGrid;
     public GridPane weaponsGrid;
+    public HBox allItems;
 
     public String showList() {
         Empire currentEmpire = Game.getCurrentGame().getCurrentEmpire();
@@ -86,25 +91,19 @@ public class ShopController {
     }
 
     public void openFoodShop(MouseEvent mouseEvent) {
-        food.setVisible(false);
-        rawMaterials.setVisible(false);
-        weapons.setVisible(false);
+        allItems.setVisible(false);
         mainBack.setVisible(false);
         foodsGrid.setVisible(true);
     }
 
     public void openMaterialsShop(MouseEvent mouseEvent) {
-        food.setVisible(false);
-        rawMaterials.setVisible(false);
-        weapons.setVisible(false);
+        allItems.setVisible(false);
         mainBack.setVisible(false);
         rawMaterialsGrid.setVisible(true);
     }
 
     public void openWeaponsShop(MouseEvent mouseEvent) {
-        food.setVisible(false);
-        rawMaterials.setVisible(false);
-        weapons.setVisible(false);
+        allItems.setVisible(false);
         mainBack.setVisible(false);
         weaponsGrid.setVisible(true);
     }
@@ -113,9 +112,11 @@ public class ShopController {
         foodsGrid.setVisible(false);
         weaponsGrid.setVisible(false);
         rawMaterialsGrid.setVisible(false);
-        food.setVisible(true);
-        rawMaterials.setVisible(true);
-        weapons.setVisible(true);
+        allItems.setVisible(true);
         mainBack.setVisible(true);
+    }
+
+    public void enterTradeMenu(MouseEvent mouseEvent) throws Exception {
+        new TradeMenu().start(ShopMenu.stage);
     }
 }

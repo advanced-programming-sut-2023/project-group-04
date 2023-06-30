@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="920.0" prefWidth="1560.0" stylesheets="@../css/mainMenuStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controller.TradeController">
+   <children>
+      <ImageView fitHeight="920.0" fitWidth="1560.0" opacity="0.39" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image requestedHeight="920" requestedWidth="1560" url="@../images/trade.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="create" layoutX="219.0" layoutY="298.0" mnemonicParsing="false" onMouseClicked="#showPlayersList" text="Create new trade">
+         <font>
+            <Font name="Berlin Sans FB" size="60.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="previous" layoutX="737.0" layoutY="479.0" mnemonicParsing="false" text="View previous trade offers">
+         <font>
+            <Font name="Berlin Sans FB" size="60.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fx:id="mainBack" fitHeight="86.0" fitWidth="109.0" layoutX="11.0" layoutY="795.0" onMouseClicked="#enterShopMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/market/back - Copy.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <GridPane fx:id="playersList" layoutX="464.0" layoutY="83.0" prefHeight="762.0" prefWidth="623.0" visible="false">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="120.0" stroke="BLACK" strokeType="INSIDE" width="620.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#36138f" height="107.0" layoutX="10.0" layoutY="6.0" stroke="BLACK" strokeType="INSIDE" width="620.0" GridPane.rowIndex="1" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#91122e" height="107.0" layoutX="10.0" layoutY="106.0" stroke="BLACK" strokeType="INSIDE" width="620.0" GridPane.rowIndex="2" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#36138f" height="107.0" layoutX="10.0" layoutY="177.0" stroke="BLACK" strokeType="INSIDE" width="620.0" GridPane.rowIndex="3" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#91122e" height="107.0" layoutX="10.0" layoutY="266.0" stroke="BLACK" strokeType="INSIDE" width="620.0" GridPane.rowIndex="4" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#36138f" height="107.0" layoutX="10.0" layoutY="354.0" stroke="BLACK" strokeType="INSIDE" width="620.0" GridPane.rowIndex="5" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#91122e" height="107.0" layoutX="10.0" layoutY="443.0" stroke="BLACK" strokeType="INSIDE" width="620.0" GridPane.rowIndex="6" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#36138f" height="107.0" layoutX="10.0" layoutY="531.0" stroke="BLACK" strokeType="INSIDE" width="620.0" GridPane.rowIndex="7" />
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Players List" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Berlin Sans FB" size="49.0" />
+               </font>
+            </Text>
+            <Text fx:id="player1" fill="WHITE" layoutX="197.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="empty" textAlignment="CENTER" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Berlin Sans FB" size="37.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Text>
+            <Text fx:id="player2" fill="WHITE" layoutX="10.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="empty" textAlignment="CENTER" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Berlin Sans FB" size="37.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Text>
+            <Text fx:id="player3" fill="WHITE" layoutX="10.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="empty" textAlignment="CENTER" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Berlin Sans FB" size="37.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Text>
+            <Text fx:id="player4" fill="WHITE" layoutX="10.0" layoutY="333.0" strokeType="OUTSIDE" strokeWidth="0.0" text="empty" textAlignment="CENTER" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Berlin Sans FB" size="37.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Text>
+            <Text fx:id="player5" fill="WHITE" layoutX="10.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" text="empty" textAlignment="CENTER" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Berlin Sans FB" size="37.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Text>
+            <Text fx:id="player6" fill="WHITE" layoutX="10.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="empty" textAlignment="CENTER" GridPane.rowIndex="6">
+               <font>
+                  <Font name="Berlin Sans FB" size="37.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Text>
+            <Text fx:id="player7" fill="WHITE" layoutX="10.0" layoutY="598.0" strokeType="OUTSIDE" strokeWidth="0.0" text="empty" textAlignment="CENTER" GridPane.rowIndex="7">
+               <font>
+                  <Font name="Berlin Sans FB" size="37.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="resourcesGrid" layoutX="180.0" layoutY="124.0" prefHeight="328.0" prefWidth="1210.0" visible="false">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT">
+               <image>
+                  <Image url="@../images/market/items/apple.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="10.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@../images/market/items/bread.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="131.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+               <image>
+                  <Image url="@../images/market/items/cheese.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="252.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+               <image>
+                  <Image url="@../images/market/items/flour.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="373.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+               <image>
+                  <Image url="@../images/market/items/hops.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="494.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5">
+               <image>
+                  <Image url="@../images/market/items/meat.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="615.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6">
+               <image>
+                  <Image url="@../images/market/items/pitch.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="736.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7">
+               <image>
+                  <Image url="@../images/market/items/wheat.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="857.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8">
+               <image>
+                  <Image url="@../images/market/items/ale.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="978.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9">
+               <image>
+                  <Image url="@../images/market/items/bow.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1099.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../images/market/items/crossBow.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="10.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../images/market/items/leather armor.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="131.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../images/market/items/mace.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="252.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../images/market/items/metal armor.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="373.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../images/market/items/pike.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="494.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../images/market/items/spear.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="615.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../images/market/items/sword.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="736.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../images/market/items/iron.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="857.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../images/market/items/stone.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="978.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../images/market/items/wood.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </GridPane>
+      <HBox layoutX="182.0" layoutY="453.0" prefHeight="60.0" prefWidth="1184.0" spacing="43.0" visible="false">
+         <children>
+            <Text fx:id="crossbowNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="leatherNumber" layoutX="10.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="maceNumber" layoutX="10.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="metalNumber" layoutX="88.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="pikeNumber" layoutX="245.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="spearNumber" layoutX="324.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="swordNumber" layoutX="402.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="ironNumber" layoutX="480.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="stoneNumber" layoutX="559.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="woodNumber" layoutX="637.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <HBox layoutX="182.0" layoutY="260.0" prefHeight="60.0" prefWidth="1184.0" spacing="43.0" visible="false">
+         <children>
+            <Text fx:id="appleNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="breadNumber" layoutX="10.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="cheeseNumber" layoutX="10.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="flourNumber" layoutX="88.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="hopsNumber" layoutX="245.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="meatNumber" layoutX="324.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="pitchNumber" layoutX="402.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="wheatNumber" layoutX="480.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="aleNumber" layoutX="559.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text fx:id="bowNumber" layoutX="637.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="78.13671875">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <ImageView fx:id="back1" fitHeight="86.0" fitWidth="109.0" layoutX="11.0" layoutY="795.0" onMouseClicked="#enterShopMenu" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/market/back - Copy.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <AnchorPane fx:id="newTrade" prefHeight="920.0" prefWidth="1560.0" visible="false">
+         <children>
+            <ImageView fx:id="selectedResource" fitHeight="200.0" fitWidth="200.0" layoutX="658.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/blank.jpg" />
+               </image>
+            </ImageView>
+            <Text layoutX="680.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="44.0" />
+               </font>
+            </Text>
+            <TextField fx:id="itemNumber" alignment="CENTER" layoutX="712.0" layoutY="391.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="100.0" text="0">
+               <font>
+                  <Font name="Berlin Sans FB" size="39.0" />
+               </font>
+            </TextField>
+            <ImageView fx:id="plus" fitHeight="50.0" fitWidth="50.0" layoutX="829.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons/plus.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="minus" fitHeight="50.0" fitWidth="50.0" layoutX="650.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons/minus.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <TextArea fx:id="tradeMessage" layoutX="474.0" layoutY="485.0" prefHeight="82.0" prefWidth="560.0" promptText="leave a message...">
+               <font>
+                  <Font name="Berlin Sans FB" size="19.0" />
+               </font>
+            </TextArea>
+            <Button fx:id="request" layoutX="650.0" layoutY="600.0" mnemonicParsing="false" text="Request">
+               <font>
+                  <Font name="Berlin Sans FB" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="donate" layoutX="780.0" layoutY="600.0" mnemonicParsing="false" text="Donate">
+               <font>
+                  <Font name="Berlin Sans FB" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="submit" layoutX="690.0" layoutY="655.0" mnemonicParsing="false" text="Submit">
+               <font>
+                  <Font name="Berlin Sans FB" size="32.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
