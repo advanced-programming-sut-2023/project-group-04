@@ -28,10 +28,10 @@ public class GameMenu extends Application {
     public void start(Stage stage) throws Exception {
         pane = new Pane();
         Scene scene = new Scene(pane);
-        mapView = new GameMapView();
-        pane.getChildren().add(mapView.getMapBox());
         ControlBar bar = new ControlBar(pane, scene);
         bar.reporterClick();
+        mapView = new GameMapView();
+        pane.getChildren().add(mapView.getMapBox());
         controlBarSetup();
         stage.setFullScreen(true);
         stage.setScene(scene);
@@ -50,6 +50,7 @@ public class GameMenu extends Application {
                 switch (pressedKey) {
                     case "+" -> mapView.zoom(+1);
                     case "-" -> mapView.zoom(-1);
+                    //todo : add shortcuts
                 }
             }
         }));

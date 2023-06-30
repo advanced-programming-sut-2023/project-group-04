@@ -62,7 +62,7 @@ public class GameMapView {
         }
         map.getTransforms().add(zoomScale = new Scale());
         handleMouseCursorMove();
-       Building building = new Building("fuckAP");
+       Building building = new Building("barracks");
         map.setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
