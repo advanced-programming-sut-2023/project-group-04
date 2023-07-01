@@ -1,13 +1,32 @@
 package org.controller;
 
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import org.model.Empire;
 import org.model.Game;
 import org.model.ResourcesDictionary;
 import org.view.CommandsEnum.ShopMessages;
 
+import javafx.scene.image.*;
+import org.view.LoginMenu;
+import org.view.ShopMenu;
+import org.view.TradeMenu;
+
+import java.awt.*;
 import java.util.regex.Matcher;
 
 public class ShopController {
+
+    public ImageView food;
+    public ImageView rawMaterials;
+    public ImageView weapons;
+    public ImageView mainBack;
+    public GridPane foodsGrid;
+    public GridPane rawMaterialsGrid;
+    public GridPane weaponsGrid;
+    public HBox allItems;
+
     public String showList() {
         Empire currentEmpire = Game.getCurrentGame().getCurrentEmpire();
         String list = "YOUR RESOURCES:";
@@ -69,5 +88,35 @@ public class ShopController {
         if (currentEmpire.getAvailableResource(itemsName) < itemsAmount)
             return ShopMessages.LACK_OF_PRODUCT;
         return ShopMessages.CERTAINTY;
+    }
+
+    public void openFoodShop(MouseEvent mouseEvent) {
+        allItems.setVisible(false);
+        mainBack.setVisible(false);
+        foodsGrid.setVisible(true);
+    }
+
+    public void openMaterialsShop(MouseEvent mouseEvent) {
+        allItems.setVisible(false);
+        mainBack.setVisible(false);
+        rawMaterialsGrid.setVisible(true);
+    }
+
+    public void openWeaponsShop(MouseEvent mouseEvent) {
+        allItems.setVisible(false);
+        mainBack.setVisible(false);
+        weaponsGrid.setVisible(true);
+    }
+
+    public void back(MouseEvent mouseEvent) {
+        foodsGrid.setVisible(false);
+        weaponsGrid.setVisible(false);
+        rawMaterialsGrid.setVisible(false);
+        allItems.setVisible(true);
+        mainBack.setVisible(true);
+    }
+
+    public void enterTradeMenu(MouseEvent mouseEvent) throws Exception {
+        new TradeMenu().start(ShopMenu.stage);
     }
 }
