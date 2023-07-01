@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.view.Menu;
 
 import java.io.IOException;
 
@@ -47,11 +48,27 @@ public class GameMenu extends Application {
         pane.setOnKeyPressed((new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                pressedKey = keyEvent.getText();
+                pressedKey = String.valueOf(keyEvent.getCode());
                 switch (pressedKey) {
-                    case "+" -> mapView.zoom(+1);
-                    case "-" -> mapView.zoom(-1);
-                    //todo : add shortcuts
+                    case "ADD" -> mapView.zoom(+1);
+                    case "SUBTRACT" -> mapView.zoom(-1);
+                    case "SPACE" -> Menu.getGameController().nextTurn();
+                    case "TAB" -> System.out.println("trade menu");  //todo : enter trade menu
+                    case "C" -> Building.buildingCopy();
+                    case "P" -> {
+                        try {
+                            Building.buildingPaste();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    case "delete" -> System.out.println("delete"); //todo : delete
+                    case "Q" -> {
+                        GameMapView.cancel();
+                        Tile.unSelectTile();
+                    }
+                    case "ESCAPE" -> System.out.println("exit"); //todo :  back to main menu
+                    default -> System.out.println(pressedKey);
                 }
             }
         }));

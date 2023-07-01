@@ -1,10 +1,12 @@
 package org.view.gameView;
 
 import javafx.event.EventHandler;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import org.view.Menu;
 
 import java.io.IOException;
@@ -24,7 +26,7 @@ public class Tile extends ImageView {
     private ImageView tree;
     private ArrayList<ImageView> people;
     private ImageView machine;
-
+    private static Tile selectedTile = null;
 
     public Tile(int x, int y, String texture) {
         tree = null;
@@ -54,12 +56,30 @@ public class Tile extends ImageView {
         this.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-
-                }
+                if (mouseEvent.getButton() == MouseButton.PRIMARY) selectTile();
+                else if (mouseEvent.getButton() == MouseButton.SECONDARY) unSelectTile();
             }
         });
 
+    }
+
+    public static void unSelectTile() {
+        if (selectedTile != null) {
+            selectedTile.setEffect(null);
+            selectedTile.setViewOrder(0);
+            selectedTile = null;
+        }
+    }
+
+    private void selectTile() {
+        if (selectedTile != null) selectedTile.unSelectTile();
+        selectedTile = this;
+        selectedTile.setViewOrder(-1);
+        DropShadow borderGlow = new DropShadow();
+        borderGlow.setColor(Color.BLUE);
+        borderGlow.setOffsetX(0f);
+        borderGlow.setOffsetY(0f);
+        this.setEffect(borderGlow);
     }
 
     public static void loadTiles() throws IOException {

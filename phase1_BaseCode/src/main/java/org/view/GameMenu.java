@@ -11,11 +11,7 @@ public class GameMenu {
         Matcher matcher;
         while (true) {
             input = Menu.getScanner().nextLine();
-            if ((matcher = GameCommands.getMatcher(input, GameCommands.SELECT_BUILDING)) != null) {
-                GameMessages output = Menu.getGameController().selectBuilding(0, 0);//TODO
-                System.out.println(output.getMessage());
-                if (output.equals(GameMessages.ENTER_SHOP_MENU)) new ShopMenu().run();
-            } else if ((matcher = GameCommands.getMatcher(input, GameCommands.CREATE_UNIT)) != null) {
+            if ((matcher = GameCommands.getMatcher(input, GameCommands.CREATE_UNIT)) != null) {
                 System.out.println(Menu.getGameController().createUnit(matcher).getMessage());
             } else if ((matcher = GameCommands.getMatcher(input, GameCommands.SELECT_UNIT)) != null) {
                 System.out.println(Menu.getGameController().selectUnit(matcher).getMessage());

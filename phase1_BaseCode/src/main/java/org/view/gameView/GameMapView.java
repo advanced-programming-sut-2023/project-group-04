@@ -4,6 +4,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -34,6 +36,10 @@ public class GameMapView {
         readyMapBox();
         mouseCursorPositionX = 0;
         mouseCursorPositionY = 0;
+    }
+
+    public static void cancel() {
+        Building.unSelectBuilding();
     }
 
     private void readyMapBox() {
@@ -129,7 +135,7 @@ public class GameMapView {
     private void showTrees() {
     }
 
-    void zoom(int dir) {
+    public void zoom(int dir) {
         double scale = zoomScale.getX();
         if ((scale > 0.6 && dir < 0)) scale -= scale > 1 ? 0.2 : 0.1;
         if ((scale < 1.8 && dir > 0)) scale += scale >= 1 ? 0.2 : 0.1;
