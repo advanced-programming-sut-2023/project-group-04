@@ -14,7 +14,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -41,6 +40,7 @@ public class ControlBar {
     public static HashMap<String, Image> buildingImages = new HashMap<>();
     public static Building clickedBuilding = null;
     private int catNum = -1;
+    private static Text detailText;
 
     public ControlBar(Pane pane, Scene scene) {
         this.pane = pane;
@@ -54,16 +54,16 @@ public class ControlBar {
         addFood();
         addPopularity();
         getClickedBuilding();
-        addDetailBox();
     }
 
-    private void addDetailBox() {
-        Text text = new Text("ufaduhka");
-        VBox detailBox = new VBox(text);
+    public void addDetailBox() {
+        detailText = new Text();
+        detailText.setFill(Color.BLACK);
+        VBox detailBox = new VBox(detailText);
         detailBox.setViewOrder(0);
-        detailBox.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, null, null)));
-        detailBox.setPrefSize(200, 200);
-        detailBox.setTranslateY(510);
+        detailBox.setBackground(new Background(new BackgroundFill(Color.rgb(208,173,65,0.8), null, null)));
+        detailBox.setPrefSize(135, 155);
+        detailBox.setTranslateY(708);
         pane.getChildren().add(detailBox);
     }
 
@@ -130,19 +130,19 @@ public class ControlBar {
         Circle meat = new Circle(500, 775, 25);
         meatText.setTranslateX(500);
         meatText.setTranslateY(790);
-        meat.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/img/food/Meat.png").toExternalForm())));
+        meat.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/images/market/items/meat.png").toExternalForm())));
         Circle cheese = new Circle(600, 775, 25);
         cheeseText.setTranslateX(600);
         cheeseText.setTranslateY(790);
-        cheese.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/img/food/cheese.png").toExternalForm())));
+        cheese.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/images/market/items/cheese.png").toExternalForm())));
         Circle apple = new Circle(700, 775, 25);
         appleText.setTranslateX(700);
         appleText.setTranslateY(790);
-        apple.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/img/food/apple.jpg").toExternalForm())));
+        apple.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/images/market/items/apple.png").toExternalForm())));
         Circle bread = new Circle(800, 775, 17);
         breadText.setTranslateX(800);
         breadText.setTranslateY(790);
-        bread.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/img/food/bread.jpg").toExternalForm())));
+        bread.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/images/market/items/bread.png").toExternalForm())));
         Slider foodSlider = new Slider();
         foodSlider.setMin(-2);
         foodSlider.setMax(2);
@@ -740,5 +740,9 @@ private void getClickedBuilding() {
         buildingImages.put("happy", new Image(ControlBar.class.getResource("/img/imoji/happy.png").toExternalForm()));
         buildingImages.put("sad", new Image(ControlBar.class.getResource("/img/imoji/sad.png").toExternalForm()));
         buildingImages.put("poker", new Image(ControlBar.class.getResource("/img/imoji/poker.png").toExternalForm()));
+    }
+
+    public static void setDetailText(String text) {
+        detailText.setText(text);
     }
 }

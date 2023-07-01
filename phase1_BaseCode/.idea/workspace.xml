@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="completing drop building">
+    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="completing hovering tiles">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/GameMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/MapController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/MapController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/Building.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/ControlBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/ControlBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMapView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMapView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/Tile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -375,7 +374,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688126093720</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="completing hovering tiles">
+      <created>1688139245511</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1688139245511</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -414,7 +420,8 @@
     <MESSAGE value="completed phase one game!" />
     <MESSAGE value="update..." />
     <MESSAGE value="completing drop building" />
-    <option name="LAST_COMMIT_MESSAGE" value="completing drop building" />
+    <MESSAGE value="completing hovering tiles" />
+    <option name="LAST_COMMIT_MESSAGE" value="completing hovering tiles" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

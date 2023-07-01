@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import org.controller.GameController;
@@ -61,12 +62,13 @@ public class Building extends ImageView {
         this.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton() == MouseButton.PRIMARY) {
 //                GameMessages message = Menu.getGameController().selectBuilding(
 //                        thisBuilding.getXCoordinate(), thisBuilding.getYCoordinate());
 
 //                if (message.equals(GameMessages.NOT_OWNING_THE_BUILDING))
-                thisBuilding.setShadow(Color.YELLOW);
-
+                    thisBuilding.setShadow(Color.YELLOW);
+                }
             }
         });
     }
