@@ -3,6 +3,7 @@ package org.view.gameView;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import org.view.Menu;
 
@@ -38,20 +39,27 @@ public class Tile extends ImageView {
         this.setFitWidth(tileWidth);
         this.setFitHeight(tileHeight);
         allTiles[x][y] = this;
-        hover();
+        events();
     }
 
-    private void hover() {
+    private void events() {
         Tile thisTile = this;
         this.onMouseMovedProperty().set(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 hoveredTile = thisTile;
-                //System.out.println(Menu.getMapController().showMapDetail(hoveredTile.x, hoveredTile.y));
-                //TODO: show details completely
-
+//                ControlBar.setDetailText(Menu.getMapController().showMapDetail(hoveredTile.x, hoveredTile.y));
             }
         });
+        this.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton() == MouseButton.PRIMARY) {
+
+                }
+            }
+        });
+
     }
 
     public static void loadTiles() throws IOException {

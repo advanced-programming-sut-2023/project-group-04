@@ -38,6 +38,7 @@ public class GameMenu extends Application {
         stage.show();
         pane.requestFocus();
         bar.showGoldAmount();
+        bar.addDetailBox();
         keyPressEvent();
     }
 

@@ -13,29 +13,27 @@ import java.util.regex.Matcher;
 
 public class MapController {
 
-    //todo: okay the output of below function
     public String showMapDetail(int x, int y) {
         Game currentGame = Game.getCurrentGame();
         MapCell[][] map = currentGame.getMap();
-        if (x >= map.length || y >= map.length) return GameMessages.INVALID_POSITION.getMessage();
         MapCell mapCell = map[x][y];
         HashMap<String, Integer> mySoldiers = getMySoldiers(currentGame.getCurrentEmpire().getOwner(), mapCell);
         HashMap<String, Integer> enemiesSoldiers = getEnemiesSoldiers(currentGame.getCurrentEmpire().getOwner(), mapCell);
         Building building = mapCell.getBuilding();
-        String mapDetails = "<<Details>>:\n";
-        mapDetails += "Ground texture : \"" + mapCell.getGroundTexture() + "\"\n";
-        mapDetails += "<<Your Soldiers>>:\n";
+        String mapDetails = "";
+        mapDetails += "Ground texture :  \"" + mapCell.getGroundTexture().toLowerCase() + "\"\n";
+        mapDetails += "Your Soldiers :  \n";
         for (String key : mySoldiers.keySet())
             if (mySoldiers.get(key) != 0)
                 mapDetails += key + ": {" + mySoldiers.get(key) + "}\n";
-        mapDetails += "<<Enemies Soldiers>>:\n";
+        mapDetails += "Enemies Soldiers :  \n";
         for (String key : enemiesSoldiers.keySet())
             if (enemiesSoldiers.get(key) != 0)
                 mapDetails += key + ": {" + enemiesSoldiers.get(key) + "}\n";
         if (building != null)
-            mapDetails += "<<Building>>:\n" + building.getName() + ", owner: "
+            mapDetails += "Building :  " + building.getName() + ", owner :  "
                     + building.getBuildingOwner().getOwner().getNickname()
-                    + ", building hp: {" + building.getCurrentHp() + "}";
+                    + ", building hp :  " + building.getCurrentHp();
         return mapDetails;
     }
 
