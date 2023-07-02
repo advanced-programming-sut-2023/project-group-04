@@ -1138,17 +1138,8 @@ public class GameController {
         return x >= 0 && x < mapSize && y >= 0 && y < mapSize;
     }
 
-    public GameMessages startGame(Matcher matcher) {
-        String mapName = matcher.group("mapName").replaceAll("\"", "");
-        if (Map.getMapByName(mapName) == null)
-            return GameMessages.MAP_NOT_EXIST;
-        String allUsers = removeQuotation(matcher.group("allUsers"));
-        String[] players;
-        if (allUsers.contains("/")) players = allUsers.split("/");
-        else players = new String[]{allUsers};
-        if (!validPlayers(players))
-            return GameMessages.USER_NOT_EXIST;
-        ArrayList<Empire> allEmpires = setEmpireForPlayers(players);
+    public GameMessages startGame(String[] allUsers, String mapName) {
+        ArrayList<Empire> allEmpires = setEmpireForPlayers(allUsers);
         int colorNumbers = Map.getMapByName(mapName).getAllColors().size();
         if (colorNumbers != allEmpires.size())
             return GameMessages.NOT_ENOUGH_HEAD_QUARTER;
