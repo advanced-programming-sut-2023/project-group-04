@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.view.CommandsEnum.ShopCommands;
-import org.view.CommandsEnum.ShopMessages;
 
 import java.util.regex.Matcher;
 
@@ -23,27 +22,28 @@ public class ShopMenu extends Application {
             if (ShopCommands.getMatcher(input, ShopCommands.SHOW_PRICE_LIST) != null)
                 System.out.println(Menu.getShopController().showList());
 
-            else if ((matcher = ShopCommands.getMatcher(input, ShopCommands.BUY_ITEM)) != null) {
-                ShopMessages shopMessages = Menu.getShopController().checkForBuy(matcher);
-                System.out.println(shopMessages.getMessage());
-                if (shopMessages.equals(ShopMessages.CERTAINTY)) {
-                    input = Menu.getScanner().nextLine();
-                    if (input.matches("yes"))
-                        System.out.println(Menu.getShopController().buyThing(matcher).getMessage());
-                    else
-                        System.out.println(ShopMessages.CANCEL.getMessage());
-                }
-            } else if ((matcher = ShopCommands.getMatcher(input, ShopCommands.SELL_ITEM)) != null) {
-                ShopMessages shopMessages = Menu.getShopController().checkForSell(matcher);
-                System.out.println(shopMessages.getMessage());
-                if (shopMessages.equals(ShopMessages.CERTAINTY)) {
-                    input = Menu.getScanner().nextLine();
-                    if (input.matches("yes"))
-                        System.out.println(Menu.getShopController().sellThing(matcher).getMessage());
-                    else
-                        System.out.println(ShopMessages.CANCEL.getMessage());
-                }
-            } else if (ShopCommands.getMatcher(input, ShopCommands.BACK) != null) {
+//            else if ((matcher = ShopCommands.getMatcher(input, ShopCommands.BUY_ITEM)) != null) {
+//                ShopMessages shopMessages = Menu.getShopController().checkForBuy(matcher);
+//                System.out.println(shopMessages.getMessage());
+//                if (shopMessages.equals(ShopMessages.CERTAINTY)) {
+//                    input = Menu.getScanner().nextLine();
+//                    if (input.matches("yes"))
+//                        System.out.println(Menu.getShopController().buyThing(matcher).getMessage());
+//                    else
+//                        System.out.println(ShopMessages.CANCEL.getMessage());
+//                }
+//            } else if ((matcher = ShopCommands.getMatcher(input, ShopCommands.SELL_ITEM)) != null) {
+//                ShopMessages shopMessages = Menu.getShopController().checkForSell(matcher);
+//                System.out.println(shopMessages.getMessage());
+//                if (shopMessages.equals(ShopMessages.CERTAINTY)) {
+//                    input = Menu.getScanner().nextLine();
+//                    if (input.matches("yes"))
+//                        System.out.println(Menu.getShopController().sellThing(matcher).getMessage());
+//                    else
+//                        System.out.println(ShopMessages.CANCEL.getMessage());
+//                }
+//            }
+            if (ShopCommands.getMatcher(input, ShopCommands.BACK) != null) {
                 System.out.println("Back to game menu successfully!");
                 return;
             } else

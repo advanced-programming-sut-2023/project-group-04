@@ -1,5 +1,8 @@
 package org.controller;
 
+import javafx.event.EventHandler;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -49,7 +52,7 @@ public class ShopController {
     public ImageView buyCheese;
     public ImageView buyhops;
     public ImageView buyAle;
-    public ImageView buywheat;
+    public ImageView buyWheat;
     public ImageView buyFlour;
     public ImageView buyBread;
     public ImageView sellApple;
@@ -123,72 +126,70 @@ public class ShopController {
         return list;
     }
 
-    public ShopMessages buyThing(Matcher matcher) {
-        String itemsName = removeQuotation(matcher.group("itemsName"));
-        int itemsAmount = Integer.parseInt(matcher.group("itemsAmount"));
+    public ShopMessages buyThing(String itemsName, int itemsAmount) {
         Empire currentEmpire = Game.getCurrentGame().getCurrentEmpire();
-        int price = ResourcesDictionary.getDictionaryByName(itemsName).getPrice() * itemsAmount;
-        currentEmpire.changeResourceAmount(itemsName, itemsAmount);
-        currentEmpire.changeResourceAmount("gold", -1 * price);
-        return ShopMessages.BUY_SUCCESSFULLY;
-    }
-
-    public ShopMessages sellThing(Matcher matcher) {
-        String itemsName = removeQuotation(matcher.group("itemsName"));
-        int itemsAmount = Integer.parseInt(matcher.group("itemsAmount"));
-        Empire currentEmpire = Game.getCurrentGame().getCurrentEmpire();
-        int price = ResourcesDictionary.getDictionaryByName(itemsName).getPrice() * itemsAmount;
-        currentEmpire.changeResourceAmount(itemsName, -1 * itemsAmount);
-        return ShopMessages.SELL_SUCCESSFULLY;
-    }
-
-    private String removeQuotation(String buffer) {
-        return buffer.replaceAll("\"", "");
-    }
-
-
-    public ShopMessages checkForBuy(Matcher matcher) {
-        String itemsName = removeQuotation(matcher.group("itemsName"));
-        int itemsAmount = Integer.parseInt(matcher.group("itemsAmount"));
-        Empire currentEmpire = Game.getCurrentGame().getCurrentEmpire();
-        if (ResourcesDictionary.getDictionaryByName(itemsName) == null)
-            return ShopMessages.WRONG_NAME_PRODUCT;
         int freeSpace = currentEmpire.getFreeSpaceByResourceName(itemsName);
         if (freeSpace < itemsAmount)
             return ShopMessages.LACK_OF_FREE_SPACE;
         int price = ResourcesDictionary.getDictionaryByName(itemsName).getPrice() * itemsAmount;
         if (price > currentEmpire.getResources().get("gold"))
             return ShopMessages.LACK_OF_MONEY;
-        return ShopMessages.CERTAINTY;
+        currentEmpire.changeResourceAmount(itemsName, itemsAmount);
+        currentEmpire.changeResourceAmount("gold", -1 * price);
+        return ShopMessages.BUY_SUCCESSFULLY;
     }
 
-    public ShopMessages checkForSell(Matcher matcher) {
-        String itemsName = removeQuotation(matcher.group("itemsName"));
-        int itemsAmount = Integer.parseInt(matcher.group("itemsAmount"));
+    public ShopMessages sellThing(String itemsName, int itemsAmount) {
         Empire currentEmpire = Game.getCurrentGame().getCurrentEmpire();
-        if (ResourcesDictionary.getDictionaryByName(itemsName) == null)
-            return ShopMessages.WRONG_NAME_PRODUCT;
         if (currentEmpire.getAvailableResource(itemsName) < itemsAmount)
             return ShopMessages.LACK_OF_PRODUCT;
-        return ShopMessages.CERTAINTY;
+        int price = ResourcesDictionary.getDictionaryByName(itemsName).getPrice() * itemsAmount;
+        currentEmpire.changeResourceAmount(itemsName, -1 * itemsAmount);
+        currentEmpire.changeResourceAmount("gold", price);
+        return ShopMessages.SELL_SUCCESSFULLY;
     }
 
     public void openFoodShop(MouseEvent mouseEvent) {
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
         allItems.setVisible(false);
         mainBack.setVisible(false);
         foodsGrid.setVisible(true);
+        appleStock.setText("" + empire.getFood().get("apple"));
+        meatStock.setText("" + empire.getFood().get("meat"));
+        cheeseStock.setText("" + empire.getFood().get("cheese"));
+        hopsStock.setText("" + empire.getResources().get("hops"));
+        aleStock.setText("" + empire.getResources().get("ale"));
+        wheatStock.setText("" + empire.getResources().get("wheat"));
+        flourStock.setText("" + empire.getResources().get("flour"));
+        breadStock.setText("" + empire.getFood().get("bread"));
     }
 
+
     public void openMaterialsShop(MouseEvent mouseEvent) {
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
         allItems.setVisible(false);
         mainBack.setVisible(false);
         rawMaterialsGrid.setVisible(true);
+        woodStock.setText("" + empire.getResources().get("wood"));
+        ironStock.setText("" + empire.getResources().get("iron"));
+        pitchStock.setText("" + empire.getResources().get("pitch"));
+        stoneStock.setText("" + empire.getResources().get("stone"));
+
     }
 
     public void openWeaponsShop(MouseEvent mouseEvent) {
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
         allItems.setVisible(false);
         mainBack.setVisible(false);
         weaponsGrid.setVisible(true);
+        spearStock.setText("" + empire.getWeaponAndArmour().get("spear"));
+        bowStock.setText("" + empire.getWeaponAndArmour().get("bow"));
+        crossbowStock.setText("" + empire.getWeaponAndArmour().get("crossbow"));
+        maceStock.setText("" + empire.getWeaponAndArmour().get("mace"));
+        leatherArmorStock.setText("" + empire.getWeaponAndArmour().get("leatherArmour"));
+        pikeStock.setText("" + empire.getWeaponAndArmour().get("pike"));
+        swordStock.setText("" + empire.getWeaponAndArmour().get("sword"));
+        metalArmorStock.setText("" + empire.getWeaponAndArmour().get("metalArmour"));
     }
 
     public void back(MouseEvent mouseEvent) {
@@ -201,5 +202,251 @@ public class ShopController {
 
     public void enterTradeMenu(MouseEvent mouseEvent) throws Exception {
         new TradeMenu().start(ShopMenu.stage);
+    }
+
+    private void buyOperation() {
+        buyApple.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("apple", Integer.parseInt(appleNumber.getText()));
+            }
+        });
+        buyMeat.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("meat", Integer.parseInt(meatNumber.getText()));
+            }
+        });
+        buyCheese.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("cheese", Integer.parseInt(cheeseNumber.getText()));
+            }
+        });
+        buyhops.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("hops", Integer.parseInt(hopsNumber.getText()));
+            }
+        });
+        buyAle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("ale", Integer.parseInt(aleNumber.getText()));
+            }
+        });
+        buyWheat.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("wheat", Integer.parseInt(wheatNumber.getText()));
+            }
+        });
+        buyFlour.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("flour", Integer.parseInt(flourNumber.getText()));
+            }
+        });
+        buyBread.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("bread", Integer.parseInt(breadNumber.getText()));
+            }
+        });
+        buyWood.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("wood", Integer.parseInt(woodNumber.getText()));
+            }
+        });
+        buyStone.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("stone", Integer.parseInt(stoneNumber.getText()));
+            }
+        });
+        buyIron.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("iron", Integer.parseInt(ironNumber.getText()));
+            }
+        });
+        buyPitch.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("pitch", Integer.parseInt(pitchNumber.getText()));
+            }
+        });
+        buySpear.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("spear", Integer.parseInt(spearNumber.getText()));
+            }
+        });
+        buyBow.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("bow", Integer.parseInt(bowNumber.getText()));
+            }
+        });
+        buyCrossbow.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("crossbow", Integer.parseInt(crossbowNumber.getText()));
+            }
+        });
+        buyMace.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("mace", Integer.parseInt(maceNumber.getText()));
+            }
+        });
+        buyLeather.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("leather armour", Integer.parseInt(leatherArmorNumber.getText()));
+            }
+        });
+        buyPike.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("pike", Integer.parseInt(pikeNumber.getText()));
+            }
+        });
+        buySword.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("sword", Integer.parseInt(swordNumber.getText()));
+            }
+        });
+        buyMetal.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = buyThing("metal armour", Integer.parseInt(metalArmorNumber.getText()));
+            }
+        });
+    }
+
+    private void sellOperation() {
+        sellApple.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("apple", Integer.parseInt(appleNumber.getText()));
+            }
+        });
+        sellMeat.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("meat", Integer.parseInt(meatNumber.getText()));
+            }
+        });
+        sellCheese.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("cheese", Integer.parseInt(cheeseNumber.getText()));
+            }
+        });
+        sellHops.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("hops", Integer.parseInt(hopsNumber.getText()));
+            }
+        });
+        sellAle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("ale", Integer.parseInt(aleNumber.getText()));
+            }
+        });
+        sellWheat.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("wheat", Integer.parseInt(wheatNumber.getText()));
+            }
+        });
+        sellFlour.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("flour", Integer.parseInt(flourNumber.getText()));
+            }
+        });
+        sellBread.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("bread", Integer.parseInt(breadNumber.getText()));
+            }
+        });
+        sellWood.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("wood", Integer.parseInt(woodNumber.getText()));
+            }
+        });
+        sellStone.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("stone", Integer.parseInt(stoneNumber.getText()));
+            }
+        });
+        sellIron.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("iron", Integer.parseInt(ironNumber.getText()));
+            }
+        });
+        sellPitch.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("pitch", Integer.parseInt(pitchNumber.getText()));
+            }
+        });
+        sellSpear.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("spear", Integer.parseInt(spearNumber.getText()));
+            }
+        });
+        sellBow.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("bow", Integer.parseInt(bowNumber.getText()));
+            }
+        });
+        sellCrossbow.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("crossbow", Integer.parseInt(crossbowNumber.getText()));
+            }
+        });
+        sellMace.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("mace", Integer.parseInt(maceNumber.getText()));
+            }
+        });
+        sellLeather.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("leather armour", Integer.parseInt(leatherArmorNumber.getText()));
+            }
+        });
+        sellPike.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("pike", Integer.parseInt(pikeNumber.getText()));
+            }
+        });
+        sellSword.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("sword", Integer.parseInt(swordNumber.getText()));
+            }
+        });
+        sellMetal.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("metal armour", Integer.parseInt(metalArmorNumber.getText()));
+            }
+        });
     }
 }

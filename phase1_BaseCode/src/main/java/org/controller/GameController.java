@@ -142,8 +142,6 @@ public class GameController {
         return false;
     }
 
-
-
     private boolean createBuilding(Empire empire, int x, int y, String buildingName, boolean upDirection) {
         ProductiveBuildingsDictionary productiveBuildingDictionary;
         StorageBuildingsDictionary storageBuildingDictionary;
