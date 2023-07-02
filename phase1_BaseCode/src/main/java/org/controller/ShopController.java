@@ -105,6 +105,10 @@ public class ShopController {
     public ImageView sellSword;
     public ImageView sellMetal;
 
+    public ShopController() {
+        buyOperation();
+        sellOperation();
+    }
 
     public String showList() {
         Empire currentEmpire = Game.getCurrentGame().getCurrentEmpire();
@@ -197,7 +201,7 @@ public class ShopController {
         new TradeMenu().start(ShopMenu.stage);
     }
 
-    private void shopOperation() {
+    private void buyOperation() {
         buyApple.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -318,10 +322,128 @@ public class ShopController {
                 ShopMessages message = buyThing("metal armour", Integer.parseInt(metalArmorNumber.getText()));
             }
         });
-
-
     }
 
     private void sellOperation() {
+        sellApple.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("apple", Integer.parseInt(appleNumber.getText()));
+            }
+        });
+        sellMeat.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("meat", Integer.parseInt(meatNumber.getText()));
+            }
+        });
+        sellCheese.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("cheese", Integer.parseInt(cheeseNumber.getText()));
+            }
+        });
+        sellHops.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("hops", Integer.parseInt(hopsNumber.getText()));
+            }
+        });
+        sellAle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("ale", Integer.parseInt(aleNumber.getText()));
+            }
+        });
+        sellWheat.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("wheat", Integer.parseInt(wheatNumber.getText()));
+            }
+        });
+        sellFlour.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("flour", Integer.parseInt(flourNumber.getText()));
+            }
+        });
+        sellBread.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("bread", Integer.parseInt(breadNumber.getText()));
+            }
+        });
+        sellWood.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("wood", Integer.parseInt(woodNumber.getText()));
+            }
+        });
+        sellStone.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("stone", Integer.parseInt(stoneNumber.getText()));
+            }
+        });
+        sellIron.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("iron", Integer.parseInt(ironNumber.getText()));
+            }
+        });
+        sellPitch.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("pitch", Integer.parseInt(pitchNumber.getText()));
+            }
+        });
+        sellSpear.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("spear", Integer.parseInt(spearNumber.getText()));
+            }
+        });
+        sellBow.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("bow", Integer.parseInt(bowNumber.getText()));
+            }
+        });
+        sellCrossbow.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("crossbow", Integer.parseInt(crossbowNumber.getText()));
+            }
+        });
+        sellMace.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("mace", Integer.parseInt(maceNumber.getText()));
+            }
+        });
+        sellLeather.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("leather armour", Integer.parseInt(leatherArmorNumber.getText()));
+            }
+        });
+        sellPike.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("pike", Integer.parseInt(pikeNumber.getText()));
+            }
+        });
+        sellSword.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("sword", Integer.parseInt(swordNumber.getText()));
+            }
+        });
+        sellMetal.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMessages message = sellThing("metal armour", Integer.parseInt(metalArmorNumber.getText()));
+            }
+        });
     }
 }
