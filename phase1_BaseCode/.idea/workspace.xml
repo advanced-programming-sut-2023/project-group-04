@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="update...">
+    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="completing hovering tiles">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/Building.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMapView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMapView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/LoginMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/ControlBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/ControlBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/loginMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/loginMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +31,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="AbolfazlSheikhha" />
+        <entry key="$PROJECT_DIR$/.." value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -62,9 +60,9 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;yousef's__branch&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;kheiliJadid&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/AP/project/phase1_BaseCode/src/main/resources/img&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/IdeaProjects/project-group-04/phase1_BaseCode/src/main/resources/img/captcha&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
@@ -80,8 +78,6 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\AP\project\phase1_BaseCode\src\main\resources\img" />
-      <recent name="E:\AP\project\phase1_BaseCode\src\main\resources\img\gameAssets" />
       <recent name="E:\IdeaProjects\project-group-04\phase1_BaseCode\src\main\resources\img\captcha" />
       <recent name="E:\IdeaProjects\project-group-04\phase1_BaseCode\src\main\resources\img\controlBar" />
       <recent name="E:\IdeaProjects\project-group-04\phase1_BaseCode\src\main\java\org" />
@@ -90,7 +86,7 @@
       <recent name="E:\IdeaProjects\project-group-04\phase1_BaseCode\src\main\resources\dataBase" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GameMenu">
+  <component name="RunManager" selected="Application.LoginMenu">
     <configuration name="GameMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.view.gameView.GameMenu" />
       <module name="phase1" />
@@ -141,11 +137,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GameMenu" />
-        <item itemvalue="Application.LoginMenu" />
         <item itemvalue="JUnit.RegistrationTest" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.LoginMenu" />
         <item itemvalue="Application.GameMenu" />
+        <item itemvalue="JUnit.RegistrationTest" />
       </list>
     </recent_temporary>
   </component>
@@ -377,14 +373,28 @@
       <option name="project" value="LOCAL" />
       <updated>1685709432748</updated>
     </task>
-    <task id="LOCAL-00032" summary="update...">
-      <created>1687554778663</created>
+    <task id="LOCAL-00032" summary="completing drop building">
+      <created>1688070196983</created>
       <option name="number" value="00032" />
       <option name="presentableId" value="LOCAL-00032" />
       <option name="project" value="LOCAL" />
-      <updated>1687554778663</updated>
+      <updated>1688070196983</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="completing drop building">
+      <created>1688126093720</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1688126093720</updated>
+    </task>
+    <task id="LOCAL-00034" summary="completing hovering tiles">
+      <created>1688139245511</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1688139245511</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -422,30 +432,9 @@
     <MESSAGE value="completing game!" />
     <MESSAGE value="completed phase one game!" />
     <MESSAGE value="update..." />
-    <option name="LAST_COMMIT_MESSAGE" value="update..." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/view/EnvironmentMenu.java</url>
-          <line>34</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/controller/GameController.java</url>
-          <line>672</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="data.hash" />
-        <watch expression="data.hash" />
-        <watch expression="path.get(1)" />
-      </configuration>
-    </watches-manager>
+    <MESSAGE value="completing drop building" />
+    <MESSAGE value="completing hovering tiles" />
+    <option name="LAST_COMMIT_MESSAGE" value="completing hovering tiles" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
