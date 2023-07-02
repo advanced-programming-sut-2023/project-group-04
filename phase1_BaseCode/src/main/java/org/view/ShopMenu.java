@@ -57,6 +57,8 @@ public class ShopMenu extends Application {
         ShopMenu.stage = stage;
         AnchorPane anchorPane = FXMLLoader.load(ShopMenu.class.getResource("/fxml/shopMenu.fxml"));
         Scene scene = new Scene(anchorPane);
+        Menu.getShopController().buyOperation();
+        Menu.getShopController().sellOperation();
         stage.setScene(scene);
         stage.show();
     }

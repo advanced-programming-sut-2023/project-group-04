@@ -201,7 +201,7 @@ public class ShopController {
         new TradeMenu().start(ShopMenu.stage);
     }
 
-    private void buyOperation() {
+    public void buyOperation() {
         buyApple.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -324,7 +324,7 @@ public class ShopController {
         });
     }
 
-    private void sellOperation() {
+    public void sellOperation() {
         sellApple.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
