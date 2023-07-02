@@ -511,6 +511,7 @@ private void getClickedBuilding() {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+
             } else if (catNum == 6) {
                 try {
                     clickedBuilding = new Building("armourer");
