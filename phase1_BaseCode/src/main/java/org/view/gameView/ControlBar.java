@@ -9,13 +9,16 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import org.model.Empire;
 
 import java.util.HashMap;
 
@@ -56,7 +59,7 @@ public class ControlBar {
         addDetailBox();
     }
 
-    private void addDetailBox() {
+    void addDetailBox() {
         Text text = new Text("ufaduhka");
         VBox detailBox = new VBox(text);
         detailBox.setViewOrder(0);
