@@ -1,5 +1,7 @@
 package org.view.gameView;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -18,6 +20,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import org.model.Empire;
+import org.model.Game;
+import org.view.Menu;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -32,7 +37,7 @@ public class ControlBar {
     public Group fearAndTax = new Group();
     public Group BuildingCategory = new Group();
     public Group imagePlaces = new Group();
-    public Slider fearSlider, taxSlider;
+    public Slider fearSlider, taxSlider, foodSlider;
     public Text meatText = new Text(), appleText = new Text(), breadText = new Text(), cheeseText = new Text();
     Rectangle tower, industry, farm, castle, foood, weapon;
     Circle circle1, circle2, circle3, circle4, circle5, circle6;
@@ -61,7 +66,7 @@ public class ControlBar {
         detailText.setFill(Color.BLACK);
         VBox detailBox = new VBox(detailText);
         detailBox.setViewOrder(0);
-        detailBox.setBackground(new Background(new BackgroundFill(Color.rgb(208,173,65,0.8), null, null)));
+        detailBox.setBackground(new Background(new BackgroundFill(Color.rgb(208, 173, 65, 0.8), null, null)));
         detailBox.setPrefSize(135, 155);
         detailBox.setTranslateY(708);
         pane.getChildren().add(detailBox);
@@ -423,281 +428,308 @@ public class ControlBar {
 //            ((Circle) popularity.getChildren().get(11)).setFill(new ImagePattern(buildingImages.get("happy")));
 //    }
 
-//    private void updateFood() {
-//        // TODO: 6/29/2023 complete
-//        // TODO: 6/29/2023 change rate with slide bar and get num by slider
-//        HashMap<String, Integer> foodList = Menu.getGameController().showFoodList();
-//
-//
-//    }
-private void getClickedBuilding() {
-    circle1.setOnMouseClicked(new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {
-            if (catNum == -1)
-                clickedBuilding = null;
-            else if (catNum == 1) {
-                try {
-                    clickedBuilding = new Building("hovel");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 2) {
-                try {
-                    clickedBuilding = new Building("quarry");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 3) {
-                try {
-                    clickedBuilding = new Building("apple orchard");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 4) {
-                try {
-                    clickedBuilding = new Building("barracks");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 5) {
-                try {
-                    clickedBuilding = new Building("bakery");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 6) {
-                try {
-                    clickedBuilding = new Building("armoury");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+    private void updateFood() {
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
+        HashMap<String, Integer> foodList = Menu.getGameController().showFoodList();
+        meatText.setText("" + foodList.get("meat"));
+        cheeseText.setText("" + foodList.get("cheese"));
+        breadText.setText("" + foodList.get("bread"));
+        appleText.setText("" + foodList.get("apple"));
+        foodSlider.setValue(empire.getFoodRate());
+        foodSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                empire.setFoodRate((Integer) number);
             }
-        }
-    });
+        });
+    }
 
-    circle2.setOnMouseClicked(new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {
-            if (catNum == -1)
-                clickedBuilding = null;
-            else if (catNum == 1) {
-                try {
-                    clickedBuilding = new Building("lookout tower");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 2) {
-                try {
-                    clickedBuilding = new Building("iron mine");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 3) {
-                try {
-                    clickedBuilding = new Building("diary farmer");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 4) {
-                try {
-                    clickedBuilding = new Building("engineer guild");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 5) {
-                try {
-                    clickedBuilding = new Building("brewer");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+    private void updateFearAndTax() {
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
+        fearSlider.setValue(empire.getFearRate());
+        taxSlider.setValue(empire.getTaxRate());
+        fearSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                empire.setFearRate((Integer) number);
+            }
+        });
+        taxSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                empire.setTaxRate((Integer) number);
+            }
+        });
+    }
 
-            } else if (catNum == 6) {
-                try {
-                    clickedBuilding = new Building("armourer");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+    private void getClickedBuilding() {
+        circle1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1) {
+                    try {
+                        clickedBuilding = new Building("hovel");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 2) {
+                    try {
+                        clickedBuilding = new Building("quarry");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 3) {
+                    try {
+                        clickedBuilding = new Building("apple orchard");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 4) {
+                    try {
+                        clickedBuilding = new Building("barracks");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 5) {
+                    try {
+                        clickedBuilding = new Building("bakery");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 6) {
+                    try {
+                        clickedBuilding = new Building("armoury");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
-        }
-    });
-    circle3.setOnMouseClicked(new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {
-            if (catNum == -1)
-                clickedBuilding = null;
-            else if (catNum == 1) {
-                try {
-                    clickedBuilding = new Building("defence turret");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 2) {
-                try {
-                    clickedBuilding = new Building("market");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 3) {
-                try {
-                    clickedBuilding = new Building("granary");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 4) {
-                try {
-                    clickedBuilding = new Building("low wall");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 5) {
-                try {
-                    clickedBuilding = new Building("inn");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 6) {
-                try {
-                    clickedBuilding = new Building("blacksmith");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-    });
-    circle4.setOnMouseClicked(new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {
-            if (catNum == -1)
-                clickedBuilding = null;
-            else if (catNum == 1) {
-                try {
-                    clickedBuilding = new Building("round tower");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 2) {
-                try {
-                    clickedBuilding = new Building("pitch rig");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 3) {
-                try {
-                    clickedBuilding = new Building("hops farmer");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 4) {
-                try {
-                    clickedBuilding = new Building("stone wall");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 5) {
-                try {
-                    clickedBuilding = new Building("mill");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 6) {
-                try {
-                    clickedBuilding = new Building("fletcher");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+        });
+
+        circle2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1) {
+                    try {
+                        clickedBuilding = new Building("lookout tower");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 2) {
+                    try {
+                        clickedBuilding = new Building("iron mine");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 3) {
+                    try {
+                        clickedBuilding = new Building("diary farmer");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 4) {
+                    try {
+                        clickedBuilding = new Building("engineer guild");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 5) {
+                    try {
+                        clickedBuilding = new Building("brewer");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                } else if (catNum == 6) {
+                    try {
+                        clickedBuilding = new Building("armourer");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
-        }
-    });
-    circle5.setOnMouseClicked(new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {
-            if (catNum == -1)
-                clickedBuilding = null;
-            else if (catNum == 1) {
-                try {
-                    clickedBuilding = new Building("square tower");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 2) {
-                try {
-                    clickedBuilding = new Building("woodcutter");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 3) {
-                try {
-                    clickedBuilding = new Building("hunter post");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 4) {
-                try {
-                    clickedBuilding = new Building("small stone gatehouse");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 5) {
-                try {
-                    clickedBuilding = new Building("stockpile");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 6) {
-                try {
-                    clickedBuilding = new Building("poleturner");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-    });
-    circle6.setOnMouseClicked(new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {
-            if (catNum == -1)
-                clickedBuilding = null;
-            else if (catNum == 1) {
-                try {
-                    clickedBuilding = new Building("perimeter");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 2) {
-                try {
-                    clickedBuilding = new Building("mercenary post");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 3) {
-                try {
-                    clickedBuilding = new Building("wheat");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 4) {
-                try {
-                    clickedBuilding = new Building("tunneler guild");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 5) {
-                try {
-                    clickedBuilding = new Building("water");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else if (catNum == 6) {
-                try {
-                    clickedBuilding = new Building("tanner");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+        });
+        circle3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1) {
+                    try {
+                        clickedBuilding = new Building("defence turret");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 2) {
+                    try {
+                        clickedBuilding = new Building("market");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 3) {
+                    try {
+                        clickedBuilding = new Building("granary");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 4) {
+                    try {
+                        clickedBuilding = new Building("low wall");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 5) {
+                    try {
+                        clickedBuilding = new Building("inn");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 6) {
+                    try {
+                        clickedBuilding = new Building("blacksmith");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
-        }
-    });
-}
+        });
+        circle4.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1) {
+                    try {
+                        clickedBuilding = new Building("round tower");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 2) {
+                    try {
+                        clickedBuilding = new Building("pitch rig");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 3) {
+                    try {
+                        clickedBuilding = new Building("hops farmer");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 4) {
+                    try {
+                        clickedBuilding = new Building("stone wall");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 5) {
+                    try {
+                        clickedBuilding = new Building("mill");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 6) {
+                    try {
+                        clickedBuilding = new Building("fletcher");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
+        circle5.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1) {
+                    try {
+                        clickedBuilding = new Building("square tower");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 2) {
+                    try {
+                        clickedBuilding = new Building("woodcutter");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 3) {
+                    try {
+                        clickedBuilding = new Building("hunter post");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 4) {
+                    try {
+                        clickedBuilding = new Building("small stone gatehouse");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 5) {
+                    try {
+                        clickedBuilding = new Building("stockpile");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 6) {
+                    try {
+                        clickedBuilding = new Building("poleturner");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
+        circle6.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (catNum == -1)
+                    clickedBuilding = null;
+                else if (catNum == 1) {
+                    try {
+                        clickedBuilding = new Building("perimeter");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 2) {
+                    try {
+                        clickedBuilding = new Building("mercenary post");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 3) {
+                    try {
+                        clickedBuilding = new Building("wheat");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 4) {
+                    try {
+                        clickedBuilding = new Building("tunneler guild");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 5) {
+                    try {
+                        clickedBuilding = new Building("water");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (catNum == 6) {
+                    try {
+                        clickedBuilding = new Building("tanner");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
+    }
 
     private void addImage() {
         buildingImages.put("armoury", new Image(ControlBar.class.getResource("/img/buildings/weapon/armoury.png").toExternalForm()));
