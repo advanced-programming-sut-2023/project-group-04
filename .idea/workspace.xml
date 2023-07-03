@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="dear Keyhan it's for you:)">
+    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="startGame completed!">
+      <change afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/ChatController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/Message.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/Chat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/FXML/chatView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/mainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/mainMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/shopMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/shopMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PLAYERS.json" beforeDir="false" afterPath="$PROJECT_DIR$/PLAYERS.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +21,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -56,27 +58,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/AP/project/phase1_BaseCode&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "jadid",
+    "last_opened_file_path": "C:/Users/abolf/OneDrive/Desktop/T33",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\yousef\Documents\GitHub\project-group-04\phase1_BaseCode\src\main\java\org\view\CommandsEnum" />
       <recent name="D:\code\JAVA language\apProject\project-group-04" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.LoginMenu">
+  <component name="RunManager" selected="Application.Chat">
+    <configuration name="Chat" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.view.Chat" />
+      <module name="phase1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GameMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.view.gameView.GameMenu" />
       <module name="phase1" />
@@ -131,9 +149,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Chat" />
         <item itemvalue="Application.LoginMenu" />
-        <item itemvalue="Application.MainMenu" />
         <item itemvalue="Application.ShopMenu" />
+        <item itemvalue="Application.MainMenu" />
         <item itemvalue="Application.GameMenu" />
       </list>
     </recent_temporary>
@@ -152,6 +171,7 @@
       <workItem from="1682965005844" duration="4535000" />
       <workItem from="1685597163563" duration="642000" />
       <workItem from="1688201485586" duration="19519000" />
+      <workItem from="1688371730681" duration="7152000" />
     </task>
     <task id="LOCAL-00001" summary="complete GameCommands">
       <created>1682973681030</created>
