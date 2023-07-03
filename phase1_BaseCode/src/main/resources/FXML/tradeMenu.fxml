@@ -563,7 +563,7 @@
                         <Font name="Berlin Sans FB" size="32.0"/>
                     </font>
                 </Button>
-                <ImageView fx:id="back1" fitHeight="86.0" fitWidth="109.0" layoutX="11.0" layoutY="795.0"
+                <ImageView fx:id="backToGame" fitHeight="86.0" fitWidth="109.0" layoutX="11.0" layoutY="795.0"
                            onMouseClicked="#enterTradeMenu" pickOnBounds="true" preserveRatio="true" visible="false">
                     <image>
                         <Image url="@../images/market/back - Copy.png"/>

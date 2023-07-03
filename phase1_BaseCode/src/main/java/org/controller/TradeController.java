@@ -8,11 +8,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import org.model.Empire;
 import org.model.Game;
-import org.model.ResourcesDictionary;
 import org.model.Trade;
 import org.view.CommandsEnum.TradeMessages;
-
-import java.util.regex.Matcher;
 
 public class TradeController {
 
@@ -44,19 +41,10 @@ public class TradeController {
     public Text status33;
     public Text status44;
 
-    public TradeMessages setTrade(Matcher matcher) {
-        if (matcher.group("type") == null || matcher.group("amount") == null ||
-                matcher.group("price") == null || matcher.group("message") == null)
-            return TradeMessages.EMPTY_FIELD;
-        String resourceName = removeQuotation(matcher.group("type"));
-        String senderMessage = removeQuotation(matcher.group("message"));
-        int amount = Integer.parseInt(matcher.group("amount"));
-        int price = Integer.parseInt(matcher.group("price"));
-        if (ResourcesDictionary.getDictionaryByName(resourceName) == null)
-            return TradeMessages.WRONG_NAME_PRODUCT;
+    public TradeMessages setTrade(String resourceName, String senderMessage, int amount, int price, String tradeGetter) {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         if (empire.getAvailableResource(resourceName) < amount) return TradeMessages.LACK_OF_PRODUCT;
-        Trade trade = new Trade(resourceName, amount, price, senderMessage, Game.getCurrentGame().getCurrentEmpire());
+        Trade trade = new Trade(resourceName, amount, price, senderMessage, Game.getCurrentGame().getCurrentEmpire(), tradeGetter);
         empire.changeResourceAmount(resourceName, -1 * price);
         Game.getCurrentGame().getCurrentEmpire().getAllTrades().add(trade);
         Game.getCurrentGame().addTrade(trade);
@@ -74,20 +62,20 @@ public class TradeController {
         return list.toString();
     }
 
-    public TradeMessages acceptTrade(Matcher matcher) {
+    public TradeMessages acceptTrade() {
         String receiverMessage;
-        if (matcher.group("id") == null || matcher.group("message") == null)
-            return TradeMessages.EMPTY_FIELD;
-        receiverMessage = removeQuotation(matcher.group("message"));
-        int id = Integer.parseInt(matcher.group("id"));
+        int id = 2;
         Trade trade = Game.getCurrentGame().getTradeById(id);
-        if (trade == null) return TradeMessages.WRONG_ID;
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         if (trade.getPrice() > empire.getAvailableResource("gold")) return TradeMessages.LACK_OF_MONEY;
         empire.changeResourceAmount("gold", trade.getPrice());
-        trade.setReceiverMessage(receiverMessage);
         Game.getCurrentGame().removeTrade(trade);
         return TradeMessages.ACCEPT_TRADE;
+    }
+
+    public void rejectTrade(int id) {
+        Trade trade = Game.getCurrentGame().getTradeById(id);
+        Game.getCurrentGame().removeTrade(trade);
     }
 
     public String showTradeHistory() {

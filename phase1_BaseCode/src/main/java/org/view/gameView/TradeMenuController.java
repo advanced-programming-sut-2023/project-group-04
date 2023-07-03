@@ -14,7 +14,7 @@ public class TradeMenuController {
     public Button create;
     public Button previous;
     public ImageView mainBack;
-    public ImageView back1;
+    public ImageView backToGame;
     public ImageView back11;
     public GridPane playersList;
     public GridPane resourcesGrid;
@@ -55,7 +55,7 @@ public class TradeMenuController {
         previous.setVisible(false);
         mainBack.setVisible(false);
         playersList.setVisible(true);
-        back1.setVisible(true);
+        backToGame.setVisible(true);
         back11.setVisible(true);
     }
 
@@ -85,7 +85,7 @@ public class TradeMenuController {
         create.setVisible(false);
         previous.setVisible(false);
         mainBack.setVisible(false);
-        back1.setVisible(true);
+        backToGame.setVisible(true);
         back11.setVisible(true);
         submitted.setVisible(true);
         received.setVisible(true);
