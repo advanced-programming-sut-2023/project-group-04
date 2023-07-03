@@ -5,7 +5,7 @@ import org.model.Game;
 import org.model.Machine.Machine;
 import org.model.Machine.MachinesDictionary;
 import org.model.MapCell;
-import org.model.Player;
+import org.model.*;
 import org.model.buildings.*;
 import org.model.map.Map;
 import org.model.person.*;
@@ -100,7 +100,7 @@ public class GameController {
         return "your fear rate is : <<" + empire.getFearRate() + ">>\n";
     }
 
-    public boolean dropBuilding(int x, int y , String buildingName, boolean upDirection) {
+    public boolean dropBuilding(int x, int y, String buildingName, boolean upDirection) {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         return createBuilding(empire, x, y, buildingName, upDirection);
     }
@@ -141,7 +141,6 @@ public class GameController {
                     return true;
         return false;
     }
-
 
 
     private boolean createBuilding(Empire empire, int x, int y, String buildingName, boolean upDirection) {

@@ -1,23 +1,24 @@
 package org.controller;
 
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-import org.model.*;
+import org.model.Empire;
+import org.model.Game;
+import org.model.ResourcesDictionary;
+import org.model.Trade;
 import org.view.CommandsEnum.TradeMessages;
 import org.view.ShopMenu;
-
-import javafx.scene.image.*;
-import javafx.scene.control.Button;
 import org.view.TradeMenu;
 
 import java.util.regex.Matcher;
 
-import javafx.scene.control.TextArea;
-
-public class TradeController {
+public class
+TradeController {
 
     public Button create;
     public Button previous;

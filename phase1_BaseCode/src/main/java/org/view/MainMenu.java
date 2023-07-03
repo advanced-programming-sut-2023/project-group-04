@@ -13,7 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.model.Player;
+import org.model.*;
 
 import javafx.scene.control.Button;
 import org.model.map.Map;

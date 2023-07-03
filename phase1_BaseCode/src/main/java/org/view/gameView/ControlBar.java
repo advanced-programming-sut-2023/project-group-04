@@ -59,10 +59,9 @@ public class ControlBar {
         addFood();
         addPopularity();
         getClickedBuilding();
-        addDetailBox();
     }
 
-    private void addDetailBox() {
+    public void addDetailBox() {
         Text text = new Text("ufaduhka");
         VBox detailBox = new VBox(text);
         detailBox.setViewOrder(0);

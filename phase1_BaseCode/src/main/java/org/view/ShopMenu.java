@@ -1,6 +1,7 @@
 package org.view;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -57,9 +58,13 @@ public class ShopMenu extends Application {
         ShopMenu.stage = stage;
         AnchorPane anchorPane = FXMLLoader.load(ShopMenu.class.getResource("/fxml/shopMenu.fxml"));
         Scene scene = new Scene(anchorPane);
-        Menu.getShopController().buyOperation();
-        Menu.getShopController().sellOperation();
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    public void initialize() {
+        Menu.getShopController().buyOperation();
+        Menu.getShopController().sellOperation();
     }
 }
