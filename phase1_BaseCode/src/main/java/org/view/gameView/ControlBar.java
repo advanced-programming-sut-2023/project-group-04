@@ -920,13 +920,13 @@ public class ControlBar {
         });
     }
 
-    private void addMercenaryPost() {
+    public void addMercenaryPost() {
         pane.getChildren().removeAll(food, fearAndTax, popularity, report);
         pane.getChildren().add(mercenaryImagePlaces);
         menuFlag = false;
     }
 
-    private void addBarracks() {
+    public void addBarracks() {
         pane.getChildren().removeAll(food, fearAndTax, popularity, report);
         pane.getChildren().add(barracksImagePlaces);
         menuFlag = false;
