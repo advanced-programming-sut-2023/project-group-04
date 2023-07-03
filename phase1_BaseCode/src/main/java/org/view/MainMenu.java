@@ -18,6 +18,7 @@ import org.model.Player;
 import javafx.scene.control.Button;
 import org.model.map.Map;
 import org.view.CommandsEnum.GameMessages;
+import org.view.gameView.GameMenu;
 
 public class MainMenu extends Application {
 
@@ -233,14 +234,15 @@ public class MainMenu extends Application {
         return true;
     }
 
-    public void startGame(MouseEvent mouseEvent) {
+    public void startGame(MouseEvent mouseEvent) throws Exception {
         if (Map.getMapByName(mapName.getText()) == null)
             Menu.getSignupController().showAlert(Alert.AlertType.ERROR,
                     "map not exist", GameMessages.MAP_NOT_EXIST.getMessage());
         else {
             GameMessages gameMessages = Menu.getGameController().startGame(this.players, mapName.getText());
             if (gameMessages.equals(GameMessages.GAME_STARTED)) {
-                // TODO: 7/2/2023 Usef Please Start Game!
+                LoginMenu.stage.close();
+                new GameMenu().start(new Stage());
             } else {
                 Menu.getSignupController().showAlert(Alert.AlertType.ERROR,
                         "can not start", gameMessages.getMessage());

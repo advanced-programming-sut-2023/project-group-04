@@ -19,4 +19,6 @@ module phase1.BaseCode {
     exports org.controller;
     opens org.model to com.google.gson;
     exports org.model;
+
+    opens org.model.map to com.google.gson;
 }

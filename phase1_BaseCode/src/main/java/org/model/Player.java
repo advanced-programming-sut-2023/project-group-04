@@ -56,7 +56,7 @@ public class Player {
     public static void recoveryPlayers() {
         try {
             Gson gson = new Gson();
-            Reader reader = Files.newBufferedReader(Paths.get("PLAYERS.json"));
+            Reader reader = Files.newBufferedReader(Paths.get("src/main/resources/dataBase/PLAYERS.json"));
             ArrayList<Player> allPlayers = new ArrayList<>();
             JsonArray jsonArray = gson.fromJson(reader, JsonArray.class);
             if (jsonArray != null) {
@@ -75,7 +75,7 @@ public class Player {
         Gson gson = new Gson();
         String data = gson.toJson(Player.getAllPlayers());
         try {
-            FileWriter output = new FileWriter("PLAYERS.json");
+            FileWriter output = new FileWriter("src/main/resources/dataBase/PLAYERS.json");
             output.write(data);
             output.close();
         } catch (Exception e) {

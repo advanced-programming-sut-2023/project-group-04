@@ -17,11 +17,11 @@ public class Map {
             "LOW_MEADOW", "HIGH_MEADOW", "OIL", "PLAIN", "LOW_WATER", "RIVER", "SMALL_POND", "LARGE_POND", "BEACH", "SEA"};
     private static final String[] allTrees = {"LITTLE_CHERRY", "LARGE_CHERRY", "OLIVE", "COCONUT", "DATE"};
     private static final String[] availableColors = {"red", "green", "blue", "yellow", "purple","orange", "white","black"};
-    private ArrayList<String> allColors = new ArrayList<>();
+    private static ArrayList<Map> allMaps = new ArrayList<>();
     private static Map currentMap;
+    private ArrayList<String> allColors = new ArrayList<>();
     private final String mapName;
     private final MapTile[][] map;
-    private static ArrayList<Map> allMaps = new ArrayList<>();
 
     public Map(String mapName, int mapSize) {
         allMaps.add(this);
@@ -96,11 +96,14 @@ public class Map {
     public static void setAllMaps(ArrayList<Map> allMaps) {
         Map.allMaps = allMaps;
     }
+    public void setAllColors(ArrayList<String> allColors) {
+        this.allColors = allColors;
+    }
 
     public static void recoveryMaps() {
         try {
             Gson gson = new Gson();
-            Reader reader = Files.newBufferedReader(Path.of("MAPS.json"));
+            Reader reader = Files.newBufferedReader(Path.of("src/main/resources/dataBase/MAPS.json"));
             ArrayList<Map> allMaps = new ArrayList<>();
             JsonArray jsonArray = gson.fromJson(reader, JsonArray.class);
             if (jsonArray != null) {
@@ -119,7 +122,7 @@ public class Map {
         Gson gson = new Gson();
         String data = gson.toJson(Map.getAllMaps());
         try {
-            FileWriter output = new FileWriter(Path.of("MAPS.json").toFile());
+            FileWriter output = new FileWriter(Path.of("src/main/resources/dataBase/MAPS.json").toFile());
             output.write(data);
             output.close();
         } catch (Exception e) {

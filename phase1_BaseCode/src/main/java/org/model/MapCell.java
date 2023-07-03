@@ -17,6 +17,7 @@ public class MapCell {
     private Machine machine;
     private boolean tunnel;
     private boolean oil;
+    private boolean headQuarter;
 
     public MapCell(int x, int y, String groundTexture, String tree) {
         this.xAxis = x;
@@ -28,6 +29,7 @@ public class MapCell {
         this.machine = null;
         this.tunnel = false;
         this.oil = false;
+        this.headQuarter = false;
     }
     public int getX() {
         return xAxis;
@@ -107,5 +109,13 @@ public class MapCell {
 
     public void removeMachine() {
         this.machine = null;
+    }
+
+    public void setHeadQuarter(boolean headQuarter) {
+        this.headQuarter = headQuarter;
+    }
+
+    public boolean isHeadQuarter() {
+        return headQuarter;
     }
 }

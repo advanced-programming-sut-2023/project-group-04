@@ -110,7 +110,7 @@ public class GameController {
         return mapCell.getBuilding() == null && checkGroundTexture(mapCell, buildingName) &&
                 mapCell.getPeople().size() == 0 && mapCell.getMachine() == null &&
                 (y == 0 || Game.getCurrentGame().getMapCellByAddress(x, y - 1).getBuilding() == null) &&
-                buildingName.equals("draw bridge") && !checkDrawBridge(x, y, upDirection);
+                (!buildingName.equals("draw bridge") || checkDrawBridge(x, y, upDirection));
     }
 
     private boolean checkGroundTexture(MapCell mapCell, String buildingName) {
@@ -1185,5 +1185,18 @@ public class GameController {
             i--;
         }
         return GameMessages.SENT_ENGINEER_SUCCESSFULLY;
+    }
+
+    public int getMapSize() {
+        return Game.getCurrentGame().getMapSize();
+    }
+
+    public ArrayList<String> getTileDetails(int x, int y) {
+        ArrayList<String> details = new ArrayList<>();
+        details.add(Game.getCurrentGame().getMap()[x][y].getGroundTexture());
+        details.add(Game.getCurrentGame().getMap()[x][y].getTree());
+        if (Game.getCurrentGame().getMap()[x][y].isHeadQuarter())
+            details.add("");
+        return details;
     }
 }

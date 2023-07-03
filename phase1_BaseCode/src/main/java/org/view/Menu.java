@@ -1,5 +1,6 @@
 package org.view;
 
+import javafx.stage.Stage;
 import org.controller.*;
 
 import java.util.Scanner;
@@ -14,6 +15,7 @@ public class Menu {
     private static final GameController gameController = new GameController();
     private static final ShopController shopController = new ShopController();
     private static final TradeController tradeController = new TradeController();
+    private static Stage stage;
 
     public static Scanner getScanner() {
         return scanner;
@@ -49,5 +51,13 @@ public class Menu {
 
     public static LoginController getLoginController() {
         return loginController;
+    }
+
+    public static void setStage(Stage stage) {
+        Menu.stage = stage;
+    }
+
+    public static Stage getStage() {
+        return stage;
     }
 }

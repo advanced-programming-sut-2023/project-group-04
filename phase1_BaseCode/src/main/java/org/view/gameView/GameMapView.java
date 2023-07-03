@@ -13,6 +13,7 @@ import javafx.scene.transform.Scale;
 import org.view.Menu;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameMapView {
@@ -28,11 +29,10 @@ public class GameMapView {
         currentGameMapView = this;
         Tile.loadTiles();
         Tree.initTrees();
-        int mapSize = 100;
+        int mapSize = Menu.getGameController().getMapSize();
         Tile.initializeAllTiles(mapSize);
         readyMap(mapSize);
         showTrees();
-        showBuildings();
         readyMapBox();
         mouseCursorPositionX = 0;
         mouseCursorPositionY = 0;
@@ -61,8 +61,12 @@ public class GameMapView {
             for (int i = 0; i < bound; i++) {
                 int y = j - 1;
                 int x = bound == size ? i : i - 1;
-                if (x >= 0 && y >= 0 && (bound == size || x < size - 1) && y < size)
-                    map.getChildren().add(new Tile(x, y, "GROUND"));
+                if (x >= 0 && y >= 0 && (bound == size || x < size - 1) && y < size) {
+                    ArrayList<String> textureAndTree = Menu.getGameController().getTileDetails(x, y);
+                    map.getChildren().add(new Tile(x, y, textureAndTree.get(0)));
+                    if (textureAndTree.get(1) != null) map.getChildren().add(new Tree(x, y, textureAndTree.get(1)));
+                    if (textureAndTree.size() == 3) ; //todo : add texture building
+                }
             }
         }
         map.getTransforms().add(zoomScale = new Scale());
@@ -75,17 +79,16 @@ public class GameMapView {
             public void handle(MouseEvent mouseEvent) {
                 mouseCursorPositionX = mouseEvent.getX();
                 mouseCursorPositionY = mouseEvent.getY();
-
                 if (Tile.getHoveredTile() != null && ControlBar.clickedBuilding != null) {
-//                    if (!Menu.getGameController().dropAble(Tile.getHoveredTile().getXCoordinate(),
-//                            Tile.getHoveredTile().getYCoordinate(), ControlBar.clickedBuilding.getType() ,true))
-//                        ControlBar.clickedBuilding.setShadow(Color.RED);
-//                        ControlBar.clickedBuilding.setFixAble(false);
-//                    else {
-                    ControlBar.clickedBuilding.setShadow(Color.GREEN);
-                    ControlBar.clickedBuilding.setFixAble(true);
+                    if (!Menu.getGameController().dropAble(Tile.getHoveredTile().getXCoordinate(),
+                            Tile.getHoveredTile().getYCoordinate(), ControlBar.clickedBuilding.getType(), true)) {
+                        ControlBar.clickedBuilding.setShadow(Color.RED);
+                        ControlBar.clickedBuilding.setFixAble(false);
+                    } else {
+                        ControlBar.clickedBuilding.setShadow(Color.GREEN);
+                        ControlBar.clickedBuilding.setFixAble(true);
+                    }
                     ControlBar.clickedBuilding.movingBuilding(Tile.getHoveredTile());
-//                    }
                 }
             }
         });
@@ -93,10 +96,10 @@ public class GameMapView {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (ControlBar.clickedBuilding != null && ControlBar.clickedBuilding.isFixAble()) {
-//                    if (Menu.getGameController().dropBuilding(Tile.getHoveredTile().getXCoordinate(),
-//                            Tile.getHoveredTile().getYCoordinate(), ControlBar.clickedBuilding.getType(), true))
+                    if (Menu.getGameController().dropBuilding(Tile.getHoveredTile().getXCoordinate(),
+                            Tile.getHoveredTile().getYCoordinate(), ControlBar.clickedBuilding.getType(), true))
                         ControlBar.clickedBuilding.fixBuilding();
-//                    else ControlBar.clickedBuilding = null;
+                    else ControlBar.clickedBuilding = null;
                 }
             }
         });

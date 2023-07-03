@@ -8,7 +8,9 @@ import javafx.scene.input.*;
 import javafx.scene.paint.Color;
 import org.controller.GameController;
 import org.view.CommandsEnum.GameMessages;
+import org.view.GameMenu;
 import org.view.Menu;
+import org.view.ShopMenu;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -66,12 +68,20 @@ public class Building extends ImageView {
             public void handle(MouseEvent mouseEvent) {
                 if (mouseEvent.getButton() == MouseButton.PRIMARY) {
                     if (mouseEvent.getClickCount() >= 2) {
-//                        GameMessages message = Menu.getGameController().selectBuilding(
-//                                thisBuilding.getXCoordinate(), thisBuilding.getYCoordinate());
-//                        if (message.equals(GameMessages.NOT_OWNING_THE_BUILDING)) thisBuilding.setShadow(Color.YELLOW);
-//                        else
+                        GameMessages message = Menu.getGameController().selectBuilding(
+                                thisBuilding.getXCoordinate(), thisBuilding.getYCoordinate());
+                        if (message.equals(GameMessages.NOT_OWNING_THE_BUILDING))
+                            thisBuilding.setShadow(Color.YELLOW);
+                        else {
                             thisBuilding.setShadow(Color.WHITE);
-                            //todo : enter shop menu if needed
+                            if (message.equals(GameMessages.ENTER_SHOP_MENU)) {
+                                try {
+                                    new ShopMenu().start(Menu.getStage());
+                                } catch (Exception e) {
+                                    throw new RuntimeException(e);
+                                }
+                            } // todo : enter shop menu
+                        }
                     } else {
                         if (selectedBuilding != null) selectedBuilding.setShadow(null);
                         selectedBuilding = thisBuilding;

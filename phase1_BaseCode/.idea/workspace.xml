@@ -6,9 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="completing hovering tiles">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/LoginMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/ControlBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/ControlBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/loginMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/loginMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/MapCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/MapCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/map/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMapView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMapView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/dataBase/MAPS.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/dataBase/MAPS.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,9 +144,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.LoginMenu" />
         <item itemvalue="JUnit.RegistrationTest" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.LoginMenu" />
         <item itemvalue="Application.GameMenu" />
         <item itemvalue="JUnit.RegistrationTest" />
       </list>
