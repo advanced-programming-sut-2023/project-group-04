@@ -91,12 +91,14 @@ public class ControlBar {
                 if ((mouseX < 1010 && mouseX > 895) && (mouseY > 740 && mouseY < 840) && !menuFlag) {
                     pane.getChildren().add(report);
                     pane.getChildren().removeAll(food, fearAndTax, BuildingCategory, popularity);
-                    //pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
+                    pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
                     menuFlag = true;
                     category = false;
+                } else if (((mouseX < 930 && mouseX > 330) && (mouseY > 710 && mouseY < 860))) {
+
                 } else {
                     pane.getChildren().removeAll(report, food, fearAndTax, popularity);
-                    //pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
+                    pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
                     if (!category) {
                         pane.getChildren().add(BuildingCategory);
                         category = true;
@@ -365,68 +367,68 @@ public class ControlBar {
         imagePlaces.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
     }
 
-//    private void updatePopularity() {
-//        HashMap<String, Integer> popularityFactors = Menu.getGameController().showPopularity();
-//        Text text = ((Text) popularity.getChildren().get(0));
-//        Integer factorNum = popularityFactors.get("food");
-//        text.setText(text.getText() + "  " + factorNum);
-//        if (factorNum <= 2 && factorNum >= -2)
-//            ((Circle) popularity.getChildren().get(6)).setFill(new ImagePattern(buildingImages.get("poker")));
-//        else if (factorNum < -2)
-//            ((Circle) popularity.getChildren().get(6)).setFill(new ImagePattern(buildingImages.get("sad")));
-//        else
-//            ((Circle) popularity.getChildren().get(6)).setFill(new ImagePattern(buildingImages.get("happy")));
-//        ///////////
-//        text = ((Text) popularity.getChildren().get(1));
-//        factorNum = popularityFactors.get("tax");
-//        text.setText(text.getText() + "  " + factorNum);
-//        if (factorNum <= 2 && factorNum >= -2)
-//            ((Circle) popularity.getChildren().get(7)).setFill(new ImagePattern(buildingImages.get("poker")));
-//        else if (factorNum < -2)
-//            ((Circle) popularity.getChildren().get(7)).setFill(new ImagePattern(buildingImages.get("sad")));
-//        else
-//            ((Circle) popularity.getChildren().get(7)).setFill(new ImagePattern(buildingImages.get("happy")));
-//        //////////////////
-//        text = ((Text) popularity.getChildren().get(2));
-//        factorNum = popularityFactors.get("fear");
-//        text.setText(text.getText() + "  " + factorNum);
-//        if (factorNum <= 2 && factorNum >= -2)
-//            ((Circle) popularity.getChildren().get(8)).setFill(new ImagePattern(buildingImages.get("poker")));
-//        else if (factorNum < -2)
-//            ((Circle) popularity.getChildren().get(8)).setFill(new ImagePattern(buildingImages.get("sad")));
-//        else
-//            ((Circle) popularity.getChildren().get(8)).setFill(new ImagePattern(buildingImages.get("happy")));
-//        //////////////////////
-//        text = ((Text) popularity.getChildren().get(3));
-//        factorNum = popularityFactors.get("ale");
-//        text.setText(text.getText() + "  " + factorNum);
-//        if (factorNum <= 2 && factorNum >= -2)
-//            ((Circle) popularity.getChildren().get(9)).setFill(new ImagePattern(buildingImages.get("poker")));
-//        else if (factorNum < -2)
-//            ((Circle) popularity.getChildren().get(9)).setFill(new ImagePattern(buildingImages.get("sad")));
-//        else
-//            ((Circle) popularity.getChildren().get(9)).setFill(new ImagePattern(buildingImages.get("happy")));
-//        //////////////////
-//        text = ((Text) popularity.getChildren().get(4));
-//        factorNum = popularityFactors.get("religion");
-//        text.setText(text.getText() + "  " + factorNum);
-//        if (factorNum <= 2 && factorNum >= -2)
-//            ((Circle) popularity.getChildren().get(10)).setFill(new ImagePattern(buildingImages.get("poker")));
-//        else if (factorNum < -2)
-//            ((Circle) popularity.getChildren().get(10)).setFill(new ImagePattern(buildingImages.get("sad")));
-//        else
-//            ((Circle) popularity.getChildren().get(10)).setFill(new ImagePattern(buildingImages.get("happy")));
-//        /////////////////
-//        text = ((Text) popularity.getChildren().get(5));
-//        factorNum = popularityFactors.get("sum");
-//        text.setText(text.getText() + "  " + factorNum);
-//        if (factorNum <= 5 && factorNum >= -5)
-//            ((Circle) popularity.getChildren().get(11)).setFill(new ImagePattern(buildingImages.get("poker")));
-//        else if (factorNum < -5)
-//            ((Circle) popularity.getChildren().get(11)).setFill(new ImagePattern(buildingImages.get("sad")));
-//        else
-//            ((Circle) popularity.getChildren().get(11)).setFill(new ImagePattern(buildingImages.get("happy")));
-//    }
+    private void updatePopularity() {
+        HashMap<String, Integer> popularityFactors = Menu.getGameController().showPopularity();
+        Text text = ((Text) popularity.getChildren().get(0));
+        Integer factorNum = popularityFactors.get("food");
+        text.setText(text.getText() + "  " + factorNum);
+        if (factorNum <= 2 && factorNum >= -2)
+            ((Circle) popularity.getChildren().get(6)).setFill(new ImagePattern(buildingImages.get("poker")));
+        else if (factorNum < -2)
+            ((Circle) popularity.getChildren().get(6)).setFill(new ImagePattern(buildingImages.get("sad")));
+        else
+            ((Circle) popularity.getChildren().get(6)).setFill(new ImagePattern(buildingImages.get("happy")));
+        ///////////
+        text = ((Text) popularity.getChildren().get(1));
+        factorNum = popularityFactors.get("tax");
+        text.setText(text.getText() + "  " + factorNum);
+        if (factorNum <= 2 && factorNum >= -2)
+            ((Circle) popularity.getChildren().get(7)).setFill(new ImagePattern(buildingImages.get("poker")));
+        else if (factorNum < -2)
+            ((Circle) popularity.getChildren().get(7)).setFill(new ImagePattern(buildingImages.get("sad")));
+        else
+            ((Circle) popularity.getChildren().get(7)).setFill(new ImagePattern(buildingImages.get("happy")));
+        //////////////////
+        text = ((Text) popularity.getChildren().get(2));
+        factorNum = popularityFactors.get("fear");
+        text.setText(text.getText() + "  " + factorNum);
+        if (factorNum <= 2 && factorNum >= -2)
+            ((Circle) popularity.getChildren().get(8)).setFill(new ImagePattern(buildingImages.get("poker")));
+        else if (factorNum < -2)
+            ((Circle) popularity.getChildren().get(8)).setFill(new ImagePattern(buildingImages.get("sad")));
+        else
+            ((Circle) popularity.getChildren().get(8)).setFill(new ImagePattern(buildingImages.get("happy")));
+        //////////////////////
+        text = ((Text) popularity.getChildren().get(3));
+        factorNum = popularityFactors.get("ale");
+        text.setText(text.getText() + "  " + factorNum);
+        if (factorNum <= 2 && factorNum >= -2)
+            ((Circle) popularity.getChildren().get(9)).setFill(new ImagePattern(buildingImages.get("poker")));
+        else if (factorNum < -2)
+            ((Circle) popularity.getChildren().get(9)).setFill(new ImagePattern(buildingImages.get("sad")));
+        else
+            ((Circle) popularity.getChildren().get(9)).setFill(new ImagePattern(buildingImages.get("happy")));
+        //////////////////
+        text = ((Text) popularity.getChildren().get(4));
+        factorNum = popularityFactors.get("religion");
+        text.setText(text.getText() + "  " + factorNum);
+        if (factorNum <= 2 && factorNum >= -2)
+            ((Circle) popularity.getChildren().get(10)).setFill(new ImagePattern(buildingImages.get("poker")));
+        else if (factorNum < -2)
+            ((Circle) popularity.getChildren().get(10)).setFill(new ImagePattern(buildingImages.get("sad")));
+        else
+            ((Circle) popularity.getChildren().get(10)).setFill(new ImagePattern(buildingImages.get("happy")));
+        /////////////////
+        text = ((Text) popularity.getChildren().get(5));
+        factorNum = popularityFactors.get("sum");
+        text.setText(text.getText() + "  " + factorNum);
+        if (factorNum <= 5 && factorNum >= -5)
+            ((Circle) popularity.getChildren().get(11)).setFill(new ImagePattern(buildingImages.get("poker")));
+        else if (factorNum < -5)
+            ((Circle) popularity.getChildren().get(11)).setFill(new ImagePattern(buildingImages.get("sad")));
+        else
+            ((Circle) popularity.getChildren().get(11)).setFill(new ImagePattern(buildingImages.get("happy")));
+    }
 
     private void updateFood() {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();

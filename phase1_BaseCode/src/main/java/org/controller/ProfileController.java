@@ -22,7 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.model.Player;
+import org.model.*;
 import org.view.*;
 import org.view.CommandsEnum.ProfileMessages;
 
