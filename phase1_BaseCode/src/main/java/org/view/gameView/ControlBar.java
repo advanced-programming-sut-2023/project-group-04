@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class ControlBar {
-    private Pane pane;
+    public Pane pane;
     private Scene scene;
     public Text goldAmount;
     public Group popularity = new Group();
@@ -36,22 +36,27 @@ public class ControlBar {
     public Group food = new Group();
     public Group fearAndTax = new Group();
     public Group BuildingCategory = new Group();
-    public Group imagePlaces = new Group();
+    public Group buildingImagePlaces = new Group(), mercenaryImagePlaces = new Group(), barracksImagePlaces = new Group();
     public Slider fearSlider, taxSlider, foodSlider;
     public Text meatText = new Text(), appleText = new Text(), breadText = new Text(), cheeseText = new Text();
     Rectangle tower, industry, farm, castle, foood, weapon;
+    Rectangle mp1, mp2, mp3, mp4, mp5, mp6, mp7, bc1, bc2, bc3, bc4, bc5, bc6, bc7;
     Circle circle1, circle2, circle3, circle4, circle5, circle6;
     private boolean menuFlag = false, category = true;
-    public static HashMap<String, Image> buildingImages = new HashMap<>();
+    public static HashMap<String, Image> buildingImages = new HashMap<>(), soldierImages = new HashMap<>();
     public static Building clickedBuilding = null;
+    public static String clickedSoldier = null;
     private int catNum = -1;
     private static Text detailText;
 
     public ControlBar(Pane pane, Scene scene) {
         this.pane = pane;
         this.scene = scene;
-        addImage();
+        addBuildingImage();
+        addSoldierImage();
         BuildingMenu();
+        MercenaryMenu();
+        BarracksMenu();
         BuildingCategory();
         addReport();
         addTax();
@@ -87,24 +92,26 @@ public class ControlBar {
             public void handle(MouseEvent event) {
                 double mouseX = event.getX();
                 double mouseY = event.getY();
-                //System.out.println(mouseX + "    " + mouseY);
+                System.out.println(mouseX + "    " + mouseY);
                 if ((mouseX < 1010 && mouseX > 895) && (mouseY > 740 && mouseY < 840) && !menuFlag) {
                     pane.getChildren().add(report);
-                    pane.getChildren().removeAll(food, fearAndTax, BuildingCategory, popularity);
+                    pane.getChildren().removeAll(food, fearAndTax, BuildingCategory, popularity, barracksImagePlaces, mercenaryImagePlaces);
                     pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
                     menuFlag = true;
                     category = false;
-                } else if (((mouseX < 930 && mouseX > 330) && (mouseY > 710 && mouseY < 860))) {
-
-                } else {
-                    pane.getChildren().removeAll(report, food, fearAndTax, popularity);
-                    pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
-                    if (!category) {
-                        pane.getChildren().add(BuildingCategory);
-                        category = true;
-                    }
-                    menuFlag = false;
                 }
+                if (((mouseX < 930 && mouseX > 330) && (mouseY > 710 && mouseY < 860))) {
+
+                }
+//                } else {
+//                    pane.getChildren().removeAll(report, food, fearAndTax, popularity);
+//                    pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
+//                    if (!category) {
+//                        pane.getChildren().add(BuildingCategory);
+//                        category = true;
+//                    }
+//                    menuFlag = false;
+//                }
             }
         });
     }
@@ -337,6 +344,7 @@ public class ControlBar {
             public void handle(MouseEvent event) {
                 pane.getChildren().removeAll(food, fearAndTax, weapon, report, BuildingCategory);
                 pane.getChildren().add(popularity);
+                menuFlag = false;
                 //updatePopularity();
             }
         });
@@ -345,6 +353,7 @@ public class ControlBar {
             public void handle(MouseEvent event) {
                 pane.getChildren().removeAll(report, fearAndTax, weapon, popularity, BuildingCategory);
                 pane.getChildren().add(food);
+                menuFlag = false;
                 //updateFood();
             }
         });
@@ -353,6 +362,7 @@ public class ControlBar {
             public void handle(MouseEvent event) {
                 pane.getChildren().removeAll(food, report, weapon, popularity, BuildingCategory);
                 pane.getChildren().add(fearAndTax);
+                menuFlag = false;
             }
         });
     }
@@ -364,7 +374,7 @@ public class ControlBar {
         circle4 = new Circle(670, 800, 32);
         circle5 = new Circle(750, 750, 32);
         circle6 = new Circle(830, 800, 32);
-        imagePlaces.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
+        buildingImagePlaces.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
     }
 
     private void updatePopularity() {
@@ -733,7 +743,7 @@ public class ControlBar {
         });
     }
 
-    private void addImage() {
+    private void addBuildingImage() {
         buildingImages.put("armoury", new Image(ControlBar.class.getResource("/img/buildings/weapon/armoury.png").toExternalForm()));
         buildingImages.put("armoury1", new Image(ControlBar.class.getResource("/img/buildings/weapon/armoury1.png").toExternalForm()));
         buildingImages.put("granary", new Image(ControlBar.class.getResource("/img/buildings/farm/granary.png").toExternalForm()));
@@ -775,6 +785,148 @@ public class ControlBar {
         buildingImages.put("happy", new Image(ControlBar.class.getResource("/img/imoji/happy.png").toExternalForm()));
         buildingImages.put("sad", new Image(ControlBar.class.getResource("/img/imoji/sad.png").toExternalForm()));
         buildingImages.put("poker", new Image(ControlBar.class.getResource("/img/imoji/poker.png").toExternalForm()));
+    }
+
+    private void addSoldierImage() {
+        soldierImages.put("arabian bow", new Image(ControlBar.class.getResource("/img/troops/mercenary post/arabian bow.png").toExternalForm()));
+        soldierImages.put("arabian swordsman", new Image(ControlBar.class.getResource("/img/troops/mercenary post/arabian swordsman.png").toExternalForm()));
+        soldierImages.put("assassin", new Image(ControlBar.class.getResource("/img/troops/mercenary post/assassin.png").toExternalForm()));
+        soldierImages.put("fire thrower", new Image(ControlBar.class.getResource("/img/troops/mercenary post/fire thrower.png").toExternalForm()));
+        soldierImages.put("horse archer", new Image(ControlBar.class.getResource("/img/troops/mercenary post/horse archer.png").toExternalForm()));
+        soldierImages.put("slave", new Image(ControlBar.class.getResource("/img/troops/mercenary post/slave.png").toExternalForm()));
+        soldierImages.put("slinger", new Image(ControlBar.class.getResource("/img/troops/mercenary post/slinger.png").toExternalForm()));
+        soldierImages.put("archer", new Image(ControlBar.class.getResource("/img/troops/barracks/archer.png").toExternalForm()));
+        soldierImages.put("crossbow man", new Image(ControlBar.class.getResource("/img/troops/barracks/crossbow man.png").toExternalForm()));
+        soldierImages.put("knight", new Image(ControlBar.class.getResource("/img/troops/barracks/knight.png").toExternalForm()));
+        soldierImages.put("mace man", new Image(ControlBar.class.getResource("/img/troops/barracks/mace man.png").toExternalForm()));
+        soldierImages.put("pike man", new Image(ControlBar.class.getResource("/img/troops/barracks/pike man.png").toExternalForm()));
+        soldierImages.put("swordsman", new Image(ControlBar.class.getResource("/img/troops/barracks/swordsman.png").toExternalForm()));
+        soldierImages.put("spearman", new Image(ControlBar.class.getResource("/img/troops/barracks/spearman.png").toExternalForm()));
+    }
+
+    private void MercenaryMenu() {
+        mp1 = new Rectangle(380, 755, 40, 75);
+        mp2 = new Rectangle(465, 755, 40, 75);
+        mp3 = new Rectangle(550, 755, 40, 75);
+        mp4 = new Rectangle(635, 755, 40, 75);
+        mp5 = new Rectangle(720, 755, 40, 75);
+        mp6 = new Rectangle(805, 755, 40, 75);
+        mp7 = new Rectangle(890, 755, 40, 75);
+        mp1.setFill(new ImagePattern(soldierImages.get("arabian bow")));
+        mp2.setFill(new ImagePattern(soldierImages.get("arabian swordsman")));
+        mp3.setFill(new ImagePattern(soldierImages.get("assassin")));
+        mp4.setFill(new ImagePattern(soldierImages.get("fire thrower")));
+        mp5.setFill(new ImagePattern(soldierImages.get("horse archer")));
+        mp6.setFill(new ImagePattern(soldierImages.get("slave")));
+        mp7.setFill(new ImagePattern(soldierImages.get("slinger")));
+        mercenaryImagePlaces.getChildren().addAll(mp1, mp2, mp3, mp4, mp5, mp6);
+        mp1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clickedSoldier = "arabian bow";
+            }
+        });
+        mp2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clickedSoldier = "arabian swordsman";
+            }
+        });
+        mp3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clickedSoldier = "assassin";
+            }
+        });
+        mp4.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clickedSoldier = "fire thrower";
+            }
+        });
+        mp5.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clickedSoldier = "horse archer";
+            }
+        });
+        mp6.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clickedSoldier = "slave";
+            }
+        });
+        mp7.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clickedSoldier = "slinger";
+            }
+        });
+
+    }
+
+    private void BarracksMenu() {
+        bc1 = new Rectangle(380, 755, 40, 75);
+        bc2 = new Rectangle(465, 755, 40, 75);
+        bc3 = new Rectangle(550, 755, 40, 75);
+        bc4 = new Rectangle(635, 755, 40, 75);
+        bc5 = new Rectangle(720, 755, 40, 75);
+        bc6 = new Rectangle(805, 755, 40, 75);
+        bc7 = new Rectangle(890, 755, 40, 75);
+        barracksImagePlaces.getChildren().addAll(bc1, bc2, bc3, bc4, bc5, bc6);
+        bc1.setFill(new ImagePattern(soldierImages.get("archer")));
+        bc2.setFill(new ImagePattern(soldierImages.get("crossbow man")));
+        bc3.setFill(new ImagePattern(soldierImages.get("knight")));
+        bc4.setFill(new ImagePattern(soldierImages.get("mace man")));
+        bc5.setFill(new ImagePattern(soldierImages.get("pike man")));
+        bc6.setFill(new ImagePattern(soldierImages.get("swordsman")));
+        bc7.setFill(new ImagePattern(soldierImages.get("spearman")));
+        bc1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clickedSoldier = "archer";
+            }
+        });
+        bc2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clickedSoldier = "crossbow man";
+            }
+        });
+        bc3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clickedSoldier = "knight";
+            }
+        });
+        bc4.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clickedSoldier = "mace man";
+            }
+        });
+        bc5.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clickedSoldier = "pike man";
+            }
+        });
+        bc6.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clickedSoldier = "swords man";
+            }
+        });
+        bc7.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clickedSoldier = "spearman";
+            }
+        });
+    }
+
+    public static void mercenaryPost() {
+
     }
 
     public static void setDetailText(String text) {

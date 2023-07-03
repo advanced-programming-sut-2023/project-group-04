@@ -1187,9 +1187,9 @@ public class GameController {
         return GameMessages.SENT_ENGINEER_SUCCESSFULLY;
     }
 
-    public int getMapSize() {
-        return Game.getCurrentGame().getMapSize();
-    }
+//    public int getMapSize() {
+//        return Game.getCurrentGame().getMapSize();
+//    }
 
     public ArrayList<String> getTileDetails(int x, int y) {
         ArrayList<String> details = new ArrayList<>();
