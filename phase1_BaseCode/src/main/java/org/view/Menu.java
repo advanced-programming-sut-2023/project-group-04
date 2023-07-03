@@ -2,6 +2,7 @@ package org.view;
 
 import javafx.stage.Stage;
 import org.controller.*;
+import org.view.gameView.ControlBar;
 
 import java.util.Scanner;
 
@@ -16,6 +17,7 @@ public class Menu {
     private static final ShopController shopController = new ShopController();
     private static final TradeController tradeController = new TradeController();
     private static Stage stage;
+    public static ControlBar bar;
 
     public static Scanner getScanner() {
         return scanner;

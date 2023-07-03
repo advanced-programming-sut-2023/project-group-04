@@ -2,7 +2,6 @@ package org.controller;
 
 import org.model.buildings.BuildingsDictionary;
 import org.model.map.Map;
-import org.model.Player;
 import org.model.map.MapTile;
 import org.model.person.SoldiersDictionary;
 import org.view.CommandsEnum.MapMenuMessages;

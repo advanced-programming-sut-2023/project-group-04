@@ -50,6 +50,7 @@ public class ControlBar {
     private static Text detailText;
 
     public ControlBar(Pane pane, Scene scene) {
+        Menu.bar = this;
         this.pane = pane;
         this.scene = scene;
         addBuildingImage();
@@ -92,7 +93,7 @@ public class ControlBar {
             public void handle(MouseEvent event) {
                 double mouseX = event.getX();
                 double mouseY = event.getY();
-                System.out.println(mouseX + "    " + mouseY);
+                //System.out.println(mouseX + "    " + mouseY);
                 if ((mouseX < 1010 && mouseX > 895) && (mouseY > 740 && mouseY < 840) && !menuFlag) {
                     pane.getChildren().add(report);
                     pane.getChildren().removeAll(food, fearAndTax, BuildingCategory, popularity, barracksImagePlaces, mercenaryImagePlaces);
@@ -100,18 +101,12 @@ public class ControlBar {
                     menuFlag = true;
                     category = false;
                 }
-                if (((mouseX < 930 && mouseX > 330) && (mouseY > 710 && mouseY < 860))) {
-
+                if (((mouseX < 890 && mouseX > 330) && (mouseY > 710 && mouseY < 860) && !category && menuFlag)) {
+                    pane.getChildren().remove(report);
+                    pane.getChildren().add(BuildingCategory);
+                    category = true;
+                    menuFlag = false;
                 }
-//                } else {
-//                    pane.getChildren().removeAll(report, food, fearAndTax, popularity);
-//                    pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
-//                    if (!category) {
-//                        pane.getChildren().add(BuildingCategory);
-//                        category = true;
-//                    }
-//                    menuFlag = false;
-//                }
             }
         });
     }
@@ -342,7 +337,7 @@ public class ControlBar {
         r1.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                pane.getChildren().removeAll(food, fearAndTax, weapon, report, BuildingCategory);
+                pane.getChildren().removeAll(food, fearAndTax, weapon, report);
                 pane.getChildren().add(popularity);
                 menuFlag = false;
                 //updatePopularity();
@@ -351,7 +346,7 @@ public class ControlBar {
         r2.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                pane.getChildren().removeAll(report, fearAndTax, weapon, popularity, BuildingCategory);
+                pane.getChildren().removeAll(report, fearAndTax, weapon, popularity);
                 pane.getChildren().add(food);
                 menuFlag = false;
                 //updateFood();
@@ -360,7 +355,7 @@ public class ControlBar {
         r3.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                pane.getChildren().removeAll(food, report, weapon, popularity, BuildingCategory);
+                pane.getChildren().removeAll(food, report, weapon, popularity);
                 pane.getChildren().add(fearAndTax);
                 menuFlag = false;
             }
@@ -925,8 +920,16 @@ public class ControlBar {
         });
     }
 
-    public static void mercenaryPost() {
+    private void addMercenaryPost() {
+        pane.getChildren().removeAll(food, fearAndTax, popularity, report);
+        pane.getChildren().add(mercenaryImagePlaces);
+        menuFlag = false;
+    }
 
+    private void addBarracks() {
+        pane.getChildren().removeAll(food, fearAndTax, popularity, report);
+        pane.getChildren().add(barracksImagePlaces);
+        menuFlag = false;
     }
 
     public static void setDetailText(String text) {
