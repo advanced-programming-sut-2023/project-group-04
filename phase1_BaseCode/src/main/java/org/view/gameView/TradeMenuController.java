@@ -1,9 +1,8 @@
 package org.view.gameView;
 
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.Group;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -13,8 +12,14 @@ import javafx.scene.text.Text;
 import org.model.Empire;
 import org.model.Game;
 import org.model.ResourcesDictionary;
+import org.model.*;
+import org.view.CommandsEnum.TradeMessages;
+import org.view.Menu;
 import org.view.ShopMenu;
 import org.view.TradeMenu;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TradeMenuController {
     public Button create;
@@ -51,7 +56,7 @@ public class TradeMenuController {
     public Text player3;
     public Text player4;
     public Empire tradeGetter;
-    public String resource;
+    public String resource = null;
     public Text crossbowNumber;
     public Text maceNumber;
     public Text leatherNumber;
@@ -99,6 +104,7 @@ public class TradeMenuController {
     public int resourceNumber;
     public TextField itemNumber;
     public TextArea tradeMessage;
+    public String senderMessage;
     public Text id4;
     public Text id3;
     public Text id2;
@@ -116,7 +122,7 @@ public class TradeMenuController {
         playersList.setVisible(true);
         back1.setVisible(true);
         back11.setVisible(true);
-        //clickedOnPlayer();
+        clickedOnPlayer();
     }
 
     private void clickedOnPlayer() {
@@ -332,14 +338,26 @@ public class TradeMenuController {
             @Override
             public void handle(MouseEvent event) {
                 resourceNumber = Integer.parseInt(itemNumber.getText());
+                senderMessage = tradeMessage.getText();
                 price = 0;
+
             }
         });
         request.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 resourceNumber = Integer.parseInt(itemNumber.getText());
-                price = ResourcesDictionary.getDictionaryByName(resource).getPrice();
+                senderMessage = tradeMessage.getText();
+                if (resource != null)
+                    price = resourceNumber * ResourcesDictionary.getDictionaryByName(resource).getPrice();
+            }
+        });
+        submit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                TradeMessages messages = Menu.getTradeController().setTrade(resource, senderMessage, resourceNumber,
+                        price, tradeGetter);
+                new Alert(Alert.AlertType.INFORMATION, messages.getMessage(), ButtonType.OK);
             }
         });
 
@@ -388,6 +406,20 @@ public class TradeMenuController {
         if (status44.getText().equals("unsight")) {
             accept4.setVisible(true);
             reject4.setVisible(true);
+        }
+    }
+
+    public void setPlayersList(Text player1, Text player2, Text player3, Text player4, Text player5, Text player6) {
+        Group text = new Group(player1, player2, player3, player4, player5, player6);
+        int empireSize = Game.getCurrentGame().getAllEmpires().size();
+        ArrayList<Empire> allEmpire = Game.getCurrentGame().getAllEmpires();
+        HashMap<String, Empire> username = Game.getCurrentGame().getEmpires();
+        ArrayList<Player> players = Player.getAllPlayers();
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getUsername().equals(Game.getCurrentGame().getCurrentEmpire().getOwner().getUsername())) {
+                continue;
+            }
+            ((Text) text.getChildren().get(i)).setText(players.get(i).getUsername());
         }
     }
 }

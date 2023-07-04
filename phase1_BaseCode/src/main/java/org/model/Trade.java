@@ -20,6 +20,7 @@ public class Trade {
         this.tradeSender = tradeSender;
         id = lastId;
         lastId++;
+        this.tradeGetter.getAllTrades().add(this);
     }
 
     public String getResourceName() {
@@ -50,4 +51,11 @@ public class Trade {
         return id;
     }
 
+    public Empire getTradeSender() {
+        return tradeSender;
+    }
+
+    public Empire getTradeGetter() {
+        return tradeGetter;
+    }
 }

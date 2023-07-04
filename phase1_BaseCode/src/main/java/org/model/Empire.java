@@ -4,6 +4,7 @@ import org.model.buildings.Building;
 import org.model.buildings.StorageBuilding;
 import org.model.buildings.StorageBuildingsDictionary;
 import org.model.person.Person;
+import org.model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

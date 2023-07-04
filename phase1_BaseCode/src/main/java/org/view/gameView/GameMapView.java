@@ -29,9 +29,9 @@ public class GameMapView {
         currentGameMapView = this;
         Tile.loadTiles();
         Tree.initTrees();
-        //int mapSize = Menu.getGameController().getMapSize();
-//        Tile.initializeAllTiles(mapSize);
-//        readyMap(mapSize);
+        int mapSize = Menu.getGameController().getMapSize();
+        Tile.initializeAllTiles(mapSize);
+        readyMap(mapSize);
         showTrees();
         readyMapBox();
         mouseCursorPositionX = 0;

@@ -8,7 +8,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.model.Game;
 import org.view.Menu;
+import org.view.TradeMenu;
 
 import java.io.IOException;
 
@@ -40,6 +42,7 @@ public class GameMenu extends Application {
         pane.requestFocus();
         bar.showGoldAmount();
         bar.addDetailBox();
+        bar.showGoldAmount();
         keyPressEvent();
     }
 
@@ -52,8 +55,17 @@ public class GameMenu extends Application {
                 switch (pressedKey) {
                     case "ADD" -> mapView.zoom(+1);
                     case "SUBTRACT" -> mapView.zoom(-1);
-                    case "SPACE" -> Menu.getGameController().nextTurn();
-                    case "TAB" -> System.out.println("trade menu");  //todo : enter trade menu
+                    case "N" -> {
+                        System.out.println(Game.getCurrentGame().getCurrentEmpire());
+                        Menu.getGameController().nextTurn();
+                    }
+                    case "TAB" -> {
+                        try {
+                            new TradeMenu().start(new Stage());
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
                     case "C" -> Building.buildingCopy();
                     case "P" -> {
                         try {

@@ -17,7 +17,7 @@ public class TradeController {
     public TradeMessages setTrade(String resourceName, String senderMessage, int amount, int price, Empire tradeGetter) {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         if (empire.getAvailableResource(resourceName) < amount) return TradeMessages.LACK_OF_PRODUCT;
-        Trade trade = new Trade(resourceName, amount, price, senderMessage, tradeGetter);
+        Trade trade = new Trade(resourceName, amount, price, senderMessage, tradeGetter, empire);
         Game.getCurrentGame().getCurrentEmpire().getAllTrades().add(trade);
         Game.getCurrentGame().addTrade(trade);
         return TradeMessages.SET_TRADE;
@@ -63,20 +63,6 @@ public class TradeController {
         }
         currentEmpire.getAllTrades().clear();
         return string.toString();
-    }
-
-    public void setPlayersList(Text player1, Text player2, Text player3, Text player4, Text player5, Text player6) {
-        Group text = new Group(player1, player2, player3, player4, player5, player6);
-        int empireSize = Game.getCurrentGame().getAllEmpires().size();
-        ArrayList<Empire> allEmpire = Game.getCurrentGame().getAllEmpires();
-        HashMap<String, Empire> username = Game.getCurrentGame().getEmpires();
-        ArrayList<Player> players = Player.getAllPlayers();
-        for (int i = 0; i < players.size(); i++) {
-            if (Game.getCurrentGame().getCurrentEmpire().getOwner() == players.get(i)) {
-                continue;
-            }
-            ((Text) text.getChildren().get(i)).setText(players.get(i).getUsername());
-        }
     }
 
     private String removeQuotation(String buffer) {

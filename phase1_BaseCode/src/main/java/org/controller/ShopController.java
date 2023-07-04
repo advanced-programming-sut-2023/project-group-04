@@ -192,6 +192,13 @@ public class ShopController {
         rawMaterialsGrid.setVisible(false);
         allItems.setVisible(true);
         mainBack.setVisible(true);
+        mainBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ShopMenu.stage.close();
+            }
+        });
+
     }
 
     public void enterTradeMenu(MouseEvent mouseEvent) throws Exception {

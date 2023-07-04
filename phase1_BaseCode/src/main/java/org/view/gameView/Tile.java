@@ -50,7 +50,7 @@ public class Tile extends ImageView {
             @Override
             public void handle(MouseEvent event) {
                 hoveredTile = thisTile;
-//                ControlBar.setDetailText(Menu.getMapController().showMapDetail(hoveredTile.x, hoveredTile.y));
+                ControlBar.setDetailText(Menu.getMapController().showMapDetail(hoveredTile.x, hoveredTile.y));
             }
         });
         this.setOnMouseClicked(new EventHandler<MouseEvent>() {

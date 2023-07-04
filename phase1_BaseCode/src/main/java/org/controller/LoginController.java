@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import org.model.Player;
+import org.model.*;
 import org.view.CommandsEnum.SignUpMessages;
 import org.view.LoginMenu;
 import org.view.MainMenu;

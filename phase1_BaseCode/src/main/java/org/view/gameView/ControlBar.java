@@ -25,6 +25,7 @@ import org.model.Game;
 import org.view.Menu;
 
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.HashMap;
 
 public class ControlBar {
@@ -59,11 +60,11 @@ public class ControlBar {
         MercenaryMenu();
         BarracksMenu();
         BuildingCategory();
-        addReport();
         addTax();
         addFear();
         addFood();
         addPopularity();
+        addReport();
         getClickedBuilding();
     }
 
@@ -79,12 +80,22 @@ public class ControlBar {
     }
 
     public void showGoldAmount() {
-        goldAmount = new Text("200");
+        goldAmount = new Text();
         goldAmount.setTranslateX(910);
         goldAmount.setTranslateY(800);
         goldAmount.setRotate(8);
         goldAmount.setFill(Color.GREEN);
         pane.getChildren().add(goldAmount);
+    }
+
+    private void updateGold() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                goldAmount.setText("" + Game.getCurrentGame().getCurrentEmpire().getResourceAmount("gold"));
+            }
+        });
+        thread.start();
     }
 
     public void reporterClick() {
@@ -138,21 +149,21 @@ public class ControlBar {
         text.setFont(Font.font(25));
         Circle meat = new Circle(500, 775, 25);
         meatText.setTranslateX(500);
-        meatText.setTranslateY(790);
+        meatText.setTranslateY(820);
         meat.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/images/market/items/meat.png").toExternalForm())));
         Circle cheese = new Circle(600, 775, 25);
         cheeseText.setTranslateX(600);
-        cheeseText.setTranslateY(790);
+        cheeseText.setTranslateY(820);
         cheese.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/images/market/items/cheese.png").toExternalForm())));
         Circle apple = new Circle(700, 775, 25);
         appleText.setTranslateX(700);
-        appleText.setTranslateY(790);
+        appleText.setTranslateY(820);
         apple.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/images/market/items/apple.png").toExternalForm())));
         Circle bread = new Circle(800, 775, 17);
         breadText.setTranslateX(800);
-        breadText.setTranslateY(790);
+        breadText.setTranslateY(820);
         bread.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/images/market/items/bread.png").toExternalForm())));
-        Slider foodSlider = new Slider();
+        foodSlider = new Slider();
         foodSlider.setMin(-2);
         foodSlider.setMax(2);
         foodSlider.setMajorTickUnit(1);
@@ -340,7 +351,7 @@ public class ControlBar {
                 pane.getChildren().removeAll(food, fearAndTax, weapon, report);
                 pane.getChildren().add(popularity);
                 menuFlag = false;
-                //updatePopularity();
+                updatePopularity();
             }
         });
         r2.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -349,7 +360,7 @@ public class ControlBar {
                 pane.getChildren().removeAll(report, fearAndTax, weapon, popularity);
                 pane.getChildren().add(food);
                 menuFlag = false;
-                //updateFood();
+                updateFood();
             }
         });
         r3.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -358,6 +369,7 @@ public class ControlBar {
                 pane.getChildren().removeAll(food, report, weapon, popularity);
                 pane.getChildren().add(fearAndTax);
                 menuFlag = false;
+                updateFearAndTax();
             }
         });
     }
@@ -376,7 +388,7 @@ public class ControlBar {
         HashMap<String, Integer> popularityFactors = Menu.getGameController().showPopularity();
         Text text = ((Text) popularity.getChildren().get(0));
         Integer factorNum = popularityFactors.get("food");
-        text.setText(text.getText() + "  " + factorNum);
+        text.setText("Food  " + factorNum);
         if (factorNum <= 2 && factorNum >= -2)
             ((Circle) popularity.getChildren().get(6)).setFill(new ImagePattern(buildingImages.get("poker")));
         else if (factorNum < -2)
@@ -386,7 +398,7 @@ public class ControlBar {
         ///////////
         text = ((Text) popularity.getChildren().get(1));
         factorNum = popularityFactors.get("tax");
-        text.setText(text.getText() + "  " + factorNum);
+        text.setText("Tax  " + factorNum);
         if (factorNum <= 2 && factorNum >= -2)
             ((Circle) popularity.getChildren().get(7)).setFill(new ImagePattern(buildingImages.get("poker")));
         else if (factorNum < -2)
@@ -396,7 +408,7 @@ public class ControlBar {
         //////////////////
         text = ((Text) popularity.getChildren().get(2));
         factorNum = popularityFactors.get("fear");
-        text.setText(text.getText() + "  " + factorNum);
+        text.setText("Fear  " + factorNum);
         if (factorNum <= 2 && factorNum >= -2)
             ((Circle) popularity.getChildren().get(8)).setFill(new ImagePattern(buildingImages.get("poker")));
         else if (factorNum < -2)
@@ -406,7 +418,7 @@ public class ControlBar {
         //////////////////////
         text = ((Text) popularity.getChildren().get(3));
         factorNum = popularityFactors.get("ale");
-        text.setText(text.getText() + "  " + factorNum);
+        text.setText("Ale Coverage  " + factorNum);
         if (factorNum <= 2 && factorNum >= -2)
             ((Circle) popularity.getChildren().get(9)).setFill(new ImagePattern(buildingImages.get("poker")));
         else if (factorNum < -2)
@@ -416,7 +428,7 @@ public class ControlBar {
         //////////////////
         text = ((Text) popularity.getChildren().get(4));
         factorNum = popularityFactors.get("religion");
-        text.setText(text.getText() + "  " + factorNum);
+        text.setText("Religion  " + factorNum);
         if (factorNum <= 2 && factorNum >= -2)
             ((Circle) popularity.getChildren().get(10)).setFill(new ImagePattern(buildingImages.get("poker")));
         else if (factorNum < -2)
@@ -426,7 +438,7 @@ public class ControlBar {
         /////////////////
         text = ((Text) popularity.getChildren().get(5));
         factorNum = popularityFactors.get("sum");
-        text.setText(text.getText() + "  " + factorNum);
+        text.setText("In The Coming Month  " + factorNum);
         if (factorNum <= 5 && factorNum >= -5)
             ((Circle) popularity.getChildren().get(11)).setFill(new ImagePattern(buildingImages.get("poker")));
         else if (factorNum < -5)
@@ -444,9 +456,9 @@ public class ControlBar {
         appleText.setText("" + foodList.get("apple"));
         foodSlider.setValue(empire.getFoodRate());
         foodSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                empire.setFoodRate((Integer) number);
+            public void changed(ObservableValue <?extends Number>observable, Number oldValue, Number newValue){
+                empire.setFoodRate(newValue.intValue());
+                System.out.println(newValue.intValue());
             }
         });
     }
@@ -512,6 +524,8 @@ public class ControlBar {
                         throw new RuntimeException(e);
                     }
                 }
+                if (clickedBuilding != null)
+                    GameMapView.getCurrentGameMapView().getMap().getChildren().remove(clickedBuilding);
             }
         });
 
@@ -558,6 +572,8 @@ public class ControlBar {
                         throw new RuntimeException(e);
                     }
                 }
+                if (clickedBuilding != null)
+                    GameMapView.getCurrentGameMapView().getMap().getChildren().remove(clickedBuilding);
             }
         });
         circle3.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -602,6 +618,8 @@ public class ControlBar {
                         throw new RuntimeException(e);
                     }
                 }
+                if (clickedBuilding != null)
+                    GameMapView.getCurrentGameMapView().getMap().getChildren().remove(clickedBuilding);
             }
         });
         circle4.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -646,6 +664,8 @@ public class ControlBar {
                         throw new RuntimeException(e);
                     }
                 }
+                if (clickedBuilding != null)
+                    GameMapView.getCurrentGameMapView().getMap().getChildren().remove(clickedBuilding);
             }
         });
         circle5.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -690,6 +710,8 @@ public class ControlBar {
                         throw new RuntimeException(e);
                     }
                 }
+                if (clickedBuilding != null)
+                    GameMapView.getCurrentGameMapView().getMap().getChildren().remove(clickedBuilding);
             }
         });
         circle6.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -734,6 +756,8 @@ public class ControlBar {
                         throw new RuntimeException(e);
                     }
                 }
+                if (clickedBuilding != null)
+                    GameMapView.getCurrentGameMapView().getMap().getChildren().remove(clickedBuilding);
             }
         });
     }

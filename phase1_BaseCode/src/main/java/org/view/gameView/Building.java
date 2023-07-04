@@ -6,9 +6,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import org.controller.GameController;
 import org.view.CommandsEnum.GameMessages;
 import org.view.GameMenu;
+import org.view.LoginMenu;
 import org.view.Menu;
 import org.view.ShopMenu;
 
@@ -76,7 +78,7 @@ public class Building extends ImageView {
                             thisBuilding.setShadow(Color.WHITE);
                             if (message.equals(GameMessages.ENTER_SHOP_MENU)) {
                                 try {
-                                    new ShopMenu().start(Menu.getStage());
+                                    new ShopMenu().start(new Stage());
                                 } catch (Exception e) {
                                     throw new RuntimeException(e);
                                 }
