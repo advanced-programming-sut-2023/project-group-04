@@ -231,4 +231,8 @@ public class Game {
         }
     }
 
+    public HashMap<String, Empire> getEmpires() {
+        return empires;
+    }
+
 }

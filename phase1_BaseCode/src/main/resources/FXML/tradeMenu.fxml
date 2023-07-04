@@ -173,8 +173,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
-                <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#createNewTrade" pickOnBounds="true"
-                           preserveRatio="true" GridPane.halignment="LEFT">
+                <ImageView fitHeight="100.0" fitWidth="100.0"  pickOnBounds="true"
+                           preserveRatio="true" GridPane.halignment="LEFT" fx:id="apple">
                     <image>
                         <Image url="@../images/market/items/apple.png"/>
                     </image>
@@ -183,8 +183,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="10.0" layoutY="50.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="1">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="1" fx:id="bread">
                     <image>
                         <Image url="@../images/market/items/bread.png"/>
                     </image>
@@ -193,8 +193,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="131.0" layoutY="50.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="2">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="2" fx:id="cheese">
                     <image>
                         <Image url="@../images/market/items/cheese.png"/>
                     </image>
@@ -203,8 +203,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="252.0" layoutY="50.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="3">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="3" fx:id="flour">
                     <image>
                         <Image url="@../images/market/items/flour.png"/>
                     </image>
@@ -213,8 +213,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="373.0" layoutY="50.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="4">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="4" fx:id="hops">
                     <image>
                         <Image url="@../images/market/items/hops.png"/>
                     </image>
@@ -223,8 +223,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="494.0" layoutY="50.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="5">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="5" fx:id="meat">
                     <image>
                         <Image url="@../images/market/items/meat.png"/>
                     </image>
@@ -233,8 +233,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="615.0" layoutY="50.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="6">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="6" fx:id="pitch">
                     <image>
                         <Image url="@../images/market/items/pitch.png"/>
                     </image>
@@ -243,8 +243,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="736.0" layoutY="50.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="7">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="7" fx:id="wheat">
                     <image>
                         <Image url="@../images/market/items/wheat.png"/>
                     </image>
@@ -253,8 +253,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="857.0" layoutY="50.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="8">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="8" fx:id="ale">
                     <image>
                         <Image url="@../images/market/items/ale.png"/>
                     </image>
@@ -263,8 +263,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="978.0" layoutY="50.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="9">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="9" fx:id="bow">
                     <image>
                         <Image url="@../images/market/items/bow.png"/>
                     </image>
@@ -273,8 +273,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1099.0" layoutY="50.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.rowIndex="1">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.rowIndex="1" fx:id="crossbow">
                     <image>
                         <Image url="@../images/market/items/crossBow.png"/>
                     </image>
@@ -283,8 +283,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="10.0" layoutY="215.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="leatherArmour">
                     <image>
                         <Image url="@../images/market/items/leather armor.png"/>
                     </image>
@@ -293,8 +293,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="131.0" layoutY="215.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="2" GridPane.rowIndex="1">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="2" GridPane.rowIndex="1" fx:id="mace">
                     <image>
                         <Image url="@../images/market/items/mace.png"/>
                     </image>
@@ -303,8 +303,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="252.0" layoutY="215.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="3" GridPane.rowIndex="1">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="3" GridPane.rowIndex="1" fx:id="metalArmour">
                     <image>
                         <Image url="@../images/market/items/metal armor.png"/>
                     </image>
@@ -313,8 +313,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="373.0" layoutY="215.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="4" GridPane.rowIndex="1">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="4" GridPane.rowIndex="1" fx:id="pike">
                     <image>
                         <Image url="@../images/market/items/pike.png"/>
                     </image>
@@ -323,8 +323,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="494.0" layoutY="215.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="5" GridPane.rowIndex="1">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="5" GridPane.rowIndex="1" fx:id="spear">
                     <image>
                         <Image url="@../images/market/items/spear.png"/>
                     </image>
@@ -333,8 +333,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="615.0" layoutY="215.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="6" GridPane.rowIndex="1">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="6" GridPane.rowIndex="1" fx:id="sword">
                     <image>
                         <Image url="@../images/market/items/sword.png"/>
                     </image>
@@ -343,8 +343,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="736.0" layoutY="215.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="7" GridPane.rowIndex="1">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="7" GridPane.rowIndex="1" fx:id="iron">
                     <image>
                         <Image url="@../images/market/items/iron.png"/>
                     </image>
@@ -353,8 +353,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="857.0" layoutY="215.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="8" GridPane.rowIndex="1">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="8" GridPane.rowIndex="1" fx:id="stone">
                     <image>
                         <Image url="@../images/market/items/stone.png"/>
                     </image>
@@ -363,8 +363,8 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="978.0" layoutY="215.0"
-                           onMouseClicked="#createNewTrade" pickOnBounds="true" preserveRatio="true"
-                           GridPane.columnIndex="9" GridPane.rowIndex="1">
+                            pickOnBounds="true" preserveRatio="true"
+                           GridPane.columnIndex="9" GridPane.rowIndex="1" fx:id="wood">
                     <image>
                         <Image url="@../images/market/items/wood.png"/>
                     </image>
@@ -524,24 +524,6 @@
                         <Font name="Berlin Sans FB" size="39.0"/>
                     </font>
                 </TextField>
-                <ImageView fx:id="plus" fitHeight="50.0" fitWidth="50.0" layoutX="829.0" layoutY="400.0"
-                           pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../images/icons/plus.png"/>
-                    </image>
-                    <cursor>
-                        <Cursor fx:constant="HAND"/>
-                    </cursor>
-                </ImageView>
-                <ImageView fx:id="minus" fitHeight="50.0" fitWidth="50.0" layoutX="650.0" layoutY="400.0"
-                           pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../images/icons/minus.png"/>
-                    </image>
-                    <cursor>
-                        <Cursor fx:constant="HAND"/>
-                    </cursor>
-                </ImageView>
                 <TextArea fx:id="tradeMessage" layoutX="474.0" layoutY="485.0" prefHeight="82.0" prefWidth="560.0"
                           promptText="leave a message...">
                     <font>
