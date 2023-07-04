@@ -116,16 +116,18 @@ public class TradeMenuController {
     @FXML
     public void initialize() {
         ArrayList<Empire> opponentEmpires = Game.getCurrentGame().getOpponentEmpires();
-        if (opponentEmpires.size() < 4)
-            player4.setText("");
-        else player4.setText(opponentEmpires.get(3).getOwner().getUsername());
-        if (opponentEmpires.size() < 3)
-            player3.setText("");
-        else player3.setText(opponentEmpires.get(2).getOwner().getUsername());
-        if (opponentEmpires.size() < 2)
-            player2.setText("");
-        else player2.setText(opponentEmpires.get(1).getOwner().getUsername());
-        player1.setText(opponentEmpires.get(0).getOwner().getUsername());
+        if (opponentEmpires != null && opponentEmpires.size() != 0) {
+            if (opponentEmpires.size() < 4)
+                player4.setText("");
+            else player4.setText(opponentEmpires.get(3).getOwner().getUsername());
+            if (opponentEmpires.size() < 3)
+                player3.setText("");
+            else player3.setText(opponentEmpires.get(2).getOwner().getUsername());
+            if (opponentEmpires.size() < 2)
+                player2.setText("");
+            else player2.setText(opponentEmpires.get(1).getOwner().getUsername());
+            player1.setText(opponentEmpires.get(0).getOwner().getUsername());
+        }
     }
 
     public void enterShopMenu(MouseEvent mouseEvent) throws Exception {
