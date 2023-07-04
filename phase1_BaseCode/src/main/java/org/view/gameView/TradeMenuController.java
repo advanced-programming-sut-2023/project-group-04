@@ -1,17 +1,12 @@
 package org.view.gameView;
 
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-import org.model.Empire;
-import org.model.Game;
 import org.view.ShopMenu;
 import org.view.TradeMenu;
 
@@ -19,7 +14,7 @@ public class TradeMenuController {
     public Button create;
     public Button previous;
     public ImageView mainBack;
-    public ImageView backToGame;
+    public ImageView back1;
     public ImageView back11;
     public GridPane playersList;
     public GridPane resourcesGrid;
@@ -49,54 +44,10 @@ public class TradeMenuController {
     public Text player2;
     public Text player3;
     public Text player4;
-    public Empire tradeGetter;
-    public String resource;
-    public Text crossbowNumber;
-    public Text maceNumber;
-    public Text leatherNumber;
-    public Text metalNumber;
-    public Text pikeNumber;
-    public Text spearNumber;
-    public Text swordNumber;
-    public Text ironNumber;
-    public Text stoneNumber;
-    public Text woodNumber;
-    public Text appleNumber;
-    public Text breadNumber;
-    public Text cheeseNumber;
-    public Text flourNumber;
-    public Text hopsNumber;
-    public Text meatNumber;
-    public Text pitchNumber;
-    public Text wheatNumber;
-    public Text aleNumber;
-    public Text bowNumber;
-    public Button request;
-    public Button donate;
-    public Button submit;
-    public ImageView apple;
-    public ImageView bread;
-    public ImageView cheese;
-    public ImageView flour;
-    public ImageView hops;
-    public ImageView meat;
-    public ImageView pitch;
-    public ImageView wheat;
-    public ImageView ale;
-    public ImageView bow;
-    public ImageView crossbow;
-    public ImageView leatherArmour;
-    public ImageView mace;
-    public ImageView metalArmour;
-    public ImageView pike;
-    public ImageView spear;
-    public ImageView sword;
-    public ImageView iron;
-    public ImageView stone;
-    public ImageView wood;
-    public int price;
-    public TextField itemNumber;
-    public TextArea tradeMessage;
+    public Text id4;
+    public Text id3;
+    public Text id2;
+    public Text id1;
 
 
     public void enterShopMenu(MouseEvent mouseEvent) throws Exception {
@@ -108,208 +59,17 @@ public class TradeMenuController {
         previous.setVisible(false);
         mainBack.setVisible(false);
         playersList.setVisible(true);
-        backToGame.setVisible(true);
+        back1.setVisible(true);
         back11.setVisible(true);
-        //clickedOnPlayer();
-    }
-
-    private void clickedOnPlayer() {
-        player1.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (!(player1.getText().equals("empty")))
-                    tradeGetter = Game.getCurrentGame().getEmpires().get(player1.getText());
-            }
-        });
-        player2.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (!(player2.getText().equals("empty")))
-                    tradeGetter = Game.getCurrentGame().getEmpires().get(player2.getText());
-            }
-        });
-        player3.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (!(player3.getText().equals("empty")))
-                    tradeGetter = Game.getCurrentGame().getEmpires().get(player3.getText());
-            }
-        });
-        player4.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (!(player4.getText().equals("empty")))
-                    tradeGetter = Game.getCurrentGame().getEmpires().get(player4.getText());
-            }
-        });
-        player5.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (!(player5.getText().equals("empty")))
-                    tradeGetter = Game.getCurrentGame().getEmpires().get(player5.getText());
-            }
-        });
-        player6.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (!(player6.getText().equals("empty")))
-                    tradeGetter = Game.getCurrentGame().getEmpires().get(player6.getText());
-            }
-        });
     }
 
     public void showResourceList(MouseEvent mouseEvent) {
         playersList.setVisible(false);
+//        String opponentUsername = mouseEvent.getSource().toString();
+//        Player opponent = Player.getPlayerByUsername(opponentUsername);
         resourcesGrid.setVisible(true);
         amount.setVisible(true);
         amount1.setVisible(true);
-        clickOnResource();
-    }
-
-    private void clickOnResource() {
-        meat.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "meat";
-                createNewTrade(event);
-            }
-        });
-        apple.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "apple";
-                createNewTrade(event);
-            }
-        });
-        bread.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "bread";
-                createNewTrade(event);
-            }
-        });
-        cheese.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "cheese";
-                createNewTrade(event);
-            }
-        });
-        flour.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "flour";
-                createNewTrade(event);
-            }
-        });
-        hops.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "hops";
-                createNewTrade(event);
-            }
-        });
-        pitch.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "pitch";
-                createNewTrade(event);
-            }
-        });
-        wheat.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "wheat";
-                createNewTrade(event);
-            }
-        });
-        ale.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "ale";
-                createNewTrade(event);
-            }
-        });
-        bow.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "bow";
-                createNewTrade(event);
-            }
-        });
-        crossbow.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "crossbow";
-                createNewTrade(event);
-            }
-        });
-        leatherArmour.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "leather armour";
-                createNewTrade(event);
-            }
-        });
-        mace.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "mace";
-                createNewTrade(event);
-            }
-        });
-        metalArmour.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "metal armour";
-                createNewTrade(event);
-            }
-        });
-        pike.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "pike";
-                createNewTrade(event);
-            }
-        });
-        spear.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "spear";
-                createNewTrade(event);
-            }
-        });
-        sword.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "sword";
-                createNewTrade(event);
-            }
-        });
-        iron.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "iron";
-                createNewTrade(event);
-            }
-        });
-        stone.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "stone";
-                createNewTrade(event);
-            }
-        });
-        wood.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                resource = "wood";
-                createNewTrade(event);
-
-            }
-        });
-
-
     }
 
     public void createNewTrade(MouseEvent mouseEvent) {
@@ -321,21 +81,6 @@ public class TradeMenuController {
         newTrade.setVisible(true);
     }
 
-    private void clickOnButton() {
-        donate.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                price = 0;
-            }
-        });
-        request.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-            }
-        });
-
-    }
-
     public void enterTradeMenu(MouseEvent mouseEvent) throws Exception {
         new TradeMenu().start(ShopMenu.stage);
     }
@@ -344,7 +89,7 @@ public class TradeMenuController {
         create.setVisible(false);
         previous.setVisible(false);
         mainBack.setVisible(false);
-        backToGame.setVisible(true);
+        back1.setVisible(true);
         back11.setVisible(true);
         submitted.setVisible(true);
         received.setVisible(true);
