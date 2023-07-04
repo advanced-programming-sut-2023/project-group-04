@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="dear Keyhan it's for you:)">
+    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="chatView completed!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/mainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/mainMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/shopMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/resources/fxml/shopMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +16,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -32,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="jadid" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -61,7 +58,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;kheiliJadid&quot;,
     &quot;last_opened_file_path&quot;: &quot;E:/AP/project/phase1_BaseCode&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -76,7 +73,7 @@
       <recent name="D:\code\JAVA language\apProject\project-group-04" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.LoginMenu">
+  <component name="RunManager" selected="Application.ShopMenu">
     <configuration name="GameMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.view.gameView.GameMenu" />
       <module name="phase1" />
@@ -131,10 +128,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.LoginMenu" />
-        <item itemvalue="Application.MainMenu" />
         <item itemvalue="Application.ShopMenu" />
         <item itemvalue="Application.GameMenu" />
+        <item itemvalue="Application.LoginMenu" />
+        <item itemvalue="Application.MainMenu" />
       </list>
     </recent_temporary>
   </component>
@@ -152,6 +149,7 @@
       <workItem from="1682965005844" duration="4535000" />
       <workItem from="1685597163563" duration="642000" />
       <workItem from="1688201485586" duration="19519000" />
+      <workItem from="1688453306011" duration="2071000" />
     </task>
     <task id="LOCAL-00001" summary="complete GameCommands">
       <created>1682973681030</created>
@@ -174,7 +172,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688221706098</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="chatView completed!">
+      <created>1688410309694</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1688410309694</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,7 +228,8 @@
     <MESSAGE value="complete GameCommands" />
     <MESSAGE value="trade appearance updated!" />
     <MESSAGE value="dear Keyhan it's for you:)" />
-    <option name="LAST_COMMIT_MESSAGE" value="dear Keyhan it's for you:)" />
+    <MESSAGE value="chatView completed!" />
+    <option name="LAST_COMMIT_MESSAGE" value="chatView completed!" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
