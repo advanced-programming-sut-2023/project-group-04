@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import java.util.regex.Matcher;
 
 public class TradeMenu extends Application {
+    public static Stage Stage;
+
     public void run() {
         String input;
         Matcher matcher;
@@ -33,6 +35,7 @@ public class TradeMenu extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        Stage = stage;
         AnchorPane anchorPane = FXMLLoader.load(TradeMenu.class.getResource("/fxml/tradeMenu.fxml"));
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);

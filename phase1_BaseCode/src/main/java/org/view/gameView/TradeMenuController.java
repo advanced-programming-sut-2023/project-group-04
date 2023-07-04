@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.model.Empire;
 import org.model.Game;
 import org.model.ResourcesDictionary;
@@ -45,16 +46,13 @@ public class TradeMenuController {
     public ImageView reject2;
     public ImageView reject3;
     public ImageView reject4;
-    public Text status11;
-    public Text status22;
-    public Text status33;
-    public Text status44;
     public Text player1;
     public Text player5;
     public Text player6;
     public Text player2;
     public Text player3;
     public Text player4;
+    public Text player7;
     public Empire tradeGetter;
     public String resource = null;
     public Text crossbowNumber;
@@ -110,9 +108,31 @@ public class TradeMenuController {
     public Text id2;
     public Text id1;
 
+    /////////////
+    public Text resource11;
+    public Text amount11;
+    public Text user11;
+    public Text status11;
+    public Text status22;
+    public Text status33;
+    public Text status44;
+    public Text resource22;
+    public Text resource33;
+    public Text resource44;
+    public Text amount22;
+    public Text amount33;
+    public Text amount44;
+    public Text user22;
+    public Text user33;
+    public Text user44;
+    public TextArea message11;
+    public TextArea message22;
+    public TextArea message33;
+    public TextArea message44;
+
 
     public void enterShopMenu(MouseEvent mouseEvent) throws Exception {
-        new ShopMenu().start(ShopMenu.stage);
+        new ShopMenu().start(TradeMenu.Stage);
     }
 
     public void showPlayersList(MouseEvent mouseEvent) {
@@ -123,6 +143,7 @@ public class TradeMenuController {
         back1.setVisible(true);
         back11.setVisible(true);
         clickedOnPlayer();
+        //setPlayersList();
     }
 
     private void clickedOnPlayer() {
@@ -360,11 +381,17 @@ public class TradeMenuController {
                 new Alert(Alert.AlertType.INFORMATION, messages.getMessage(), ButtonType.OK);
             }
         });
+//        create.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//                setPlayersList();
+//            }
+//        });
 
     }
 
     public void enterTradeMenu(MouseEvent mouseEvent) throws Exception {
-        new TradeMenu().start(ShopMenu.stage);
+        new TradeMenu().start(TradeMenu.Stage);
     }
 
     public void viewPreviousTrades(MouseEvent mouseEvent) {
@@ -387,39 +414,51 @@ public class TradeMenuController {
         submitted.setVisible(false);
         received.setVisible(false);
         receivedOffers.setVisible(true);
-        setButtons();
+        //setButtons();
     }
 
-    private void setButtons() {
-        if (status11.getText().equals("unsight")) {
-            accept1.setVisible(true);
-            reject1.setVisible(true);
+//    private void setButtons() {
+//        if (status11.getText().equals("unsight")) {
+//            accept1.setVisible(true);
+//            reject1.setVisible(true);
+//        }
+//        if (status22.getText().equals("unsight")) {
+//            accept2.setVisible(true);
+//            reject2.setVisible(true);
+//        }
+//        if (status33.getText().equals("unsight")) {
+//            accept3.setVisible(true);
+//            reject3.setVisible(true);
+//        }
+//        if (status44.getText().equals("unsight")) {
+//            accept4.setVisible(true);
+//            reject4.setVisible(true);
+//        }
+//    }
+
+    private void showTrade() {
+        ArrayList<Trade> allTrades = Game.getCurrentGame().getCurrentEmpire().getAllTrades();
+        if (allTrades.size() == 0)
+            return;
+        if (allTrades.size() == 1) {
+            resource11.setText(allTrades.get(0).getResourceName());
+            amount11.setText("" + allTrades.get(0).getResourceAmount());
+            status11.setText("unsight");
+            user11.setText(allTrades.get(0).getTradeSender().getOwner().getUsername());
+            id1.setText("" + allTrades.get(0).getId());
         }
-        if (status22.getText().equals("unsight")) {
-            accept2.setVisible(true);
-            reject2.setVisible(true);
-        }
-        if (status33.getText().equals("unsight")) {
-            accept3.setVisible(true);
-            reject3.setVisible(true);
-        }
-        if (status44.getText().equals("unsight")) {
-            accept4.setVisible(true);
-            reject4.setVisible(true);
-        }
+
     }
 
-    public void setPlayersList(Text player1, Text player2, Text player3, Text player4, Text player5, Text player6) {
+    public void setPlayersList() {
         Group text = new Group(player1, player2, player3, player4, player5, player6);
-        int empireSize = Game.getCurrentGame().getAllEmpires().size();
         ArrayList<Empire> allEmpire = Game.getCurrentGame().getAllEmpires();
-        HashMap<String, Empire> username = Game.getCurrentGame().getEmpires();
-        ArrayList<Player> players = Player.getAllPlayers();
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getUsername().equals(Game.getCurrentGame().getCurrentEmpire().getOwner().getUsername())) {
+        for (int i = 0; i < allEmpire.size(); i++) {
+            if (allEmpire.get(i).equals(Game.getCurrentGame().getCurrentEmpire())) {
                 continue;
             }
-            ((Text) text.getChildren().get(i)).setText(players.get(i).getUsername());
+            ((Text) playersList.getChildren().get(i)).setText(allEmpire.get(i).getOwner().getUsername());
+
         }
     }
 }

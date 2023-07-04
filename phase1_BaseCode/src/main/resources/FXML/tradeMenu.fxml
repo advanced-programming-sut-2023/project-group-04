@@ -173,7 +173,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
-                <ImageView fitHeight="100.0" fitWidth="100.0"  pickOnBounds="true"
+                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true"
                            preserveRatio="true" GridPane.halignment="LEFT" fx:id="apple">
                     <image>
                         <Image url="@../images/market/items/apple.png"/>
@@ -183,7 +183,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="10.0" layoutY="50.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="1" fx:id="bread">
                     <image>
                         <Image url="@../images/market/items/bread.png"/>
@@ -193,7 +193,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="131.0" layoutY="50.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="2" fx:id="cheese">
                     <image>
                         <Image url="@../images/market/items/cheese.png"/>
@@ -203,7 +203,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="252.0" layoutY="50.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="3" fx:id="flour">
                     <image>
                         <Image url="@../images/market/items/flour.png"/>
@@ -213,7 +213,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="373.0" layoutY="50.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="4" fx:id="hops">
                     <image>
                         <Image url="@../images/market/items/hops.png"/>
@@ -223,7 +223,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="494.0" layoutY="50.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="5" fx:id="meat">
                     <image>
                         <Image url="@../images/market/items/meat.png"/>
@@ -233,7 +233,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="615.0" layoutY="50.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="6" fx:id="pitch">
                     <image>
                         <Image url="@../images/market/items/pitch.png"/>
@@ -243,7 +243,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="736.0" layoutY="50.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="7" fx:id="wheat">
                     <image>
                         <Image url="@../images/market/items/wheat.png"/>
@@ -253,7 +253,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="857.0" layoutY="50.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="8" fx:id="ale">
                     <image>
                         <Image url="@../images/market/items/ale.png"/>
@@ -263,7 +263,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="978.0" layoutY="50.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="9" fx:id="bow">
                     <image>
                         <Image url="@../images/market/items/bow.png"/>
@@ -273,7 +273,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1099.0" layoutY="50.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.rowIndex="1" fx:id="crossbow">
                     <image>
                         <Image url="@../images/market/items/crossBow.png"/>
@@ -283,7 +283,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="10.0" layoutY="215.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="leatherArmour">
                     <image>
                         <Image url="@../images/market/items/leather armor.png"/>
@@ -293,7 +293,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="131.0" layoutY="215.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="2" GridPane.rowIndex="1" fx:id="mace">
                     <image>
                         <Image url="@../images/market/items/mace.png"/>
@@ -303,7 +303,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="252.0" layoutY="215.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="3" GridPane.rowIndex="1" fx:id="metalArmour">
                     <image>
                         <Image url="@../images/market/items/metal armor.png"/>
@@ -313,7 +313,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="373.0" layoutY="215.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="4" GridPane.rowIndex="1" fx:id="pike">
                     <image>
                         <Image url="@../images/market/items/pike.png"/>
@@ -323,7 +323,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="494.0" layoutY="215.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="5" GridPane.rowIndex="1" fx:id="spear">
                     <image>
                         <Image url="@../images/market/items/spear.png"/>
@@ -333,7 +333,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="615.0" layoutY="215.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="6" GridPane.rowIndex="1" fx:id="sword">
                     <image>
                         <Image url="@../images/market/items/sword.png"/>
@@ -343,7 +343,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="736.0" layoutY="215.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="7" GridPane.rowIndex="1" fx:id="iron">
                     <image>
                         <Image url="@../images/market/items/iron.png"/>
@@ -353,7 +353,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="857.0" layoutY="215.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="8" GridPane.rowIndex="1" fx:id="stone">
                     <image>
                         <Image url="@../images/market/items/stone.png"/>
@@ -363,7 +363,7 @@
                     </cursor>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="978.0" layoutY="215.0"
-                            pickOnBounds="true" preserveRatio="true"
+                           pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="9" GridPane.rowIndex="1" fx:id="wood">
                     <image>
                         <Image url="@../images/market/items/wood.png"/>
@@ -545,7 +545,8 @@
                         <Font name="Berlin Sans FB" size="32.0"/>
                     </font>
                 </Button>
-                <ImageView fx:id="back1" fitHeight="86.0" fitWidth="109.0" layoutX="11.0" layoutY="795.0" onMouseClicked="#enterTradeMenu" pickOnBounds="true" preserveRatio="true" visible="false">
+                <ImageView fx:id="back1" fitHeight="86.0" fitWidth="109.0" layoutX="11.0" layoutY="795.0"
+                           onMouseClicked="#enterTradeMenu" pickOnBounds="true" preserveRatio="true" visible="false">
                     <image>
                         <Image url="@../images/market/back - Copy.png"/>
                     </image>
@@ -1023,31 +1024,36 @@
                         <Cursor fx:constant="HAND"/>
                     </cursor>
                 </ImageView>
-            <Text layoutX="351.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trade id" textAlignment="CENTER" GridPane.halignment="CENTER">
-               <font>
-                  <Font name="Berlin Sans FB" size="19.0" />
-               </font>
-            </Text>
-            <Text fx:id="id1" layoutX="377.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-               <font>
-                  <Font name="Berlin Sans FB" size="20.0" />
-               </font>
-            </Text>
-            <Text fx:id="id2" layoutX="10.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <font>
-                  <Font name="Berlin Sans FB" size="20.0" />
-               </font>
-            </Text>
-            <Text fx:id="id3" layoutX="10.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" GridPane.halignment="CENTER" GridPane.rowIndex="3">
-               <font>
-                  <Font name="Berlin Sans FB" size="20.0" />
-               </font>
-            </Text>
-            <Text fx:id="id4" layoutX="10.0" layoutY="582.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" GridPane.halignment="CENTER" GridPane.rowIndex="4">
-               <font>
-                  <Font name="Berlin Sans FB" size="20.0" />
-               </font>
-            </Text>
+                <Text layoutX="351.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trade id"
+                      textAlignment="CENTER" GridPane.halignment="CENTER">
+                    <font>
+                        <Font name="Berlin Sans FB" size="19.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="id1" layoutX="377.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1"
+                      GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                    <font>
+                        <Font name="Berlin Sans FB" size="20.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="id2" layoutX="10.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2"
+                      GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                    <font>
+                        <Font name="Berlin Sans FB" size="20.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="id3" layoutX="10.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3"
+                      GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                    <font>
+                        <Font name="Berlin Sans FB" size="20.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="id4" layoutX="10.0" layoutY="582.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4"
+                      GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                    <font>
+                        <Font name="Berlin Sans FB" size="20.0"/>
+                    </font>
+                </Text>
             </children>
         </GridPane>
     </children>

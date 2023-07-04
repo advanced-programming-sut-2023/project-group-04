@@ -9,6 +9,7 @@ import org.view.CommandsEnum.TradeMessages;
 import org.model.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class TradeController {
@@ -21,17 +22,6 @@ public class TradeController {
         Game.getCurrentGame().getCurrentEmpire().getAllTrades().add(trade);
         Game.getCurrentGame().addTrade(trade);
         return TradeMessages.SET_TRADE;
-    }
-
-    public String showTradeList() {
-        StringBuilder list = new StringBuilder("LIST OF TRADE :");
-        for (Trade trade : Game.getCurrentGame().getAllTrades()) {
-            list.append("\nResource name : ").append(trade.getResourceName());
-            list.append("   Amount : ").append(trade.getResourceAmount());
-            list.append("   Price : ").append(trade.getPrice());
-            list.append("   ID : << ").append(trade.getId()).append(" >>");
-        }
-        return list.toString();
     }
 
     public TradeMessages acceptTrade() {

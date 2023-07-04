@@ -4,24 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="completing hovering tiles">
-      <change beforePath="$PROJECT_DIR$/../PLAYERS.json" beforeDir="false" afterPath="$PROJECT_DIR$/../PLAYERS.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_1_2023_5_55_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_1_2023_5_55_PM__Changes_.xml" afterDir="false" />
+    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="update trade and shop">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/ShopController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/TradeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/TradeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Empire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/Empire.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/Trade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/map/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/Building.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/ControlBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/ControlBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMapView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMapView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/TradeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/TradeMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/Tile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/TradeMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/dataBase/PLAYERS.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/dataBase/PLAYERS.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/tradeMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/tradeMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +158,7 @@
       <workItem from="1685599343516" duration="2782000" />
       <workItem from="1685713023081" duration="1365000" />
       <workItem from="1688456937041" duration="8653000" />
-      <workItem from="1688487317956" duration="591000" />
+      <workItem from="1688487317956" duration="6690000" />
     </task>
     <task id="LOCAL-00001" summary="game controller update">
       <created>1683454838020</created>
@@ -409,7 +398,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688139245511</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="update trade and shop">
+      <created>1688488110655</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1688488110655</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -449,7 +445,8 @@
     <MESSAGE value="update..." />
     <MESSAGE value="completing drop building" />
     <MESSAGE value="completing hovering tiles" />
-    <option name="LAST_COMMIT_MESSAGE" value="completing hovering tiles" />
+    <MESSAGE value="update trade and shop" />
+    <option name="LAST_COMMIT_MESSAGE" value="update trade and shop" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -56,7 +56,6 @@ public class GameMenu extends Application {
                     case "ADD" -> mapView.zoom(+1);
                     case "SUBTRACT" -> mapView.zoom(-1);
                     case "N" -> {
-                        System.out.println(Game.getCurrentGame().getCurrentEmpire());
                         Menu.getGameController().nextTurn();
                     }
                     case "TAB" -> {
