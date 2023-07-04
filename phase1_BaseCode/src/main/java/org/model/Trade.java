@@ -2,7 +2,7 @@ package org.model;
 
 public class Trade {
     public static int lastId = 100;
-    private final Empire tradeOwner;
+    private final Empire tradeGetter;
     private final String resourceName;
     private final int resourceAmount;
     private final int price;
@@ -10,12 +10,12 @@ public class Trade {
     private String receiverMessage;
     private final int id;
 
-    public Trade(String resourceName, int resourceAmount, int price, String senderMessage, Empire tradeOwner) {
-        this.tradeOwner = tradeOwner;
+    public Trade(String resourceName, int resourceAmount, int price, String senderMessage, Empire tradeGetter) {
         this.resourceName = resourceName;
         this.resourceAmount = resourceAmount;
         this.price = price;
         this.senderMessage = senderMessage;
+        this.tradeGetter = tradeGetter;
         id = lastId;
         lastId++;
     }
@@ -46,10 +46,6 @@ public class Trade {
 
     public int getId() {
         return id;
-    }
-
-    public Empire getTradeOwner() {
-        return tradeOwner;
     }
 
 }

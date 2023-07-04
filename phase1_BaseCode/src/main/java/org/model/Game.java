@@ -1,8 +1,5 @@
 package org.model;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import org.model.Machine.Machine;
 import org.model.buildings.*;
 import org.model.map.Map;
@@ -11,11 +8,8 @@ import org.model.person.Person;
 import org.model.person.Soldier;
 import org.model.person.SoldiersDictionary;
 
-import java.io.FileWriter;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Game {
     private static Game currentGame;
@@ -25,6 +19,7 @@ public class Game {
     private Building selectedBuilding;
     private int mapFirstX;
     private int mapFirstY;
+    private HashMap<String, Empire> empires;
     private ArrayList<Person> selectedUnit;
     private final ArrayList<Person> toMovePeople;
     private final ArrayList<Soldier> attackingSoldiers;
@@ -38,6 +33,8 @@ public class Game {
         this.toMovePeople = new ArrayList<>();
         this.attackingSoldiers = new ArrayList<>();
         toMoveOrAttackMachine = new ArrayList<>();
+        this.empires = new HashMap<>();
+        setEmpireByUsername();
         initializeMap(mapName);
         allTrades = new ArrayList<>();
     }
@@ -225,6 +222,17 @@ public class Game {
 
     public void removeMovedMachine(Machine machine) {
         this.toMoveOrAttackMachine.remove(machine);
+    }
+
+    private void setEmpireByUsername() {
+        for (Empire empire : allEmpires) {
+            String username = empire.getOwner().getUsername();
+            empires.put(username, empire);
+        }
+    }
+
+    public HashMap<String, Empire> getEmpires() {
+        return empires;
     }
 
 }
