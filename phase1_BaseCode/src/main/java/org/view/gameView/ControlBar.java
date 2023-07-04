@@ -449,8 +449,9 @@ public class ControlBar {
 
     private void updateFood() {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
-        HashMap<String, Integer> foodList = Menu.getGameController().showFoodList();
-        meatText.setText("" + foodList.get("meat"));
+        HashMap<String, Integer> foodList = empire.getFood();
+//        meatText.setText("" + foodList.get("meat"));
+        meatText.setText("salam");
         cheeseText.setText("" + foodList.get("cheese"));
         breadText.setText("" + foodList.get("bread"));
         appleText.setText("" + foodList.get("apple"));
@@ -795,6 +796,7 @@ public class ControlBar {
         buildingImages.put("tunneler guild", new Image(ControlBar.class.getResource("/img/buildings/castle/tunneler guild.png").toExternalForm()));
         buildingImages.put("low wall", new Image(ControlBar.class.getResource("/img/buildings/castle/low wall.png").toExternalForm()));
         buildingImages.put("stone wall", new Image(ControlBar.class.getResource("/img/buildings/castle/stone wall.png").toExternalForm()));
+        buildingImages.put("headquarter", new Image(ControlBar.class.getResource("/img/buildings/castle/head quarter.png").toExternalForm()));
         buildingImages.put("iron mine", new Image(ControlBar.class.getResource("/img/buildings/industry/iron mine.png").toExternalForm()));
         buildingImages.put("market", new Image(ControlBar.class.getResource("/img/buildings/industry/Market.png").toExternalForm()));
         buildingImages.put("quarry", new Image(ControlBar.class.getResource("/img/buildings/industry/quarry.png").toExternalForm()));

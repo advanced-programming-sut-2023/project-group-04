@@ -3,6 +3,7 @@ package org.view.gameView;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -135,16 +136,17 @@ public class TradeMenuController {
 
     @FXML
     public void initialize() {
+        Group acAndRe = new Group(accept1,accept2,accept3,accept4,reject1,reject2,reject3,reject4);
         ArrayList<Empire> opponentEmpires = Game.getCurrentGame().getOpponentEmpires();
         if (opponentEmpires != null && opponentEmpires.size() != 0) {
             if (opponentEmpires.size() < 4)
-                player4.setText("");
+                player4.setText("empty");
             else player4.setText(opponentEmpires.get(3).getOwner().getUsername());
             if (opponentEmpires.size() < 3)
-                player3.setText("");
+                player3.setText("empty");
             else player3.setText(opponentEmpires.get(2).getOwner().getUsername());
             if (opponentEmpires.size() < 2)
-                player2.setText("");
+                player2.setText("empty");
             else player2.setText(opponentEmpires.get(1).getOwner().getUsername());
             player1.setText(opponentEmpires.get(0).getOwner().getUsername());
         }
@@ -162,50 +164,61 @@ public class TradeMenuController {
         back1.setVisible(true);
         back11.setVisible(true);
         clickedOnPlayer();
-        //setPlayersList();
     }
 
     private void clickedOnPlayer() {
         player1.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (!(player1.getText().equals("empty")))
+                if (!(player1.getText().equals("empty"))) {
                     tradeGetter = Game.getCurrentGame().getEmpires().get(player1.getText());
+                    showResourceList(event);
+                }
             }
         });
         player2.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (!(player2.getText().equals("empty")))
+                if (!(player2.getText().equals("empty"))) {
                     tradeGetter = Game.getCurrentGame().getEmpires().get(player2.getText());
+                    showResourceList(event);
+                }
             }
         });
         player3.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (!(player3.getText().equals("empty")))
+                if (!(player3.getText().equals("empty"))) {
                     tradeGetter = Game.getCurrentGame().getEmpires().get(player3.getText());
+                    showResourceList(event);
+                }
             }
         });
         player4.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (!(player4.getText().equals("empty")))
+                if (!(player4.getText().equals("empty"))) {
                     tradeGetter = Game.getCurrentGame().getEmpires().get(player4.getText());
+                    showResourceList(event);
+                }
             }
         });
         player5.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (!(player5.getText().equals("empty")))
+                if (!(player5.getText().equals("empty"))) {
                     tradeGetter = Game.getCurrentGame().getEmpires().get(player5.getText());
+                    showResourceList(event);
+                }
             }
         });
         player6.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (!(player6.getText().equals("empty")))
+                if (!(player6.getText().equals("empty"))) {
                     tradeGetter = Game.getCurrentGame().getEmpires().get(player6.getText());
+                    showResourceList(event);
+                }
             }
         });
     }
@@ -216,6 +229,30 @@ public class TradeMenuController {
         amount.setVisible(true);
         amount1.setVisible(true);
         clickOnResource();
+        showResourceAmount();
+    }
+
+    private void showResourceAmount() {
+        aleNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getResources().get("ale"));
+        wheatNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getResources().get("wheat"));
+        appleNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getFood().get("apple"));
+        cheeseNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getFood().get("cheese"));
+        breadNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getFood().get("bread"));
+        flourNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getResources().get("flour"));
+        hopsNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getResources().get("hops"));
+        meatNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getFood().get("meat"));
+        pitchNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getResources().get("pitch"));
+        bowNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getWeaponAndArmour().get("bow"));
+        crossbowNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getWeaponAndArmour().get("crossbow"));
+        leatherNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getWeaponAndArmour().get("leather armour"));
+        pikeNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getWeaponAndArmour().get("pike"));
+        spearNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getWeaponAndArmour().get("spear"));
+        metalNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getWeaponAndArmour().get("metal armour"));
+        swordNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getWeaponAndArmour().get("sword"));
+        ironNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getResources().get("iron"));
+        stoneNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getResources().get("stone"));
+        woodNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getResources().get("wood"));
+        maceNumber.setText("" + Game.getCurrentGame().getCurrentEmpire().getWeaponAndArmour().get("mace"));
     }
 
     private void clickOnResource() {
@@ -400,13 +437,6 @@ public class TradeMenuController {
                 new Alert(Alert.AlertType.INFORMATION, messages.getMessage(), ButtonType.OK);
             }
         });
-//        create.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                setPlayersList();
-//            }
-//        });
-
     }
 
     public void enterTradeMenu(MouseEvent mouseEvent) throws Exception {
@@ -421,6 +451,7 @@ public class TradeMenuController {
         back11.setVisible(true);
         submitted.setVisible(true);
         received.setVisible(true);
+        showTrade();
     }
 
     public void showSubmittedTrades(MouseEvent mouseEvent) {
@@ -459,25 +490,33 @@ public class TradeMenuController {
         ArrayList<Trade> allTrades = Game.getCurrentGame().getCurrentEmpire().getAllTrades();
         if (allTrades.size() == 0)
             return;
-        if (allTrades.size() == 1) {
+        if (allTrades.size() > 1) {
             resource11.setText(allTrades.get(0).getResourceName());
             amount11.setText("" + allTrades.get(0).getResourceAmount());
             status11.setText("unsight");
             user11.setText(allTrades.get(0).getTradeSender().getOwner().getUsername());
             id1.setText("" + allTrades.get(0).getId());
         }
-
-    }
-
-    public void setPlayersList() {
-        Group text = new Group(player1, player2, player3, player4, player5, player6);
-        ArrayList<Empire> allEmpire = Game.getCurrentGame().getAllEmpires();
-        for (int i = 0; i < allEmpire.size(); i++) {
-            if (allEmpire.get(i).equals(Game.getCurrentGame().getCurrentEmpire())) {
-                continue;
-            }
-            ((Text) playersList.getChildren().get(i)).setText(allEmpire.get(i).getOwner().getUsername());
-
+        if (allTrades.size() > 2) {
+            resource22.setText(allTrades.get(1).getResourceName());
+            amount22.setText("" + allTrades.get(1).getResourceAmount());
+            status22.setText("unsight");
+            user22.setText(allTrades.get(1).getTradeSender().getOwner().getUsername());
+            id2.setText("" + allTrades.get(1).getId());
+        }
+        if (allTrades.size() > 3) {
+            resource33.setText(allTrades.get(2).getResourceName());
+            amount33.setText("" + allTrades.get(2).getResourceAmount());
+            status33.setText("unsight");
+            user33.setText(allTrades.get(2).getTradeSender().getOwner().getUsername());
+            id3.setText("" + allTrades.get(2).getId());
+        }
+        if (allTrades.size() > 4) {
+            resource44.setText(allTrades.get(3).getResourceName());
+            amount44.setText("" + allTrades.get(3).getResourceAmount());
+            status44.setText("unsight");
+            user44.setText(allTrades.get(3).getTradeSender().getOwner().getUsername());
+            id4.setText("" + allTrades.get(3).getId());
         }
     }
 }

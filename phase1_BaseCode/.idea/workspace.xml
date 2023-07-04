@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="update fxml">
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/buildings/castle/head quarter.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/ControlBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/ControlBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/TradeMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/tradeMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/tradeMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -155,7 +157,7 @@
       <workItem from="1685599343516" duration="2782000" />
       <workItem from="1685713023081" duration="1365000" />
       <workItem from="1688456937041" duration="8653000" />
-      <workItem from="1688487317956" duration="8275000" />
+      <workItem from="1688487317956" duration="15453000" />
     </task>
     <task id="LOCAL-00001" summary="game controller update">
       <created>1683454838020</created>
@@ -409,7 +411,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688496320785</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="update fxml">
+      <created>1688498239614</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1688498239614</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -452,6 +461,17 @@
     <MESSAGE value="update trade and shop" />
     <MESSAGE value="update fxml" />
     <option name="LAST_COMMIT_MESSAGE" value="update fxml" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/controller/ShopController.java</url>
+          <line>146</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
