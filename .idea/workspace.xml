@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="For Keyhan!">
+    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="bage kooooooochak">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/gameView/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/gameView/TradeMenuController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +150,7 @@
       <workItem from="1685597163563" duration="642000" />
       <workItem from="1688201485586" duration="19519000" />
       <workItem from="1688453306011" duration="4913000" />
-      <workItem from="1688495413901" duration="993000" />
+      <workItem from="1688495413901" duration="2536000" />
     </task>
     <task id="LOCAL-00001" summary="complete GameCommands">
       <created>1682973681030</created>
@@ -196,7 +194,28 @@
       <option name="project" value="LOCAL" />
       <updated>1688457903202</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="For Keyhan!">
+      <created>1688497952194</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1688497952194</updated>
+    </task>
+    <task id="LOCAL-00008" summary="initialize trade!">
+      <created>1688498226006</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1688498226006</updated>
+    </task>
+    <task id="LOCAL-00009" summary="bage kooooooochak">
+      <created>1688498584376</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1688498584376</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,7 +266,9 @@
     <MESSAGE value="dear Keyhan it's for you:)" />
     <MESSAGE value="chatView completed!" />
     <MESSAGE value="For Keyhan!" />
-    <option name="LAST_COMMIT_MESSAGE" value="For Keyhan!" />
+    <MESSAGE value="initialize trade!" />
+    <MESSAGE value="bage kooooooochak" />
+    <option name="LAST_COMMIT_MESSAGE" value="bage kooooooochak" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
