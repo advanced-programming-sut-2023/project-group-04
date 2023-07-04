@@ -235,4 +235,13 @@ public class Game {
         return empires;
     }
 
+    public ArrayList<Empire> getOpponentEmpires() {
+        ArrayList<Empire> empires1 = getAllEmpires();
+        for (int i = 0; i < empires1.size(); i++) {
+            if (empires1.get(i).equals(getCurrentEmpire()))
+                empires1.remove(getCurrentEmpire());
+        }
+        return empires1;
+    }
+
 }

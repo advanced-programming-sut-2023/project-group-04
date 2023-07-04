@@ -1,6 +1,7 @@
 package org.view.gameView;
 
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -15,6 +16,7 @@ import org.model.Game;
 import org.model.ResourcesDictionary;
 import org.model.*;
 import org.view.CommandsEnum.TradeMessages;
+import org.view.GameMenu;
 import org.view.Menu;
 import org.view.ShopMenu;
 import org.view.TradeMenu;
@@ -130,6 +132,23 @@ public class TradeMenuController {
     public TextArea message33;
     public TextArea message44;
 
+
+    @FXML
+    public void initialize() {
+        ArrayList<Empire> opponentEmpires = Game.getCurrentGame().getOpponentEmpires();
+        if (opponentEmpires != null && opponentEmpires.size() != 0) {
+            if (opponentEmpires.size() < 4)
+                player4.setText("");
+            else player4.setText(opponentEmpires.get(3).getOwner().getUsername());
+            if (opponentEmpires.size() < 3)
+                player3.setText("");
+            else player3.setText(opponentEmpires.get(2).getOwner().getUsername());
+            if (opponentEmpires.size() < 2)
+                player2.setText("");
+            else player2.setText(opponentEmpires.get(1).getOwner().getUsername());
+            player1.setText(opponentEmpires.get(0).getOwner().getUsername());
+        }
+    }
 
     public void enterShopMenu(MouseEvent mouseEvent) throws Exception {
         new ShopMenu().start(TradeMenu.Stage);

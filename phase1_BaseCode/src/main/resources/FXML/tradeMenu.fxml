@@ -15,13 +15,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="920.0" prefWidth="1560.0" stylesheets="@../css/mainMenuStyle.css"
-            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.view.gameView.TradeMenuController">
+<AnchorPane prefHeight="920.0" prefWidth="1560.0" stylesheets="@../css/mainMenuStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.view.gameView.TradeMenuController">
     <children>
         <ImageView fitHeight="920.0" fitWidth="1560.0" opacity="0.39" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image requestedHeight="920" requestedWidth="1560" url="@../images/trade.png"/>
+                <Image requestedHeight="920" requestedWidth="1560" url="@../images/trade.png" />
             </image>
         </ImageView>
         <Button fx:id="create" layoutX="219.0" layoutY="298.0" mnemonicParsing="false" onMouseClicked="#showPlayersList"
@@ -128,49 +126,46 @@
                 <Text fx:id="player5" fill="WHITE" layoutX="10.0" layoutY="421.0" onMouseClicked="#showResourceList"
                       strokeType="OUTSIDE" strokeWidth="0.0" text="empty" textAlignment="CENTER" GridPane.rowIndex="5">
                     <font>
-                        <Font name="Berlin Sans FB" size="37.0"/>
+                        <Font name="Berlin Sans FB" size="37.0" />
                     </font>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </Text>
-                <Text fx:id="player6" fill="WHITE" layoutX="10.0" layoutY="510.0" onMouseClicked="#showResourceList"
-                      strokeType="OUTSIDE" strokeWidth="0.0" text="empty" textAlignment="CENTER" GridPane.rowIndex="6">
+                <Text fx:id="player6" fill="WHITE" layoutX="10.0" layoutY="510.0" onMouseClicked="#showResourceList" strokeType="OUTSIDE" strokeWidth="0.0" text="empty" textAlignment="CENTER" GridPane.rowIndex="6">
                     <font>
-                        <Font name="Berlin Sans FB" size="37.0"/>
+                        <Font name="Berlin Sans FB" size="37.0" />
                     </font>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </Text>
-                <Text fx:id="player7" fill="WHITE" layoutX="10.0" layoutY="598.0" onMouseClicked="#showResourceList"
-                      strokeType="OUTSIDE" strokeWidth="0.0" text="empty" textAlignment="CENTER" GridPane.rowIndex="7">
+                <Text fx:id="player7" fill="WHITE" layoutX="10.0" layoutY="598.0" onMouseClicked="#showResourceList" strokeType="OUTSIDE" strokeWidth="0.0" text="empty" textAlignment="CENTER" GridPane.rowIndex="7">
                     <font>
-                        <Font name="Berlin Sans FB" size="37.0"/>
+                        <Font name="Berlin Sans FB" size="37.0" />
                     </font>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </Text>
             </children>
         </GridPane>
-        <GridPane fx:id="resourcesGrid" layoutX="180.0" layoutY="124.0" prefHeight="328.0" prefWidth="1210.0"
-                  visible="false">
+        <GridPane fx:id="resourcesGrid" layoutX="180.0" layoutY="124.0" prefHeight="328.0" prefWidth="1210.0" visible="false">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true"
@@ -366,10 +361,10 @@
                            pickOnBounds="true" preserveRatio="true"
                            GridPane.columnIndex="9" GridPane.rowIndex="1" fx:id="wood">
                     <image>
-                        <Image url="@../images/market/items/wood.png"/>
+                        <Image url="@../images/market/items/wood.png" />
                     </image>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </ImageView>
             </children>
@@ -545,8 +540,7 @@
                         <Font name="Berlin Sans FB" size="32.0"/>
                     </font>
                 </Button>
-                <ImageView fx:id="back1" fitHeight="86.0" fitWidth="109.0" layoutX="11.0" layoutY="795.0"
-                           onMouseClicked="#enterTradeMenu" pickOnBounds="true" preserveRatio="true" visible="false">
+                <ImageView fx:id="back1" fitHeight="86.0" fitWidth="109.0" layoutX="11.0" layoutY="795.0" onMouseClicked="#enterTradeMenu" pickOnBounds="true" preserveRatio="true" visible="false">
                     <image>
                         <Image url="@../images/market/back - Copy.png"/>
                     </image>

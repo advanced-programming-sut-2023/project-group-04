@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="For Keyhan!" />
+    <list default="true" id="96794855-f4c6-48d0-b3cc-6afc08a7c4ad" name="Changes" comment="For Keyhan!">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/gameView/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/phase1_BaseCode/src/main/java/org/view/gameView/TradeMenuController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +75,7 @@
       <recent name="D:\code\JAVA language\apProject\project-group-04" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ShopMenu">
+  <component name="RunManager" selected="Application.GameMenu">
     <configuration name="GameMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.view.gameView.GameMenu" />
       <module name="phase1" />
@@ -126,8 +130,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ShopMenu" />
         <item itemvalue="Application.GameMenu" />
+        <item itemvalue="Application.ShopMenu" />
         <item itemvalue="Application.LoginMenu" />
         <item itemvalue="Application.MainMenu" />
       </list>
@@ -147,7 +151,8 @@
       <workItem from="1682965005844" duration="4535000" />
       <workItem from="1685597163563" duration="642000" />
       <workItem from="1688201485586" duration="19519000" />
-      <workItem from="1688453306011" duration="2102000" />
+      <workItem from="1688453306011" duration="4913000" />
+      <workItem from="1688495413901" duration="993000" />
     </task>
     <task id="LOCAL-00001" summary="complete GameCommands">
       <created>1682973681030</created>
@@ -184,7 +189,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688457087320</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="For Keyhan!">
+      <created>1688457903202</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1688457903202</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
