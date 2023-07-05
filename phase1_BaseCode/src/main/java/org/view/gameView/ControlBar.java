@@ -31,7 +31,7 @@ import java.util.HashMap;
 public class ControlBar {
     public Pane pane;
     private Scene scene;
-    public Text goldAmount;
+    public Text goldAmount, population;
     public Group popularity = new Group();
     public Group report = new Group();
     public Group food = new Group();
@@ -85,26 +85,23 @@ public class ControlBar {
         goldAmount.setTranslateY(800);
         goldAmount.setRotate(8);
         goldAmount.setFill(Color.GREEN);
-        pane.getChildren().add(goldAmount);
-    }
-
-    private void updateGold() {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                goldAmount.setText("" + Game.getCurrentGame().getCurrentEmpire().getResourceAmount("gold"));
-            }
-        });
-        thread.start();
+        population = new Text();
+        population.setTranslateX(935);
+        population.setTranslateY(770);
+        population.setRotate(9);
+        population.setFill(Color.BLUE);
+        population.setFont(Font.font(17));
+        pane.getChildren().addAll(goldAmount, population);
     }
 
     public void reporterClick() {
         scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                goldAmount.setText("" + Game.getCurrentGame().getCurrentEmpire().getResourceAmount("gold"));
+                population.setText("" + Game.getCurrentGame().getCurrentEmpire().getPopulation().size());
                 double mouseX = event.getX();
                 double mouseY = event.getY();
-                //System.out.println(mouseX + "    " + mouseY);
                 if ((mouseX < 1010 && mouseX > 895) && (mouseY > 740 && mouseY < 840) && !menuFlag) {
                     pane.getChildren().add(report);
                     pane.getChildren().removeAll(food, fearAndTax, BuildingCategory, popularity, barracksImagePlaces, mercenaryImagePlaces);
@@ -385,9 +382,11 @@ public class ControlBar {
     }
 
     private void updatePopularity() {
-        HashMap<String, Integer> popularityFactors = Menu.getGameController().showPopularity();
+        int sum = 0;
+        Empire empire = Game.getCurrentGame().getCurrentEmpire();
         Text text = ((Text) popularity.getChildren().get(0));
-        Integer factorNum = popularityFactors.get("food");
+        Integer factorNum = empire.getFoodRate() * 3;
+        sum += factorNum;
         text.setText("Food  " + factorNum);
         if (factorNum <= 2 && factorNum >= -2)
             ((Circle) popularity.getChildren().get(6)).setFill(new ImagePattern(buildingImages.get("poker")));
@@ -397,7 +396,8 @@ public class ControlBar {
             ((Circle) popularity.getChildren().get(6)).setFill(new ImagePattern(buildingImages.get("happy")));
         ///////////
         text = ((Text) popularity.getChildren().get(1));
-        factorNum = popularityFactors.get("tax");
+        factorNum = empire.getTaxRate();
+        sum += factorNum;
         text.setText("Tax  " + factorNum);
         if (factorNum <= 2 && factorNum >= -2)
             ((Circle) popularity.getChildren().get(7)).setFill(new ImagePattern(buildingImages.get("poker")));
@@ -407,8 +407,10 @@ public class ControlBar {
             ((Circle) popularity.getChildren().get(7)).setFill(new ImagePattern(buildingImages.get("happy")));
         //////////////////
         text = ((Text) popularity.getChildren().get(2));
-        factorNum = popularityFactors.get("fear");
+        factorNum = empire.getFearRate();
+        System.out.println(factorNum);
         text.setText("Fear  " + factorNum);
+        sum += factorNum;
         if (factorNum <= 2 && factorNum >= -2)
             ((Circle) popularity.getChildren().get(8)).setFill(new ImagePattern(buildingImages.get("poker")));
         else if (factorNum < -2)
@@ -417,7 +419,8 @@ public class ControlBar {
             ((Circle) popularity.getChildren().get(8)).setFill(new ImagePattern(buildingImages.get("happy")));
         //////////////////////
         text = ((Text) popularity.getChildren().get(3));
-        factorNum = popularityFactors.get("ale");
+        factorNum = empire.getPopularity().get("ale");
+        sum += factorNum;
         text.setText("Ale Coverage  " + factorNum);
         if (factorNum <= 2 && factorNum >= -2)
             ((Circle) popularity.getChildren().get(9)).setFill(new ImagePattern(buildingImages.get("poker")));
@@ -427,7 +430,8 @@ public class ControlBar {
             ((Circle) popularity.getChildren().get(9)).setFill(new ImagePattern(buildingImages.get("happy")));
         //////////////////
         text = ((Text) popularity.getChildren().get(4));
-        factorNum = popularityFactors.get("religion");
+        factorNum = empire.getPopularity().get("religion");
+        sum += factorNum;
         text.setText("Religion  " + factorNum);
         if (factorNum <= 2 && factorNum >= -2)
             ((Circle) popularity.getChildren().get(10)).setFill(new ImagePattern(buildingImages.get("poker")));
@@ -437,8 +441,7 @@ public class ControlBar {
             ((Circle) popularity.getChildren().get(10)).setFill(new ImagePattern(buildingImages.get("happy")));
         /////////////////
         text = ((Text) popularity.getChildren().get(5));
-        factorNum = popularityFactors.get("sum");
-        text.setText("In The Coming Month  " + factorNum);
+        text.setText("In The Coming Month  " + sum);
         if (factorNum <= 5 && factorNum >= -5)
             ((Circle) popularity.getChildren().get(11)).setFill(new ImagePattern(buildingImages.get("poker")));
         else if (factorNum < -5)
@@ -450,14 +453,13 @@ public class ControlBar {
     private void updateFood() {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         HashMap<String, Integer> foodList = empire.getFood();
-//        meatText.setText("" + foodList.get("meat"));
-        meatText.setText("salam");
+        meatText.setText("" + foodList.get("meat"));
         cheeseText.setText("" + foodList.get("cheese"));
         breadText.setText("" + foodList.get("bread"));
         appleText.setText("" + foodList.get("apple"));
         foodSlider.setValue(empire.getFoodRate());
         foodSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue <?extends Number>observable, Number oldValue, Number newValue){
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 empire.setFoodRate(newValue.intValue());
                 System.out.println(newValue.intValue());
             }
@@ -469,15 +471,14 @@ public class ControlBar {
         fearSlider.setValue(empire.getFearRate());
         taxSlider.setValue(empire.getTaxRate());
         fearSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                empire.setFearRate((Integer) number);
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                empire.setFearRate(newValue.intValue());
             }
         });
+
         taxSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                empire.setTaxRate((Integer) number);
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                empire.setTaxRate(newValue.intValue());
             }
         });
     }

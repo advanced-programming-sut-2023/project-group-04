@@ -105,6 +105,26 @@ public class ShopController {
     public ImageView sellPike;
     public ImageView sellSword;
     public ImageView sellMetal;
+    public Text appleBuy;
+    public Text meetBuy;
+    public Text cheeseBuy;
+    public Text hopsBuy;
+    public Text aleBuy;
+    public Text wheatBuy;
+    public Text flourBuy;
+    public Text breadBuy;
+    public Text spearBuy;
+    public Text bowBuy;
+    public Text maceBuy;
+    public Text leatherBuy;
+    public Text crossbowBuy;
+    public Text pikeBuy;
+    public Text swordBuy;
+    public Text metalBuy;
+    public Text woodBuy;
+    public Text stoneBuy;
+    public Text ironBuy;
+    public Text pitchBuy;
 
 
     public String showList() {
@@ -148,6 +168,14 @@ public class ShopController {
         allItems.setVisible(false);
         mainBack.setVisible(false);
         foodsGrid.setVisible(true);
+        appleBuy.setText("" + ResourcesDictionary.getDictionaryByName("apple").getPrice());
+        meetBuy.setText("" + ResourcesDictionary.getDictionaryByName("meat").getPrice());
+        cheeseBuy.setText("" + ResourcesDictionary.getDictionaryByName("cheese").getPrice());
+        hopsBuy.setText("" + ResourcesDictionary.getDictionaryByName("hops").getPrice());
+        aleBuy.setText("" + ResourcesDictionary.getDictionaryByName("ale").getPrice());
+        wheatBuy.setText("" + ResourcesDictionary.getDictionaryByName("wheat").getPrice());
+        flourBuy.setText("" + ResourcesDictionary.getDictionaryByName("flour").getPrice());
+        breadBuy.setText("" + ResourcesDictionary.getDictionaryByName("bread").getPrice());
         appleStock.setText("" + empire.getFood().get("apple"));
         meatStock.setText("" + empire.getFood().get("meat"));
         cheeseStock.setText("" + empire.getFood().get("cheese"));
@@ -165,6 +193,10 @@ public class ShopController {
         allItems.setVisible(false);
         mainBack.setVisible(false);
         rawMaterialsGrid.setVisible(true);
+        woodBuy.setText("" + ResourcesDictionary.getDictionaryByName("wood").getPrice());
+        stoneBuy.setText("" + ResourcesDictionary.getDictionaryByName("stone").getPrice());
+        ironBuy.setText("" + ResourcesDictionary.getDictionaryByName("iron").getPrice());
+        pitchBuy.setText("" + ResourcesDictionary.getDictionaryByName("pitch").getPrice());
         woodStock.setText("" + empire.getResources().get("wood"));
         ironStock.setText("" + empire.getResources().get("iron"));
         pitchStock.setText("" + empire.getResources().get("pitch"));
@@ -179,14 +211,22 @@ public class ShopController {
         allItems.setVisible(false);
         mainBack.setVisible(false);
         weaponsGrid.setVisible(true);
+        spearBuy.setText("" + ResourcesDictionary.getDictionaryByName("apple").getPrice());
+        bowBuy.setText("" + ResourcesDictionary.getDictionaryByName("apple").getPrice());
+        crossbowBuy.setText("" + ResourcesDictionary.getDictionaryByName("apple").getPrice());
+        maceBuy.setText("" + ResourcesDictionary.getDictionaryByName("apple").getPrice());
+        leatherBuy.setText("" + ResourcesDictionary.getDictionaryByName("apple").getPrice());
+        pikeBuy.setText("" + ResourcesDictionary.getDictionaryByName("apple").getPrice());
+        swordBuy.setText("" + ResourcesDictionary.getDictionaryByName("apple").getPrice());
+        metalBuy.setText("" + ResourcesDictionary.getDictionaryByName("apple").getPrice());
         spearStock.setText("" + empire.getWeaponAndArmour().get("spear"));
         bowStock.setText("" + empire.getWeaponAndArmour().get("bow"));
         crossbowStock.setText("" + empire.getWeaponAndArmour().get("crossbow"));
         maceStock.setText("" + empire.getWeaponAndArmour().get("mace"));
-        leatherArmorStock.setText("" + empire.getWeaponAndArmour().get("leatherArmour"));
+        leatherArmorStock.setText("" + empire.getWeaponAndArmour().get("leather armour"));
         pikeStock.setText("" + empire.getWeaponAndArmour().get("pike"));
         swordStock.setText("" + empire.getWeaponAndArmour().get("sword"));
-        metalArmorStock.setText("" + empire.getWeaponAndArmour().get("metalArmour"));
+        metalArmorStock.setText("" + empire.getWeaponAndArmour().get("metal armour"));
         buyWeapon();
         sellWeapon();
     }

@@ -4,12 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="update up to night">
+    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="finish shop">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/ShopController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/TradeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/TradeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/TradeMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/CommandsEnum/TradeMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/ControlBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/ControlBar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/TradeMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/tradeMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/tradeMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/dataBase/PLAYERS.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/dataBase/PLAYERS.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/shopMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/shopMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +176,7 @@
       <workItem from="1685599343516" duration="2782000" />
       <workItem from="1685713023081" duration="1365000" />
       <workItem from="1688456937041" duration="8653000" />
-      <workItem from="1688487317956" duration="17518000" />
+      <workItem from="1688487317956" duration="25241000" />
     </task>
     <task id="LOCAL-00001" summary="game controller update">
       <created>1683454838020</created>
@@ -438,7 +444,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688507125991</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="finish shop">
+      <created>1688534010335</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1688534010335</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -456,7 +469,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="game controller update" />
     <MESSAGE value="merged with abolfazl's code" />
     <MESSAGE value="complete till next turn!!!" />
     <MESSAGE value="merged with usef's code!" />
@@ -481,7 +493,8 @@
     <MESSAGE value="update trade and shop" />
     <MESSAGE value="update fxml" />
     <MESSAGE value="update up to night" />
-    <option name="LAST_COMMIT_MESSAGE" value="update up to night" />
+    <MESSAGE value="finish shop" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish shop" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

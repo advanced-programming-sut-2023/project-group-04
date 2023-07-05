@@ -24,20 +24,20 @@ public class TradeController {
         return TradeMessages.SET_TRADE;
     }
 
-    public TradeMessages acceptTrade() {
+    public TradeMessages acceptTrade(int id) {
         String receiverMessage;
-        int id = 5;
         Trade trade = Game.getCurrentGame().getTradeById(id);
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
         if (trade.getPrice() > empire.getAvailableResource("gold")) return TradeMessages.LACK_OF_MONEY;
         empire.changeResourceAmount("gold", trade.getPrice());
-        Game.getCurrentGame().removeTrade(trade);
+        empire.getAllTrades().remove(trade);
         return TradeMessages.ACCEPT_TRADE;
     }
 
-    public void rejectTrade(int id) {
+    public TradeMessages rejectTrade(int id) {
         Trade trade = Game.getCurrentGame().getTradeById(id);
-        Game.getCurrentGame().removeTrade(trade);
+        Game.getCurrentGame().getCurrentEmpire().getAllTrades().remove(trade);
+        return TradeMessages.REMOVE;
     }
 
     public String showTradeHistory() {
@@ -49,7 +49,6 @@ public class TradeController {
             string.append("Resource Name : ").append(trade.getResourceName());
             string.append("     Sender Message : ").append(trade.getSenderMessage());
             string.append("     Receiver Message : ").append(trade.getReceiverMessage());
-//            string.append("     Owner's Nickname : ").append(trade.getTradeOwner().getOwner().getNickname()).append("\n\n");
         }
         currentEmpire.getAllTrades().clear();
         return string.toString();

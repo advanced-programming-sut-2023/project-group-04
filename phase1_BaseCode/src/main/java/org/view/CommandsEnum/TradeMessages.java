@@ -7,6 +7,7 @@ public enum TradeMessages {
     EMPTY_LIST("This list is empty"),
     WRONG_NAME_PRODUCT("Don't have any product with this name!"),
     LACK_OF_MONEY("You don't have enough gold!"),
+    REMOVE("Rejected"),
     LACK_OF_PRODUCT("You don't have enough of the desired product!"),
     WRONG_ID("No trade with this id exist!"),
     EMPTY_FIELD("At least one field is empty");

@@ -197,7 +197,7 @@ public class Game {
     }
 
     public Trade getTradeById(int id) {
-        for (Trade trade : allTrades) {
+        for (Trade trade : Game.getCurrentGame().getCurrentEmpire().getAllTrades()) {
             if (trade.getId() == id)
                 return trade;
         }
