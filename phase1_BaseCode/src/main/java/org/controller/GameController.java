@@ -670,6 +670,7 @@ public class GameController {
                 return "winner : " + winner.getOwner().getNickname();
             }
         }
+        System.out.println("player is changed");
         return "player " + Game.getCurrentGame().getCurrentEmpire().getOwner().getNickname() + " is playing!";
     }
 

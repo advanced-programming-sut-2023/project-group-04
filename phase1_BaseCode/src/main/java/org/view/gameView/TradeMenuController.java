@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -136,7 +137,7 @@ public class TradeMenuController {
 
     @FXML
     public void initialize() {
-        Group acAndRe = new Group(accept1,accept2,accept3,accept4,reject1,reject2,reject3,reject4);
+        Group acAndRe = new Group(accept1, accept2, accept3, accept4, reject1, reject2, reject3, reject4);
         ArrayList<Empire> opponentEmpires = Game.getCurrentGame().getOpponentEmpires();
         if (opponentEmpires != null && opponentEmpires.size() != 0) {
             if (opponentEmpires.size() < 4)
@@ -408,6 +409,7 @@ public class TradeMenuController {
         amount.setVisible(false);
         amount1.setVisible(false);
         newTrade.setVisible(true);
+        clickOnButton();
     }
 
     private void clickOnButton() {
@@ -434,7 +436,8 @@ public class TradeMenuController {
             public void handle(MouseEvent event) {
                 TradeMessages messages = Menu.getTradeController().setTrade(resource, senderMessage, resourceNumber,
                         price, tradeGetter);
-                new Alert(Alert.AlertType.INFORMATION, messages.getMessage(), ButtonType.OK);
+                new Alert(Alert.AlertType.INFORMATION, messages.getMessage(), ButtonType.OK).showAndWait();
+                // TradeMenu.Stage.close();
             }
         });
     }
@@ -452,6 +455,7 @@ public class TradeMenuController {
         submitted.setVisible(true);
         received.setVisible(true);
         showTrade();
+        acceptTrade();
     }
 
     public void showSubmittedTrades(MouseEvent mouseEvent) {
@@ -464,54 +468,112 @@ public class TradeMenuController {
         submitted.setVisible(false);
         received.setVisible(false);
         receivedOffers.setVisible(true);
-        //setButtons();
+        setButtons();
     }
 
-//    private void setButtons() {
-//        if (status11.getText().equals("unsight")) {
-//            accept1.setVisible(true);
-//            reject1.setVisible(true);
-//        }
-//        if (status22.getText().equals("unsight")) {
-//            accept2.setVisible(true);
-//            reject2.setVisible(true);
-//        }
-//        if (status33.getText().equals("unsight")) {
-//            accept3.setVisible(true);
-//            reject3.setVisible(true);
-//        }
-//        if (status44.getText().equals("unsight")) {
-//            accept4.setVisible(true);
-//            reject4.setVisible(true);
-//        }
-//    }
+    private void setButtons() {
+        if (status11.getText().equals("unsight")) {
+            accept1.setVisible(true);
+            reject1.setVisible(true);
+        }
+        if (status22.getText().equals("unsight")) {
+            accept2.setVisible(true);
+            reject2.setVisible(true);
+        }
+        if (status33.getText().equals("unsight")) {
+            accept3.setVisible(true);
+            reject3.setVisible(true);
+        }
+        if (status44.getText().equals("unsight")) {
+            accept4.setVisible(true);
+            reject4.setVisible(true);
+        }
+    }
+
+    private void acceptTrade() {
+        id1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println(id1.getText());
+                if (event.getButton() == MouseButton.PRIMARY) {
+                    TradeMessages messages = Menu.getTradeController().acceptTrade(Integer.parseInt(id1.getText()));
+                    new Alert(Alert.AlertType.INFORMATION, messages.getMessage(), ButtonType.OK).showAndWait();
+                }
+                if (event.getButton() == MouseButton.SECONDARY) {
+                    TradeMessages messages = Menu.getTradeController().rejectTrade(Integer.parseInt(id1.getText()));
+                    new Alert(Alert.AlertType.INFORMATION, messages.getMessage(), ButtonType.OK).showAndWait();
+                }
+            }
+        });
+        id2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getButton() == MouseButton.PRIMARY) {
+                    TradeMessages messages = Menu.getTradeController().acceptTrade(Integer.parseInt(id2.getText()));
+                    new Alert(Alert.AlertType.INFORMATION, messages.getMessage(), ButtonType.OK).showAndWait();
+                }
+                if (event.getButton() == MouseButton.SECONDARY) {
+                    TradeMessages messages = Menu.getTradeController().rejectTrade(Integer.parseInt(id2.getText()));
+                    new Alert(Alert.AlertType.INFORMATION, messages.getMessage(), ButtonType.OK).showAndWait();
+                }
+            }
+        });
+        id3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getButton() == MouseButton.PRIMARY) {
+                    TradeMessages messages = Menu.getTradeController().acceptTrade(Integer.parseInt(id3.getText()));
+                    new Alert(Alert.AlertType.INFORMATION, messages.getMessage(), ButtonType.OK).showAndWait();
+                }
+                if (event.getButton() == MouseButton.SECONDARY) {
+                    TradeMessages messages = Menu.getTradeController().rejectTrade(Integer.parseInt(id3.getText()));
+                    new Alert(Alert.AlertType.INFORMATION, messages.getMessage(), ButtonType.OK).showAndWait();
+                }
+            }
+        });
+        id4.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getButton() == MouseButton.PRIMARY) {
+                    System.out.println("left");
+                    TradeMessages messages = Menu.getTradeController().acceptTrade(Integer.parseInt(id4.getText()));
+                    new Alert(Alert.AlertType.INFORMATION, messages.getMessage(), ButtonType.OK).showAndWait();
+                }
+                if (event.getButton() == MouseButton.SECONDARY) {
+                    System.out.println("right");
+                    TradeMessages messages = Menu.getTradeController().rejectTrade(Integer.parseInt(id4.getText()));
+                    new Alert(Alert.AlertType.INFORMATION, messages.getMessage(), ButtonType.OK).showAndWait();
+                }
+            }
+        });
+    }
 
     private void showTrade() {
+        new Trade("wood", 10, 200, "salam",
+                Game.getCurrentGame().getCurrentEmpire(), Game.getCurrentGame().getCurrentEmpire());
         ArrayList<Trade> allTrades = Game.getCurrentGame().getCurrentEmpire().getAllTrades();
         if (allTrades.size() == 0)
             return;
-        if (allTrades.size() > 1) {
-            resource11.setText(allTrades.get(0).getResourceName());
-            amount11.setText("" + allTrades.get(0).getResourceAmount());
-            status11.setText("unsight");
-            user11.setText(allTrades.get(0).getTradeSender().getOwner().getUsername());
-            id1.setText("" + allTrades.get(0).getId());
-        }
-        if (allTrades.size() > 2) {
+        resource11.setText(allTrades.get(0).getResourceName());
+        amount11.setText("" + allTrades.get(0).getResourceAmount());
+        status11.setText("unsight");
+        user11.setText(allTrades.get(0).getTradeSender().getOwner().getUsername());
+        id1.setText("" + allTrades.get(0).getId());
+        if (allTrades.size() >= 2) {
             resource22.setText(allTrades.get(1).getResourceName());
             amount22.setText("" + allTrades.get(1).getResourceAmount());
             status22.setText("unsight");
             user22.setText(allTrades.get(1).getTradeSender().getOwner().getUsername());
             id2.setText("" + allTrades.get(1).getId());
         }
-        if (allTrades.size() > 3) {
+        if (allTrades.size() >= 3) {
             resource33.setText(allTrades.get(2).getResourceName());
             amount33.setText("" + allTrades.get(2).getResourceAmount());
             status33.setText("unsight");
             user33.setText(allTrades.get(2).getTradeSender().getOwner().getUsername());
             id3.setText("" + allTrades.get(2).getId());
         }
-        if (allTrades.size() > 4) {
+        if (allTrades.size() >= 4) {
             resource44.setText(allTrades.get(3).getResourceName());
             amount44.setText("" + allTrades.get(3).getResourceAmount());
             status44.setText("unsight");
