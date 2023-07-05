@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="update fxml">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/buildings/castle/head quarter.png" afterDir="false" />
+    <list default="true" id="f1bd639b-5fac-4f8b-a9a2-19b9e67a063b" name="Changes" comment="update up to night">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/ControlBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/ControlBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controller/ShopController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/view/gameView/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/gameView/TradeMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/tradeMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/tradeMenu.fxml" afterDir="false" />
     </list>
@@ -127,6 +127,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ShopMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.view.ShopMenu" />
+      <module name="phase1_BaseCode" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RegistrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="phase1" />
       <option name="PACKAGE_NAME" value="" />
@@ -139,10 +152,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.LoginMenu" />
+        <item itemvalue="Application.ShopMenu" />
         <item itemvalue="JUnit.RegistrationTest" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.GameMenu" />
-        <item itemvalue="JUnit.RegistrationTest" />
       </list>
     </recent_temporary>
   </component>
@@ -157,7 +170,7 @@
       <workItem from="1685599343516" duration="2782000" />
       <workItem from="1685713023081" duration="1365000" />
       <workItem from="1688456937041" duration="8653000" />
-      <workItem from="1688487317956" duration="15453000" />
+      <workItem from="1688487317956" duration="17518000" />
     </task>
     <task id="LOCAL-00001" summary="game controller update">
       <created>1683454838020</created>
@@ -418,7 +431,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688498239614</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="update up to night">
+      <created>1688507125991</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1688507125991</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -460,18 +480,8 @@
     <MESSAGE value="completing hovering tiles" />
     <MESSAGE value="update trade and shop" />
     <MESSAGE value="update fxml" />
-    <option name="LAST_COMMIT_MESSAGE" value="update fxml" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/controller/ShopController.java</url>
-          <line>146</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="update up to night" />
+    <option name="LAST_COMMIT_MESSAGE" value="update up to night" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

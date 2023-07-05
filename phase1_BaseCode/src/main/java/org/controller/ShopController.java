@@ -156,8 +156,9 @@ public class ShopController {
         wheatStock.setText("" + empire.getResources().get("wheat"));
         flourStock.setText("" + empire.getResources().get("flour"));
         breadStock.setText("" + empire.getFood().get("bread"));
+        buyFood();
+        sellFood();
     }
-
 
     public void openMaterialsShop(MouseEvent mouseEvent) {
         Empire empire = Game.getCurrentGame().getCurrentEmpire();
@@ -168,6 +169,8 @@ public class ShopController {
         ironStock.setText("" + empire.getResources().get("iron"));
         pitchStock.setText("" + empire.getResources().get("pitch"));
         stoneStock.setText("" + empire.getResources().get("stone"));
+        buyResource();
+        sellResource();
 
     }
 
@@ -184,6 +187,8 @@ public class ShopController {
         pikeStock.setText("" + empire.getWeaponAndArmour().get("pike"));
         swordStock.setText("" + empire.getWeaponAndArmour().get("sword"));
         metalArmorStock.setText("" + empire.getWeaponAndArmour().get("metalArmour"));
+        buyWeapon();
+        sellWeapon();
     }
 
     public void back(MouseEvent mouseEvent) {
@@ -205,7 +210,7 @@ public class ShopController {
         new TradeMenu().start(ShopMenu.stage);
     }
 
-    private void buyOperation() {
+    private void buyFood() {
         buyApple.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -262,6 +267,9 @@ public class ShopController {
                 showAlert(message);
             }
         });
+    }
+
+    private void buyResource() {
         buyWood.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -290,6 +298,10 @@ public class ShopController {
                 showAlert(message);
             }
         });
+    }
+
+
+    private void buyWeapon() {
         buySpear.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -348,7 +360,7 @@ public class ShopController {
         });
     }
 
-    private void sellOperation() {
+    private void sellFood() {
         sellApple.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -405,6 +417,9 @@ public class ShopController {
                 showAlert(message);
             }
         });
+    }
+
+    private void sellResource() {
         sellWood.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -433,6 +448,10 @@ public class ShopController {
                 showAlert(message);
             }
         });
+    }
+
+    private void sellWeapon() {
+
         sellSpear.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
