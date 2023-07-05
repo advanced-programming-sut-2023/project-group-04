@@ -60,6 +60,8 @@ public enum GameMessages {
     SET_OUTPUT_SUCCESSFUL("Selected object set successful!"),
     TAX_NOT_ACTIVE("You can't change tax rate yet!"),
     ENTER_SHOP_MENU("Entered shop menu successfully!"),
+    ENTER_MERCENARY_POST("enter mercenary post successfully"),
+    ENTER_BARRACKS("enter barracks successfully"),
     NO_WAY("there isn't any way to selected entered destination!"),
     NO_SELECTED_BUILDING("You didn't select any building"),
     INVALID_EQUIPMENT_NAME("Entered equipment name is invalid!"),

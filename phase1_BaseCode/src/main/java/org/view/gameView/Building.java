@@ -82,7 +82,21 @@ public class Building extends ImageView {
                                 } catch (Exception e) {
                                     throw new RuntimeException(e);
                                 }
-                            } // todo : enter shop menu
+                            }// todo : enter shop menu
+                            if (message.equals(GameMessages.ENTER_MERCENARY_POST)) {
+                                try {
+                                    Menu.bar.addMercenaryPost();
+                                } catch (Exception e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                            if (message.equals(GameMessages.ENTER_BARRACKS)) {
+                                try {
+                                    Menu.bar.addBarracks();
+                                } catch (Exception e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
                         }
                     } else {
                         if (selectedBuilding != null) selectedBuilding.setShadow(null);

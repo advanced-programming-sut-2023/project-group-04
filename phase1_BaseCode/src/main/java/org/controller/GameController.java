@@ -221,6 +221,10 @@ public class GameController {
             return GameMessages.NOT_OWNING_THE_BUILDING;
         if (building.getBuildingDictionary().equals(BuildingsDictionary.MARKET))
             return GameMessages.ENTER_SHOP_MENU;
+        if (building.getBuildingDictionary().equals(BuildingsDictionary.MERCENARY_POST))
+            return GameMessages.ENTER_MERCENARY_POST;
+        if (building.getBuildingDictionary().equals(BuildingsDictionary.BARRACKS))
+            return GameMessages.ENTER_BARRACKS;
         Game.getCurrentGame().setSelectedBuilding(building);
         return GameMessages.SET_SUCCESSFUL;
     }

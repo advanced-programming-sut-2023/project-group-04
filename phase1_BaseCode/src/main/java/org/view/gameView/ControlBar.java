@@ -110,7 +110,7 @@ public class ControlBar {
                     category = false;
                 }
                 if (((mouseX < 890 && mouseX > 330) && (mouseY > 710 && mouseY < 860) && !category && menuFlag)) {
-                    pane.getChildren().remove(report);
+                    pane.getChildren().removeAll(report, mercenaryImagePlaces, barracksImagePlaces);
                     pane.getChildren().add(BuildingCategory);
                     category = true;
                     menuFlag = false;
@@ -211,7 +211,6 @@ public class ControlBar {
         fearAndTax.getChildren().addAll(taxSlider, taxText);
     }
 
-
     private void addReport() {
         Button popularity = new Button("Popularity");
         popularity.setTranslateX(570);
@@ -261,6 +260,7 @@ public class ControlBar {
                 circle6.setFill(new ImagePattern(buildingImages.get("perimeter")));
                 if (pane.getChildren().contains(circle1))
                     pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
+                pane.getChildren().removeAll(mercenaryImagePlaces, barracksImagePlaces);
                 pane.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
             }
         });
@@ -276,6 +276,7 @@ public class ControlBar {
                 circle6.setFill(new ImagePattern(buildingImages.get("mercenary post")));
                 if (pane.getChildren().contains(circle1))
                     pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
+                pane.getChildren().removeAll(mercenaryImagePlaces, barracksImagePlaces);
                 pane.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
             }
         });
@@ -291,6 +292,7 @@ public class ControlBar {
                 circle6.setFill(new ImagePattern(buildingImages.get("wheat")));
                 if (pane.getChildren().contains(circle1))
                     pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
+                pane.getChildren().removeAll(mercenaryImagePlaces, barracksImagePlaces);
                 pane.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
             }
         });
@@ -306,6 +308,7 @@ public class ControlBar {
                 circle6.setFill(new ImagePattern(buildingImages.get("tunneler guild")));
                 if (pane.getChildren().contains(circle1))
                     pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
+                pane.getChildren().removeAll(mercenaryImagePlaces, barracksImagePlaces);
                 pane.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
             }
         });
@@ -321,6 +324,7 @@ public class ControlBar {
                 circle6.setFill(new ImagePattern(buildingImages.get("water")));
                 if (pane.getChildren().contains(circle1))
                     pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
+                pane.getChildren().removeAll(mercenaryImagePlaces, barracksImagePlaces);
                 pane.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
             }
         });
@@ -336,6 +340,7 @@ public class ControlBar {
                 circle6.setFill(new ImagePattern(buildingImages.get("tanner")));
                 if (pane.getChildren().contains(circle1))
                     pane.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5, circle6);
+                pane.getChildren().removeAll(mercenaryImagePlaces, barracksImagePlaces);
                 pane.getChildren().addAll(circle1, circle2, circle3, circle4, circle5, circle6);
             }
         });
@@ -345,7 +350,7 @@ public class ControlBar {
         r1.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                pane.getChildren().removeAll(food, fearAndTax, weapon, report);
+                pane.getChildren().removeAll(food, fearAndTax, weapon, report, mercenaryImagePlaces, barracksImagePlaces);
                 pane.getChildren().add(popularity);
                 menuFlag = false;
                 updatePopularity();
@@ -354,7 +359,7 @@ public class ControlBar {
         r2.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                pane.getChildren().removeAll(report, fearAndTax, weapon, popularity);
+                pane.getChildren().removeAll(report, fearAndTax, weapon, popularity, mercenaryImagePlaces, barracksImagePlaces);
                 pane.getChildren().add(food);
                 menuFlag = false;
                 updateFood();
@@ -363,7 +368,7 @@ public class ControlBar {
         r3.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                pane.getChildren().removeAll(food, report, weapon, popularity);
+                pane.getChildren().removeAll(food, report, weapon, popularity, mercenaryImagePlaces, barracksImagePlaces);
                 pane.getChildren().add(fearAndTax);
                 menuFlag = false;
                 updateFearAndTax();
@@ -948,13 +953,15 @@ public class ControlBar {
     }
 
     public void addMercenaryPost() {
-        pane.getChildren().removeAll(food, fearAndTax, popularity, report);
+        pane.getChildren().removeAll(food, fearAndTax, popularity, report, barracksImagePlaces, circle1, circle2,
+                circle3, circle4, circle5, circle6, mercenaryImagePlaces);
         pane.getChildren().add(mercenaryImagePlaces);
         menuFlag = false;
     }
 
     public void addBarracks() {
-        pane.getChildren().removeAll(food, fearAndTax, popularity, report);
+        pane.getChildren().removeAll(food, fearAndTax, popularity, report, mercenaryImagePlaces, circle1, circle2,
+                circle3, circle4, circle5, circle6, barracksImagePlaces);
         pane.getChildren().add(barracksImagePlaces);
         menuFlag = false;
     }

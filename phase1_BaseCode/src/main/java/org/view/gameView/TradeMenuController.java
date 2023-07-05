@@ -111,8 +111,6 @@ public class TradeMenuController {
     public Text id3;
     public Text id2;
     public Text id1;
-
-    /////////////
     public Text resource11;
     public Text amount11;
     public Text user11;
@@ -137,7 +135,6 @@ public class TradeMenuController {
 
     @FXML
     public void initialize() {
-        Group acAndRe = new Group(accept1, accept2, accept3, accept4, reject1, reject2, reject3, reject4);
         ArrayList<Empire> opponentEmpires = Game.getCurrentGame().getOpponentEmpires();
         if (opponentEmpires != null && opponentEmpires.size() != 0) {
             if (opponentEmpires.size() < 4)
@@ -468,7 +465,7 @@ public class TradeMenuController {
         submitted.setVisible(false);
         received.setVisible(false);
         receivedOffers.setVisible(true);
-        setButtons();
+        //setButtons();
     }
 
     private void setButtons() {
@@ -549,8 +546,8 @@ public class TradeMenuController {
     }
 
     private void showTrade() {
-        new Trade("wood", 10, 200, "salam",
-                Game.getCurrentGame().getCurrentEmpire(), Game.getCurrentGame().getCurrentEmpire());
+//        new Trade("wood", 10, 200, "salam",
+//                Game.getCurrentGame().getCurrentEmpire(), Game.getCurrentGame().getCurrentEmpire());
         ArrayList<Trade> allTrades = Game.getCurrentGame().getCurrentEmpire().getAllTrades();
         if (allTrades.size() == 0)
             return;
